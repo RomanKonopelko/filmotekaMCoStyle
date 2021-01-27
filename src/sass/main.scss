@@ -2,5 +2,8 @@
  * Все паршалы импортировать в этот файл
  */
 
-@import 'normalize.scss';
-@import 'base.scss';
+@import './base/normalize';
+@import './utils/variables';
+@import './utils/_fonts';
+@import './utils/fonts';
+@import './base/common';
