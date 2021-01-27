@@ -1,0 +1,72 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  // outline: 2px solid red;
+}
+
+body {
+  font-family: $primary-font-family;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.67;
+  letter-spacing: 0.08em;
+
+  color: $primary-text-color;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+// доп.класс, который сбрасывает с ul маркеры и базовые маржины и паддинги
+.enumeration {
+  padding: 0;
+  margin: 0;
+
+  list-style: none;
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  width: 320px;
+
+  @include for-size(tablet) {
+    padding-left: 40px;
+    padding-right: 40px;
+
+    width: 768px;
+  }
+
+  @include for-size(desktop) {
+    padding-left: 60px;
+    padding-right: 60px;
+
+    width: 1024px;
+  }
+}
