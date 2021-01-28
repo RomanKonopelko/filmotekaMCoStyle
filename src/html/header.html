@@ -1,21 +1,18 @@
-<section class="header">
+<section class="container header">
     <nav class="header__nav">
-       <ul class="header__menu">
-        <li class="header__item">
+       <ul class="header__menu enumeration">
+        <li class="header__item hedear__icon" data-icon>
             <a href="" class="header__link link">
             <picture>
                 <source srcset="
                                 ../images/film-icon.svg    1x,
-                                ../images/film-icon@2x.svg 2x,
+                                <!-- ../images/film-icon@2x.svg 2x, -->
                               " />
     
                 <img src="../images/film-icon.svg" alt="" />
-            </picture></a></li>
-        <li class="header__item"><a href="" class="header__link link">Home</a></li>
-        <li class="header__item"><a href="" class="header__link link">My library</a></li>
+            </picture><span class="header__logo-text" id="logo__text" data-logoText>Filmoteka</span></a></li>
+        <li class="header__item" data-home><a href="" class="header__link link">Home</a></li>
+        <li class="header__item" data-library><a href="" class="header__link link">My library</a></li>
 </ul>
     </nav>
-    <form action="#" class="header__search">
-        <input type="text" name="search" id="search" placeholder="Поиск фильмов">
-    </form>
 </section>
