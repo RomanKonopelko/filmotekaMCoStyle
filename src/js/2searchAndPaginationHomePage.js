@@ -29,10 +29,13 @@ const createFilmCard = function (arr) {
   const description = document.createElement('p');
   const name = document.createElement('h1');
   const mainPic = document.createElement('img');
+  mainPic.width = 300;
 
   description.textContent = arr.overview;
   name.textContent = arr.name || arr.title;
-  mainPic.src = MyApi.IMAGE_BASE_URL + arr.backdrop_path;
+  mainPic.src = arr.backdrop_path
+    ? MyApi.IMAGE_BASE_URL + arr.backdrop_path
+    : MyApi.DEFAULT_IMAGE;
   li.append(name, mainPic, description);
   return li;
 };
