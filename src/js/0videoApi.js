@@ -3,12 +3,13 @@ class MovieApi {
     this.API_KEY = key;
     this.BASE_URL = 'https://api.themoviedb.org/3/';
     this.IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w300';
+    this.DEFAULT_IMAGE = '../images/image-not-found.jpg';
     this.currentPage;
     this.params = {
       generalSearchUrl: 'search/movie?',
       popularSearchUrl: '',
       genreSearchUrl: '',
-      query: 'sherlock',
+      query: 'пше ',
       _page: 1,
     };
   }
