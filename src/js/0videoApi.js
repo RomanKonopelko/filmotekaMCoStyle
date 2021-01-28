@@ -9,7 +9,7 @@ class MovieApi {
       generalSearchUrl: 'search/movie?',
       popularSearchUrl: '',
       genreSearchUrl: '',
-      query: 'sherlock',
+      query: 'пше ',
       _page: 1,
     };
   }
