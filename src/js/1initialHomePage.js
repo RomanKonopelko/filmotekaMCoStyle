@@ -1,115 +1,113 @@
+// 'use strict';
 
-'use strict';
+// const movieList = document.querySelector('.container__list');
 
-const movieList = document.querySelector('.container__list');
+// const API_KEY = '91085a172e1ffb2047d72641d0a91356';
 
-const API_KEY = '91085a172e1ffb2047d72641d0a91356';
+// const configurationAPI = {
+//   apiKey: API_KEY,
+//   baseUrl: 'https://api.themoviedb.org/3/',
+//   searchQuery: '',
+//   totalPages: 1,
+//   pageNumber: 1,
 
-const configurationAPI = {
-  apiKey: API_KEY,
-  baseUrl: 'https://api.themoviedb.org/3/',
-  searchQuery: '',
-  totalPages: 1,
-  pageNumber: 1,
+//   fetchPopularFilmsList() {
+//     return fetch(
+//       `${this.baseUrl}movie/popular?api_key=${this.apiKey}&language=en-US&page=${this.pageNumber}`,
+//     )
+//       .then(response => response.json())
+//       .then(resp => {
+//         this.totalPages = resp.total_pages;
+//         return resp;
+//       })
+//       .then(({ results }) => results);
+//   },
 
-  fetchPopularFilmsList() {
-    return fetch(
-      `${this.baseUrl}movie/popular?api_key=${this.apiKey}&language=en-US&page=${this.pageNumber}`,
-    )
-      .then(response => response.json())
-      .then(resp => {
-        this.totalPages = resp.total_pages;
-        return resp;
-      })
-      .then(({ results }) => results);
-  },
+//   fetchGenres() {
+//     return fetch(`${this.baseUrl}genre/movie/list?api_key=${this.apiKey}`)
+//       .then(response => response.json())
+//       .then(({ genres }) => genres);
+//   },
+// };
 
-  fetchGenres() {
-    return fetch(`${this.baseUrl}genre/movie/list?api_key=${this.apiKey}`)
-      .then(response => response.json())
-      .then(({ genres }) => genres);
-  },
-};
+// // Создает одну карточку фильма, "li"
 
-// Создает одну карточку фильма, "li"
+// function createCardFunc(imgPath, filmTitle, movieId, rating, data) {
+//   const baseImageUrl = 'https://image.tmdb.org/t/p/w300/';
+//   const yearOfRelease = data.slice(0, 4);
 
-function createCardFunc(imgPath, filmTitle, movieId, rating, data) {
-  const baseImageUrl = 'https://image.tmdb.org/t/p/w300/';
-  const yearOfRelease = data.slice(0, 4);
+//   const cardImg = document.createElement('img');
+//   cardImg.setAttribute('src', `${baseImageUrl}${imgPath}`);
+//   cardImg.setAttribute('alt', filmTitle);
 
-  const cardImg = document.createElement('img');
-  cardImg.setAttribute('src', `${baseImageUrl}${imgPath}`);
-  cardImg.setAttribute('alt', filmTitle);
+//   const title = document.createElement('p');
+//   title.textContent = `${filmTitle}(${yearOfRelease})`;
 
-  const title = document.createElement('p');
-  title.textContent = `${filmTitle}(${yearOfRelease})`;
+//   const spanRating = document.createElement('span');
+//   spanRating.textContent = rating;
 
-  const spanRating = document.createElement('span');
-  spanRating.textContent = rating;
+//   const item = document.createElement('li');
+//   item.append(cardImg, title, spanRating);
 
-  const item = document.createElement('li');
-  item.append(cardImg, title, spanRating);
+//   item.addEventListener('click', () => {
+//     activeDetailsPage(movieId, false);
+//   });
+//   return item;
+// }
 
-  item.addEventListener('click', () => {
-    activeDetailsPage(movieId, false);
-  });
-  return item;
-}
+// // Рендерит всю галерию карточек популярных фильмов
 
-// Рендерит всю галерию карточек популярных фильмов
+// configurationAPI
+//   .fetchPopularFilmsList()
+//   .then(collection =>
+//     collection.map(
+//       ({ backdrop_path, title, id, vote_average, release_date }) => {
+//         return createCardFunc(
+//           backdrop_path,
+//           title,
+//           id,
+//           vote_average,
+//           release_date,
+//         );
+//       },
+//     ),
+//   )
+//   .then(item => movieList.append(...item));
 
-configurationAPI
-  .fetchPopularFilmsList()
-  .then(collection =>
-    collection.map(
-      ({ backdrop_path, title, id, vote_average, release_date }) => {
-        return createCardFunc(
-          backdrop_path,
-          title,
-          id,
-          vote_average,
-          release_date,
-        );
-      },
-    ),
-  )
-  .then(item => movieList.append(...item));
+// function activeDetailsPage(movieId, status) {
+//   //   console.log('movieID', movieId, status);
+// }
 
-function activeDetailsPage(movieId, status) {
-  //   console.log('movieID', movieId, status);
-}
+// let renderFilms = configurationAPI.fetchPopularFilmsList(); // содержит массив объектов популярных фильмов
+// const genres = configurationAPI.fetchGenres(); // содержит коллекцию жанров
 
-let renderFilms = configurationAPI.fetchPopularFilmsList(); // содержит массив объектов популярных фильмов
-const genres = configurationAPI.fetchGenres(); // содержит коллекцию жанров
+//  refs.modalBtn.addEventListener('click', closeModal)
+//  refs.filmImage.addEventListener('click', openModal)
+//  refs.backdrop.addEventListener('click' , onBeckDropCkick)
 
- refs.modalBtn.addEventListener('click', closeModal)
- refs.filmImage.addEventListener('click', openModal)
- refs.backdrop.addEventListener('click' , onBeckDropCkick)
+//  function closeModal() {
+//      refs.backdrop.classList.add('backdrop--hidden');
 
- function closeModal() {
-     refs.backdrop.classList.add('backdrop--hidden');  
+//     //  window.removeEventListener("keydown", onKeybordPress);
+// }
+// //ЛОГИКА МОДАЛЬНОГО ОКНА
+// function openModal(event) {
+//     event.preventDefault();
 
-    //  window.removeEventListener("keydown", onKeybordPress); 
-}
-//ЛОГИКА МОДАЛЬНОГО ОКНА 
-function openModal(event) {
-    event.preventDefault();
-    
-    refs.backdrop.classList.remove('backdrop--hidden');
-    refs.modalText.textContent = refs.aboutFilmText.textContent;
-    
-    window.addEventListener("keydown", onKeybordPress);
-}
+//     refs.backdrop.classList.remove('backdrop--hidden');
+//     refs.modalText.textContent = refs.aboutFilmText.textContent;
 
+//     window.addEventListener("keydown", onKeybordPress);
+// }
 
-function onKeybordPress(event) {
-    if (event.code === "Escape") {
-    closeModal();
-  }
-}
-    
-function onBeckDropCkick(event) {
-    if (event.target.nodeName === "DIV") {
-    closeModal();
-  }
-}
+// function onKeybordPress(event) {
+//     if (event.code === "Escape") {
+//     closeModal();
+//   }
+// }
+
+// function onBeckDropCkick(event) {
+//     if (event.target.nodeName === "DIV") {
+//     closeModal();
+//   }
+// }
