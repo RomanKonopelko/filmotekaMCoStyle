@@ -1,3 +1,4 @@
+
 'use strict';
 
 const movieList = document.querySelector('.container__list');
@@ -80,3 +81,35 @@ function activeDetailsPage(movieId, status) {
 
 let renderFilms = configurationAPI.fetchPopularFilmsList(); // содержит массив объектов популярных фильмов
 const genres = configurationAPI.fetchGenres(); // содержит коллекцию жанров
+
+ refs.modalBtn.addEventListener('click', closeModal)
+ refs.filmImage.addEventListener('click', openModal)
+ refs.backdrop.addEventListener('click' , onBeckDropCkick)
+
+ function closeModal() {
+     refs.backdrop.classList.add('backdrop--hidden');  
+
+    //  window.removeEventListener("keydown", onKeybordPress); 
+}
+//ЛОГИКА МОДАЛЬНОГО ОКНА 
+function openModal(event) {
+    event.preventDefault();
+    
+    refs.backdrop.classList.remove('backdrop--hidden');
+    refs.modalText.textContent = refs.aboutFilmText.textContent;
+    
+    window.addEventListener("keydown", onKeybordPress);
+}
+
+
+function onKeybordPress(event) {
+    if (event.code === "Escape") {
+    closeModal();
+  }
+}
+    
+function onBeckDropCkick(event) {
+    if (event.target.nodeName === "DIV") {
+    closeModal();
+  }
+}
