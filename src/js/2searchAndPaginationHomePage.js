@@ -3,18 +3,22 @@ const API_KEY = '91085a172e1ffb2047d72641d0a91356';
 const MyApi = new MovieApi(API_KEY);
 
 const ul = document.querySelector('.test');
-console.log(ul);
-MyApi.movieSearch().then(results =>
-  results.forEach(el => {
-    return ul.append(createFilmCard(el));
-  }),
-);
 
 form.addEventListener('submit', e => {
   e.preventDefault();
-  let query = e.target.elements.query.value;
-  console.dir(query);
-  movieSearch(query);
+  let inputValue = e.target.elements.query.value;
+  MyApi.params.query = inputValue;
+  MyApi.movieSearch()
+    .then(data => {
+      console.log(data.total_pages);
+      pagination(data);
+      return data;
+    })
+    .then(({ results }) =>
+      results.forEach(el => {
+        return ul.append(createFilmCard(el));
+      }),
+    );
 });
 
 //ТЕСТОВЫЙ СПИСОК
@@ -32,3 +36,50 @@ const createFilmCard = function (arr) {
   li.append(name, mainPic, description);
   return li;
 };
+
+function pagination(data) {
+  const totalPages = data.total_pages;
+  let btnArr = [];
+  for (let i = 1; i <= totalPages; i++) {
+    const paginationBtn = document.createElement('button');
+    paginationBtn.addEventListener('click', e => {
+      ul.innerHTML = '';
+      console.log(e.target.textContent);
+      MyApi.params._page = +e.target.textContent;
+      console.log(MyApi.params._page, 'api');
+      console.log(MyApi.params.query);
+      MyApi.movieSearch().then(({ results }) =>
+        results.forEach(el => {
+          return ul.append(createFilmCard(el));
+        }),
+      );
+    });
+    paginationBtn.textContent = i;
+    console.log(i);
+    btnArr.push(paginationBtn);
+  }
+  console.dir(btnArr);
+  return paginationWrapper.append(...btnArr);
+}
+
+btnNext.addEventListener('click', () => {
+  MyApi.incrementPage();
+  ul.innerHTML = '';
+  console.log(MyApi.params._page);
+  MyApi.movieSearch().then(({ results }) =>
+    results.forEach(el => {
+      return ul.append(createFilmCard(el));
+    }),
+  );
+});
+
+btnPrev.addEventListener('click', () => {
+  MyApi.decrementPage();
+  ul.innerHTML = '';
+  console.log(MyApi.params._page);
+  MyApi.movieSearch().then(({ results }) =>
+    results.forEach(el => {
+      return ul.append(createFilmCard(el));
+    }),
+  );
+});

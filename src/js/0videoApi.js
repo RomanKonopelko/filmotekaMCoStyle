@@ -17,7 +17,7 @@ class MovieApi {
       `${this.BASE_URL}${this.params.generalSearchUrl}api_key=${this.API_KEY}&language=en-US&query=${this.params.query}&page=${this.params._page}`,
     )
       .then(data => data.json())
-      .then(({ results }) => results);
+      .then(results => results);
   }
   get page() {
     return this.params._page;
