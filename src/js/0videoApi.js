@@ -261,5 +261,5 @@ class MovieApi {
 }
 
 const API_KEY = '91085a172e1ffb2047d72641d0a91356';
-
+console.log(form, paginationWrapper);
 const MyApi = new MovieApi(API_KEY, paginationWrapper, ulForCards);
