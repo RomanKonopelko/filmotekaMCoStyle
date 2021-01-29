@@ -10,7 +10,6 @@
 //     refs.iconButton.addEventListener('click', homeEfect);
 //   refs.libraryButton.addEventListener('click', libraryEfect);
 
-
 //   function homeEfect() {
 //     refs.homeButton.classList.add('current');
 
@@ -19,22 +18,20 @@
 //         refs.libraryButton.classList.toggle('current');
 //     }
 // })();
-  function homeEfect() {
-    if (!refs.homeButton.classList.contains("current")) {
-      refs.homeButton.classList.add('current');
-      if (refs.libraryButton.classList.contains("current")) {
-        refs.libraryButton.classList.remove('current');
-      }
+function homeEfect() {
+  if (!refs.homeButton.classList.contains('current')) {
+    refs.homeButton.classList.add('current');
+    if (refs.libraryButton.classList.contains('current')) {
+      refs.libraryButton.classList.remove('current');
     }
   }
-  
-    function libraryEfect() {
-       if (!refs.libraryButton.classList.contains("current")) {
-      refs.libraryButton.classList.add('current');
-      if (refs.homeButton.classList.contains("current")) {
-        refs.homeButton.classList.remove('current');
-      }
-    }
-    }
-})();
+}
 
+function libraryEfect() {
+  if (!refs.libraryButton.classList.contains('current')) {
+    refs.libraryButton.classList.add('current');
+    if (refs.homeButton.classList.contains('current')) {
+      refs.homeButton.classList.remove('current');
+    }
+  }
+}
