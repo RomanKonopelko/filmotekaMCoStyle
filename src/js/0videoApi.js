@@ -76,17 +76,18 @@ class MovieApi {
     return fetch(
       `${this.BASE_URL}${this.params.generalSearchUrl}api_key=${this.API_KEY}&language=en-US&query=${this.params.query}&page=${this.params._page}`,
     )
-      .then(data => data.json())
-      .then(data => {
-        this.setRatioButtons(data);
-        return data;
+      .then(response => response.json())
+      .then(resp => {
+        this.setRatioButtons(resp);
+        return resp;
       })
-      .then(({ results }) => {
-        MyApi.checkBackdropImgSize();
-        results.forEach(el => {
-          return this.pagination.cardContainer.append(this.createCardFunc(el));
-        });
-      });
+      .then(({ results }) => results)
+      .then(collection =>
+        collection.map(el => {
+          return createCardFunc(el);
+        }),
+      )
+      .then(item => MyApi.pagination.cardContainer.append(...item));
   }
 
   resetGalleryCard() {
@@ -158,12 +159,16 @@ class MovieApi {
     prevBtn.addEventListener('click', () => {
       this.decrementPage();
       this.resetGalleryCard();
-      this.movieSearch();
+      this.searchMode === 'popular'
+        ? this.fetchPopularFilmsList()
+        : this.movieSearch();
     });
     nextBtn.addEventListener('click', () => {
       this.incrementPage();
       this.resetGalleryCard();
-      this.movieSearch();
+      this.searchMode === 'popular'
+        ? this.fetchPopularFilmsList()
+        : this.movieSearch();
     });
     prevBtn.textContent = 'Prev';
     nextBtn.textContent = 'Next';
