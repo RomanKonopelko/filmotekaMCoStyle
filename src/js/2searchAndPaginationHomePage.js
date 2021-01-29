@@ -1,13 +1,10 @@
-// const API_KEY = '91085a172e1ffb2047d72641d0a91356';
-
-const ul = document.querySelector('.test');
-// const MyApi = new MovieApi(API_KEY, paginationWrapper, ul);
-
+console.log(form);
 form.addEventListener('submit', e => {
-  MyApi.searchMode = 'default';
   e.preventDefault();
   MyApi.resetPage();
+  MyApi.searchMode = 'default';
   let inputValue = e.target.elements.query.value;
+  console.log(inputValue);
   MyApi.params.query = inputValue;
   MyApi.movieSearch();
   form.reset();
