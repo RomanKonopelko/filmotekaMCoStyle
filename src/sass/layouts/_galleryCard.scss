@@ -2,47 +2,24 @@
   background-color: $primary-bg-color;
 
   &__search-form {
-    display: inline-block;
+    display: block;
     align-items: center;
-    padding: 8px;
+    padding: 10px;
     margin-bottom: 24px;
-  }
-
-  .form__control {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    text-align: center;
-    color: $title-text-color;
-
-    @media (min-width: 575px) {
-      font-size: 18px;
-    }
-
-    @media (min-width: 769px) {
-      font-size: 20px;
-    }
-  }
-
-  &__container {
-    padding-left: 15px;
-    padding-right: 15px;
+    cursor: text;
+    outline: none;
     margin-left: auto;
     margin-right: auto;
     width: 100%;
-
-    @media screen and (min-width: 480px) {
-      width: 480px;
-    }
-
-    @media screen and (min-width: 768px) {
-      width: 768px;
-    }
-
-    @media screen and (min-width: 1200px) {
-      width: 1200px;
-    }
   }
+}
+
+.form__control {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  text-align: center;
+  color: $title-text-color;
 }
 
 .gallery {
