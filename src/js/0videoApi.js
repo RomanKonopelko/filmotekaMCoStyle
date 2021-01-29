@@ -76,10 +76,12 @@ class MovieApi {
     this.resetGalleryCard();
     return fetch(
       `${this.BASE_URL}${this.params.generalSearchUrl}api_key=${this.API_KEY}&language=en-US&query=${this.params.query}&page=${this.params._page}`,
-    ).then(data => data.json())
+    )
+      .then(data => data.json())
       .then(data => {
         this.setRatioButtons(data);
         return data;
+      })
       .then(response => response.json())
       .then(resp => {
         if (resp.results.length === 0) {
