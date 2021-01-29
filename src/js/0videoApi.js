@@ -26,8 +26,8 @@ class MovieApi {
       },
       backdropSizes: {
         mobile: 'w342',
-        tablet: 'w500',
-        desktop: 'w780',
+        tablet: 'w342',
+        desktop: 'w500',
       },
       posterSizes: {
         mobile: 'w342',
@@ -45,13 +45,14 @@ class MovieApi {
     )
       .then(response => response.json())
       .then(resp => {
+        console.log(resp);
         this.setRatioButtons(resp);
         return resp;
       })
       .then(({ results }) => results)
       .then(collection =>
         collection.map(el => {
-          return createCardFunc(el);
+          return this.createCardFunc(el);
         }),
       )
       .then(item => MyApi.pagination.cardContainer.append(...item));
@@ -75,7 +76,10 @@ class MovieApi {
     this.resetGalleryCard();
     return fetch(
       `${this.BASE_URL}${this.params.generalSearchUrl}api_key=${this.API_KEY}&language=en-US&query=${this.params.query}&page=${this.params._page}`,
-    )
+    ).then(data => data.json())
+      .then(data => {
+        this.setRatioButtons(data);
+        return data;
       .then(response => response.json())
       .then(resp => {
         if (resp.results.length === 0) {
@@ -119,30 +123,38 @@ class MovieApi {
       ? `${MyApi.IMAGE_BASE_URL}${MyApi.imgCards.currentSizes.backdropSize}${backdrop_path}`
       : MyApi.imgCards.defaultBackdropImg;
 
-    const yearOfRelease = release_date.slice(0, 4);
+    const yearOfRelease = release_date ? `(${release_date.slice(0, 4)})` : '';
 
     const cardImg = document.createElement('img');
     cardImg.setAttribute('src', imgCardSize);
-    cardImg.classList.add('galllery__item-img');
+    cardImg.classList.add('galllery__item-image');
     cardImg.setAttribute('alt', title);
+    if (!backdrop_path) {
+      cardImg.width = 342;
+    }
+
+    const imgContainer = document.createElement('div');
+    imgContainer.classList.add('movie__image');
+    imgContainer.append(cardImg);
 
     const filmTitle = document.createElement('p');
-    filmTitle.textContent = `${title}(${yearOfRelease})`;
+    filmTitle.classList.add('movie__title');
+    filmTitle.textContent = `${title} ${yearOfRelease}`;
 
     const spanRating = document.createElement('span');
+    spanRating.classList.add('movie__title');
     spanRating.textContent = vote_average;
 
-    const itemLink = document.createElement('a');
-    itemLink.classList.add('galllery__item-link');
-    itemLink.append(cardImg, filmTitle, spanRating);
-
-    const itemContainer = document.createElement('div');
-    itemContainer.classList.add('gallery__item-card');
-    itemContainer.append(itemLink);
+    // const itemLink = document.createElement('a');
+    // itemLink.classList.add('galllery__item-link');
+    // itemLink.append(cardImg, filmTitle, spanRating);
+    const cardContainer = document.createElement('div');
+    cardContainer.classList.add('gallery__card-movie');
+    cardContainer.append(imgContainer, filmTitle, spanRating);
 
     const item = document.createElement('li');
-    item.classList.add('gallery__item');
-    item.append(itemContainer);
+    item.classList.add('gallery__list-item');
+    item.append(cardContainer);
 
     item.addEventListener('click', () => {
       activeDetailsPage(id, false);
@@ -234,19 +246,19 @@ class MovieApi {
   checkBackdropImgSize() {
     if (window.innerWidth >= 1200) {
       this.imgCards.currentSizes.backdropSize = this.imgCards.backdropSizes.desktop;
-      this.imgCards.defaultBackdropImg = '../images/default_backdrop.jpeg';
+      this.imgCards.defaultBackdropImg = '../images/image-not-found.jpg';
       return;
     }
-    if (window.innerWidth >= 768 && window.innerWidth < 1200) {
+    if (window.innerWidth < 1200) {
       this.imgCards.currentSizes.backdropSize = this.imgCards.backdropSizes.tablet;
-      this.imgCards.defaultBackdropImg = '../images/default_backdrop.jpeg';
+      this.imgCards.defaultBackdropImg = '../images/image-not-found.jpg';
       return;
     }
-    if (window.innerWidth < 768) {
-      this.imgCards.currentSizes.backdropSize = this.imgCards.backdropSizes.mobile;
-      this.imgCards.defaultBackdropImg = '../images/default_backdrop.jpeg';
-      return;
-    }
+    // if (window.innerWidth < 768) {
+    //   this.imgCards.currentSizes.backdropSize = this.imgCards.backdropSizes.mobile;
+    //   this.imgCards.defaultBackdropImg = '../images/image-not-found.jpg';
+    //   return;
+    // }
   }
 
   checkPosterImgSize() {
@@ -267,3 +279,5 @@ class MovieApi {
 
 const API_KEY = '91085a172e1ffb2047d72641d0a91356';
 const MyApi = new MovieApi(API_KEY, paginationWrapper, ulForCards);
+
+console.log(window.innerWidth);
