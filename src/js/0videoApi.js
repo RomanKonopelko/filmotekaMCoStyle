@@ -80,7 +80,7 @@ class MovieApi {
       .then(resp => {
         if (resp.results.length === 0) {
           this.fetchPopularFilmsList();
-          throw Error('nnooo');
+          throw Error('Sorry we dont watch this kind of movies!');
         }
         this.setRatioButtons(resp);
         return resp;
@@ -91,7 +91,8 @@ class MovieApi {
           return createCardFunc(el);
         }),
       )
-      .then(item => MyApi.pagination.cardContainer.append(...item));
+      .then(item => MyApi.pagination.cardContainer.append(...item))
+      .catch(error => alert(error));
   }
 
   resetGalleryCard() {
