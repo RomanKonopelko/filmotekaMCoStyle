@@ -79,7 +79,7 @@ class MovieApi {
       .then(data => data.json())
       .then(data => {
         this.setRatioButtons(data);
-        console.log(data);
+        console.log(data.total_pages);
         return data;
       })
       .then(resp => {
@@ -96,8 +96,8 @@ class MovieApi {
           return this.createCardFunc(el);
         }),
       )
-      .then(item => MyApi.pagination.cardContainer.append(...item));
-    // .catch(error => alert(error));
+      .then(item => MyApi.pagination.cardContainer.append(...item))
+      .catch(error => console.log(error));
   }
 
   resetGalleryCard() {
@@ -204,6 +204,7 @@ class MovieApi {
     if (maxRight > data.total_pages) {
       maxLeft = this.params._page - (this.pagination.window - 1);
       maxRight = data.total_pages;
+      if (maxLeft < 1) maxLeft = 1;
     }
     this.pagination.paginationContainer.innerHTML = '';
     let btnArray = [];
