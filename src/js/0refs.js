@@ -1,7 +1,5 @@
 const refs = {
-  form: document.querySelector('.search-form'),
-  btnNext: document.querySelector('.button-next'),
-  btnPrev: document.querySelector('.button-prev'),
+  form: document.querySelector('.main__search-form'),
   paginationWrapper: document.querySelector('.pagination'),
   backdrop: document.querySelector('.backdrop'),
   modalBtn: document.querySelector('.backdrop__modal__btn'),
@@ -11,4 +9,5 @@ const refs = {
   ulForCards: document.querySelector('.gallery__list'),
 };
 
-const { form, btnPrev, btnNext, paginationWrapper, ulForCards } = refs;
+const { form, paginationWrapper, ulForCards } = refs;
+console.log(form);
