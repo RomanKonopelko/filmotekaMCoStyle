@@ -2,13 +2,13 @@ class MovieApi {
   constructor(key, paginationWrapper, cardWrapper) {
     this.API_KEY = key;
     this.BASE_URL = 'https://api.themoviedb.org/3/';
-    this.IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w300';
+    this.IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/';
     this.DEFAULT_IMAGE = '../images/image-not-found.jpg';
     this.currentPage;
     this.params = {
       generalSearchUrl: 'search/movie?',
-      popularSearchUrl: '', //Api url of popular movies
-      genreSearchUrl: '', // Api url of genre search
+      popularSearchUrl: 'movie/popular?',   //Api url of popular movie
+      genreSearchUrl: 'genre/movie/list?',  // Api url of genre search
       query: '',
       _page: 1,
     };
@@ -17,7 +17,48 @@ class MovieApi {
       cardContainer: cardWrapper, //gallery cards container
       paginationContainer: paginationWrapper, //pagination buttons container
     };
+    this.imgCards = {
+      defaultBackdropImg: '',
+      defaultPosterImg: '',
+      currentSizes: {
+        backdropSize: '',
+        posterSize: '',
+      },
+      backdropSizes: {
+        mobile: 'w342',
+        tablet: 'w500',
+        desktop: 'w780',
+      },
+      posterSizes: {
+        mobile: 'w342',
+        tablet: 'w500',
+        desktop: 'w780',
+      },
+    };
   }
+
+  fetchPopularFilmsList() {
+    return fetch(
+      `${this.BASE_URL}${this.params.popularSearchUrl}api_key=${this.API_KEY}&language=en-US&page=${this.params._page}`,
+    )
+      .then(response => response.json())
+      .then(resp => {
+        this.totalPages = resp.total_pages;
+        this.checkPaginationRatio(resp);
+        this.setRatioButtons(resp);
+        return resp;
+      })
+      .then(({ results }) => results);
+  }
+
+  fetchGenres() {
+    return fetch(
+      `${this.BASE_URL}${this.params.genreSearchUrl}api_key=${this.API_KEY}`,
+    )
+      .then(response => response.json())
+      .then(({ genres }) => genres);
+  }
+
   movieSearch() {
     this.resetGalleryCard();
     return fetch(
@@ -126,4 +167,42 @@ class MovieApi {
   resetPage() {
     return (this.params._page = 1);
   }
+
+  checkBackdropImgSize() {
+    if (window.innerWidth >= 1200) {
+      this.imgCards.currentSizes.backdropSize = this.imgCards.backdropSizes.desktop;
+      this.imgCards.defaultBackdropImg = './images/default_backdrop.jpeg';
+      return;
+    }
+    if (window.innerWidth >= 768 && window.innerWidth < 1200) {
+      this.imgCards.currentSizes.backdropSize = this.imgCards.backdropSizes.tablet;
+      this.imgCards.defaultBackdropImg = './images/default_backdrop.jpeg';
+      return;
+    }
+    if (window.innerWidth < 768) {
+      this.imgCards.currentSizes.backdropSize = this.imgCards.backdropSizes.mobile;
+      this.imgCards.defaultBackdropImg = './images/default_backdrop.jpeg';
+      return;
+    }
+  }
+
+  checkPosterImgSize() {
+    if (window.innerWidth >= 1200) {
+      this.imgCards.currentSizes.posterSize = this.imgCards.posterSizes.desktop;
+      this.imgCards.defaultPosterImg = './images/default_poster.jpg';
+    }
+    if (window.innerWidth >= 768 && window.innerWidth < 1200) {
+      this.imgCards.currentSizes.posterSize = this.imgCards.posterSizes.tablet;
+      this.imgCards.defaultPosterImg = './images/default_poster.jpg';
+    }
+    if (window.innerWidth < 768) {
+      this.imgCards.currentSizes.posterSize = this.imgCards.posterSizes.mobile;
+      this.imgCards.defaultPosterImg = './images/default_poster.jpg';
+    }
+  }
 }
+
+const API_KEY = '91085a172e1ffb2047d72641d0a91356';
+
+// const ul = document.querySelector('.test');
+const MyApi = new MovieApi(API_KEY, paginationWrapper, ulForCards);
