@@ -44,13 +44,7 @@ function createCardFunc(itemData) {
 
 // Рендерит всю галерию карточек популярных фильмов в UL galleryCard.html
 
-MyApi.fetchPopularFilmsList()
-  .then(collection =>
-    collection.map(el => {
-      return createCardFunc(el);
-    }),
-  )
-  .then(item => ulForCards.append(...item));
+MyApi.fetchPopularFilmsList();
 
 //Функция для клика по карточке и открытия
 function activeDetailsPage(movieId, status) {
