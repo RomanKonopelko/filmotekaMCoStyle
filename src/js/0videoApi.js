@@ -78,6 +78,10 @@ class MovieApi {
     )
       .then(response => response.json())
       .then(resp => {
+        if (resp.results.length === 0) {
+          this.fetchPopularFilmsList();
+          throw Error('nnooo');
+        }
         this.setRatioButtons(resp);
         return resp;
       })
