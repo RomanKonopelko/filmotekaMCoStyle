@@ -45,7 +45,6 @@ class MovieApi {
     )
       .then(response => response.json())
       .then(resp => {
-        console.log(resp);
         this.setRatioButtons(resp);
         return resp;
       })
@@ -80,9 +79,9 @@ class MovieApi {
       .then(data => data.json())
       .then(data => {
         this.setRatioButtons(data);
+        console.log(data);
         return data;
       })
-      .then(response => response.json())
       .then(resp => {
         if (resp.results.length === 0) {
           this.fetchPopularFilmsList();
@@ -94,11 +93,11 @@ class MovieApi {
       .then(({ results }) => results)
       .then(collection =>
         collection.map(el => {
-          return createCardFunc(el);
+          return this.createCardFunc(el);
         }),
       )
-      .then(item => MyApi.pagination.cardContainer.append(...item))
-      .catch(error => alert(error));
+      .then(item => MyApi.pagination.cardContainer.append(...item));
+    // .catch(error => alert(error));
   }
 
   resetGalleryCard() {
@@ -281,5 +280,3 @@ class MovieApi {
 
 const API_KEY = '91085a172e1ffb2047d72641d0a91356';
 const MyApi = new MovieApi(API_KEY, paginationWrapper, ulForCards);
-
-console.log(window.innerWidth);
