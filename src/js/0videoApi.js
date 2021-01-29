@@ -82,6 +82,7 @@ class MovieApi {
         return data;
       })
       .then(({ results }) => {
+        MyApi.checkBackdropImgSize();
         results.forEach(el => {
           return this.pagination.cardContainer.append(this.createCardFunc(el));
         });
@@ -116,7 +117,6 @@ class MovieApi {
 
     const cardImg = document.createElement('img');
     cardImg.setAttribute('src', imgCardSize);
-    cardImg.width = 300; //set width to clean up the look
     cardImg.classList.add('galllery__item-img');
     cardImg.setAttribute('alt', title);
 
