@@ -1,51 +1,64 @@
 .main {
   background-color: $primary-bg-color;
+  color: $title-text-color;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 20px;
+  }
 
   &__search-form {
     display: inline-block;
     align-items: center;
-    padding: 8px;
-    margin-bottom: 24px;
+    padding: 10px;
+    margin-bottom: 15px;
+    cursor: text;
+    outline: none;
+      
+    @media (min-width: 767px) {
+      margin-bottom: 30px;
+    }
   }
 
   .form__control {
     font-style: normal;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 12px;
     text-align: center;
     color: $title-text-color;
-
-    @media (min-width: 575px) {
-      font-size: 18px;
-    }
-
-    @media (min-width: 769px) {
-      font-size: 20px;
-    }
-  }
-
-  &__container {
-    padding-left: 15px;
-    padding-right: 15px;
+    width: 250px;
     margin-left: auto;
     margin-right: auto;
-    width: 100%;
 
-    @media screen and (min-width: 480px) {
-      width: 480px;
+
+    @media screen and (min-width: 575px) and (max-width: 767px) {
+      width: 500px;
     }
 
-    @media screen and (min-width: 768px) {
-      width: 768px;
+    @media screen and (min-width: 768px) and (max-width: 1099px) {
+      width: 600px;
+      font-size: 14px;
     }
 
-    @media screen and (min-width: 1200px) {
-      width: 1200px;
+    @media (min-width: 1100px) {
+      width: 900px;
+      font-size: 14px;
     }
+
   }
 }
-
 .gallery {
+  padding: 0;
+
+  &__item-image {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+
   &__list {
     padding: 0;
     margin: 0;
@@ -62,21 +75,47 @@
     }
   }
 
-  &__item {
+  &__card-movie {
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 25px;
+
+    &:not(:last-child) {
+      margin-bottom: 30px;
+    }
+
     @media screen and (min-width: 768px) {
       flex-basis: calc((100% - 2 * 30px) / 2);
       margin: 15px;
     }
+  
+  .movie {
 
-    &-link {
-      text-decoration: none;
-      color: currentColor;
-      display: inline-block;
+  &__title {
+    font-style: normal;
+    font-size: 12px;
+    line-height: 17px;
+    text-align: center;
+    width: 100%; 
+     
+    @media (min-width: 768px) {
+      font-size: 14px;
     }
-    &-img {
-      display: block;
-      max-width: 100%;
-      height: auto;
+
+  }
+
+  &__genre {
+    font-weight: 500;
+    color: $accent-color;
+    font-size: 12px;
+
+    @media (min-width: 768px) {
+      font-size: 14px;
     }
+
+  }
+  }
   }
 }

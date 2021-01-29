@@ -4,11 +4,11 @@ class MovieApi {
     this.BASE_URL = 'https://api.themoviedb.org/3/';
     this.IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/';
     this.DEFAULT_IMAGE = '../images/image-not-found.jpg';
-    this.currentPage;
+    this.searchMode = 'popular';
     this.params = {
       generalSearchUrl: 'search/movie?',
-      popularSearchUrl: 'movie/popular?',   //Api url of popular movie
-      genreSearchUrl: 'genre/movie/list?',  // Api url of genre search
+      popularSearchUrl: 'movie/popular?', //Api url of popular movie
+      genreSearchUrl: 'genre/movie/list?', // Api url of genre search
       query: '',
       _page: 1,
     };
@@ -38,17 +38,23 @@ class MovieApi {
   }
 
   fetchPopularFilmsList() {
+    this.searchMode = 'popular';
+    this.resetGalleryCard();
     return fetch(
       `${this.BASE_URL}${this.params.popularSearchUrl}api_key=${this.API_KEY}&language=en-US&page=${this.params._page}`,
     )
       .then(response => response.json())
       .then(resp => {
-        this.totalPages = resp.total_pages;
-        this.checkPaginationRatio(resp);
         this.setRatioButtons(resp);
         return resp;
       })
-      .then(({ results }) => results);
+      .then(({ results }) => results)
+      .then(collection =>
+        collection.map(el => {
+          return createCardFunc(el);
+        }),
+      )
+      .then(item => MyApi.pagination.cardContainer.append(...item));
   }
 
   fetchGenres() {
@@ -56,10 +62,16 @@ class MovieApi {
       `${this.BASE_URL}${this.params.genreSearchUrl}api_key=${this.API_KEY}`,
     )
       .then(response => response.json())
+      .then(data => {
+        this.setRatioButtons(data);
+        return data;
+      })
       .then(({ genres }) => genres);
   }
 
   movieSearch() {
+    console.log(this.searchMode);
+    this.searchMode = 'default';
     this.resetGalleryCard();
     return fetch(
       `${this.BASE_URL}${this.params.generalSearchUrl}api_key=${this.API_KEY}&language=en-US&query=${this.params.query}&page=${this.params._page}`,
@@ -70,8 +82,9 @@ class MovieApi {
         return data;
       })
       .then(({ results }) => {
+        MyApi.checkBackdropImgSize();
         results.forEach(el => {
-          return this.pagination.cardContainer.append(this.createFilmCard(el));
+          return this.pagination.cardContainer.append(this.createCardFunc(el));
         });
       });
   }
@@ -80,20 +93,56 @@ class MovieApi {
     this.pagination.cardContainer.innerHTML = '';
   }
 
-  createFilmCard(arr) {
-    const li = document.createElement('li');
-    const name = document.createElement('h1');
-    const mainPic = document.createElement('img');
-    mainPic.width = 300; //test card image width
+  // createFilmCard(arr) {
+  //   const li = document.createElement('li');
+  //   const name = document.createElement('h1');
+  //   const mainPic = document.createElement('img');
+  //   mainPic.width = 300; //test card image width
 
-    name.textContent = arr.name || arr.title;
-    mainPic.src = arr.backdrop_path
-      ? this.IMAGE_BASE_URL + arr.backdrop_path
-      : this.DEFAULT_IMAGE;
-    li.append(name, mainPic);
-    return li;
+  //   name.textContent = arr.name || arr.title;
+  //   mainPic.src = arr.backdrop_path
+  //     ? `${this.IMAGE_BASE_URL}${MyApi.imgCards.currentSizes.backdropSize}${arr.backdrop_path}`
+  //     : this.DEFAULT_IMAGE;
+  //   li.append(name, mainPic);
+  //   return li;
+  // }
+
+  createCardFunc(itemData) {
+    const { backdrop_path, title, id, vote_average, release_date } = itemData;
+    const imgCardSize = backdrop_path
+      ? `${MyApi.IMAGE_BASE_URL}${MyApi.imgCards.currentSizes.backdropSize}${backdrop_path}`
+      : MyApi.imgCards.defaultBackdropImg;
+
+    const yearOfRelease = release_date.slice(0, 4);
+
+    const cardImg = document.createElement('img');
+    cardImg.setAttribute('src', imgCardSize);
+    cardImg.classList.add('galllery__item-img');
+    cardImg.setAttribute('alt', title);
+
+    const filmTitle = document.createElement('p');
+    filmTitle.textContent = `${title}(${yearOfRelease})`;
+
+    const spanRating = document.createElement('span');
+    spanRating.textContent = vote_average;
+
+    const itemLink = document.createElement('a');
+    itemLink.classList.add('galllery__item-link');
+    itemLink.append(cardImg, filmTitle, spanRating);
+
+    const itemContainer = document.createElement('div');
+    itemContainer.classList.add('gallery__item-card');
+    itemContainer.append(itemLink);
+
+    const item = document.createElement('li');
+    item.classList.add('gallery__item');
+    item.append(itemContainer);
+
+    item.addEventListener('click', () => {
+      activeDetailsPage(id, false);
+    });
+    return item;
   }
-
   setPrevNextButtons(data) {
     const prevBtn = document.createElement('button');
     const nextBtn = document.createElement('button');
@@ -140,8 +189,12 @@ class MovieApi {
       button.textContent = i;
       button.addEventListener('click', e => {
         this.page = +e.target.textContent;
+        console.log(this.searchMode);
+        console.log(data.total_pages);
         this.pagination.cardContainer.innerHTML = '';
-        this.movieSearch();
+        this.searchMode === 'popular'
+          ? this.fetchPopularFilmsList()
+          : this.movieSearch();
       });
       btnArray.push(button);
     }
@@ -171,17 +224,17 @@ class MovieApi {
   checkBackdropImgSize() {
     if (window.innerWidth >= 1200) {
       this.imgCards.currentSizes.backdropSize = this.imgCards.backdropSizes.desktop;
-      this.imgCards.defaultBackdropImg = './images/default_backdrop.jpeg';
+      this.imgCards.defaultBackdropImg = '../images/default_backdrop.jpeg';
       return;
     }
     if (window.innerWidth >= 768 && window.innerWidth < 1200) {
       this.imgCards.currentSizes.backdropSize = this.imgCards.backdropSizes.tablet;
-      this.imgCards.defaultBackdropImg = './images/default_backdrop.jpeg';
+      this.imgCards.defaultBackdropImg = '../images/default_backdrop.jpeg';
       return;
     }
     if (window.innerWidth < 768) {
       this.imgCards.currentSizes.backdropSize = this.imgCards.backdropSizes.mobile;
-      this.imgCards.defaultBackdropImg = './images/default_backdrop.jpeg';
+      this.imgCards.defaultBackdropImg = '../images/default_backdrop.jpeg';
       return;
     }
   }
@@ -189,20 +242,19 @@ class MovieApi {
   checkPosterImgSize() {
     if (window.innerWidth >= 1200) {
       this.imgCards.currentSizes.posterSize = this.imgCards.posterSizes.desktop;
-      this.imgCards.defaultPosterImg = './images/default_poster.jpg';
+      this.imgCards.defaultPosterImg = '../images/default_poster.jpg';
     }
     if (window.innerWidth >= 768 && window.innerWidth < 1200) {
       this.imgCards.currentSizes.posterSize = this.imgCards.posterSizes.tablet;
-      this.imgCards.defaultPosterImg = './images/default_poster.jpg';
+      this.imgCards.defaultPosterImg = '../images/default_poster.jpg';
     }
     if (window.innerWidth < 768) {
       this.imgCards.currentSizes.posterSize = this.imgCards.posterSizes.mobile;
-      this.imgCards.defaultPosterImg = './images/default_poster.jpg';
+      this.imgCards.defaultPosterImg = '../images/default_poster.jpg';
     }
   }
 }
 
 const API_KEY = '91085a172e1ffb2047d72641d0a91356';
 
-// const ul = document.querySelector('.test');
 const MyApi = new MovieApi(API_KEY, paginationWrapper, ulForCards);
