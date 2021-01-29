@@ -7,17 +7,15 @@ class MovieApi {
     this.currentPage;
     this.params = {
       generalSearchUrl: 'search/movie?',
-      popularSearchUrl: 'movie/popular?',
-      genreSearchUrl: 'genre/movie/list?',
+      popularSearchUrl: 'movie/popular?',   //Api url of popular movie
+      genreSearchUrl: 'genre/movie/list?',  // Api url of genre search
       query: '',
-      _page: '',
+      _page: 1,
     };
-    this.window = 5;
     this.pagination = {
-      cardContainer: cardWrapper,
-      paginationContainer: paginationWrapper,
-      maxLeft: this.params._page - Math.floor(this.window / 2),
-      maxRight: this.params._page + Math.floor(this.window / 2),
+      window: 5, //quantity of pagination buttons
+      cardContainer: cardWrapper, //gallery cards container
+      paginationContainer: paginationWrapper, //pagination buttons container
     };
     this.imgCards = {
       defaultBackdropImg: '',
@@ -62,82 +60,93 @@ class MovieApi {
   }
 
   movieSearch() {
+    this.resetGalleryCard();
     return fetch(
       `${this.BASE_URL}${this.params.generalSearchUrl}api_key=${this.API_KEY}&language=en-US&query=${this.params.query}&page=${this.params._page}`,
     )
       .then(data => data.json())
-      .then(results => results);
+      .then(data => {
+        this.setRatioButtons(data);
+        return data;
+      })
+      .then(({ results }) => {
+        results.forEach(el => {
+          return this.pagination.cardContainer.append(this.createFilmCard(el));
+        });
+      });
+  }
+
+  resetGalleryCard() {
+    this.pagination.cardContainer.innerHTML = '';
   }
 
   createFilmCard(arr) {
     const li = document.createElement('li');
-    const description = document.createElement('p');
     const name = document.createElement('h1');
     const mainPic = document.createElement('img');
-    mainPic.width = 300;
+    mainPic.width = 300; //test card image width
 
-    description.textContent = arr.overview;
     name.textContent = arr.name || arr.title;
     mainPic.src = arr.backdrop_path
       ? this.IMAGE_BASE_URL + arr.backdrop_path
       : this.DEFAULT_IMAGE;
-    li.append(name, mainPic, description);
+    li.append(name, mainPic);
     return li;
   }
 
-  checkPaginationRatio(data) {
-    if (this.pagination.maxLeft < 1) {
-      this.pagination.maxLeft = 1;
-      this.pagination.maxRight = this.window;
+  setPrevNextButtons(data) {
+    const prevBtn = document.createElement('button');
+    const nextBtn = document.createElement('button');
+    if (this.page === 1) {
+      prevBtn.classList.add('is-hidden');
+      prevBtn.disabled = true;
     }
-    if (this.pagination.maxRight > data.total_pages) {
-      this.pagination.maxLeft = this.params._page - (this.window - 1);
-      this.pagination.maxRight = data.total_pages;
+
+    if (this.page === data.total_pages) {
+      nextBtn.classList.add('is-hidden');
+      nextBtn.disabled = true;
     }
-    console.log(
-      this.pagination.maxLeft,
-      'left',
-      this.pagination.maxRight,
-      'right',
-      this.params._page,
-    );
+    prevBtn.addEventListener('click', () => {
+      this.decrementPage();
+      this.resetGalleryCard();
+      this.movieSearch();
+    });
+    nextBtn.addEventListener('click', () => {
+      this.incrementPage();
+      this.resetGalleryCard();
+      this.movieSearch();
+    });
+    prevBtn.textContent = 'Prev';
+    nextBtn.textContent = 'Next';
+    this.pagination.paginationContainer.prepend(prevBtn);
+    this.pagination.paginationContainer.append(nextBtn);
   }
 
-  setRatioButtons() {
+  setRatioButtons(data) {
+    let maxLeft = this.params._page - Math.floor(this.pagination.window / 2);
+    let maxRight = this.params._page + Math.floor(this.pagination.window / 2);
+    if (maxLeft < 1) {
+      maxLeft = 1;
+      maxRight = this.pagination.window;
+    }
+    if (maxRight > data.total_pages) {
+      maxLeft = this.params._page - (this.pagination.window - 1);
+      maxRight = data.total_pages;
+    }
     this.pagination.paginationContainer.innerHTML = '';
     let btnArray = [];
-    for (let i = this.pagination.maxLeft; i <= this.pagination.maxRight; i++) {
+    for (let i = maxLeft; i <= maxRight; i++) {
       const button = document.createElement('button');
       button.textContent = i;
       button.addEventListener('click', e => {
         this.page = +e.target.textContent;
         this.pagination.cardContainer.innerHTML = '';
-        console.log(
-          this.pagination.maxLeft,
-          'left',
-          this.pagination.maxRight,
-          'right',
-          this.params._page,
-        );
-        this.movieSearch()
-          .then(data => {
-            console.log(data.total_pages);
-            this.checkPaginationRatio(data);
-            this.setRatioButtons();
-            return data;
-          })
-          .then(({ results }) => {
-            results.forEach(el => {
-              return this.pagination.cardContainer.append(
-                this.createFilmCard(el),
-              );
-            });
-          });
+        this.movieSearch();
       });
       btnArray.push(button);
-      console.log(btnArray);
     }
     this.pagination.paginationContainer.append(...btnArray);
+    this.setPrevNextButtons(data);
   }
   get page() {
     return this.params._page;
