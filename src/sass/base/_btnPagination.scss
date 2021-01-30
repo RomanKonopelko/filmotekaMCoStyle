@@ -5,15 +5,21 @@
 
   border-radius: 5px;
   border: 1px solid #6ab1d7;
-  background-color: white;
-  color: #002878;
+  background-color: transparent;
+  color: $accent-color;
+  animation: animate 5s infinite;
+  animation: animate-border-btn 2s infinite;
 }
 
 .pagination__btn:hover,
 .pagination__btn:focus {
-  background-color: #b8ccd6;
+  background-color: $accent-color;
+  color: white;
+  border: 2px solid white;
+  box-shadow: 0 0 10px $accent-color, 0 0 20px $accent-color, 0 0 10px,
+    0 0 10px $accent-color, 0 0 10px $accent-color;
   outline: none;
-  box-shadow: $focus-box-shadow;
+  animation: none;
 }
 
 .pagination__turning-btn {
@@ -29,11 +35,8 @@
   text-decoration: none;
   color: white;
 
-  background-image: $popular-background-image;
-  background-position: 100% 0;
-  background-size: 200% 200%;
-  box-shadow: $popular-box-shadow;
-  transition: $transition-duration;
+  background-color: transparent;
+  animation: animate-border-btn 5s infinite, animate 5s infinite;
 
   @include for-size(tablet) {
     width: 100px;
@@ -43,19 +46,36 @@
   }
 }
 
-.pagination__turning-btn:hover {
-  box-shadow: 0 0 0 0 rgba(0, 40, 120, 0);
-  background-position: 0 0;
+.pagination__turning-btn:hover,
+.pagination__turning-btn:focus {
+  animation: none;
+  border: 2px solid rgb(255, 117, 117);
+  box-shadow: 0 0 10px $accent-color2, 0 0 20px $accent-color2, 0 0 10px,
+    0 0 10px $accent-color2, 0 0 10px $accent-color2;
+  color: $accent-color2;
+  text-shadow: 0 0 10px lightskyblue, 0 0 20px lightskyblue,
+    0 0 40px lightskyblue, 0 0 80px lightskyblue, 0 0 160px lightskyblue;
 }
 
-.pagination__turning-btn:focus {
+.pagination__turning-btn:active {
   outline: none;
-  box-shadow: $focus-box-shadow;
+  border: 2px solid $accent-color;
+  box-shadow: none;
+}
+
+.pagination__turning-btn.is-hidden {
+  display: none;
+  outline: none;
+  border: 2px solid $accent-color;
+  box-shadow: none;
 }
 
 .pagination__btn.active {
-  border: none;
-  color: white;
-  background-image: $popular-background-image;
-  background-position: 100% 0;
+  animation: none;
+  border: 2px solid rgb(255, 117, 117);
+  box-shadow: 0 0 10px $accent-color2, 0 0 20px $accent-color2, 0 0 10px,
+    0 0 10px $accent-color2, 0 0 10px $accent-color2;
+  color: $accent-color2;
+  text-shadow: 0 0 10px lightskyblue, 0 0 20px lightskyblue,
+    0 0 40px lightskyblue, 0 0 80px lightskyblue, 0 0 160px lightskyblue;
 }

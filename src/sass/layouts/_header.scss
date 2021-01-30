@@ -6,9 +6,11 @@
   position: relative;
   background-size: cover;
   background-repeat: no-repeat;
-  background-image: url('../../images/header-mobile.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), #0d121e),
+    url('../../images/header-mobile.jpg');
   @include for-size(tablet) {
-    background-image: url('../../images/header-tablet.jpg');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), #0d121e),
+      url('../../images/header-tablet.jpg');
   }
   @include for-size(desktop) {
     background-image: linear-gradient(rgba(0, 0, 0, 0.3), #0d121e),
@@ -78,6 +80,10 @@
 .header__item:first-child {
   margin-right: auto;
 }
+
+.header__logo {
+  width: 10px;
+}
 //test animation to main text
 .header__logo-text {
   margin-left: 10px;
@@ -85,6 +91,7 @@
   letter-spacing: 5px;
   color: lightseagreen;
   width: 100%;
+  text-transform: uppercase;
   -webkit-box-reflect: below 1px linear-gradient(transparent, #0008);
   line-height: 0.7em;
   outline: none;

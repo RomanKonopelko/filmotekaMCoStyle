@@ -296,10 +296,15 @@ class MovieApi {
   setPrevNextButtons(data) {
     const prevBtn = document.createElement('button');
     const nextBtn = document.createElement('button');
+    prevBtn.textContent = 'Prev';
+    prevBtn.classList.add('pagination__turning-btn');
+    nextBtn.textContent = 'Next';
+    nextBtn.classList.add('pagination__turning-btn');
     if (this.page === 1) {
       prevBtn.classList.add('is-hidden');
       prevBtn.disabled = true;
     }
+    console.log(this.page === 1);
 
     if (this.page === data.total_pages) {
       nextBtn.classList.add('is-hidden');
@@ -319,10 +324,7 @@ class MovieApi {
         ? this.fetchPopularFilmsList()
         : this.movieSearch();
     });
-    prevBtn.textContent = 'Prev';
-    prevBtn.classList.add('pagination__turning-btn');
-    nextBtn.textContent = 'Next';
-    nextBtn.classList.add('pagination__turning-btn');
+
     this.pagination.paginationContainer.prepend(prevBtn);
     this.pagination.paginationContainer.append(nextBtn);
   }

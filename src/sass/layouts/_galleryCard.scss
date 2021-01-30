@@ -104,8 +104,8 @@ $shadows-big: multiple-box-shadow(100);
 
   .form__control {
     padding: 5px 10px; // change input color
+    border: none;
     border-bottom: 2px solid $accent-color;
-    border-radius: 5px;
     background-color: transparent;
     outline: none;
     font-style: normal;
@@ -116,7 +116,6 @@ $shadows-big: multiple-box-shadow(100);
     width: 250px;
     margin-left: auto;
     margin-right: auto;
-    box-shadow: 0 0 5px 0 lightskyblue;
 
     @media screen and (min-width: 575px) and (max-width: 767px) {
       width: 500px;
