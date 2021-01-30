@@ -190,7 +190,9 @@ class MovieApi {
         : this.movieSearch();
     });
     prevBtn.textContent = 'Prev';
+    prevBtn.classList.add('pagination__turning-btn');
     nextBtn.textContent = 'Next';
+    nextBtn.classList.add('pagination__turning-btn');
     this.pagination.paginationContainer.prepend(prevBtn);
     this.pagination.paginationContainer.append(nextBtn);
   }
@@ -212,6 +214,7 @@ class MovieApi {
     for (let i = maxLeft; i <= maxRight; i++) {
       let button = document.createElement('button');
       button.textContent = i;
+      button.classList.add('pagination__btn'); // добавляет класс для стилей
       if (+button.textContent === this.params._page)
         button.classList.add('active');
       button.addEventListener('click', e => {
