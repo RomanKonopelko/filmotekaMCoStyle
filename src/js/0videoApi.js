@@ -5,6 +5,7 @@ class MovieApi {
     this.IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/';
     this.DEFAULT_IMAGE = '../images/image-not-found.jpg';
     this.searchMode = 'popular';
+    this.currentPage = 1;
     this.params = {
       generalSearchUrl: 'search/movie?',
       popularSearchUrl: 'movie/popular?', //Api url of popular movie
@@ -25,8 +26,8 @@ class MovieApi {
         posterSize: '',
       },
       backdropSizes: {
-        mobile: 'w342',
-        tablet: 'w342',
+        mobile: 'w500',
+        tablet: 'w500',
         desktop: 'w500',
       },
       posterSizes: {
@@ -79,7 +80,7 @@ class MovieApi {
       .then(data => data.json())
       .then(data => {
         this.setRatioButtons(data);
-        console.log(data);
+        console.log(data.total_pages);
         return data;
       })
       .then(resp => {
@@ -96,8 +97,8 @@ class MovieApi {
           return this.createCardFunc(el);
         }),
       )
-      .then(item => MyApi.pagination.cardContainer.append(...item));
-    // .catch(error => alert(error));
+      .then(item => MyApi.pagination.cardContainer.append(...item))
+      .catch(error => console.log(error));
   }
 
   resetGalleryCard() {
@@ -128,7 +129,7 @@ class MovieApi {
 
     const cardImg = document.createElement('img');
     cardImg.setAttribute('src', imgCardSize);
-    cardImg.classList.add('galllery__item-image');
+    cardImg.classList.add('gallery__item-image');
     cardImg.setAttribute('alt', title);
     if (!backdrop_path) {
       cardImg.width = 342;
@@ -143,7 +144,7 @@ class MovieApi {
     filmTitle.textContent = `${title} ${yearOfRelease}`;
 
     const spanRating = document.createElement('span');
-    spanRating.classList.add('movie__title');
+    spanRating.classList.add('movie__genre');
     spanRating.textContent = vote_average;
 
     // const itemLink = document.createElement('a');
@@ -204,16 +205,18 @@ class MovieApi {
     if (maxRight > data.total_pages) {
       maxLeft = this.params._page - (this.pagination.window - 1);
       maxRight = data.total_pages;
+      if (maxLeft < 1) maxLeft = 1;
     }
     this.pagination.paginationContainer.innerHTML = '';
     let btnArray = [];
     for (let i = maxLeft; i <= maxRight; i++) {
-      const button = document.createElement('button');
+      let button = document.createElement('button');
       button.textContent = i;
+      if (+button.textContent === this.params._page)
+        button.classList.add('active');
       button.addEventListener('click', e => {
         this.page = +e.target.textContent;
-        console.log(this.searchMode);
-        console.log(data.total_pages);
+        this.currentPage = this.page;
         this.pagination.cardContainer.innerHTML = '';
         this.searchMode === 'popular'
           ? this.fetchPopularFilmsList()
@@ -221,6 +224,7 @@ class MovieApi {
       });
       btnArray.push(button);
     }
+
     this.pagination.paginationContainer.append(...btnArray);
     this.setPrevNextButtons(data);
   }
@@ -245,12 +249,12 @@ class MovieApi {
   }
 
   checkBackdropImgSize() {
-    if (window.innerWidth >= 1200) {
+    if (window.innerWidth >= 1024) {
       this.imgCards.currentSizes.backdropSize = this.imgCards.backdropSizes.desktop;
       this.imgCards.defaultBackdropImg = '../images/image-not-found.jpg';
       return;
     }
-    if (window.innerWidth < 1200) {
+    if (window.innerWidth < 1024) {
       this.imgCards.currentSizes.backdropSize = this.imgCards.backdropSizes.tablet;
       this.imgCards.defaultBackdropImg = '../images/image-not-found.jpg';
       return;
