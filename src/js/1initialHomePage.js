@@ -47,38 +47,42 @@ MyApi.fetchPopularFilmsList();
 // Рендерит всю галерию карточек популярных фильмов в UL galleryCard.html
 
 //Функция для клика по карточке и открытия
-function activeDetailsPage(movieId, status) {
-  //   console.log('movieID', movieId, status);
-}
 
-let renderFilms = MyApi.fetchPopularFilmsList(); // содержит массив объектов популярных фильмов
+// function activeDetailsPage(movieId, status) {
+//   // console.log('movieID', movieId, status);
+// }
+
+let renderFilms = MyApi.fetchPopularFilmsList();
+//console.log(renderFilms); // содержит массив объектов популярных фильмов
 const genres = MyApi.fetchGenres(); // содержит коллекцию жанров
+// console.log(genres);
 
-refs.modalBtn.addEventListener('click', closeModal);
-// refs.filmImage.addEventListener('click', openModal);
-refs.backdrop.addEventListener('click', onBeckDropCkick);
-
-function closeModal() {
-  refs.backdrop.classList.add('backdrop--hidden');
-
-  //  window.removeEventListener("keydown", onKeybordPress);
-}
 //ЛОГИКА МОДАЛЬНОГО ОКНА
+modalBtn.addEventListener('click', closeModal);
+backdrop.addEventListener('click', onBeckDropCkick); // закриває модалку якщо клікнути на бекдроп
+
 function openModal(event) {
   event.preventDefault();
 
-  refs.backdrop.classList.remove('backdrop--hidden');
-  refs.modalText.textContent = refs.aboutFilmText.textContent;
+  if (event.target.nodeName !== 'IMG') {
+    return;
+  }
 
+  backdrop.classList.remove('backdrop--hidden');
   window.addEventListener('keydown', onKeybordPress);
 }
 
+function closeModal() {
+  backdrop.classList.add('backdrop--hidden');
+  window.removeEventListener('keydown', onKeybordPress);
+}
+// закриваємо модалку кнопкою Escape
 function onKeybordPress(event) {
   if (event.code === 'Escape') {
     closeModal();
   }
 }
-
+// закриваємо модалку, при натисканні на бекдроп
 function onBeckDropCkick(event) {
   if (event.target.nodeName === 'DIV') {
     closeModal();

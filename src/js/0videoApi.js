@@ -5,7 +5,10 @@ class MovieApi {
     this.IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/';
     this.DEFAULT_IMAGE = '../images/image-not-found.jpg';
     this.searchMode = 'popular';
+
+    this.popularFilmItem = []; // test
     this.currentPage = 1;
+
     this.params = {
       generalSearchUrl: 'search/movie?',
       popularSearchUrl: 'movie/popular?', //Api url of popular movie
@@ -49,7 +52,10 @@ class MovieApi {
         this.setRatioButtons(resp);
         return resp;
       })
-      .then(({ results }) => results)
+      .then(({ results }) => {
+        this.popularFilmItem = results; // test
+        return results; // test
+      })
       .then(collection =>
         collection.map(el => {
           return this.createCardFunc(el);
@@ -84,7 +90,8 @@ class MovieApi {
         return data;
       })
       .then(resp => {
-        if (resp.results.length === 0) {
+        if (resp.results.length === 0);
+        {
           this.fetchPopularFilmsList();
           throw Error('Sorry we dont watch this kind of movies!');
         }
@@ -120,6 +127,10 @@ class MovieApi {
   // }
 
   createCardFunc(itemData) {
+    //test start //
+    ulForCards.classList.remove('is-hidden');
+    // test end //
+
     const { backdrop_path, title, id, vote_average, release_date } = itemData;
     const imgCardSize = backdrop_path
       ? `${MyApi.IMAGE_BASE_URL}${MyApi.imgCards.currentSizes.backdropSize}${backdrop_path}`
@@ -159,10 +170,130 @@ class MovieApi {
     item.append(cardContainer);
 
     item.addEventListener('click', () => {
-      activeDetailsPage(id, false);
+      // клік на картку //
+      ulForCards.classList.add('is-hidden');
+
+      this.activeDetailsPage(id, false);
     });
     return item;
   }
+
+  activeDetailsPage(id) {
+    const array = this.popularFilmItem.filter(item => {
+      if (item.id === id) return item;
+    });
+    const item = array[0];
+
+    const tdGenre = document.createElement('td');
+    tdGenre.textContent = 'genre';
+    const tdGenreName = document.createElement('td');
+    //tdGenreName.textContent = 'Western';
+
+    const trGenre = document.createElement('tr');
+    trGenre.append(tdGenre, tdGenreName);
+    trGenre.classList.add('details-page__rows');
+
+    const tdTitle = document.createElement('td');
+    tdTitle.textContent = 'original title';
+    const tdTitleName = document.createElement('td');
+    tdTitleName.textContent = item.original_title;
+    const trTitle = document.createElement('tr');
+    trTitle.classList.add('details-page__rows');
+    trTitle.append(tdTitle, tdTitleName);
+
+    const tdPopularity = document.createElement('td');
+    tdPopularity.textContent = 'popularity';
+    const tdPopularityName = document.createElement('td');
+    tdPopularityName.textContent = item.popularity;
+    const trPopularity = document.createElement('tr');
+    trPopularity.classList.add('details-page__rows');
+    trPopularity.append(tdPopularity, tdPopularityName);
+
+    const tdVote = document.createElement('td');
+    tdVote.textContent = 'vote / votes';
+    const spanVote = document.createElement('span');
+    spanVote.classList.add('rows__vote');
+    spanVote.textContent = item.vote_average;
+
+    const tdVoteName = document.createElement('td');
+    tdVoteName.textContent = `/ ${item.vote_count}`;
+
+    spanVote.appendChild(tdVoteName);
+
+    const trVotes = document.createElement('tr');
+    trVotes.classList.add('details-page__rows');
+    trVotes.append(tdVote, spanVote);
+
+    const table = document.createElement('table');
+    table.classList.add('details-page__table');
+
+    table.append(trVotes, trPopularity, trTitle, trGenre);
+
+    const title = document.createElement('h2');
+    title.classList.add('details-page__title');
+    title.textContent = item.title;
+
+    const div = document.createElement('div');
+    div.append(title, table);
+
+    const divPage = document.createElement('div');
+    divPage.classList.add('details-page__about');
+    const titleText = document.createElement('h3');
+    titleText.classList.add('details-page__title', 'second');
+    titleText.textContent = 'About';
+    const textAbout = document.createElement('p');
+    textAbout.classList.add('details-page__text');
+    textAbout.textContent = item.overview;
+
+    divPage.append(titleText, textAbout);
+
+    const buttonFirst = document.createElement('button');
+    buttonFirst.classList.add('button__add', 'first');
+    buttonFirst.setAttribute('type', 'submite');
+    buttonFirst.textContent = 'add to Watched';
+
+    const buttonSecond = document.createElement('button');
+    buttonSecond.classList.add('button__add');
+    buttonSecond.setAttribute('type', 'submite');
+    buttonSecond.textContent = 'add to queue';
+
+    const divBtn = document.createElement('div');
+    divBtn.classList.add('details-page__button');
+    divBtn.append(buttonFirst, buttonSecond);
+
+    const detailsPageDecr = document.createElement('div');
+    detailsPageDecr.classList.add('details-page__description');
+    detailsPageDecr.append(div, divPage, divBtn);
+
+    const img = document.createElement('img');
+    img.setAttribute(
+      'src',
+      `${MyApi.IMAGE_BASE_URL}${MyApi.imgCards.currentSizes.backdropSize}${item.poster_path}`,
+    );
+    img.setAttribute('alt', img.title);
+    img.setAttribute('width', '650');
+    img.setAttribute('data', 'poster');
+    console.dir(img);
+
+    const aImg = document.createElement('a');
+    aImg.setAttribute('href', '#');
+
+    aImg.appendChild(img);
+    const divImage = document.createElement('div');
+    divImage.classList.add('details-page__foto');
+
+    divImage.appendChild(aImg);
+
+    const container = document.createElement('div');
+    container.classList.add('container', 'details-page__film');
+    container.append(divImage, detailsPageDecr);
+
+    detailsSection.classList.remove('is-hidden');
+    detailsSection.appendChild(container);
+
+    detailsSection.addEventListener('click', openModal);
+  }
+
   setPrevNextButtons(data) {
     const prevBtn = document.createElement('button');
     const nextBtn = document.createElement('button');
