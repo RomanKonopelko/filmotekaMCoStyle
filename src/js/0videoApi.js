@@ -5,6 +5,7 @@ class MovieApi {
     this.IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/';
     this.DEFAULT_IMAGE = '../images/image-not-found.jpg';
     this.searchMode = 'popular';
+    this.currentPage = 1;
     this.params = {
       generalSearchUrl: 'search/movie?',
       popularSearchUrl: 'movie/popular?', //Api url of popular movie
@@ -209,12 +210,13 @@ class MovieApi {
     this.pagination.paginationContainer.innerHTML = '';
     let btnArray = [];
     for (let i = maxLeft; i <= maxRight; i++) {
-      const button = document.createElement('button');
+      let button = document.createElement('button');
       button.textContent = i;
+      if (+button.textContent === this.params._page)
+        button.classList.add('active');
       button.addEventListener('click', e => {
         this.page = +e.target.textContent;
-        console.log(this.searchMode);
-        console.log(data.total_pages);
+        this.currentPage = this.page;
         this.pagination.cardContainer.innerHTML = '';
         this.searchMode === 'popular'
           ? this.fetchPopularFilmsList()
@@ -222,6 +224,7 @@ class MovieApi {
       });
       btnArray.push(button);
     }
+
     this.pagination.paginationContainer.append(...btnArray);
     this.setPrevNextButtons(data);
   }
