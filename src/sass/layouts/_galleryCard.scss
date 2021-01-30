@@ -73,7 +73,6 @@
     max-width: 100%;
     height: auto;
 
-
     border-radius: 10px;
   }
   // &__item-image:hover {
@@ -102,13 +101,11 @@
     align-items: center;
     margin-bottom: 25px;
 
-
     position: relative;
 
     border-radius: 10px;
     box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2),
       0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
 
     &:not(:last-child) {
       margin-bottom: 30px;
@@ -157,16 +154,17 @@
 
         @media (min-width: 768px) {
           font-size: 14px;
-        // color: $accent-color;
-        color: white;
-        font-size: 12px;
+          // color: $accent-color;
+          color: white;
+          font-size: 12px;
 
-        position: absolute; // ДОбавил позиционирование
-        top: 20px;
-        right: 20px;
+          position: absolute; // ДОбавил позиционирование
+          top: 20px;
+          right: 20px;
 
-        @media (min-width: 768px) {
-          font-size: 20px; //Изменил с 14 для наглядности
+          @media (min-width: 768px) {
+            font-size: 20px; //Изменил с 14 для наглядности
+          }
         }
       }
     }
