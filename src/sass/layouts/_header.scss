@@ -3,9 +3,7 @@
   padding-bottom: 160px;
   background-size: cover;
   background-repeat: no-repeat;
-  @include for-size(mobile) {
-    background-image: url('../../images/header-mobile.jpg');
-  }
+  background-image: url('../../images/header-mobile.jpg');
   @include for-size(tablet) {
     background-image: url('../../images/header-tablet.jpg');
   }
@@ -17,33 +15,47 @@
   display: flex;
   align-items: center;
 }
-.header__link {
-  text-transform: uppercase;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 14px;
-  color: #ffffff;
-  &:visited {
-    color: #ffffff;
-  }
-}
 .header__item {
+  display: flex;
+  align-items: center;
   padding-bottom: 5px;
-}
-.header__item.current {
-  position: relative;
-  &::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 4px;
+  // font-weight: 500;
+  // font-size: 12px;
+  // line-height: 14px;
+  // color: #ffffff;
+  cursor: pointer;
+
+  &-title {
+    text-transform: uppercase;
+    font-size: 25px;
+    letter-spacing: 5px;
+    color: lightseagreen;
     width: 100%;
-    border-radius: 2px;
-    background-color: $accent-color;
-    background-repeat: no-repeat;
-    background-position: center;
+    -webkit-box-reflect: below 1px linear-gradient(transparent, #0008);
+    line-height: 0.7em;
+    outline: none;
+    animation: animate 5s linear infinite;
   }
+}
+.header__item.current .header__item-title {
+  //test animation active
+  position: relative;
+  animation: none;
+  color: white;
+  text-shadow: 0 0 10px lightskyblue, 0 0 20px lightskyblue,
+    0 0 40px lightskyblue, 0 0 80px lightskyblue, 0 0 160px lightskyblue;
+  // &::after {
+  //   content: '';
+  //   position: absolute;
+  //   left: 0;
+  //   bottom: 0px;
+  //   height: 4px;
+  //   width: 100%;
+  //   border-radius: 2px;
+  //   background-color: $accent-color;
+  //   background-repeat: no-repeat;
+  //   background-position: center;
+  // }
 }
 .header__item:last-child {
   margin-left: 40px;
@@ -51,13 +63,19 @@
 .header__item:first-child {
   margin-right: auto;
 }
-.header__link {
-  display: flex;
-  align-items: center;
-}
+//test animation to main text
 .header__logo-text {
   margin-left: 10px;
+  font-size: 25px;
+  letter-spacing: 5px;
+  color: lightseagreen;
+  width: 100%;
+  -webkit-box-reflect: below 1px linear-gradient(transparent, #0008);
+  line-height: 0.7em;
+  outline: none;
+  animation: animate 5s linear infinite;
 }
-.header__logo-text.is-hiden {
+
+.header__logo-text.is-hidden {
   display: none;
 }
