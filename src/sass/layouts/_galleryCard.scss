@@ -78,27 +78,35 @@ $shadows-big: multiple-box-shadow(100);
   }
 }
 .main {
+
   padding-top: 20px; //add padding
-  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%); //test bg animation
   color: $title-text-color;
+
 
   &__container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-bottom: 20px;
+    padding: 20px;
+    background-color: $primary-bg-color;
+    color: $title-text-color;
+
   }
 
   &__search-form {
-    display: inline-block;
-    align-items: center;
     padding: 10px;
-    margin-bottom: 15px;
     cursor: text;
     outline: none;
-
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+      
     @media (min-width: 767px) {
       margin-bottom: 30px;
+      padding: 8px;
     }
   }
 
@@ -132,6 +140,22 @@ $shadows-big: multiple-box-shadow(100);
     }
   }
 }
+
+.gallery__list {
+  display: grid;
+  grid-gap: 20px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+  grid-template-columns: repeat(2, 1fr);
+
+    @media (max-width: 1109px) {
+      grid-template-columns: repeat(2, 1fr);
+      justify-content: space-between;
+
 
 .gallery {
   padding: 0;
@@ -167,86 +191,85 @@ $shadows-big: multiple-box-shadow(100);
       text-align: center;
     }
 
-    @media screen and (min-width: 768px) {
-      display: flex;
-      flex-wrap: wrap;
-      margin: -15px;
+    @media (max-width: 767px) {
+      margin: 30px 0;
     }
-  }
+    @media (max-width: 574px) {
+      grid-template-columns: 1fr;
+      justify-content: center;
 
-  &__card-movie {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 25px;
+      margin: 20px 0;
+    }
+}
 
-    position: relative;
-
-    border-radius: 10px;
+.card__movie {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  
+  margin: 5px;
+  padding: 5px;
+  border-radius: 5px;
+  overflow: hidden;
+ // box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3),
+    //-23px 0 20px -23px rgba(0, 0, 0, 0.6), 23px 0 20px -23px rgba(0, 0, 0, 0.6),
+  //  inset 0 0 40px rgba(0, 0, 0, 0.1);
     border: 2px solid lightskyblue;
     box-shadow: 0px 8px 17px 2px rgba(135, 206, 250, 0.4),
       0 6px 10px 0 rgba(135, 206, 250, 10);
 
-    &:not(:last-child) {
-      margin-bottom: 30px;
-    }
 
-    @media screen and (min-width: 768px) {
-      flex-basis: calc((100% - 2 * 30px) / 2);
-      margin: 15px;
-    }
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
-    .movie {
-      &__title {
-        font-style: normal;
-        font-size: 12px;
-        line-height: 17px;
-        text-align: center;
-        width: 100%;
+  &:hover {
+  transform: scale(1.05);
+  }
+}
+  
+.movie {
 
-        font-weight: 900;
-        color: white;
-        // text-align: center;   // Мешало позиционированию
-        width: 100%; //  Захаркодил ширину текста, чтобы не растягивала контейнер
-        padding: 20px 20px;
-        border-radius: 10px;
+  &__image-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+  }
 
-        background: linear-gradient(1turn, #959597, rgba(126, 35, 126, 0));
+  &__title {
+    font-style: normal;
+    font-size: 12px;
+    color: white;
+    width: 100%; //  Захаркодил ширину текста, чтобы не растягивала контейнер
+    padding: 20px 20px;
+    border-radius: 10px;
 
-        position: absolute; // ДОбавил позиционирование
-        bottom: 0px;
-        left: 0px;
+    background: linear-gradient(1turn, #959597, rgba(126, 35, 126, 0));
 
-        @media (min-width: 768px) {
-          font-size: 14px;
-        }
-
-        // @media (min-width: 1024px) {
-        //   //  Захаркодил ширину текста, чтобы не растягивала контейнер
-        //   width: 450px;
-        // }
-      }
-
-      &__genre {
-        font-weight: 500;
-        color: $accent-color;
-        font-size: 12px;
-
-        @media (min-width: 768px) {
-          font-size: 14px;
-          // color: $accent-color;
-          color: white;
-          font-size: 12px;
-
-          position: absolute; // ДОбавил позиционирование
-          top: 20px;
-          right: 20px;
-
-          @media (min-width: 768px) {
-            font-size: 20px; //Изменил с 14 для наглядности
-          }
-        }
-      }
+    position: absolute; // ДОбавил позиционирование
+    bottom: 0px;
+    left: 0px;
+    
+     
+    @media (min-width: 768px) {
+      font-size: 16px;
     }
   }
+
+  &__genre {
+    font-style: normal;
+    font-size: 16px;
+    text-align: center;
+    color: white;
+
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    
+    @media (min-width: 768px) {
+      font-size: 20px;
+    }
+  }
+
 }
