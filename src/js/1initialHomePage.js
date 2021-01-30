@@ -1,113 +1,86 @@
-// 'use strict';
+'use strict';
 
-// const movieList = document.querySelector('.container__list');
+MyApi.checkBackdropImgSize();
+MyApi.checkPosterImgSize();
 
-// const API_KEY = '91085a172e1ffb2047d72641d0a91356';
+MyApi.fetchPopularFilmsList();
 
-// const configurationAPI = {
-//   apiKey: API_KEY,
-//   baseUrl: 'https://api.themoviedb.org/3/',
-//   searchQuery: '',
-//   totalPages: 1,
-//   pageNumber: 1,
+// Создает одну карточку фильма, "li", с
 
-//   fetchPopularFilmsList() {
-//     return fetch(
-//       `${this.baseUrl}movie/popular?api_key=${this.apiKey}&language=en-US&page=${this.pageNumber}`,
-//     )
-//       .then(response => response.json())
-//       .then(resp => {
-//         this.totalPages = resp.total_pages;
-//         return resp;
-//       })
-//       .then(({ results }) => results);
-//   },
+// function createCardFunc(itemData) {
+//   const { backdrop_path, title, id, vote_average, release_date } = itemData;
+//   const imgCardSize = backdrop_path
+//     ? `${MyApi.IMAGE_BASE_URL}${MyApi.imgCards.currentSizes.backdropSize}${backdrop_path}`
+//     : MyApi.imgCards.defaultBackdropImg;
 
-//   fetchGenres() {
-//     return fetch(`${this.baseUrl}genre/movie/list?api_key=${this.apiKey}`)
-//       .then(response => response.json())
-//       .then(({ genres }) => genres);
-//   },
-// };
-
-// // Создает одну карточку фильма, "li"
-
-// function createCardFunc(imgPath, filmTitle, movieId, rating, data) {
-//   const baseImageUrl = 'https://image.tmdb.org/t/p/w300/';
-//   const yearOfRelease = data.slice(0, 4);
+//   const yearOfRelease = release_date.slice(0, 4);
 
 //   const cardImg = document.createElement('img');
-//   cardImg.setAttribute('src', `${baseImageUrl}${imgPath}`);
-//   cardImg.setAttribute('alt', filmTitle);
+//   cardImg.setAttribute('src', imgCardSize);
+//   cardImg.classList.add('galllery__item-img');
+//   cardImg.setAttribute('alt', title);
 
-//   const title = document.createElement('p');
-//   title.textContent = `${filmTitle}(${yearOfRelease})`;
+//   const filmTitle = document.createElement('p');
+//   filmTitle.textContent = `${title}(${yearOfRelease})`;
 
 //   const spanRating = document.createElement('span');
-//   spanRating.textContent = rating;
+//   spanRating.textContent = vote_average;
+
+//   const itemLink = document.createElement('a');
+//   itemLink.classList.add('galllery__item-link');
+//   itemLink.append(cardImg, filmTitle, spanRating);
+
+//   const itemContainer = document.createElement('div');
+//   itemContainer.classList.add('gallery__item-card');
+//   itemContainer.append(itemLink);
 
 //   const item = document.createElement('li');
-//   item.append(cardImg, title, spanRating);
+//   item.classList.add('gallery__item');
+//   item.append(itemContainer);
 
 //   item.addEventListener('click', () => {
-//     activeDetailsPage(movieId, false);
+//     activeDetailsPage(id, false);
 //   });
 //   return item;
 // }
 
-// // Рендерит всю галерию карточек популярных фильмов
+// Рендерит всю галерию карточек популярных фильмов в UL galleryCard.html
 
-// configurationAPI
-//   .fetchPopularFilmsList()
-//   .then(collection =>
-//     collection.map(
-//       ({ backdrop_path, title, id, vote_average, release_date }) => {
-//         return createCardFunc(
-//           backdrop_path,
-//           title,
-//           id,
-//           vote_average,
-//           release_date,
-//         );
-//       },
-//     ),
-//   )
-//   .then(item => movieList.append(...item));
+//Функция для клика по карточке и открытия
+function activeDetailsPage(movieId, status) {
+  //   console.log('movieID', movieId, status);
+}
 
-// function activeDetailsPage(movieId, status) {
-//   //   console.log('movieID', movieId, status);
-// }
+let renderFilms = MyApi.fetchPopularFilmsList(); // содержит массив объектов популярных фильмов
+const genres = MyApi.fetchGenres(); // содержит коллекцию жанров
 
-// let renderFilms = configurationAPI.fetchPopularFilmsList(); // содержит массив объектов популярных фильмов
-// const genres = configurationAPI.fetchGenres(); // содержит коллекцию жанров
+refs.modalBtn.addEventListener('click', closeModal);
+// refs.filmImage.addEventListener('click', openModal);
+refs.backdrop.addEventListener('click', onBeckDropCkick);
 
-//  refs.modalBtn.addEventListener('click', closeModal)
-//  refs.filmImage.addEventListener('click', openModal)
-//  refs.backdrop.addEventListener('click' , onBeckDropCkick)
+function closeModal() {
+  refs.backdrop.classList.add('backdrop--hidden');
 
-//  function closeModal() {
-//      refs.backdrop.classList.add('backdrop--hidden');
+  //  window.removeEventListener("keydown", onKeybordPress);
+}
+//ЛОГИКА МОДАЛЬНОГО ОКНА
+function openModal(event) {
+  event.preventDefault();
 
-//     //  window.removeEventListener("keydown", onKeybordPress);
-// }
-// //ЛОГИКА МОДАЛЬНОГО ОКНА
-// function openModal(event) {
-//     event.preventDefault();
+  refs.backdrop.classList.remove('backdrop--hidden');
+  refs.modalText.textContent = refs.aboutFilmText.textContent;
 
-//     refs.backdrop.classList.remove('backdrop--hidden');
-//     refs.modalText.textContent = refs.aboutFilmText.textContent;
+  window.addEventListener('keydown', onKeybordPress);
+}
 
-//     window.addEventListener("keydown", onKeybordPress);
-// }
+function onKeybordPress(event) {
+  if (event.code === 'Escape') {
+    closeModal();
+  }
+}
 
-// function onKeybordPress(event) {
-//     if (event.code === "Escape") {
-//     closeModal();
-//   }
-// }
-
-// function onBeckDropCkick(event) {
-//     if (event.target.nodeName === "DIV") {
-//     closeModal();
-//   }
-// }
+function onBeckDropCkick(event) {
+  if (event.target.nodeName === 'DIV') {
+    closeModal();
+  }
+}

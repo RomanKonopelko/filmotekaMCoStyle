@@ -17,21 +17,24 @@
     <!-- Сюда будет всталена ссылка на файл скриптов -->
     <!-- inject:header.html -->
     //= ./html/header.html
-
     <!-- endinject -->
-    <!-- //= ./html/main.html -->
+    //= ./html/main.html
+    <!-- inject:header.html -->
+    <!-- endinject -->
     //= ./html/galleryCard.html
-    <!-- //= ./html/detailsPage.html -->
+    <!-- inject:header.html -->
+    //= ./html/detailsPage.html
     <!-- endinject -->
-    <!-- //= ./html/myFilmLibraryPage.html -->
+    //= ./html/myFilmLibraryPage.html
     <!-- inject:footer.html -->
-    <!-- //= ./html/footer.html -->
-   //= ./html/modal.html
+    //= ./html/modal.html
+    //= ./html/footer.html
+    <!-- endinject -->
+    //= ./html/modal.html
     <!-- endinject -->
     <!-- inject:js -->
     <script src="./js/headerLogoText.js"></script>
     <script src="./js/navigationEfectSwitch.js"></script>
-    <!-- <ul class="container__list"></ul> -->
     <!-- inject:js -->
     <script src="./js/2searchAndPaginationHomePage.js"></script>
     <!-- endinject -->

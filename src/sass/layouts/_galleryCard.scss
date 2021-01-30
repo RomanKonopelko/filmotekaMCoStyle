@@ -1,4 +1,88 @@
+@function multiple-box-shadow($n) {
+  $value: '#{random(2000)}px #{random(2000)}px #FFF';
+  @for $i from 2 through $n {
+    $value: '#{$value} , #{random(2000)}px #{random(20000)}px #FFF';
+  }
+  @return unquote($value);
+}
+
+$shadows-small: multiple-box-shadow(700);
+$shadows-medium: multiple-box-shadow(200);
+$shadows-big: multiple-box-shadow(100);
+
+#stars {
+  width: 1px;
+  height: 1px;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: $shadows-small;
+  animation: animStar 50s linear infinite;
+
+  &:after {
+    content: ' ';
+    position: absolute;
+    top: 2000px;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background: transparent;
+    box-shadow: $shadows-small;
+  }
+}
+
+#stars2 {
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: $shadows-medium;
+  animation: animStar 70s linear infinite;
+
+  &:after {
+    content: ' ';
+    position: absolute;
+    top: 2000px;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background: transparent;
+    box-shadow: $shadows-medium;
+  }
+}
+#stars3 {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: $shadows-big;
+  animation: animStar 30s linear infinite;
+
+  &:after {
+    content: ' ';
+    position: absolute;
+    top: 2000px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: transparent;
+    box-shadow: $shadows-big;
+  }
+}
+
+@keyframes animStar {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-2000px);
+  }
+}
 .main {
+
+  padding-top: 20px; //add padding
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%); //test bg animation
+  color: $title-text-color;
+
 
   &__container {
     display: flex;
@@ -27,6 +111,11 @@
   }
 
   .form__control {
+    border-radius: 5px;
+    padding: 5px 10px; // change input color
+    border-color: #6ab1d7;
+    background-color: white;
+    color: #002878;
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
@@ -35,7 +124,6 @@
     width: 250px;
     margin-left: auto;
     margin-right: auto;
-
 
     @media screen and (min-width: 575px) and (max-width: 767px) {
       width: 500px;
@@ -50,9 +138,9 @@
       width: 900px;
       font-size: 14px;
     }
-
   }
 }
+
 .gallery__list {
   display: grid;
   grid-gap: 20px;
@@ -67,12 +155,45 @@
     @media (max-width: 1109px) {
       grid-template-columns: repeat(2, 1fr);
       justify-content: space-between;
+
+
+.gallery {
+  padding: 0;
+
+  &__list-item {
+    cursor: pointer;
+
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    transform: scale(1);
+  }
+
+  &__list-item:hover {
+    transform: scale(1.04);
+  }
+
+  &__item-image {
+    display: block;
+    max-width: 100%;
+    height: auto;
+
+    border-radius: 10px;
+  }
+  // &__item-image:hover {
+  //   transform: scale(1.04);
+  // }
+
+  &__list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    @media screen and (max-width: 767px) {
+      text-align: center;
     }
 
     @media (max-width: 767px) {
       margin: 30px 0;
     }
-
     @media (max-width: 574px) {
       grid-template-columns: 1fr;
       justify-content: center;
@@ -91,9 +212,13 @@
   padding: 5px;
   border-radius: 5px;
   overflow: hidden;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3),
-    -23px 0 20px -23px rgba(0, 0, 0, 0.6), 23px 0 20px -23px rgba(0, 0, 0, 0.6),
-    inset 0 0 40px rgba(0, 0, 0, 0.1);
+ // box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3),
+    //-23px 0 20px -23px rgba(0, 0, 0, 0.6), 23px 0 20px -23px rgba(0, 0, 0, 0.6),
+  //  inset 0 0 40px rgba(0, 0, 0, 0.1);
+    border: 2px solid lightskyblue;
+    box-shadow: 0px 8px 17px 2px rgba(135, 206, 250, 0.4),
+      0 6px 10px 0 rgba(135, 206, 250, 10);
+
 
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
