@@ -90,8 +90,7 @@ class MovieApi {
         return data;
       })
       .then(resp => {
-        if (resp.results.length === 0);
-        {
+        if (resp.results.length === 0) {
           this.fetchPopularFilmsList();
           throw Error('Sorry we dont watch this kind of movies!');
         }

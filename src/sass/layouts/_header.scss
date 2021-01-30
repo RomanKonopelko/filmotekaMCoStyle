@@ -8,7 +8,8 @@
     background-image: url('../../images/header-tablet.jpg');
   }
   @include for-size(desktop) {
-    background-image: url('../../images/header-desktop.jpg');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), #0d121e),
+      url('../../images/header-desktop.jpg');
   }
 }
 .header__menu {
