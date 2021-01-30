@@ -1,7 +1,9 @@
 .header {
+  display: flex;
+  height: 250px;
+  justify-content: center;
+  align-items: center;
   position: relative;
-  padding-top: 50px;
-  padding-bottom: 160px;
   background-size: cover;
   background-repeat: no-repeat;
   background-image: url('../../images/header-mobile.jpg');
@@ -19,9 +21,9 @@
     position: absolute;
     top: 100%;
     width: 100%;
-    height: 6px;
+    height: 5px;
     background-color: lightseagreen;
-    animation: animate-border 7s infinite;
+    animation: animate-border 10s infinite;
   }
 }
 .header__menu {
@@ -47,7 +49,7 @@
     -webkit-box-reflect: below 1px linear-gradient(transparent, #0008);
     line-height: 0.7em;
     outline: none;
-    animation: animate 5s linear infinite;
+    animation: animate 4s linear infinite;
   }
 }
 .header__item.current .header__item-title {
@@ -86,7 +88,7 @@
   -webkit-box-reflect: below 1px linear-gradient(transparent, #0008);
   line-height: 0.7em;
   outline: none;
-  animation: animate 5s linear infinite;
+  animation: animate 4s linear infinite;
 }
 
 .header__logo-text.is-hidden {

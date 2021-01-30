@@ -24,6 +24,7 @@ $primary-font-family: Roboto, sans-serif;
 // Функции времени для анимации //
 $timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 $transition-duration: 250ms;
+
 @keyframes animate-border {
   0%,
   18%,
@@ -39,6 +40,7 @@ $transition-duration: 250ms;
     box-shadow: 0 0 3px lightskyblue, 0 0 5px lightskyblue,
       0 0 10px lightskyblue, 0 0 20px lightskyblue, 0 0 20px lightskyblue;
   }
+  10%,
   18.1%,
   20.1%,
   30%,
@@ -49,9 +51,9 @@ $transition-duration: 250ms;
   90%,
   92.1%,
   100% {
-    background: white;
+    background: $accent-color;
     box-shadow: 0 0 10px $accent-color, 0 0 20px $accent-color, 0 0 40px,
-      0 0 80px $accent-color, 0 0 160px $accent-color;
+      0 0 40px $accent-color, 0 0 10px $accent-color;
   }
 }
 @keyframes animate {

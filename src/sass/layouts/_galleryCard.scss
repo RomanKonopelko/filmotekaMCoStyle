@@ -103,19 +103,20 @@ $shadows-big: multiple-box-shadow(100);
   }
 
   .form__control {
-    border-radius: 5px;
     padding: 5px 10px; // change input color
-    border-color: #6ab1d7;
-    background-color: white;
-    color: #002878;
+    border-bottom: 2px solid $accent-color;
+    border-radius: 5px;
+    background-color: transparent;
+    outline: none;
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
     text-align: center;
-    color: $title-text-color;
+    color: $accent-color;
     width: 250px;
     margin-left: auto;
     margin-right: auto;
+    box-shadow: 0 0 5px 0 lightskyblue;
 
     @media screen and (min-width: 575px) and (max-width: 767px) {
       width: 500px;
