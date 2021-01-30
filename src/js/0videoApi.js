@@ -25,8 +25,8 @@ class MovieApi {
         posterSize: '',
       },
       backdropSizes: {
-        mobile: 'w342',
-        tablet: 'w342',
+        mobile: 'w500',
+        tablet: 'w500',
         desktop: 'w500',
       },
       posterSizes: {
@@ -128,7 +128,7 @@ class MovieApi {
 
     const cardImg = document.createElement('img');
     cardImg.setAttribute('src', imgCardSize);
-    cardImg.classList.add('galllery__item-image');
+    cardImg.classList.add('gallery__item-image');
     cardImg.setAttribute('alt', title);
     if (!backdrop_path) {
       cardImg.width = 342;
@@ -143,7 +143,7 @@ class MovieApi {
     filmTitle.textContent = `${title} ${yearOfRelease}`;
 
     const spanRating = document.createElement('span');
-    spanRating.classList.add('movie__title');
+    spanRating.classList.add('movie__genre');
     spanRating.textContent = vote_average;
 
     // const itemLink = document.createElement('a');
@@ -246,12 +246,12 @@ class MovieApi {
   }
 
   checkBackdropImgSize() {
-    if (window.innerWidth >= 1200) {
+    if (window.innerWidth >= 1024) {
       this.imgCards.currentSizes.backdropSize = this.imgCards.backdropSizes.desktop;
       this.imgCards.defaultBackdropImg = '../images/image-not-found.jpg';
       return;
     }
-    if (window.innerWidth < 1200) {
+    if (window.innerWidth < 1024) {
       this.imgCards.currentSizes.backdropSize = this.imgCards.backdropSizes.tablet;
       this.imgCards.defaultBackdropImg = '../images/image-not-found.jpg';
       return;
