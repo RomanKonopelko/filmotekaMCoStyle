@@ -57,6 +57,10 @@
     height: auto;
   }
 
+  &__list.is-hidden {
+    display: none;
+  }
+
   &__list {
     padding: 0;
     margin: 0;
@@ -113,4 +117,8 @@
       }
     }
   }
+}
+
+.movie__image {
+  cursor: pointer;
 }
