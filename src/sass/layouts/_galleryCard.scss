@@ -1,4 +1,5 @@
 .main {
+  padding-top: 20px; //add padding
   background-color: $primary-bg-color;
   color: $title-text-color;
 
@@ -16,13 +17,18 @@
     margin-bottom: 15px;
     cursor: text;
     outline: none;
-      
+
     @media (min-width: 767px) {
       margin-bottom: 30px;
     }
   }
 
   .form__control {
+    border-radius: 5px;
+    padding: 5px 10px; // change input color
+    border-color: #6ab1d7;
+    background-color: white;
+    color: #002878;
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
@@ -31,7 +37,6 @@
     width: 250px;
     margin-left: auto;
     margin-right: auto;
-
 
     @media screen and (min-width: 575px) and (max-width: 767px) {
       width: 500px;
@@ -46,7 +51,6 @@
       width: 900px;
       font-size: 14px;
     }
-
   }
 }
 .gallery {
@@ -57,7 +61,6 @@
     max-width: 100%;
     height: auto;
   }
-
 
   &__list {
     padding: 0;
@@ -76,11 +79,10 @@
   }
 
   &__card-movie {
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 25px;
 
     &:not(:last-child) {
       margin-bottom: 30px;
@@ -90,32 +92,29 @@
       flex-basis: calc((100% - 2 * 30px) / 2);
       margin: 15px;
     }
-  
-  .movie {
 
-  &__title {
-    font-style: normal;
-    font-size: 12px;
-    line-height: 17px;
-    text-align: center;
-    width: 100%; 
-     
-    @media (min-width: 768px) {
-      font-size: 14px;
+    .movie {
+      &__title {
+        font-style: normal;
+        font-size: 12px;
+        line-height: 17px;
+        text-align: center;
+        width: 100%;
+
+        @media (min-width: 768px) {
+          font-size: 14px;
+        }
+      }
+
+      &__genre {
+        font-weight: 500;
+        color: $accent-color;
+        font-size: 12px;
+
+        @media (min-width: 768px) {
+          font-size: 14px;
+        }
+      }
     }
-
-  }
-
-  &__genre {
-    font-weight: 500;
-    color: $accent-color;
-    font-size: 12px;
-
-    @media (min-width: 768px) {
-      font-size: 14px;
-    }
-
-  }
-  }
   }
 }
