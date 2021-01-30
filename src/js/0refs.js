@@ -1,4 +1,5 @@
 const refs = {
+  errorNotification: document.querySelector('.main__error-notification'),
   form: document.querySelector('.main__search-form'),
   paginationWrapper: document.querySelector('.pagination'),
   backdrop: document.querySelector('.backdrop'),
@@ -8,6 +9,7 @@ const refs = {
 };
 
 const {
+  errorNotification,
   form,
   paginationWrapper,
   ulForCards,
@@ -15,4 +17,4 @@ const {
   modalBtn,
   detailsSection,
 } = refs;
-// console.log(form);
+// console.log(errorNotification);

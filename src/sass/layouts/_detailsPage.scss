@@ -17,6 +17,7 @@
 }
 
 .details-page__foto {
+  position: relative;
   height: 100%;
   box-shadow: $popular-box-shadow;
 
@@ -112,4 +113,18 @@ td {
 .button__add:focus {
   outline: none;
   box-shadow: $focus-box-shadow;
+}
+
+// Кнопка для закрытия Страницы! ТЕСТовая стилизация!!!!
+.details-page__button-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: black;
+  font-size: 20px;
+  border-radius: 50%;
+  outline: none;
+}
+.details-page__button-close:hover {
+  transform: scale(1.5);
 }

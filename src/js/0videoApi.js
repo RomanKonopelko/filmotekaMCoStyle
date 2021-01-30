@@ -7,6 +7,8 @@ class MovieApi {
     this.searchMode = 'popular';
 
     this.popularFilmItem = []; // test
+    this.genres = [];
+
     this.currentPage = 1;
 
     this.params = {
@@ -73,13 +75,15 @@ class MovieApi {
         this.setRatioButtons(data);
         return data;
       })
-      .then(({ genres }) => genres);
+      .then(({ genres }) => {
+        return (this.genres = genres);
+      });
   }
 
   movieSearch() {
     console.log(this.searchMode);
     this.searchMode = 'default';
-    this.resetGalleryCard();
+    // this.resetGalleryCard();
     return fetch(
       `${this.BASE_URL}${this.params.generalSearchUrl}api_key=${this.API_KEY}&language=en-US&query=${this.params.query}&page=${this.params._page}`,
     )
@@ -94,17 +98,30 @@ class MovieApi {
           this.fetchPopularFilmsList();
           throw Error('Sorry we dont watch this kind of movies!');
         }
+        this.resetGalleryCard();
         this.setRatioButtons(resp);
         return resp;
       })
-      .then(({ results }) => results)
+      .then(({ results }) => {
+        // console.log(results);
+        this.popularFilmItem = results;
+        return results;
+      })
       .then(collection =>
         collection.map(el => {
           return this.createCardFunc(el);
         }),
       )
       .then(item => MyApi.pagination.cardContainer.append(...item))
-      .catch(error => console.log(error));
+      .catch(error => this.handlErrors(error));
+  }
+
+  handlErrors(text) {
+    errorNotification.classList.remove('is-hidden');
+    errorNotification.textContent = text.message;
+    setTimeout(() => {
+      errorNotification.classList.add('is-hidden');
+    }, 3000);
   }
 
   resetGalleryCard() {
@@ -157,9 +174,6 @@ class MovieApi {
     spanRating.classList.add('movie__genre');
     spanRating.textContent = vote_average;
 
-    // const itemLink = document.createElement('a');
-    // itemLink.classList.add('galllery__item-link');
-    // itemLink.append(cardImg, filmTitle, spanRating);
     const cardContainer = document.createElement('div');
     cardContainer.classList.add('gallery__card-movie');
     cardContainer.append(imgContainer, filmTitle, spanRating);
@@ -178,15 +192,31 @@ class MovieApi {
   }
 
   activeDetailsPage(id) {
+    //Прячит пагинацию и форму поиска
+    form.style.display = 'none';
+    paginationWrapper.style.display = 'none';
+
     const array = this.popularFilmItem.filter(item => {
       if (item.id === id) return item;
     });
     const item = array[0];
 
+    const genresArray = [];
+
+    const itemGenres = item.genre_ids;
+    itemGenres.filter(item => {
+      for (let key of this.genres) {
+        if (item === key.id) return genresArray.push(key.name);
+      }
+    });
+    const genresText = genresArray.join(', ');
+    // console.log(genresText);
+    // console.log(genresArray);
+
     const tdGenre = document.createElement('td');
     tdGenre.textContent = 'genre';
     const tdGenreName = document.createElement('td');
-    //tdGenreName.textContent = 'Western';
+    tdGenreName.textContent = genresText;
 
     const trGenre = document.createElement('tr');
     trGenre.append(tdGenre, tdGenreName);
@@ -278,10 +308,15 @@ class MovieApi {
     aImg.setAttribute('href', '#');
 
     aImg.appendChild(img);
+    //TEST Btn that close DetailsPage
+    const btnClose = document.createElement('button');
+    btnClose.classList.add('details-page__button-close');
+    btnClose.textContent = 'X';
+
     const divImage = document.createElement('div');
     divImage.classList.add('details-page__foto');
 
-    divImage.appendChild(aImg);
+    divImage.append(aImg, btnClose);
 
     const container = document.createElement('div');
     container.classList.add('container', 'details-page__film');
@@ -291,6 +326,16 @@ class MovieApi {
     detailsSection.appendChild(container);
 
     detailsSection.addEventListener('click', openModal);
+
+    //Затирает карточку после закрытия страницы
+
+    btnClose.addEventListener('click', () => {
+      form.style.display = 'block';
+      paginationWrapper.style.display = 'block';
+      detailsSection.classList.add('is-hidden');
+      ulForCards.classList.remove('is-hidden');
+      detailsSection.innerHTML = '';
+    });
   }
 
   setPrevNextButtons(data) {
