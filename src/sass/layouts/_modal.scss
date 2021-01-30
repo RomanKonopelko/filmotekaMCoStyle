@@ -1,13 +1,13 @@
 .backdrop {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    
-    background-color: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
 
-    opacity: 1;
-    transition: opacity 250ms $timing-function;
+  background-color: rgba(0, 0, 0, 0.8);
+
+  opacity: 1;
+  transition: opacity 250ms $timing-function;
 }
 
 .backdrop--hidden {
@@ -15,8 +15,8 @@
   pointer-events: none;
 }
 
-.backdrop__modal--hidden{
-  transform: translate(-50%, -50%) scale(0,9);
+.backdrop__modal--hidden {
+  transform: translate(-50%, -50%) scale(0, 9);
 }
 
 .backdrop__modal {
@@ -37,11 +37,11 @@
   left: 90%;
 }
 
-.material-icons { 
-  color: $accent-color; 
+.material-icons {
+  color: $accent-color;
   font-size: 36px;
-  }
+}
 
-  .material-icons:hover {
-    cursor: pointer
-  }
+.material-icons:hover {
+  cursor: pointer;
+}
