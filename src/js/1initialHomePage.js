@@ -52,7 +52,7 @@ MyApi.fetchPopularFilmsList();
 //   // console.log('movieID', movieId, status);
 // }
 
-let renderFilms = MyApi.fetchPopularFilmsList();
+// let renderFilms = MyApi.fetchPopularFilmsList();
 //console.log(renderFilms); // содержит массив объектов популярных фильмов
 const genres = MyApi.fetchGenres(); // содержит коллекцию жанров
 // console.log(genres);

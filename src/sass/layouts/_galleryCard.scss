@@ -87,6 +87,10 @@ $shadows-big: multiple-box-shadow(600);
     flex-direction: column;
     align-items: center;
     padding-bottom: 20px;
+
+    &.is-hidden {
+      visibility: hidden;
+    }
   }
 
   &__search-form {
@@ -102,6 +106,15 @@ $shadows-big: multiple-box-shadow(600);
     }
   }
 
+  &__error-notification {
+    font-size: large;
+    text-align: center;
+    padding: 10px;
+    color: white;
+    &.is-hidden {
+      visibility: hidden;
+    }
+  }
   .form__control {
     padding: 5px 10px; // change input color
     border: none;
