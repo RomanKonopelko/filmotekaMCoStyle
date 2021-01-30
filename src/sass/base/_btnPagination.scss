@@ -12,6 +12,8 @@
 .pagination__btn:hover,
 .pagination__btn:focus {
   background-color: #b8ccd6;
+  outline: none;
+  box-shadow: $focus-box-shadow;
 }
 
 .pagination__turning-btn {
@@ -41,10 +43,14 @@
   }
 }
 
-.pagination__turning-btn:hover,
-.pagination__turning-btn:focus {
+.pagination__turning-btn:hover {
   box-shadow: 0 0 0 0 rgba(0, 40, 120, 0);
   background-position: 0 0;
+}
+
+.pagination__turning-btn:focus {
+  outline: none;
+  box-shadow: $focus-box-shadow;
 }
 
 .pagination__btn.active {
