@@ -1,5 +1,85 @@
+@function multiple-box-shadow($n) {
+  $value: '#{random(2000)}px #{random(2000)}px #FFF';
+  @for $i from 2 through $n {
+    $value: '#{$value} , #{random(2000)}px #{random(20000)}px #FFF';
+  }
+  @return unquote($value);
+}
+
+$shadows-small: multiple-box-shadow(700);
+$shadows-medium: multiple-box-shadow(200);
+$shadows-big: multiple-box-shadow(100);
+
+#stars {
+  width: 1px;
+  height: 1px;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: $shadows-small;
+  animation: animStar 50s linear infinite;
+
+  &:after {
+    content: ' ';
+    position: absolute;
+    top: 2000px;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background: transparent;
+    box-shadow: $shadows-small;
+  }
+}
+
+#stars2 {
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: $shadows-medium;
+  animation: animStar 70s linear infinite;
+
+  &:after {
+    content: ' ';
+    position: absolute;
+    top: 2000px;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background: transparent;
+    box-shadow: $shadows-medium;
+  }
+}
+#stars3 {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: $shadows-big;
+  animation: animStar 30s linear infinite;
+
+  &:after {
+    content: ' ';
+    position: absolute;
+    top: 2000px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: transparent;
+    box-shadow: $shadows-big;
+  }
+}
+
+@keyframes animStar {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-2000px);
+  }
+}
 .main {
-  background-color: $primary-bg-color;
+  padding-top: 20px; //add padding
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
   color: $title-text-color;
 
   &__container {
@@ -23,6 +103,11 @@
   }
 
   .form__control {
+    border-radius: 5px;
+    padding: 5px 10px; // change input color
+    border-color: #6ab1d7;
+    background-color: white;
+    color: #002878;
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
@@ -51,11 +136,27 @@
 .gallery {
   padding: 0;
 
+  &__list-item {
+    cursor: pointer;
+
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    transform: scale(1);
+  }
+
+  &__list-item:hover {
+    transform: scale(1.04);
+  }
+
   &__item-image {
     display: block;
     max-width: 100%;
     height: auto;
+
+    border-radius: 10px;
   }
+  // &__item-image:hover {
+  //   transform: scale(1.04);
+  // }
 
   &__list.is-hidden {
     display: none;
@@ -83,6 +184,13 @@
     align-items: center;
     margin-bottom: 25px;
 
+    position: relative;
+
+    border-radius: 10px;
+    border: 2px solid lightskyblue;
+    box-shadow: 0px 8px 17px 2px rgba(135, 206, 250, 0.4),
+      0 6px 10px 0 rgba(135, 206, 250, 10);
+
     &:not(:last-child) {
       margin-bottom: 30px;
     }
@@ -98,12 +206,29 @@
         font-size: 12px;
         line-height: 17px;
         text-align: center;
-        width: 300px; //  Захаркодил ширину текста, чтобы не растягивала контейнер
+        width: 100%;
+
+        font-weight: 900;
+        color: white;
+        // text-align: center;   // Мешало позиционированию
+        width: 100%; //  Захаркодил ширину текста, чтобы не растягивала контейнер
+        padding: 20px 20px;
+        border-radius: 10px;
+
+        background: linear-gradient(1turn, #959597, rgba(126, 35, 126, 0));
+
+        position: absolute; // ДОбавил позиционирование
+        bottom: 0px;
+        left: 0px;
 
         @media (min-width: 768px) {
           font-size: 14px;
-          width: 450px; //  Захаркодил ширину текста, чтобы не растягивала контейнер
         }
+
+        // @media (min-width: 1024px) {
+        //   //  Захаркодил ширину текста, чтобы не растягивала контейнер
+        //   width: 450px;
+        // }
       }
 
       &__genre {
@@ -113,6 +238,17 @@
 
         @media (min-width: 768px) {
           font-size: 14px;
+          // color: $accent-color;
+          color: white;
+          font-size: 12px;
+
+          position: absolute; // ДОбавил позиционирование
+          top: 20px;
+          right: 20px;
+
+          @media (min-width: 768px) {
+            font-size: 20px; //Изменил с 14 для наглядности
+          }
         }
       }
     }
