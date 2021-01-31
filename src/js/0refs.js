@@ -12,6 +12,7 @@ const refs = {
   libraryFilrt: document.querySelector('.library-filter'),
   btnTop: document.querySelector('.main__btn-scroll'),
   player: document.querySelector('#player'),
+  mian: document.querySelector('.main'),
 };
 
 const {
@@ -26,6 +27,7 @@ const {
   libraryFilrt,
   btnTop,
   player,
+  mian,
 } = refs;
 // console.log(errorNotification);
 console.log(btnMyLibrary);
