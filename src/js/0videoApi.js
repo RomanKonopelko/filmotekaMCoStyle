@@ -277,23 +277,15 @@ class MovieApi {
     buttonFirst.classList.add('button__add', 'first');
     buttonFirst.setAttribute('type', 'submite');
     buttonFirst.textContent = 'add to Watched';
-    buttonFirst.addEventListener('click', this.onWatchedClick);
 
     const buttonSecond = document.createElement('button');
     buttonSecond.classList.add('button__add');
     buttonSecond.setAttribute('type', 'submite');
     buttonSecond.textContent = 'add to queue';
-    buttonSecond.addEventListener('click', this.onQueueClick);
-
-    const buttonTrailer = document.createElement('button');
-    buttonTrailer.classList.add('button__add');
-    buttonTrailer.setAttribute('type', 'submite');
-    buttonTrailer.textContent = 'watched trailer';
-    buttonTrailer.addEventListener('click', this.onTrailerClick);
 
     const divBtn = document.createElement('div');
     divBtn.classList.add('details-page__button');
-    divBtn.append(buttonFirst, buttonSecond, buttonTrailer);
+    divBtn.append(buttonFirst, buttonSecond);
 
     const detailsPageDecr = document.createElement('div');
     detailsPageDecr.classList.add('details-page__description');
@@ -330,7 +322,7 @@ class MovieApi {
     detailsSection.classList.remove('is-hidden');
     detailsSection.appendChild(container);
 
-    //detailsSection.addEventListener('click', openModal);
+    detailsSection.addEventListener('click', openModal);
 
     //Затирает карточку после закрытия страницы
 
@@ -377,17 +369,6 @@ class MovieApi {
 
     this.pagination.paginationContainer.prepend(prevBtn);
     this.pagination.paginationContainer.append(nextBtn);
-  }
-  onWatchedClick() {
-    //клik на копку переносить нас в
-  }
-  onQueueClick() {
-    //кліл на кнопку переносить нас в
-  }
-  onTrailerClick() {
-    //кліл на кнопку відкриває трейлер
-    console.log('ket');
-    openModal(event);
   }
 
   setRatioButtons(data) {
