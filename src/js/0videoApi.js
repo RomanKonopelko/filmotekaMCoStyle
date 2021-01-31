@@ -3,7 +3,7 @@ class MovieApi {
     this.API_KEY = key;
     this.BASE_URL = 'https://api.themoviedb.org/3/';
     this.IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/';
-    this.DEFAULT_IMAGE = '../images/image-not-found.jpg';
+    this.DEFAULT_IMAGE = '../images/default_backdrop2.jpg';
     this.searchMode = 'popular';
 
     this.popularFilmItem = []; // test
@@ -158,9 +158,6 @@ class MovieApi {
     cardImg.setAttribute('src', imgCardSize);
     cardImg.classList.add('gallery__item-image');
     cardImg.setAttribute('alt', title);
-    if (!backdrop_path) {
-      cardImg.width = 342;
-    }
 
     const imgContainer = document.createElement('div');
     imgContainer.classList.add('movie__image');
@@ -431,12 +428,12 @@ class MovieApi {
   checkBackdropImgSize() {
     if (window.innerWidth >= 1024) {
       this.imgCards.currentSizes.backdropSize = this.imgCards.backdropSizes.desktop;
-      this.imgCards.defaultBackdropImg = '../images/image-not-found.jpg';
+      this.imgCards.defaultBackdropImg = this.DEFAULT_IMAGE;
       return;
     }
     if (window.innerWidth < 1024) {
       this.imgCards.currentSizes.backdropSize = this.imgCards.backdropSizes.tablet;
-      this.imgCards.defaultBackdropImg = '../images/image-not-found.jpg';
+      this.imgCards.defaultBackdropImg = this.DEFAULT_IMAGE;
       return;
     }
     // if (window.innerWidth < 768) {
