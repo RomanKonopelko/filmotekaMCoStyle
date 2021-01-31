@@ -110,6 +110,7 @@ backdrop.addEventListener('click', onBeckDropCkick); // закриває мод�
 
 function openModal(event) {
   event.preventDefault();
+
   MyApi.fetchVideoById().then(key => {
     player.setAttribute(
       'src',

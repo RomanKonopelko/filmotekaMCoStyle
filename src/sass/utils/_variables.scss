@@ -2,8 +2,11 @@
 $title-text-color: #000000;
 $primary-text-color: darkgray;
 $secondary-text-color: #3d3d3d;
-$accent-color: rgb(32, 178, 170);
-$accent-color2: rgba(255, 0, 64, 0.795);
+$accent-color: #20b2aa;
+$accent-color2: white;
+$accent-color3: #ffebee;
+$accent-shadow-color2: #ff1744;
+$accent-shadow-color: lightskyblue;
 
 $primary-bg-color: #e5e5e5;
 $secondary-bg-color: turquoise;
@@ -25,6 +28,38 @@ $primary-font-family: Roboto, sans-serif;
 // Функции времени для анимации //
 $timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 $transition-duration: 250ms;
+
+@keyframes animate-border-bottom {
+  0%,
+  18%,
+  20%,
+  50%,
+  1%,
+  60%,
+  65.1%,
+  80%,
+  90.1%,
+  92% {
+    border-radius: 5px;
+    border-bottom: 3px solid $accent-color;
+    box-shadow: none;
+  }
+  10%,
+  18.1%,
+  20.1%,
+  30%,
+  50%,
+  60.1%,
+  65%,
+  80.1%,
+  90%,
+  92.1%,
+  100% {
+    border-radius: 5px;
+    border-bottom: 3px solid white;
+    box-shadow: 0 10px 5px -2px $accent-color;
+  }
+}
 @keyframes animate-border-btn {
   0%,
   18%,
@@ -113,5 +148,34 @@ $transition-duration: 250ms;
     color: white;
     text-shadow: 0 0 10px lightskyblue, 0 0 20px lightskyblue,
       0 0 40px lightskyblue, 0 0 80px lightskyblue, 0 0 160px lightskyblue;
+  }
+}
+@keyframes animate-runtext {
+  0%,
+  18%,
+  20%,
+  50%,
+  1%,
+  60%,
+  65.1%,
+  80%,
+  90.1%,
+  92% {
+    color: lightseagreen;
+    text-shadow: none;
+  }
+  18.1%,
+  20.1%,
+  30%,
+  50%,
+  60.1%,
+  65%,
+  80.1%,
+  90%,
+  92.1%,
+  100% {
+    color: white;
+    text-shadow: 0 0 5px lightskyblue, 0 0 5px lightskyblue,
+      0 0 6px lightskyblue, 0 0 6px lightskyblue, 0 0 8px lightskyblue;
   }
 }

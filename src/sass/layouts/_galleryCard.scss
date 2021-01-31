@@ -118,32 +118,62 @@ $shadows-big: multiple-box-shadow(600);
   .form__control {
     padding: 5px 10px; // change input color
     border: none;
-    border-bottom: 2px solid $accent-color;
     background-color: transparent;
     outline: none;
+    width: 300px;
+    border-radius: 5px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 300;
     font-size: 12px;
     text-align: center;
     color: $accent-color;
-    width: 250px;
+    animation: animate-border-bottom 4s infinite;
     margin-left: auto;
     margin-right: auto;
 
     @media screen and (min-width: 575px) and (max-width: 767px) {
-      width: 500px;
+      width: 400px;
     }
 
     @media screen and (min-width: 768px) and (max-width: 1099px) {
+      width: 500px;
+    }
+
+    @media (min-width: 1100px) {
       width: 600px;
       font-size: 14px;
     }
 
-    @media (min-width: 1100px) {
-      width: 900px;
-      font-size: 14px;
+    &:hover,
+    &:focus {
+      animation: none;
+      border-bottom: 3px solid $accent-color2;
+      box-shadow: 0 10px 5px -2px $accent-shadow-color2;
     }
   }
+}
+
+.main__search-form .form__control::placeholder {
+  margin-left: 10px;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  color: white;
+  text-shadow: 0 0 3px lightskyblue, 0 0 5px lightskyblue, 0 0 1px lightskyblue,
+    0 0 10px lightskyblue, 0 0 10px lightskyblue;
+  transition: all $transition-duration $timing-function;
+}
+
+.main__search-form .form__control:hover::placeholder {
+  color: $accent-color2;
+  text-shadow: 0 0 3px $accent-shadow-color2, 0 0 5px $accent-shadow-color2,
+    0 0 1px $accent-shadow-color2, 0 0 10px $accent-shadow-color2,
+    0 0 10px $accent-shadow-color2;
+}
+
+.main__search-form .form__control:focus::placeholder {
+  color: transparent;
+  text-shadow: none;
 }
 
 .gallery {

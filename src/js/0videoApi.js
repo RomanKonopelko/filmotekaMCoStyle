@@ -299,11 +299,19 @@ class MovieApi {
     buttonFirst.classList.add('button__add', 'first');
     buttonFirst.setAttribute('type', 'submite');
     buttonFirst.textContent = 'add to Watched';
+    buttonFirst.addEventListener('click', this.onWatchedClick);
 
     const buttonSecond = document.createElement('button');
     buttonSecond.classList.add('button__add');
     buttonSecond.setAttribute('type', 'submite');
     buttonSecond.textContent = 'add to queue';
+    buttonSecond.addEventListener('click', this.onQueueClick);
+
+    const buttonTrailer = document.createElement('button');
+    buttonTrailer.classList.add('button__add');
+    buttonTrailer.setAttribute('type', 'submite');
+    buttonTrailer.textContent = 'watched trailer';
+    buttonTrailer.addEventListener('click', this.onTrailerClick);
 
     const buttonTrailer = document.createElement('button');
     buttonTrailer.classList.add('button__add');
@@ -334,9 +342,13 @@ class MovieApi {
     aImg.appendChild(img);
 
     //TEST Btn that close DetailsPage
-    const btnClose = document.createElement('button');
+    const btnClose = document.createElement('a');
     btnClose.classList.add('details-page__button-close');
-    btnClose.textContent = 'X';
+
+    const btnCloseI = document.createElement('i');
+    btnCloseI.textContent = 'cancel';
+    btnCloseI.classList.add('material-icons', 'active');
+    btnClose.append(btnCloseI);
 
     const divImage = document.createElement('div');
     divImage.classList.add('details-page__foto');
@@ -350,9 +362,12 @@ class MovieApi {
     detailsSection.classList.remove('is-hidden');
     detailsSection.appendChild(container);
 
+
     // buttonTrailer.addEventListener('click', this.onTrailerClick);
 
     buttonTrailer.addEventListener('click', openModal);
+
+
 
     //Затирает карточку после закрытия страницы
 
@@ -366,6 +381,15 @@ class MovieApi {
     });
 
     // Вызов видео
+  }
+  onTrailerClick() {
+    openModal(event);
+  }
+  onWatchedClick() {
+    // клік на кнопку Watched
+  }
+  onQueueClick() {
+    // клік на Queue
   }
 
   setPrevNextButtons(data) {
