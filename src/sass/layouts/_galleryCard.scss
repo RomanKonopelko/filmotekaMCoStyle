@@ -380,3 +380,15 @@ $shadows-big: multiple-box-shadow(600);
     transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
   }
 }
+
+.library-filter__btn {
+  width: 150px;
+  height: 50px;
+}
+
+.message-title {
+  display: block;
+  color: white;
+  text-align: center;
+  margin-bottom: 20px;
+}

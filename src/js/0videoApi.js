@@ -334,6 +334,10 @@ class MovieApi {
     detailsSection.classList.remove('is-hidden');
     detailsSection.appendChild(container);
 
+    // window.scrollTo({
+    //   top: 0,
+    //   behavior: 'smooth',
+    // });
     //Затирает карточку после закрытия страницы
 
     btnClose.addEventListener('click', () => {
@@ -351,7 +355,7 @@ class MovieApi {
     // клік на кнопку Watched
   }
   onQueueClick() {
-    // клік на Queue
+    // клік на Queue додає фільм в чергку
   }
 
   setPrevNextButtons(data) {

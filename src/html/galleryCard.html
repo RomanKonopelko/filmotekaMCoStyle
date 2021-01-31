@@ -3,7 +3,7 @@
     <div id='stars2'></div>
     <div id='stars3'></div>
     <div class="container main__container">
-        <form class="main__search-form">
+        <form class="main__search-form is-hidden">
             <!-- <label for="search-form" class="search__label">What movie should I find?</label> -->
             <input type="text" class="form__control" name="query" id="search-form"
             placeholder="Write movie name and click Enter " autocomplete="off" />
@@ -22,5 +22,16 @@
         </ul>
         <div class="pagination">
         </div>
+        <div class="library-filter is-hidden">
+            
+            <button type="button" class="button library-filter__btn btnWatched button__add">
+                Watched
+            </button>
+            <button type="button" class="button library-filter__btn btnQueue button__add">
+                Queue
+            </button>
+        </div>
+        <div class="films-library"></div>
+
     </div>
 </section>

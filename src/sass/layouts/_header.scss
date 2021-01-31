@@ -54,6 +54,12 @@
     animation: animate 4s linear infinite;
   }
 }
+
+.heder__item_a {
+  display: flex;
+  align-items: center;
+}
+
 .header__item.current .header__item-title {
   //test animation active
   position: relative;

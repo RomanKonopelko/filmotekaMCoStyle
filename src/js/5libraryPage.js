@@ -77,7 +77,10 @@ function drawQueueFilmList(fragment, key) {
   if (parsedFilmsQueue === null || parsedFilmsQueue.length === 0) {
     const messageTitle = document.createElement('h2');
     messageTitle.textContent = `You do not have to queue movies to watch. Add them.`;
+    messageTitle.classList.add('message-title');
+    filmsLibrary.classList.remove('gallery__list');
     filmsLibrary.append(messageTitle);
+
     return filmsLibrary;
   }
 
@@ -99,6 +102,8 @@ function drawWatchedFilmList(fragment, key) {
   if (parsedFilmsWatched === null || parsedFilmsWatched.length === 0) {
     const messageTitle = document.createElement('h2');
     messageTitle.textContent = `You do not have watched movies. Add them.`;
+    messageTitle.classList.add('message-title');
+    filmsLibrary.classList.remove('gallery__list');
     filmsLibrary.append(messageTitle);
     return filmsLibrary;
   }
@@ -109,3 +114,21 @@ function drawWatchedFilmList(fragment, key) {
     return filmsLibrary;
   });
 }
+
+// кнопка My Library //
+
+btnMyLibrary.addEventListener('click', openLibrary);
+//btnHome.addEventListener('click', goHome);
+
+function openLibrary() {
+  MyApi.resetGalleryCard();
+  detailsSection.innerHTML = '';
+  paginationWrapper.innerHTML = '';
+  form.innerHTML = '';
+  libraryFilrt.classList.remove('is-hidden');
+  console.log('ket');
+}
+
+// goHome() {
+//   MyApi.fetchPopularFilmsList()
+// }
