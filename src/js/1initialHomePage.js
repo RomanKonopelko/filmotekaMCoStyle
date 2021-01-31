@@ -4,8 +4,26 @@ MyApi.checkBackdropImgSize();
 MyApi.checkPosterImgSize();
 
 MyApi.fetchPopularFilmsList();
+// MyApi.fetchVideoById();
 
 // Создает одну карточку фильма, "li", с
+// Load the IFrame Player API code asynchronously.
+// var tag = document.createElement('script');
+// tag.src = 'https://www.youtube.com/player_api';
+// var firstScriptTag = document.getElementsByTagName('script')[0];
+// firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+// // Replace the 'ytplayer' element with an <iframe> and
+// // YouTube player after the API code downloads.
+// var player;
+// function onYouTubePlayerAPIReady() {
+//   player = new YT.Player('ytplayer', {
+//     height: '360',
+//     width: '640',
+//     videoId: 'u8ZsUivELbs',
+//     autoplay: 1,
+//   });
+// }
 
 // function createCardFunc(itemData) {
 //   const { backdrop_path, title, id, vote_average, release_date } = itemData;
@@ -44,7 +62,36 @@ MyApi.fetchPopularFilmsList();
 //   return item;
 // }
 
-// Рендерит всю галерию карточек популярных фильмов в UL galleryCard.html
+// Button UP function
+btnTop.addEventListener('click', () => {
+  scrollToTop();
+});
+
+function scrollToTop() {
+  // document.body.scrollTop = 0;
+  // document.documentElement.scrollTop = 0;
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  });
+}
+
+window.onscroll = () => {
+  handleScroll();
+};
+
+function handleScroll() {
+  let bodyScrollTop = document.body.scrollTop;
+
+  let elementScrollTop = document.documentElement.scrollTop;
+  // console.log(elementScrollTop);
+  console.log(bodyScrollTop);
+  if (bodyScrollTop > 500 || elementScrollTop > 500) {
+    btnTop.style.display = 'block';
+  } else {
+    btnTop.style.display = 'none';
+  }
+}
 
 //Функция для клика по карточке и открытия
 
@@ -64,11 +111,19 @@ backdrop.addEventListener('click', onBeckDropCkick); // закриває мод�
 function openModal(event) {
   event.preventDefault();
 
+  MyApi.fetchVideoById().then(key => {
+    player.setAttribute(
+      'src',
+      `http://www.youtube.com/embed/${key}?autoplay=1`,
+    );
+  });
+
   backdrop.classList.remove('backdrop--hidden');
   window.addEventListener('keydown', onKeybordPress);
 }
 
 function closeModal() {
+  player.src = '';
   backdrop.classList.add('backdrop--hidden');
   window.removeEventListener('keydown', onKeybordPress);
 }

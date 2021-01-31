@@ -6,9 +6,12 @@ const refs = {
   ulForCards: document.querySelector('.gallery__list'),
   modalBtn: document.querySelector('.backdrop__modal__btn'),
   detailsSection: document.querySelector('.details-page'),
+
   btnMyLibrary: document.querySelector('.library'),
   btnHome: document.querySelector('.home'),
   libraryFilrt: document.querySelector('.library-filter'),
+  btnTop: document.querySelector('.main__btn-scroll'),
+  player: document.querySelector('#player'),
 };
 
 const {
@@ -24,3 +27,9 @@ const {
 } = refs;
 // console.log(errorNotification);
 console.log(btnMyLibrary);
+=======
+  btnTop,
+  player,
+} = refs;
+// console.log(player);
+

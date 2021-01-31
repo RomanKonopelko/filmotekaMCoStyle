@@ -4,6 +4,9 @@ class MovieApi {
     this.BASE_URL = 'https://api.themoviedb.org/3/';
     this.IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/';
     this.DEFAULT_IMAGE = '../images/default_backdrop2.jpg';
+    this.VIDEO_BASE_URL = 'https://api.themoviedb.org/3/movie/';
+
+    this.movieID = 0;
     this.searchMode = 'popular';
 
     this.popularFilmItem = []; // test
@@ -41,6 +44,19 @@ class MovieApi {
         desktop: 'w780',
       },
     };
+  }
+
+  fetchVideoById() {
+    return fetch(
+      `${this.VIDEO_BASE_URL}${this.movieID}/videos?api_key=${this.API_KEY}`,
+    )
+      .then(response => response.json())
+      .then(resp => {
+        console.log(resp);
+        return resp;
+      })
+      .then(({ results }) => results[0])
+      .then(({ key }) => key);
   }
 
   fetchPopularFilmsList() {
@@ -81,7 +97,7 @@ class MovieApi {
   }
 
   movieSearch() {
-    console.log(this.searchMode);
+    // console.log(this.searchMode);
     this.searchMode = 'default';
     // this.resetGalleryCard();
     return fetch(
@@ -192,6 +208,12 @@ class MovieApi {
     //Прячит пагинацию и форму поиска
     form.style.display = 'none';
     paginationWrapper.style.display = 'none';
+    btnTop.classList.add('is-hidden');
+    //Скролит вверх
+    window.scrollTo(0, 80);
+
+    this.movieID = id;
+    console.log(id);
 
     const array = this.popularFilmItem.filter(item => {
       if (item.id === id) return item;
@@ -291,6 +313,11 @@ class MovieApi {
     buttonTrailer.textContent = 'watched trailer';
     buttonTrailer.addEventListener('click', this.onTrailerClick);
 
+    const buttonTrailer = document.createElement('button');
+    buttonTrailer.classList.add('button__add');
+    buttonTrailer.setAttribute('type', 'submite');
+    buttonTrailer.textContent = 'watched trailer';
+
     const divBtn = document.createElement('div');
     divBtn.classList.add('details-page__button');
     divBtn.append(buttonFirst, buttonSecond, buttonTrailer);
@@ -302,10 +329,10 @@ class MovieApi {
     const img = document.createElement('img');
     img.setAttribute(
       'src',
-      `${MyApi.IMAGE_BASE_URL}${MyApi.imgCards.currentSizes.backdropSize}${item.poster_path}`,
+      `${MyApi.IMAGE_BASE_URL}${MyApi.imgCards.currentSizes.posterSize}${item.poster_path}`,
     );
     img.setAttribute('alt', img.title);
-    img.setAttribute('width', '650');
+    img.setAttribute('width', '100%');
     img.setAttribute('data', 'poster');
     console.dir(img);
 
@@ -313,6 +340,7 @@ class MovieApi {
     aImg.setAttribute('href', '#');
 
     aImg.appendChild(img);
+
     //TEST Btn that close DetailsPage
     const btnClose = document.createElement('a');
     btnClose.classList.add('details-page__button-close');
@@ -334,10 +362,20 @@ class MovieApi {
     detailsSection.classList.remove('is-hidden');
     detailsSection.appendChild(container);
 
+
     // window.scrollTo({
     //   top: 0,
     //   behavior: 'smooth',
     // });
+
+
+    // buttonTrailer.addEventListener('click', this.onTrailerClick);
+
+    buttonTrailer.addEventListener('click', openModal);
+
+
+
+
     //Затирает карточку после закрытия страницы
 
     btnClose.addEventListener('click', () => {
@@ -345,8 +383,11 @@ class MovieApi {
       paginationWrapper.style.display = 'block';
       detailsSection.classList.add('is-hidden');
       ulForCards.classList.remove('is-hidden');
+      btnTop.classList.remove('is-hidden');
       detailsSection.innerHTML = '';
     });
+
+    // Вызов видео
   }
   onTrailerClick() {
     openModal(event);
