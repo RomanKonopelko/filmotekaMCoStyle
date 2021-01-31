@@ -161,6 +161,7 @@ class MovieApi {
   createCardFunc(itemData) {
     //test start //
     ulForCards.classList.remove('is-hidden');
+    mian.classList.remove('is-hidden');
     // test end //
 
     const { backdrop_path, title, id, vote_average, release_date } = itemData;
@@ -298,7 +299,7 @@ class MovieApi {
     const buttonFirst = document.createElement('button');
     buttonFirst.classList.add('button__add', 'first');
     buttonFirst.setAttribute('type', 'submite');
-    buttonFirst.textContent = 'add to Watched';
+    buttonFirst.textContent = 'add to watched';
     buttonFirst.addEventListener('click', this.onWatchedClick);
 
     const buttonSecond = document.createElement('button');
@@ -310,13 +311,8 @@ class MovieApi {
     const buttonTrailer = document.createElement('button');
     buttonTrailer.classList.add('button__add');
     buttonTrailer.setAttribute('type', 'submite');
-    buttonTrailer.textContent = 'watched trailer';
+    buttonTrailer.textContent = 'watch the trailer';
     buttonTrailer.addEventListener('click', this.onTrailerClick);
-
-    // const buttonTrailer = document.createElement('button');
-    // buttonTrailer.classList.add('button__add');
-    // buttonTrailer.setAttribute('type', 'submite');
-    // buttonTrailer.textContent = 'watched trailer';
 
     const divBtn = document.createElement('div');
     divBtn.classList.add('details-page__button');
@@ -362,15 +358,8 @@ class MovieApi {
     detailsSection.classList.remove('is-hidden');
     detailsSection.appendChild(container);
 
-    // window.scrollTo({
-    //   top: 0,
-    //   behavior: 'smooth',
-    // });
-
-    // buttonTrailer.addEventListener('click', this.onTrailerClick);
-
-    buttonTrailer.addEventListener('click', openModal);
-
+    buttonTrailer.addEventListener('click', this.onTrailerClick);
+    mian.classList.add('is-hidden');
     //Затирает карточку после закрытия страницы
 
     btnClose.addEventListener('click', () => {
