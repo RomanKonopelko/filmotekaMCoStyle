@@ -1,7 +1,4 @@
 .footer {
-  background: radial-gradient(ellipse at bottom, #29405a 0%, #020614 100%);
-  color: $primary-bg-color;
-
   &::before {
     content: '';
     display: block;
