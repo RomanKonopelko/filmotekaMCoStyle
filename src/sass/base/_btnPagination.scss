@@ -22,6 +22,17 @@
   animation: none;
 }
 
+.pagination__btn.active:hover,
+.pagination__btn.active:active {
+  background-color: $accent-color;
+  color: white;
+  border: 2px solid white;
+  box-shadow: 0 0 10px $accent-color, 0 0 20px $accent-color, 0 0 10px,
+    0 0 10px $accent-color, 0 0 10px $accent-color;
+  outline: none;
+  animation: none;
+}
+
 .pagination__turning-btn {
   display: inline-block;
   width: 50px;
@@ -72,10 +83,10 @@
 
 .pagination__btn.active {
   animation: none;
-  border: 2px solid rgb(255, 117, 117);
-  box-shadow: 0 0 10px $accent-color2, 0 0 20px $accent-color2, 0 0 10px,
-    0 0 10px $accent-color2, 0 0 10px $accent-color2;
-  color: $accent-color2;
-  text-shadow: 0 0 10px lightskyblue, 0 0 20px lightskyblue,
-    0 0 40px lightskyblue, 0 0 80px lightskyblue, 0 0 160px lightskyblue;
+  border: 2px solid $accent-color3;
+  box-shadow: 0 0 10px $accent-shadow-color2, 0 0 20px $accent-shadow-color2,
+    0 0 10px, 0 0 10px $accent-shadow-color2, 0 0 10px $accent-shadow-color2;
+  color: $accentgit-color2;
+  text-shadow: 0 0 10px $accent-color3, 0 0 20px $accent-color3,
+    0 0 4px $accent-color3, 0 0 8px$accent-color3, 0 0 16px$accent-color3;
 }
