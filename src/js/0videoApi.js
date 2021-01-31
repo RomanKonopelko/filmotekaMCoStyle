@@ -306,9 +306,13 @@ class MovieApi {
 
     aImg.appendChild(img);
     //TEST Btn that close DetailsPage
-    const btnClose = document.createElement('button');
+    const btnClose = document.createElement('a');
     btnClose.classList.add('details-page__button-close');
-    btnClose.textContent = 'X';
+
+    const btnCloseI = document.createElement('i');
+    btnCloseI.textContent = 'cancel';
+    btnCloseI.classList.add('material-icons', 'active');
+    btnClose.append(btnCloseI);
 
     const divImage = document.createElement('div');
     divImage.classList.add('details-page__foto');
