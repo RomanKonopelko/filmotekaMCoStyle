@@ -21,7 +21,7 @@ $shadows-big: multiple-box-shadow(600);
   &:after {
     content: ' ';
     position: absolute;
-    top: 1000px;
+    top: 800px;
     width: 2px;
     height: 2px;
     border-radius: 50%;
@@ -41,7 +41,7 @@ $shadows-big: multiple-box-shadow(600);
   &:after {
     content: ' ';
     position: absolute;
-    top: 1000px;
+    top: 800px;
     width: 2px;
     height: 2px;
     border-radius: 50%;
@@ -60,7 +60,7 @@ $shadows-big: multiple-box-shadow(600);
   &:after {
     content: ' ';
     position: absolute;
-    top: 1000px;
+    top: 800px;
     width: 5px;
     height: 5px;
     border-radius: 50%;
@@ -79,7 +79,6 @@ $shadows-big: multiple-box-shadow(600);
 }
 .main {
   padding-top: 20px; //add padding
-  background: radial-gradient(ellipse at bottom, #29405a 0%, #020614 100%);
   color: $title-text-color;
 
   &__container {
