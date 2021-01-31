@@ -363,9 +363,16 @@ class MovieApi {
     detailsSection.appendChild(container);
 
 
+    // window.scrollTo({
+    //   top: 0,
+    //   behavior: 'smooth',
+    // });
+
+
     // buttonTrailer.addEventListener('click', this.onTrailerClick);
 
     buttonTrailer.addEventListener('click', openModal);
+
 
 
 
@@ -389,7 +396,7 @@ class MovieApi {
     // клік на кнопку Watched
   }
   onQueueClick() {
-    // клік на Queue
+    // клік на Queue додає фільм в чергку
   }
 
   setPrevNextButtons(data) {

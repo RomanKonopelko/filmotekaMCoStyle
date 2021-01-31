@@ -55,10 +55,18 @@
   }
 }
 
+
+.heder__item_a {
+  display: flex;
+  align-items: center;
+}
+
+
 .running__strokes {
   display: flex;
   justify-content: space-around;
 }
+
 .header__item.current .header__item-title {
   //test animation active
   position: relative;

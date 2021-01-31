@@ -380,6 +380,18 @@ $shadows-big: multiple-box-shadow(600);
   }
 }
 
+
+.library-filter__btn {
+  width: 150px;
+  height: 50px;
+}
+
+.message-title {
+  display: block;
+  color: white;
+  text-align: center;
+  margin-bottom: 20px;
+
 // BUTTON UP
 
 .main__btn-scroll {
