@@ -146,6 +146,29 @@ $shadows-big: multiple-box-shadow(600);
   }
 }
 
+.main__search-form .form__control::placeholder {
+  margin-left: 10px;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  color: white;
+  text-shadow: 0 0 3px lightskyblue, 0 0 5px lightskyblue, 0 0 1px lightskyblue,
+    0 0 10px lightskyblue, 0 0 10px lightskyblue;
+  transition: all $transition-duration $timing-function;
+}
+
+.main__search-form .form__control:hover::placeholder {
+  color: $accent-color2;
+  text-shadow: 0 0 3px $accent-shadow-color2, 0 0 5px $accent-shadow-color2,
+    0 0 1px $accent-shadow-color2, 0 0 10px $accent-shadow-color2,
+    0 0 10px $accent-shadow-color2;
+}
+
+.main__search-form .form__control:focus::placeholder {
+  color: transparent;
+  text-shadow: none;
+}
+
 .gallery {
   padding: 0;
 
