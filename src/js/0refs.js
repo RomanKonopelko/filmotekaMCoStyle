@@ -6,6 +6,8 @@ const refs = {
   ulForCards: document.querySelector('.gallery__list'),
   modalBtn: document.querySelector('.backdrop__modal__btn'),
   detailsSection: document.querySelector('.details-page'),
+  btnTop: document.querySelector('.main__btn-scroll'),
+  player: document.querySelector('#player'),
 };
 
 const {
@@ -16,5 +18,7 @@ const {
   backdrop,
   modalBtn,
   detailsSection,
+  btnTop,
+  player,
 } = refs;
-// console.log(errorNotification);
+// console.log(player);
