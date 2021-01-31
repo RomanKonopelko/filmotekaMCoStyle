@@ -1,0 +1,48 @@
+.footer {
+  background: radial-gradient(ellipse at bottom, #29405a 0%, #020614 100%);
+  color: $primary-bg-color;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    background-color: lightseagreen;
+    animation: animate-border 10s infinite;
+  }
+}
+
+.footer__container {
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.footer__img {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.footer__overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-transform: uppercase;
+  background-color: transparent;
+  animation: animate 5s infinite;
+}
+
+.footer__link {
+  display: inline-block;
+  font-size: 16px;
+  color: $primary-bg-color;
+}
+
+.footer__link:hover,
+.footer__link:hover {
+  color: $accent-color;
+}
