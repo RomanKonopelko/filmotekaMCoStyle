@@ -24,8 +24,9 @@ const {
   detailsSection,
   btnMyLibrary,
   libraryFilrt,
+  btnTop,
+  player,
 } = refs;
 // console.log(errorNotification);
 console.log(btnMyLibrary);
-const { btnTop, player } = refs;
 // console.log(player);
