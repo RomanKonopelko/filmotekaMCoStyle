@@ -185,7 +185,7 @@ class MovieApi {
 
     const spanRating = document.createElement('span');
     spanRating.classList.add('movie__genre');
-    spanRating.textContent = vote_average;
+    spanRating.textContent = `☆  ` + `${vote_average}`;
 
     const cardContainer = document.createElement('div');
     cardContainer.classList.add('gallery__card-movie');
