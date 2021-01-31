@@ -40,7 +40,8 @@ $transition-duration: 250ms;
   80%,
   90.1%,
   92% {
-    border-bottom: 2px solid $accent-color;
+    border-radius: 5px;
+    border-bottom: 3px solid $accent-color;
     box-shadow: none;
   }
   10%,
@@ -54,7 +55,8 @@ $transition-duration: 250ms;
   90%,
   92.1%,
   100% {
-    border-bottom: 2px solid white;
+    border-radius: 5px;
+    border-bottom: 3px solid white;
     box-shadow: 0 10px 5px -2px $accent-color;
   }
 }
