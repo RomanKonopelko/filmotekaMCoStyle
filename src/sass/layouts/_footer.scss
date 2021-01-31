@@ -14,15 +14,22 @@
 }
 
 .footer__container {
-  display: flex;
-  justify-content: center;
   padding-top: 30px;
   padding-bottom: 30px;
 }
 
+.img {
+  display: flex;
+  justify-content: center;
+}
+
 .footer__img {
-  display: inline-block;
-  margin-right: 10px;
+  display: none;
+
+  @include for-size(tablet) {
+    display: inline-block;
+    margin: 0;
+  }
 }
 
 .footer__overlay {
