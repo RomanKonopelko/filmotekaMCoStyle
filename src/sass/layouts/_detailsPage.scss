@@ -100,7 +100,7 @@ td {
   transition: $transition-duration;
 }
 
-.button__add:not(:last-child) {
+.button__add.first {
   margin-right: 10px;
 }
 

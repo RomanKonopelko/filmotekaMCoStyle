@@ -64,6 +64,10 @@ backdrop.addEventListener('click', onBeckDropCkick); // закриває мод�
 function openModal(event) {
   event.preventDefault();
 
+  if (event.target.nodeName !== 'IMG') {
+    return;
+  }
+
   backdrop.classList.remove('backdrop--hidden');
   window.addEventListener('keydown', onKeybordPress);
 }
