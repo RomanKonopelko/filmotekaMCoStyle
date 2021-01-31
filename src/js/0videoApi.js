@@ -313,10 +313,10 @@ class MovieApi {
     buttonTrailer.textContent = 'watched trailer';
     buttonTrailer.addEventListener('click', this.onTrailerClick);
 
-    const buttonTrailer = document.createElement('button');
-    buttonTrailer.classList.add('button__add');
-    buttonTrailer.setAttribute('type', 'submite');
-    buttonTrailer.textContent = 'watched trailer';
+    // const buttonTrailer = document.createElement('button');
+    // buttonTrailer.classList.add('button__add');
+    // buttonTrailer.setAttribute('type', 'submite');
+    // buttonTrailer.textContent = 'watched trailer';
 
     const divBtn = document.createElement('div');
     divBtn.classList.add('details-page__button');
@@ -362,19 +362,14 @@ class MovieApi {
     detailsSection.classList.remove('is-hidden');
     detailsSection.appendChild(container);
 
-
     // window.scrollTo({
     //   top: 0,
     //   behavior: 'smooth',
     // });
 
-
     // buttonTrailer.addEventListener('click', this.onTrailerClick);
 
     buttonTrailer.addEventListener('click', openModal);
-
-
-
 
     //Затирает карточку после закрытия страницы
 

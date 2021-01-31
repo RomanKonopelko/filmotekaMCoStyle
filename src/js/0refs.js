@@ -27,9 +27,5 @@ const {
 } = refs;
 // console.log(errorNotification);
 console.log(btnMyLibrary);
-=======
-  btnTop,
-  player,
-} = refs;
+const { btnTop, player } = refs;
 // console.log(player);
-
