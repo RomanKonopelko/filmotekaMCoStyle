@@ -184,7 +184,7 @@ class MovieApi {
   createCardFunc(itemData) {
     //test start //
     ulForCards.classList.remove('is-hidden');
-    mian.classList.remove('is-hidden');
+    main.classList.remove('is-hidden');
     // test end //
 
     const { backdrop_path, title, id, vote_average, release_date } = itemData;
@@ -383,7 +383,7 @@ class MovieApi {
     detailsSection.appendChild(container);
 
     buttonTrailer.addEventListener('click', this.onTrailerClick);
-    mian.classList.add('is-hidden');
+    main.classList.add('is-hidden');
     this.hideLoader();
     //Затирает карточку после закрытия страницы
 
@@ -394,7 +394,7 @@ class MovieApi {
       ulForCards.classList.remove('is-hidden');
       btnTop.classList.remove('is-hidden');
       detailsSection.innerHTML = '';
-      mian.classList.remove('is-hidden');
+      main.classList.remove('is-hidden');
     });
 
     // Вызов видео

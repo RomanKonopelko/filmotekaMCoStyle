@@ -14,7 +14,7 @@ const refs = {
   libraryFilrt: document.querySelector('.library-filter'),
   btnTop: document.querySelector('.main__btn-scroll'),
   player: document.querySelector('#player'),
-  mian: document.querySelector('.main'),
+  main: document.querySelector('.main'),
 };
 
 const {
@@ -29,7 +29,7 @@ const {
   libraryFilrt,
   btnTop,
   player,
-  mian,
+  main,
   loaderPartOne,
   loaderPartTwo,
 } = refs;
