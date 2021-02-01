@@ -67,7 +67,7 @@ btnQueue.addEventListener('click', drawQueueFilmList);
 btnWatched.addEventListener('click', drawWatchedFilmList);
 
 function drawQueueFilmList(fragment, key) {
-  const filmsQueueLocalStorage = localStorage.getItem('Queue', key);
+  const filmsQueueLocalStorage = localStorage.getItem('filmsQueue', key);
   const parsedFilmsQueue = JSON.parse(filmsQueueLocalStorage);
 
   MyApi.resetGalleryCard();
@@ -92,7 +92,7 @@ function drawQueueFilmList(fragment, key) {
 }
 
 function drawWatchedFilmList(fragment, key) {
-  const filmsWatchedLocalStorage = localStorage.getItem('Watched', key);
+  const filmsWatchedLocalStorage = localStorage.getItem('filmsWatched', key);
   const parsedFilmsWatched = JSON.parse(filmsWatchedLocalStorage);
 
   MyApi.resetGalleryCard();
@@ -108,7 +108,7 @@ function drawWatchedFilmList(fragment, key) {
     return filmsLibrary;
   }
 
-  parsedFilmsQueue.forEach(el => {
+  parsedFilmsWatched.forEach(el => {
     const LibraryCard = MyApi.createCardFunc(el);
     filmsLibrary.append(LibraryCard);
     return filmsLibrary;
