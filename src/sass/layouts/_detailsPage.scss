@@ -19,7 +19,9 @@
 .details-page__foto {
   position: relative;
   height: 100%;
-  box-shadow: $popular-box-shadow;
+  border: 3px solid $accent-color2;
+  box-shadow: 0 0 10px $accent-color, 0 0 20px $accent-color, 0 0 10px,
+    0 0 10px $accent-color, 0 0 10px $accent-color;
 
   @include for-size(desktop) {
     flex-shrink: 0;
@@ -28,6 +30,10 @@
 }
 
 .details-page__description {
+  font-size: 16px;
+  color: white;
+  text-shadow: 0 0 3px lightskyblue, 0 0 2px lightskyblue, 0 0 1px lightskyblue,
+    0 0 1px lightskyblue, 0 0 2px lightskyblue;
   @include for-size(tablet) {
     margin-left: 30px;
     width: 50%;
@@ -39,9 +45,11 @@
   margin-bottom: 10px;
 
   font-size: 30px;
-  line-height: 35px;
-
-  color: $title-text-color;
+  -webkit-box-reflect: below 1px linear-gradient(transparent, #0008);
+  line-height: 0.7em;
+  color: #ffebee;
+  text-shadow: 0 0 10px #ff1744, 0 0 20px#ff1744, 0 0 40px #ff1744,
+    0 0 80px #ff1744, 0 0 160px #ff1744;
 
   @include for-size(tablet) {
     margin-top: 0;
@@ -57,19 +65,26 @@ td {
   margin-bottom: 40px;
   width: 100%;
   border-collapse: collapse;
-  box-shadow: $popular-box-shadow;
+  // box-shadow: 0 0 5px $accent-color, 0 0 5px $accent-color, 0 0 10px,
+  //   0 0 40px $accent-color, 0 0 10px $accent-color;
+  // box-shadow: $popular-box-shadow;
 }
 
-.details-page__rows:nth-child(2n-1) {
-  color: $secondary-text-color;
+// .details-page__rows:nth-child(2n-1) {
+//   color: $secondary-text-color;
+//   border-bottom: 3px solid $accent-color2;
+//   box-shadow: 0 8px 5px -3px $accent-color;
+// }
 
-  background-image: $popular-background-image;
-}
+// .details-page__rows:nth-child(2n) {
+//   border-bottom: 3px solid $accent-color2;
+//   box-shadow: 0 8px 5px -3px $accent-shadow-color2;
+// }
 
 .rows__vote {
   padding: 5px 7px;
   border-radius: 20%;
-  background-color: $primary-bg-color;
+  // background-color: $primary-bg-color;
 }
 
 .details-page__text {
@@ -92,12 +107,14 @@ td {
   border-radius: 10px;
 
   text-transform: uppercase;
-  background-image: $popular-background-image;
-  background-position: 100% 0;
-  background-size: 200% 200%;
+  // background-image: $popular-background-image;
+  // background-position: 100% 0;
+  // background-size: 200% 200%;
 
+  background-color: transparent;
+  animation: animate-border-btn 5s infinite, animate 5s infinite;
   box-shadow: $popular-box-shadow;
-  transition: $transition-duration;
+  transition: all $transition-duration $timing-function;
 }
 
 .button__add:not(:last-child) {
@@ -105,9 +122,13 @@ td {
 }
 
 .button__add:hover {
-  box-shadow: 0 0 0 0 rgba(0, 40, 120, 0);
-  background-position: 0 0;
-  cursor: pointer;
+  animation: none;
+  border: 2px solid rgb(255, 117, 117);
+  text-shadow: 0 0 10px $accent-shadow-color2, 0 0 20px$accent-shadow-color2,
+    0 0 10px, 0 0 10px $accent-shadow-color2, 0 0 10px $accent-shadow-color2;
+  color: $accent-color2;
+  box-shadow: 0 0 10px $accent-shadow-color2, 0 0 20px $accent-shadow-color2,
+    0 0 10px, 0 0 10px $accent-shadow-color2, 0 0 10px $accent-shadow-color2;
 }
 
 .button__add:focus {
