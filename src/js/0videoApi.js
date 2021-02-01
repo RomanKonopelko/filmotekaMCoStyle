@@ -457,6 +457,7 @@ class MovieApi {
   setRatioButtons(data) {
     let maxLeft = this.params._page - Math.floor(this.pagination.window / 2);
     let maxRight = this.params._page + Math.floor(this.pagination.window / 2);
+    this.pagination.paginationContainer.innerHTML = '';
     if (maxLeft < 1) {
       maxLeft = 1;
       maxRight = this.pagination.window;
@@ -467,7 +468,6 @@ class MovieApi {
       if (maxLeft < 1) maxLeft = 1;
     }
 
-    this.pagination.paginationContainer.innerHTML = '';
     let btnArray = [];
     for (let i = maxLeft; i <= maxRight; i++) {
       const button = document.createElement('button');
