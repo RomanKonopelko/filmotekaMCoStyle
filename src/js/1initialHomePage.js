@@ -85,7 +85,6 @@ function handleScroll() {
 
   let elementScrollTop = document.documentElement.scrollTop;
   // console.log(elementScrollTop);
-  console.log(bodyScrollTop);
   if (bodyScrollTop > 500 || elementScrollTop > 500) {
     btnTop.style.display = 'block';
   } else {

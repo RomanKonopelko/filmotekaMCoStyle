@@ -1,5 +1,7 @@
 const refs = {
   errorNotification: document.querySelector('.main__error-notification'),
+  loaderPartOne: document.querySelectorAll('.bars-common'),
+  loaderPartTwo: document.querySelectorAll('.squares-common'),
   form: document.querySelector('.main__search-form'),
   paginationWrapper: document.querySelector('.pagination'),
   backdrop: document.querySelector('.backdrop'),
@@ -28,7 +30,8 @@ const {
   btnTop,
   player,
   mian,
+  loaderPartOne,
+  loaderPartTwo,
 } = refs;
 // console.log(errorNotification);
-console.log(btnMyLibrary);
 // console.log(player);

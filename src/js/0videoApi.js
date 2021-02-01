@@ -46,13 +46,27 @@ class MovieApi {
     };
   }
 
+  activeLoader() {
+    this.pagination.paginationContainer.classList.add('is-hidden');
+    const loaderArr = [...loaderPartOne, ...loaderPartTwo];
+    loaderArr.map(part => {
+      part.classList.remove('is-hidden');
+    });
+  }
+
+  hideLoader() {
+    this.pagination.paginationContainer.classList.remove('is-hidden');
+    const loaderArr = [...loaderPartOne, ...loaderPartTwo];
+    loaderArr.map(part => {
+      part.classList.add('is-hidden');
+    });
+  }
   fetchVideoById() {
     return fetch(
       `${this.VIDEO_BASE_URL}${this.movieID}/videos?api_key=${this.API_KEY}`,
     )
       .then(response => response.json())
       .then(resp => {
-        console.log(resp);
         return resp;
       })
       .then(({ results }) => results[0])
@@ -79,7 +93,10 @@ class MovieApi {
           return this.createCardFunc(el);
         }),
       )
-      .then(item => MyApi.pagination.cardContainer.append(...item));
+      .then(item => MyApi.pagination.cardContainer.append(...item))
+      .finally(() => {
+        this.hideLoader();
+      });
   }
 
   fetchGenres() {
@@ -93,6 +110,9 @@ class MovieApi {
       })
       .then(({ genres }) => {
         return (this.genres = genres);
+      })
+      .finally(() => {
+        this.hideLoader();
       });
   }
 
@@ -129,7 +149,10 @@ class MovieApi {
         }),
       )
       .then(item => MyApi.pagination.cardContainer.append(...item))
-      .catch(error => this.handlErrors(error));
+      .catch(error => this.handlErrors(error))
+      .finally(() => {
+        this.hideLoader();
+      });
   }
 
   handlErrors(text) {
@@ -199,8 +222,10 @@ class MovieApi {
     item.addEventListener('click', () => {
       // клік на картку //
       ulForCards.classList.add('is-hidden');
-
-      this.activeDetailsPage(id, false);
+      this.activeLoader();
+      setTimeout(() => {
+        this.activeDetailsPage(id, false);
+      }, 2000);
     });
     return item;
   }
@@ -214,7 +239,7 @@ class MovieApi {
     window.scrollTo(0, 80);
 
     this.movieID = id;
-    console.log(id);
+    // console.log(id);
 
     const array = this.popularFilmItem.filter(item => {
       if (item.id === id) return item;
@@ -330,7 +355,6 @@ class MovieApi {
     img.setAttribute('alt', img.title);
     img.setAttribute('width', '100%');
     img.setAttribute('data', 'poster');
-    console.dir(img);
 
     const aImg = document.createElement('a');
     aImg.setAttribute('href', '#');
@@ -360,6 +384,7 @@ class MovieApi {
 
     buttonTrailer.addEventListener('click', this.onTrailerClick);
     mian.classList.add('is-hidden');
+    this.hideLoader();
     //Затирает карточку после закрытия страницы
 
     btnClose.addEventListener('click', () => {
@@ -394,25 +419,34 @@ class MovieApi {
       prevBtn.classList.add('is-hidden');
       prevBtn.disabled = true;
     }
-    console.log(this.page === 1);
 
     if (this.page === data.total_pages) {
       nextBtn.classList.add('is-hidden');
       nextBtn.disabled = true;
     }
     prevBtn.addEventListener('click', () => {
+      this.activeLoader();
       this.decrementPage();
       this.resetGalleryCard();
       this.searchMode === 'popular'
-        ? this.fetchPopularFilmsList()
-        : this.movieSearch();
+        ? setTimeout(() => {
+            this.fetchPopularFilmsList();
+          }, 2000)
+        : setTimeout(() => {
+            this.movieSearch();
+          }, 2000);
     });
     nextBtn.addEventListener('click', () => {
+      this.activeLoader();
       this.incrementPage();
       this.resetGalleryCard();
       this.searchMode === 'popular'
-        ? this.fetchPopularFilmsList()
-        : this.movieSearch();
+        ? setTimeout(() => {
+            this.fetchPopularFilmsList();
+          }, 2000)
+        : setTimeout(() => {
+            this.movieSearch();
+          }, 2000);
     });
 
     this.pagination.paginationContainer.prepend(prevBtn);
@@ -431,26 +465,36 @@ class MovieApi {
       maxRight = data.total_pages;
       if (maxLeft < 1) maxLeft = 1;
     }
+
     this.pagination.paginationContainer.innerHTML = '';
     let btnArray = [];
     for (let i = maxLeft; i <= maxRight; i++) {
-      let button = document.createElement('button');
+      const button = document.createElement('button');
       button.textContent = i;
       button.classList.add('pagination__btn'); // добавляет класс для стилей
+
       if (+button.textContent === this.params._page)
         button.classList.add('active');
       button.addEventListener('click', e => {
+        this.activeLoader();
         this.page = +e.target.textContent;
         this.currentPage = this.page;
         this.pagination.cardContainer.innerHTML = '';
         this.searchMode === 'popular'
-          ? this.fetchPopularFilmsList()
-          : this.movieSearch();
+          ? setTimeout(() => {
+              this.fetchPopularFilmsList();
+            }, 2000)
+          : setTimeout(() => {
+              this.movieSearch();
+            }, 2000);
       });
       btnArray.push(button);
     }
 
     this.pagination.paginationContainer.append(...btnArray);
+    if (this.loaderStatus === 'active') {
+      button.classList.add('is-hidden');
+    }
     this.setPrevNextButtons(data);
   }
   get page() {

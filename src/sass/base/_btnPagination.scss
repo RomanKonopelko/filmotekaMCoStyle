@@ -11,6 +11,9 @@
   animation: animate-border-btn 2s infinite;
 }
 
+.pagination__btn.is-hidden {
+  display: none;
+}
 .pagination__btn:hover,
 .pagination__btn:focus {
   background-color: $accent-color;

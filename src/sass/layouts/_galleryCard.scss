@@ -1,82 +1,3 @@
-@function multiple-box-shadow($n) {
-  $value: '#{random(2000)}px #{random(2000)}px #FFF';
-  @for $i from 2 through $n {
-    $value: '#{$value} , #{random(2000)}px #{random(20000)}px #FFF';
-  }
-  @return unquote($value);
-}
-
-$shadows-small: multiple-box-shadow(2000);
-$shadows-medium: multiple-box-shadow(800);
-$shadows-big: multiple-box-shadow(600);
-
-#stars {
-  width: 1px;
-  height: 1px;
-  border-radius: 50%;
-  background: transparent;
-  box-shadow: $shadows-small;
-  animation: animStar 50s linear infinite;
-
-  &:after {
-    content: ' ';
-    position: absolute;
-    top: 100px;
-    width: 2px;
-    height: 2px;
-    border-radius: 50%;
-    background: transparent;
-    box-shadow: $shadows-small;
-  }
-}
-
-#stars2 {
-  width: 2px;
-  height: 2px;
-  border-radius: 50%;
-  background: transparent;
-  box-shadow: $shadows-medium;
-  animation: animStar 70s linear infinite;
-
-  &:after {
-    content: ' ';
-    position: absolute;
-    top: 100px;
-    width: 2px;
-    height: 2px;
-    border-radius: 50%;
-    background: transparent;
-    box-shadow: $shadows-medium;
-  }
-}
-#stars3 {
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: transparent;
-  box-shadow: $shadows-big;
-  animation: animStar 30s linear infinite;
-
-  &:after {
-    content: ' ';
-    position: absolute;
-    top: 100px;
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: transparent;
-    box-shadow: $shadows-big;
-  }
-}
-
-@keyframes animStar {
-  from {
-    transform: translateY(0px);
-  }
-  to {
-    transform: translateY(-2000px);
-  }
-}
 .main {
   padding-top: 20px; //add padding
   color: $title-text-color;
@@ -86,7 +7,7 @@ $shadows-big: multiple-box-shadow(600);
     flex-direction: column;
     align-items: center;
     padding-bottom: 20px;
-    min-height: 100vh;
+    min-height: 80vh;
 
     &.is-hidden {
       visibility: hidden;
@@ -390,29 +311,4 @@ $shadows-big: multiple-box-shadow(600);
   color: white;
   text-align: center;
   margin-bottom: 20px;
-}
-
-// BUTTON UP
-
-.main__btn-scroll {
-  display: none;
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 99;
-  font-size: 10px;
-  border: none;
-  outline: none;
-  background-color: rgb(10, 162, 189);
-  color: white;
-  cursor: pointer;
-  padding: 15px;
-  border-radius: 4px;
-
-  &:hover {
-    background-color: rgb(136, 120, 120);
-  }
-  &.is-hidden {
-    opacity: 0;
-  }
 }
