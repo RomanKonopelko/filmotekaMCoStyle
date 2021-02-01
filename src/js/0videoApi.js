@@ -394,6 +394,7 @@ class MovieApi {
       ulForCards.classList.remove('is-hidden');
       btnTop.classList.remove('is-hidden');
       detailsSection.innerHTML = '';
+      mian.classList.remove('is-hidden');
     });
 
     // Вызов видео

@@ -126,7 +126,8 @@ function openLibrary() {
   paginationWrapper.innerHTML = '';
   form.innerHTML = '';
   libraryFilrt.classList.remove('is-hidden');
-  // console.log('ket');
+  console.log('ket');
+  mian.classList.remove('is-hidden');
 }
 
 // goHome() {
