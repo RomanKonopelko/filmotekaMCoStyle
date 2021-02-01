@@ -20,6 +20,7 @@ class MovieApi {
       byGenreSearchUrl: 'discover/movie?',
       query: '',
       _page: 1,
+      lastPage: '',
     };
     this.pagination = {
       window: 5, //quantity of pagination buttons
@@ -100,7 +101,7 @@ class MovieApi {
       });
   }
   //////////////////////////////
-fetchDramaFilmsList() {
+  fetchDramaFilmsList() {
     this.searchMode = 'popular';
     this.resetGalleryCard();
     return fetch(
@@ -124,9 +125,9 @@ fetchDramaFilmsList() {
       .finally(() => {
         ulForCards.classList.remove('is-hidden');
         this.hideLoader();
-  });
-}
-  
+      });
+  }
+
   fetchThrillerFilmsList() {
     this.searchMode = 'popular';
     this.resetGalleryCard();
@@ -151,7 +152,7 @@ fetchDramaFilmsList() {
       .finally(() => {
         ulForCards.classList.remove('is-hidden');
         this.hideLoader();
-  });
+      });
   }
 
   fetchComedyFilmsList() {
@@ -178,9 +179,9 @@ fetchDramaFilmsList() {
       .finally(() => {
         ulForCards.classList.remove('is-hidden');
         this.hideLoader();
-  });
+      });
   }
-  
+
   fetchAnimationFilmsList() {
     this.searchMode = 'popular';
     this.resetGalleryCard();
@@ -205,8 +206,8 @@ fetchDramaFilmsList() {
       .finally(() => {
         ulForCards.classList.remove('is-hidden');
         this.hideLoader();
-  });
-}
+      });
+  }
 
   fetchActionFilmsList() {
     this.searchMode = 'popular';
@@ -232,9 +233,9 @@ fetchDramaFilmsList() {
       .finally(() => {
         ulForCards.classList.remove('is-hidden');
         this.hideLoader();
-  });
+      });
   }
-  
+
   fetchWesternFilmsList() {
     this.searchMode = 'popular';
     this.resetGalleryCard();
@@ -259,10 +260,10 @@ fetchDramaFilmsList() {
       .finally(() => {
         ulForCards.classList.remove('is-hidden');
         this.hideLoader();
-  });
+      });
   }
-  
-    fetchFantasyFilmsList() {
+
+  fetchFantasyFilmsList() {
     this.searchMode = 'popular';
     this.resetGalleryCard();
     return fetch(
@@ -286,9 +287,9 @@ fetchDramaFilmsList() {
       .finally(() => {
         ulForCards.classList.remove('is-hidden');
         this.hideLoader();
-  });
-}
-///////////////////
+      });
+  }
+  ///////////////////
   fetchGenres() {
     return fetch(
       `${this.BASE_URL}${this.params.genreSearchUrl}api_key=${this.API_KEY}`,
@@ -737,6 +738,7 @@ fetchDramaFilmsList() {
 
     lastBtn.addEventListener('click', () => {
       this.pagesScroll();
+      this.params._page = this.params.lastPage;
       console.log(data.total_pages);
       //this.params._page += data.total_pages;
     });
@@ -761,6 +763,7 @@ fetchDramaFilmsList() {
   setRatioButtons(data) {
     let maxLeft = this.params._page - Math.floor(this.pagination.window / 2);
     let maxRight = this.params._page + Math.floor(this.pagination.window / 2);
+    this.params.lastPage = data.total_pages;
     this.pagination.paginationContainer.innerHTML = '';
     if (maxLeft < 1) {
       maxLeft = 1;
