@@ -69,6 +69,7 @@ btnWatched.addEventListener('click', drawWatchedFilmList);
 function drawQueueFilmList(fragment, key) {
   const filmsQueueLocalStorage = localStorage.getItem('filmsQueue', key);
   const parsedFilmsQueue = JSON.parse(filmsQueueLocalStorage);
+  MyApi.pagination.cardContainer.classList.remove('is-hidden');
 
   MyApi.resetGalleryCard();
   btnWatched.disabled = false;
@@ -93,7 +94,9 @@ function drawQueueFilmList(fragment, key) {
 
 function drawWatchedFilmList(fragment, key) {
   const filmsWatchedLocalStorage = localStorage.getItem('filmsWatched', key);
+  console.log(filmsWatchedLocalStorage);
   const parsedFilmsWatched = JSON.parse(filmsWatchedLocalStorage);
+  MyApi.pagination.cardContainer.classList.remove('is-hidden');
 
   MyApi.resetGalleryCard();
   btnWatched.disabled = true;
@@ -107,10 +110,11 @@ function drawWatchedFilmList(fragment, key) {
     filmsLibrary.append(messageTitle);
     return filmsLibrary;
   }
-
+  console.log(MyApi);
   parsedFilmsWatched.forEach(el => {
     const LibraryCard = MyApi.createCardFunc(el);
     filmsLibrary.append(LibraryCard);
+    console.log(filmsLibrary);
     return filmsLibrary;
   });
 }
