@@ -5,7 +5,6 @@ class MovieApi {
     this.IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/';
     this.DEFAULT_IMAGE = '../images/default_backdrop2.jpg';
     this.VIDEO_BASE_URL = 'https://api.themoviedb.org/3/movie/';
-
     this.movieID = 0;
     this.searchMode = 'popular';
 
@@ -95,6 +94,7 @@ class MovieApi {
       )
       .then(item => MyApi.pagination.cardContainer.append(...item))
       .finally(() => {
+        ulForCards.classList.remove('is-hidden');
         this.hideLoader();
       });
   }
@@ -112,6 +112,7 @@ class MovieApi {
         return (this.genres = genres);
       })
       .finally(() => {
+        ulForCards.classList.remove('is-hidden');
         this.hideLoader();
       });
   }
@@ -151,6 +152,7 @@ class MovieApi {
       .then(item => MyApi.pagination.cardContainer.append(...item))
       .catch(error => this.handlErrors(error))
       .finally(() => {
+        ulForCards.classList.remove('is-hidden');
         this.hideLoader();
       });
   }
@@ -183,7 +185,6 @@ class MovieApi {
 
   createCardFunc(itemData) {
     //test start //
-    ulForCards.classList.remove('is-hidden');
     main.classList.remove('is-hidden');
     // test end //
 
@@ -233,7 +234,7 @@ class MovieApi {
   activeDetailsPage(id) {
     //Прячит пагинацию и форму поиска
     form.style.display = 'none';
-    paginationWrapper.style.display = 'none';
+    // paginationWrapper.style.display = 'none'; //Роман. Убрал эту строку т.к. перебивает классы
     btnTop.classList.add('is-hidden');
     //Скролит вверх
     window.scrollTo(0, 80);
@@ -389,7 +390,8 @@ class MovieApi {
 
     btnClose.addEventListener('click', () => {
       form.style.display = 'block';
-      paginationWrapper.style.display = 'block';
+      this.pagination.paginationContainer.classList.remove('is-hidden');
+      // paginationWrapper.style.display = 'block'; //Роман. Убрал эту строку т.к. перебивает классы
       detailsSection.classList.add('is-hidden');
       ulForCards.classList.remove('is-hidden');
       btnTop.classList.remove('is-hidden');
@@ -426,6 +428,7 @@ class MovieApi {
       nextBtn.disabled = true;
     }
     prevBtn.addEventListener('click', () => {
+      window.scrollTo(0, 0);
       this.activeLoader();
       this.decrementPage();
       this.resetGalleryCard();
@@ -438,6 +441,7 @@ class MovieApi {
           }, 2000);
     });
     nextBtn.addEventListener('click', () => {
+      window.scrollTo(0, 0);
       this.activeLoader();
       this.incrementPage();
       this.resetGalleryCard();
@@ -477,6 +481,7 @@ class MovieApi {
       if (+button.textContent === this.params._page)
         button.classList.add('active');
       button.addEventListener('click', e => {
+        window.scrollTo(0, 0);
         this.activeLoader();
         this.page = +e.target.textContent;
         this.currentPage = this.page;
