@@ -48,6 +48,7 @@
     font-size: 12px;
     text-align: center;
     color: $accent-color;
+    transform: translateZ(0);
     animation: animate-border-bottom 4s infinite;
     margin-left: auto;
     margin-right: auto;
