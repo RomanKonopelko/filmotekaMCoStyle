@@ -386,6 +386,12 @@ class MovieApi {
     buttonTrailer.addEventListener('click', this.onTrailerClick);
     main.classList.add('is-hidden');
     this.hideLoader();
+    // добавил присвоение значений глобадьнім переменным
+    btnAddWatched = buttonFirst;
+    btnAddQueue = buttonSecond;
+    selectFilm = item;
+
+    monitorButtonStatusText(); //следит за состоянием текста в кнопке
     //Затирает карточку после закрытия страницы
 
     btnClose.addEventListener('click', () => {
@@ -406,9 +412,85 @@ class MovieApi {
   }
   onWatchedClick() {
     // клік на кнопку Watched
+    let films = JSON.parse(localStorage.getItem('filmsWatched'));
+
+    if (films === null) {
+      films = [];
+      addFilm();
+    } else {
+      let arrFilmsidx = films.map((elem, idx) => {
+        return elem.id;
+      });
+      let idxFilm = arrFilmsidx.indexOf(selectFilm.id);
+
+      if (idxFilm != -1) {
+        deleteFilm(idxFilm);
+      } else {
+        addFilm();
+      }
+    }
+
+    function addFilm() {
+      films.push(selectFilm);
+
+      localStorage.setItem('filmsWatched', JSON.stringify(films));
+    }
+    function deleteFilm(idxFilm) {
+      let newFilms = films.reduce((acc, elem, idx) => {
+        if (idx != idxFilm) {
+          acc.push(elem);
+        }
+        return acc;
+      }, []);
+
+      if (newFilms.length === 0) {
+        localStorage.removeItem('filmsWatched');
+      } else {
+        localStorage.setItem('filmsWatched', JSON.stringify(newFilms));
+      }
+    }
+    monitorButtonStatusText();
   }
   onQueueClick() {
-    // клік на Queue додає фільм в чергку
+    // клік на Queue
+    let films = JSON.parse(localStorage.getItem('filmsQueue'));
+    if (films === null) {
+      films = [];
+      addFilm();
+    } else {
+      let arrFilmsidx = films.map((elem, idx) => {
+        return elem.id;
+      });
+      let idxFilm = arrFilmsidx.indexOf(selectFilm.id);
+
+      if (idxFilm != -1) {
+        deleteFilm(idxFilm);
+      } else {
+        addFilm();
+      }
+    }
+
+    function addFilm() {
+      films.push(selectFilm);
+
+      localStorage.setItem('filmsQueue', JSON.stringify(films));
+    }
+    function deleteFilm(idxFilm) {
+      let newFilms = films.reduce((acc, elem, idx) => {
+        if (idx != idxFilm) {
+          acc.push(elem);
+        }
+        return acc;
+      }, []);
+
+      if (newFilms.length === 0) {
+        localStorage.removeItem('filmsQueue');
+      } else {
+        localStorage.setItem('filmsQueue', JSON.stringify(newFilms));
+      }
+    }
+
+    monitorButtonStatusText();
   }
 
   setPrevNextButtons(data) {
