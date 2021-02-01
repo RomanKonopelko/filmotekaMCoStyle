@@ -104,7 +104,15 @@
   // }
 }
 .header__item:last-child {
-  margin-left: 40px;
+  margin-left: 80px;
+
+  @include for-size(tablet) {
+    margin-left: 40px;
+  }
+
+  @include for-size(desktop) {
+    margin-left: 40px;
+  }
 }
 .header__item:first-child {
   margin-right: auto;
@@ -156,7 +164,7 @@
 //runtext
 .header__runtext {
   display: none;
-  margin-left: 20px;
+  margin-left: 100px;
   font-size: 20px;
   letter-spacing: 5px;
   color: lightseagreen;
