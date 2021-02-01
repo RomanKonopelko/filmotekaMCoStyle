@@ -6,7 +6,7 @@
   @return unquote($value);
 }
 
-$shadows-small: multiple-box-shadow(2000);
+$shadows-small: multiple-box-shadow(1000);
 $shadows-medium: multiple-box-shadow(800);
 $shadows-big: multiple-box-shadow(600);
 
@@ -19,16 +19,16 @@ $shadows-big: multiple-box-shadow(600);
   box-shadow: $shadows-small;
   animation: animStar 50s linear infinite;
 
-  &:after {
-    content: ' ';
-    position: absolute;
-    top: 100px;
-    width: 2px;
-    height: 2px;
-    border-radius: 50%;
-    background: transparent;
-    box-shadow: $shadows-small;
-  }
+  // &:after {
+  //   content: ' ';
+  //   position: absolute;
+  //   top: 100px;
+  //   width: 2px;
+  //   height: 2px;
+  //   border-radius: 50%;
+  //   background: transparent;
+  //   box-shadow: $shadows-small;
+  // }
 }
 
 #stars2 {
@@ -40,16 +40,16 @@ $shadows-big: multiple-box-shadow(600);
   box-shadow: $shadows-medium;
   animation: animStar 70s linear infinite;
 
-  &:after {
-    content: ' ';
-    position: absolute;
-    top: 100px;
-    width: 2px;
-    height: 2px;
-    border-radius: 50%;
-    background: transparent;
-    box-shadow: $shadows-medium;
-  }
+  // &:after {
+  //   content: ' ';
+  //   position: absolute;
+  //   top: 100px;
+  //   width: 2px;
+  //   height: 2px;
+  //   border-radius: 50%;
+  //   background: transparent;
+  //   box-shadow: $shadows-medium;
+  // }
 }
 #stars3 {
   width: 4px;

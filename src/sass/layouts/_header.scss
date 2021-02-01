@@ -120,13 +120,12 @@
   font-size: 25px;
   letter-spacing: 5px;
   color: lightseagreen;
-  width: 100%;
   text-transform: uppercase;
   -webkit-box-reflect: below 1px linear-gradient(transparent, #0008);
   line-height: 0.7em;
   outline: none;
   transform: translateZ(0);
-  animation: animate 4s linear infinite;
+  animation: animate 4s infinite;
   @include for-size(tablet) {
     display: inline;
   }
