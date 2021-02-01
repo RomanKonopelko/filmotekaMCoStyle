@@ -126,7 +126,6 @@ function openLibrary() {
   paginationWrapper.innerHTML = '';
   form.innerHTML = '';
   libraryFilrt.classList.remove('is-hidden');
-  console.log('ket');
   main.classList.remove('is-hidden');
 }
 
