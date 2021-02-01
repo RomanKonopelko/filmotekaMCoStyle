@@ -1,5 +1,6 @@
 .header {
   display: flex;
+  flex-wrap: wrap;
   height: 250px;
   justify-content: center;
   align-items: center;
@@ -61,6 +62,10 @@
   }
 }
 
+.run__container {
+  display: flex;
+  flex-grow: 1;
+}
 .hedear__logo {
   display: inline;
   width: 150px;
