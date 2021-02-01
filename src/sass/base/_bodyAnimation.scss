@@ -26,7 +26,6 @@ $shadows-big: multiple-box-shadow(600);
     width: 2px;
     height: 2px;
     border-radius: 50%;
-    transform: translateZ(0);
     background: transparent;
     box-shadow: $shadows-small;
   }
@@ -59,7 +58,7 @@ $shadows-big: multiple-box-shadow(600);
   background: transparent;
   transform: translateZ(0);
   box-shadow: $shadows-big;
-  animation: animStar 30s linear infinite;
+  animation: animStar 30s infinite;
 
   &:after {
     content: ' ';
