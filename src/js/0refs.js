@@ -15,6 +15,10 @@ const refs = {
   btnTop: document.querySelector('.main__btn-scroll'),
   player: document.querySelector('#player'),
   main: document.querySelector('.main'),
+
+  filmsLibrary: document.querySelector('.js-gallery'),
+  btnWatched: document.querySelector('.btnWatched'),
+  btnQueue: document.querySelector('.btnQueue'),
 };
 
 const {
@@ -32,6 +36,9 @@ const {
   main,
   loaderPartOne,
   loaderPartTwo,
+  filmsLibrary,
+  btnWatched,
+  btnQueue,
 } = refs;
 // console.log(errorNotification);
 // console.log(player);
