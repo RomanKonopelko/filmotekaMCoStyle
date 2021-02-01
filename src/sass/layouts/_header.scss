@@ -25,6 +25,7 @@
     top: 100%;
     width: 100%;
     height: 5px;
+    transform: translateZ(0);
     background-color: lightseagreen;
     animation: animate-border 10s infinite;
   }
@@ -161,6 +162,7 @@
   letter-spacing: 5px;
   color: lightseagreen;
   text-transform: uppercase;
+  transform: translateZ(0);
   -webkit-box-reflect: below 1px linear-gradient(transparent, #0008);
   animation: animate-runtext 4s linear infinite;
   transition: all $transition-duration $timing-function;

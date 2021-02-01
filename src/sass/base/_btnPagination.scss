@@ -7,6 +7,7 @@
   border: 1px solid #6ab1d7;
   background-color: transparent;
   color: $accent-color;
+  transform: translateZ(0);
   animation: animate 5s infinite;
   animation: animate-border-btn 2s infinite;
 }
@@ -51,6 +52,7 @@
   color: white;
 
   background-color: transparent;
+  transform: translateZ(0);
   animation: animate-border-btn 5s infinite, animate 5s infinite;
 
   @include for-size(tablet) {
