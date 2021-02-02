@@ -137,18 +137,35 @@ td {
   box-shadow: $focus-box-shadow;
 }
 
-// Кнопка для закрытия Страницы! ТЕСТовая стилизация!!!!
-.details-page__button-close {
+// Кнопка для закрытия Страницы! 
+.button-close {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  border-radius: 50%;
-  border: none;
-  outline: none;
-  opacity: 0.87;
+  top: 0px;
+  right: 0px;
+  font-size: 15px;
+  
+  @media screen and (min-width: 400px) and (max-width: 699px) {
+    top: -10px;
+    right: -300px;
+    font-size: 20px;
+  }
+
+  @media screen and (min-width: 700px) and (max-width: 899px) {
+    top: -15px;
+    right: -400px;
+    font-size: 25px;
+  }
+
+  @media (min-width: 900px) {
+    top: -25px;
+    right: -500px;
+    font-size: 30px;
+  }
+
+
 }
 
-.details-page__button-close:hover {
+.button-close:hover {
   transform: scale(1.1);
 }
 

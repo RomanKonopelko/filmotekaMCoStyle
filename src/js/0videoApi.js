@@ -554,13 +554,12 @@ class MovieApi {
     aImg.appendChild(img);
 
     //TEST Btn that close DetailsPage
-    const btnClose = document.createElement('a');
-    btnClose.classList.add('details-page__button-close');
-
-    const btnCloseI = document.createElement('i');
-    btnCloseI.textContent = 'cancel';
-    btnCloseI.classList.add('material-icons', 'active');
-    btnClose.append(btnCloseI);
+    const btnClose = document.createElement('button');
+    btnClose.classList.add('button__add', 'button-close');
+    // const btnCloseI = document.createElement('i');
+    btnClose.textContent = 'Back';
+    // btnCloseI.classList.add('material-icons', 'active');
+    // btnClose.append(btnCloseI);
 
     const divImage = document.createElement('div');
     divImage.classList.add('details-page__foto');
@@ -590,7 +589,7 @@ class MovieApi {
       form.style.display = 'block';
       this.pagination.paginationContainer.classList.remove('is-hidden');
       detailsSection.classList.add('is-hidden');
-      ulForCards.classList.remove('is-hidden');
+      this.pagination.cardContainer.classList.remove('is-hidden');
       btnTop.classList.remove('is-hidden');
       detailsSection.innerHTML = '';
       main.classList.remove('is-hidden');
