@@ -100,38 +100,11 @@ class MovieApi {
       });
   }
   //////////////////////////////
-fetchDramaFilmsList() {
+  fetchFilmsListByGenre(val) {
     this.searchMode = 'popular';
     this.resetGalleryCard();
     return fetch(
-      `${this.BASE_URL}${this.params.byGenreSearchUrl}api_key=${this.API_KEY}&language=en-US&page=${this.params._page}&with_genres=18`,
-    )
-      .then(response => response.json())
-      .then(resp => {
-        this.setRatioButtons(resp);
-        return resp;
-      })
-      .then(({ results }) => {
-        this.popularFilmItem = results; // test
-        return results; // test
-      })
-      .then(collection =>
-        collection.map(el => {
-          return this.createCardFunc(el);
-        }),
-      )
-      .then(item => MyApi.pagination.cardContainer.append(...item))
-      .finally(() => {
-        ulForCards.classList.remove('is-hidden');
-        this.hideLoader();
-  });
-}
-  
-  fetchThrillerFilmsList() {
-    this.searchMode = 'popular';
-    this.resetGalleryCard();
-    return fetch(
-      `${this.BASE_URL}${this.params.byGenreSearchUrl}api_key=${this.API_KEY}&language=en-US&page=${this.params._page}&with_genres=53`,
+      `${this.BASE_URL}${this.params.byGenreSearchUrl}api_key=${this.API_KEY}&language=en-US&page=${this.params._page}&with_genres=${val}`,
     )
       .then(response => response.json())
       .then(resp => {
@@ -153,141 +126,6 @@ fetchDramaFilmsList() {
         this.hideLoader();
   });
   }
-
-  fetchComedyFilmsList() {
-    this.searchMode = 'popular';
-    this.resetGalleryCard();
-    return fetch(
-      `${this.BASE_URL}${this.params.byGenreSearchUrl}api_key=${this.API_KEY}&language=en-US&page=${this.params._page}&with_genres=35`,
-    )
-      .then(response => response.json())
-      .then(resp => {
-        this.setRatioButtons(resp);
-        return resp;
-      })
-      .then(({ results }) => {
-        this.popularFilmItem = results; // test
-        return results; // test
-      })
-      .then(collection =>
-        collection.map(el => {
-          return this.createCardFunc(el);
-        }),
-      )
-      .then(item => MyApi.pagination.cardContainer.append(...item))
-      .finally(() => {
-        ulForCards.classList.remove('is-hidden');
-        this.hideLoader();
-  });
-  }
-  
-  fetchAnimationFilmsList() {
-    this.searchMode = 'popular';
-    this.resetGalleryCard();
-    return fetch(
-      `${this.BASE_URL}${this.params.byGenreSearchUrl}api_key=${this.API_KEY}&language=en-US&page=${this.params._page}&with_genres=16`,
-    )
-      .then(response => response.json())
-      .then(resp => {
-        this.setRatioButtons(resp);
-        return resp;
-      })
-      .then(({ results }) => {
-        this.popularFilmItem = results; // test
-        return results; // test
-      })
-      .then(collection =>
-        collection.map(el => {
-          return this.createCardFunc(el);
-        }),
-      )
-      .then(item => MyApi.pagination.cardContainer.append(...item))
-      .finally(() => {
-        ulForCards.classList.remove('is-hidden');
-        this.hideLoader();
-  });
-}
-
-  fetchActionFilmsList() {
-    this.searchMode = 'popular';
-    this.resetGalleryCard();
-    return fetch(
-      `${this.BASE_URL}${this.params.byGenreSearchUrl}api_key=${this.API_KEY}&language=en-US&page=${this.params._page}&with_genres=28`,
-    )
-      .then(response => response.json())
-      .then(resp => {
-        this.setRatioButtons(resp);
-        return resp;
-      })
-      .then(({ results }) => {
-        this.popularFilmItem = results; // test
-        return results; // test
-      })
-      .then(collection =>
-        collection.map(el => {
-          return this.createCardFunc(el);
-        }),
-      )
-      .then(item => MyApi.pagination.cardContainer.append(...item))
-      .finally(() => {
-        ulForCards.classList.remove('is-hidden');
-        this.hideLoader();
-  });
-  }
-  
-  fetchWesternFilmsList() {
-    this.searchMode = 'popular';
-    this.resetGalleryCard();
-    return fetch(
-      `${this.BASE_URL}${this.params.byGenreSearchUrl}api_key=${this.API_KEY}&language=en-US&page=${this.params._page}&with_genres=37`,
-    )
-      .then(response => response.json())
-      .then(resp => {
-        this.setRatioButtons(resp);
-        return resp;
-      })
-      .then(({ results }) => {
-        this.popularFilmItem = results; // test
-        return results; // test
-      })
-      .then(collection =>
-        collection.map(el => {
-          return this.createCardFunc(el);
-        }),
-      )
-      .then(item => MyApi.pagination.cardContainer.append(...item))
-      .finally(() => {
-        ulForCards.classList.remove('is-hidden');
-        this.hideLoader();
-  });
-  }
-  
-    fetchFantasyFilmsList() {
-    this.searchMode = 'popular';
-    this.resetGalleryCard();
-    return fetch(
-      `${this.BASE_URL}${this.params.byGenreSearchUrl}api_key=${this.API_KEY}&language=en-US&page=${this.params._page}&with_genres=14`,
-    )
-      .then(response => response.json())
-      .then(resp => {
-        this.setRatioButtons(resp);
-        return resp;
-      })
-      .then(({ results }) => {
-        this.popularFilmItem = results; // test
-        return results; // test
-      })
-      .then(collection =>
-        collection.map(el => {
-          return this.createCardFunc(el);
-        }),
-      )
-      .then(item => MyApi.pagination.cardContainer.append(...item))
-      .finally(() => {
-        ulForCards.classList.remove('is-hidden');
-        this.hideLoader();
-  });
-}
 ///////////////////
   fetchGenres() {
     return fetch(
