@@ -121,7 +121,7 @@ function drawWatchedFilmList(fragment, key) {
 
 // кнопка My Library //
 
-btnMyLibrary.addEventListener('click', openLibrary);
+// btnMyLibrary.addEventListener('click', openLibrary);
 //btnHome.addEventListener('click', goHome);
 
 function openLibrary() {

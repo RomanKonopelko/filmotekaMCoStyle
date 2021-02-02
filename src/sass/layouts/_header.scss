@@ -1,23 +1,20 @@
 .header {
-  display: flex;
-  flex-wrap: wrap;
-  height: 250px;
+  // display: flex;
+  // flex-wrap: wrap;
+
   justify-content: center;
   align-items: center;
-  position: relative;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.3), #0d121e),
-    url('../../images/header-mobile.jpg');
-  @include for-size(tablet) {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), #0d121e),
-      url('../../images/header-tablet.jpg');
-  }
-  @include for-size(desktop) {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), #0d121e),
-      url('../../images/header-desktop.jpg');
-  }
-
+  // background-size: cover;
+  // background-repeat: no-repeat;
+  // background-image: linear-gradient(rgba(0, 0, 0, 0.3), #0d121e),
+  //   url('../../images/parallax.jpg');
+  // @include for-size(tablet) {
+  //   background-image: linear-gradient(rgba(0, 0, 0, 0.3), #0d121e),
+  //     url('../../images/parallax.jpg');
+  // }
+  // @include for-size(desktop) {
+  //   background-image: linear-gradient(rgba(0, 0, 0, 0.3), #0d121e),
+  //     url('../../images/parallax.jpg');
   &::before {
     content: '';
     display: block;
@@ -29,6 +26,28 @@
     background-color: lightseagreen;
     animation: animate-border 10s infinite;
   }
+}
+.scene {
+  position: relative;
+  overflow: hidden;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  padding-top: 5%;
+  min-height: 100vh;
+}
+
+.layer__bg {
+  position: absolute;
+  z-index: -100;
+  left: -10%;
+  top: -10%;
+  width: 130%;
+  height: 110%;
+  background: linear-gradient(rgba(2, 8, 95, 0.568), rgba(95, 81, 95, 0.041)),
+    url('../../images/parallax.jpg') center no-repeat;
+  background-size: cover;
 }
 .header__menu {
   display: flex;
@@ -70,6 +89,9 @@
 }
 .hedear__logo {
   display: inline;
+  position: absolute;
+  top: 35%;
+  left: 50%;
   width: 150px;
 }
 
@@ -114,9 +136,9 @@
     margin-left: 40px;
   }
 }
-.header__item:first-child {
-  margin-right: auto;
-}
+// .header__item:first-child {
+//   // margin-right: auto;
+// }
 .header__item-title.library {
   display: inline;
 }
@@ -125,15 +147,16 @@
 .header__logo-text {
   display: none;
   margin-left: 10px;
-  font-size: 25px;
+  font-size: 70px;
+  font-weight: bold;
   letter-spacing: 5px;
-  color: lightseagreen;
+  color: $accent-color3;
   text-transform: uppercase;
   -webkit-box-reflect: below 1px linear-gradient(transparent, #0008);
   line-height: 0.7em;
   outline: none;
   transform: translateZ(0);
-  animation: animate 4s infinite;
+  animation: animate-logo 7s infinite;
   @include for-size(tablet) {
     display: inline;
   }

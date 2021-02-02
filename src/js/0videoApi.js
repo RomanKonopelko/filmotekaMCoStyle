@@ -428,7 +428,7 @@ class MovieApi {
     btnTop.classList.add('is-hidden');
 
     //Скролит вверх
-    window.scrollTo(0, 80);
+    window.scrollTo(0, 0);
 
     this.movieID = id;
 
