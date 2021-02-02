@@ -1,5 +1,6 @@
 'use strict';
-
+history.scrollRestoration = 'manual';
+console.log(history.scrollRestoration);
 MyApi.checkBackdropImgSize();
 MyApi.checkPosterImgSize();
 
