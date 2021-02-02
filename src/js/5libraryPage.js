@@ -55,10 +55,14 @@ function createPlugTitle(title, library) {
 
 // кнопка My Library //
 
-// btnMyLibrary.addEventListener('click', openLibrary);
+btnMyLibrary.addEventListener('click', openLibrary);
 //btnHome.addEventListener('click', goHome);
 
 function openLibrary() {
+  window.scrollTo({
+    top: document.body.children[2].clientHeight,
+    behavior: 'smooth',
+  });
   MyApi.resetGalleryCard();
   detailsSection.innerHTML = '';
   paginationWrapper.innerHTML = '';

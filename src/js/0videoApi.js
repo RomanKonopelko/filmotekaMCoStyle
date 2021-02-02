@@ -110,7 +110,8 @@ class MovieApi {
     this.searchMode = 'popular';
     this.resetGalleryCard();
     return fetch(
-      `${this.BASE_URL}${this.params.byGenreSearchUrl}api_key=${this.API_KEY}&language=en-US&page=${this.params._page}&with_genres=${val}`,)
+      `${this.BASE_URL}${this.params.byGenreSearchUrl}api_key=${this.API_KEY}&language=en-US&page=${this.params._page}&with_genres=${val}`,
+    )
       .then(response => response.json())
       .then(resp => {
         this.setRatioButtons(resp);
@@ -267,9 +268,9 @@ class MovieApi {
     //Прячит пагинацию и форму поиска
     form.style.display = 'none';
     btnTop.classList.add('is-hidden');
-
+    console.dir(document.body.children[2].clientHeight);
     //Скролит вверх
-    window.scrollTo(0, 0);
+    window.scrollTo(0, document.body.children[2].clientHeight);
 
     this.movieID = id;
 
@@ -588,10 +589,9 @@ class MovieApi {
     this.pagination.paginationContainer.append(nextBtn, lastBtn);
   }
   pagesScroll() {
-    window.scrollTo(0, 0);
     this.activeLoader();
-
     this.resetGalleryCard();
+    window.scrollTo(0, document.body.children[2].clientHeight);
     this.searchMode === 'popular'
       ? setTimeout(() => {
           this.fetchPopularFilmsList();
@@ -625,8 +625,8 @@ class MovieApi {
       if (+button.textContent === this.params._page)
         button.classList.add('active');
       button.addEventListener('click', e => {
-        window.scrollTo(0, 0);
         this.activeLoader();
+          window.scrollTo(0, document.body.children[2].clientHeight);
         this.page = +e.target.textContent;
         this.currentPage = this.page;
         this.pagination.cardContainer.innerHTML = '';
