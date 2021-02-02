@@ -55,7 +55,7 @@ function createPlugTitle(title, library) {
 
 // кнопка My Library //
 
-btnMyLibrary.addEventListener('click', openLibrary);
+// btnMyLibrary.addEventListener('click', openLibrary);
 //btnHome.addEventListener('click', goHome);
 
 function openLibrary() {

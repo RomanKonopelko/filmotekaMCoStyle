@@ -13,7 +13,7 @@
 .bar-one {
   left: 0;
   right: 4vw;
-  top: 300px;
+  top: 0;
   bottom: 0;
   box-shadow: 0 0 0 0.1vw cyan, 0 0 1vw 0 cyan, inset 0 0 0.5vw 0 cyan;
 }
@@ -21,7 +21,7 @@
 .bar-two {
   left: 0;
   right: 0;
-  top: 300px;
+  top: 0;
   bottom: 0;
   box-shadow: 0 0 0 0.1vw cyan, 0 0 1vw 0 cyan, inset 0 0 0.5vw 0 cyan;
 }
@@ -29,7 +29,7 @@
 .bar-three {
   left: 4vw;
   right: 0;
-  top: 300px;
+  top: 0;
   bottom: 0;
   box-shadow: 0 0 0 0.1vw cyan, 0 0 1vw 0 cyan, inset 0 0 0.5vw 0 cyan;
 }
@@ -44,7 +44,7 @@
   position: absolute;
   left: 0;
   right: 0;
-  top: 300px;
+  top: 0;
   bottom: 0;
   border-radius: 0%;
 }
@@ -52,7 +52,7 @@
 .square-one {
   left: 0;
   right: 0;
-  top: 300px;
+  top: 0;
   bottom: 0;
   box-shadow: 0 0 0 0.1vw cyan, 0 0 1vw 0 cyan, inset 0 0 0.5vw 0 cyan;
 }
@@ -60,7 +60,7 @@
 .square-two {
   left: 0;
   right: 0;
-  top: 300px;
+  top: 0;
   bottom: 0;
   box-shadow: 0 0 0 0.1vw cyan, 0 0 1vw 0 cyan, inset 0 0 0.5vw 0 cyan;
 }
