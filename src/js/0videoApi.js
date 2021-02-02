@@ -20,6 +20,7 @@ class MovieApi {
       byGenreSearchUrl: 'discover/movie?',
       query: '',
       _page: 1,
+      lastPage: '',
     };
     this.pagination = {
       window: 5, //quantity of pagination buttons
@@ -99,13 +100,12 @@ class MovieApi {
         this.hideLoader();
       });
   }
-  //////////////////////////////
+
   fetchFilmsListByGenre(val) {
     this.searchMode = 'popular';
     this.resetGalleryCard();
     return fetch(
-      `${this.BASE_URL}${this.params.byGenreSearchUrl}api_key=${this.API_KEY}&language=en-US&page=${this.params._page}&with_genres=${val}`,
-    )
+      `${this.BASE_URL}${this.params.byGenreSearchUrl}api_key=${this.API_KEY}&language=en-US&page=${this.params._page}&with_genres=${val}`,)
       .then(response => response.json())
       .then(resp => {
         this.setRatioButtons(resp);
@@ -124,9 +124,8 @@ class MovieApi {
       .finally(() => {
         ulForCards.classList.remove('is-hidden');
         this.hideLoader();
-  });
+      });
   }
-///////////////////
   fetchGenres() {
     return fetch(
       `${this.BASE_URL}${this.params.genreSearchUrl}api_key=${this.API_KEY}`,
@@ -262,21 +261,21 @@ class MovieApi {
   activeDetailsPage(id) {
     //Прячит пагинацию и форму поиска
     form.style.display = 'none';
-    // paginationWrapper.style.display = 'none'; //Роман. Убрал эту строку т.к. перебивает классы
     btnTop.classList.add('is-hidden');
+
     //Скролит вверх
     window.scrollTo(0, 80);
 
     this.movieID = id;
-    // console.log(id);
 
+    // серед масиву об'єктів знаходить об'єкт з необхідним id //
     const array = this.popularFilmItem.filter(item => {
       if (item.id === id) return item;
     });
     const item = array[0];
-
     const genresArray = [];
 
+    // шукаємо жанри фільма //
     const itemGenres = item.genre_ids;
     itemGenres.filter(item => {
       for (let key of this.genres) {
@@ -284,8 +283,8 @@ class MovieApi {
       }
     });
     const genresText = genresArray.join(', ');
-    // console.log(genresText);
-    // console.log(genresArray);
+
+    // створюємо розмтіку сторінки //
 
     const tdGenre = document.createElement('td');
     tdGenre.textContent = 'genre';
@@ -414,6 +413,7 @@ class MovieApi {
     buttonTrailer.addEventListener('click', this.onTrailerClick);
     main.classList.add('is-hidden');
     this.hideLoader();
+
     // добавил присвоение значений глобадьнім переменным
     btnAddWatched = buttonFirst;
     btnAddQueue = buttonSecond;
@@ -425,7 +425,6 @@ class MovieApi {
     btnClose.addEventListener('click', () => {
       form.style.display = 'block';
       this.pagination.paginationContainer.classList.remove('is-hidden');
-      // paginationWrapper.style.display = 'block'; //Роман. Убрал эту строку т.к. перебивает классы
       detailsSection.classList.add('is-hidden');
       ulForCards.classList.remove('is-hidden');
       btnTop.classList.remove('is-hidden');
@@ -524,53 +523,83 @@ class MovieApi {
   setPrevNextButtons(data) {
     const prevBtn = document.createElement('button');
     const nextBtn = document.createElement('button');
+
+    const lastBtn = document.createElement('button');
+    const firsBtn = document.createElement('button');
+    lastBtn.textContent = 'Last';
+    firsBtn.textContent = 'First';
+    lastBtn.classList.add('pagination__turning-btn');
+    firsBtn.classList.add('pagination__turning-btn');
+
     prevBtn.textContent = 'Prev';
     prevBtn.classList.add('pagination__turning-btn');
     nextBtn.textContent = 'Next';
     nextBtn.classList.add('pagination__turning-btn');
     if (this.page === 1) {
       prevBtn.classList.add('is-hidden');
-      prevBtn.disabled = true;
+      firsBtn.classList.add('is-hidden');
+      firsBtn.disabled = true;
+      //prevBtn.disabled = true; // їх же і так не видно, навіщо disabled?
     }
 
     if (this.page === data.total_pages) {
       nextBtn.classList.add('is-hidden');
-      nextBtn.disabled = true;
+      lastBtn.classList.add('is-hidden');
+      //nextBtn.disabled = true; // їх же і так не видно, навіщо disabled?
     }
+
+    if (this.page < 4) {
+      firsBtn.classList.add('is-hidden');
+    }
+
+    if (data.total_pages < 6) {
+      firsBtn.classList.add('is-hidden');
+      lastBtn.classList.add('is-hidden');
+      nextBtn.classList.add('is-hidden');
+    }
+
     prevBtn.addEventListener('click', () => {
-      window.scrollTo(0, 0);
-      this.activeLoader();
+      this.pagesScroll();
       this.decrementPage();
-      this.resetGalleryCard();
-      this.searchMode === 'popular'
-        ? setTimeout(() => {
-            this.fetchPopularFilmsList();
-          }, 2000)
-        : setTimeout(() => {
-            this.movieSearch();
-          }, 2000);
     });
     nextBtn.addEventListener('click', () => {
-      window.scrollTo(0, 0);
-      this.activeLoader();
       this.incrementPage();
-      this.resetGalleryCard();
-      this.searchMode === 'popular'
-        ? setTimeout(() => {
-            this.fetchPopularFilmsList();
-          }, 2000)
-        : setTimeout(() => {
-            this.movieSearch();
-          }, 2000);
+      this.pagesScroll();
     });
 
-    this.pagination.paginationContainer.prepend(prevBtn);
-    this.pagination.paginationContainer.append(nextBtn);
+    firsBtn.addEventListener('click', () => {
+      this.resetPage();
+      this.pagesScroll();
+    });
+
+    lastBtn.addEventListener('click', () => {
+      this.pagesScroll();
+      this.params._page = this.params.lastPage;
+      console.log(data.total_pages);
+      //this.params._page += data.total_pages;
+    });
+
+    this.pagination.paginationContainer.prepend(firsBtn, prevBtn);
+    this.pagination.paginationContainer.append(nextBtn, lastBtn);
+  }
+  pagesScroll() {
+    window.scrollTo(0, 0);
+    this.activeLoader();
+
+    this.resetGalleryCard();
+    this.searchMode === 'popular'
+      ? setTimeout(() => {
+          this.fetchPopularFilmsList();
+        }, 2000)
+      : setTimeout(() => {
+          this.movieSearch();
+        }, 2000);
   }
 
   setRatioButtons(data) {
     let maxLeft = this.params._page - Math.floor(this.pagination.window / 2);
     let maxRight = this.params._page + Math.floor(this.pagination.window / 2);
+    this.params.lastPage = data.total_pages;
     this.pagination.paginationContainer.innerHTML = '';
     if (maxLeft < 1) {
       maxLeft = 1;
