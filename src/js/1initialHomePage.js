@@ -4,7 +4,78 @@ MyApi.checkBackdropImgSize();
 MyApi.checkPosterImgSize();
 
 MyApi.fetchPopularFilmsList();
+MyApi.fetchGenres();
+
 // MyApi.fetchVideoById();
+
+// Button UP Logic
+
+btnTop.addEventListener('click', () => {
+  scrollToTop();
+});
+
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  });
+}
+
+window.onscroll = () => {
+  handleScroll();
+};
+
+function handleScroll() {
+  let bodyScrollTop = document.body.scrollTop;
+  let elementScrollTop = document.documentElement.scrollTop;
+  if (bodyScrollTop > 500 || elementScrollTop > 500) {
+    btnTop.style.display = 'block';
+  } else {
+    btnTop.style.display = 'none';
+  }
+}
+
+// Modal on Details Page Logic
+
+modalBtn.addEventListener('click', closeModal);
+backdrop.addEventListener('click', onBeckDropCkick); // Close Modal on Backdrop click
+
+function onHandleTrailerError() {
+  player.src = `http://www.youtube.com/embed/Zq_zgig9DqQ?autoplay=1`;
+}
+
+function openModal(event) {
+  event.preventDefault();
+  // youTubeSizes();
+
+  MyApi.fetchVideoById().then(key => {
+    // if (!key) {
+    // player.src = `http://www.youtube.com/embed/Zq_zgig9DqQ?autoplay=1`;
+    // }
+    player.src = `http://www.youtube.com/embed/${key}?autoplay=1`;
+  });
+
+  backdrop.classList.remove('backdrop--hidden');
+  window.addEventListener('keydown', onKeybordPress);
+}
+
+function closeModal() {
+  player.src = '';
+  backdrop.classList.add('backdrop--hidden');
+  window.removeEventListener('keydown', onKeybordPress);
+}
+// Close Modal by cleck on Btn Escape
+function onKeybordPress(event) {
+  if (event.code === 'Escape') {
+    closeModal();
+  }
+}
+// Close Modal by cleck on Backdrop
+function onBeckDropCkick(event) {
+  if (event.target.nodeName === 'DIV') {
+    closeModal();
+  }
+}
 
 // Создает одну карточку фильма, "li", с
 // Load the IFrame Player API code asynchronously.
@@ -62,36 +133,6 @@ MyApi.fetchPopularFilmsList();
 //   return item;
 // }
 
-// Button UP function
-btnTop.addEventListener('click', () => {
-  scrollToTop();
-});
-
-function scrollToTop() {
-  // document.body.scrollTop = 0;
-  // document.documentElement.scrollTop = 0;
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth',
-  });
-}
-
-window.onscroll = () => {
-  handleScroll();
-};
-
-function handleScroll() {
-  let bodyScrollTop = document.body.scrollTop;
-
-  let elementScrollTop = document.documentElement.scrollTop;
-  // console.log(elementScrollTop);
-  if (bodyScrollTop > 500 || elementScrollTop > 500) {
-    btnTop.style.display = 'block';
-  } else {
-    btnTop.style.display = 'none';
-  }
-}
-
 //Функция для клика по карточке и открытия
 
 // function activeDetailsPage(movieId, status) {
@@ -100,41 +141,7 @@ function handleScroll() {
 
 // let renderFilms = MyApi.fetchPopularFilmsList();
 //console.log(renderFilms); // содержит массив объектов популярных фильмов
-const genres = MyApi.fetchGenres(); // содержит коллекцию жанров
+// const genres = ; // содержит коллекцию жанров
 // console.log(genres);
 
 //ЛОГИКА МОДАЛЬНОГО ОКНА
-modalBtn.addEventListener('click', closeModal);
-backdrop.addEventListener('click', onBeckDropCkick); // закриває модалку якщо клікнути на бекдроп
-
-function openModal(event) {
-  event.preventDefault();
-
-  MyApi.fetchVideoById().then(key => {
-    player.setAttribute(
-      'src',
-      `http://www.youtube.com/embed/${key}?autoplay=1`,
-    );
-  });
-
-  backdrop.classList.remove('backdrop--hidden');
-  window.addEventListener('keydown', onKeybordPress);
-}
-
-function closeModal() {
-  player.src = '';
-  backdrop.classList.add('backdrop--hidden');
-  window.removeEventListener('keydown', onKeybordPress);
-}
-// закриваємо модалку кнопкою Escape
-function onKeybordPress(event) {
-  if (event.code === 'Escape') {
-    closeModal();
-  }
-}
-// закриваємо модалку, при натисканні на бекдроп
-function onBeckDropCkick(event) {
-  if (event.target.nodeName === 'DIV') {
-    closeModal();
-  }
-}

@@ -4,6 +4,7 @@ class MovieApi {
     this.BASE_URL = 'https://api.themoviedb.org/3/';
     this.IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/';
     this.DEFAULT_IMAGE = '../images/default_backdrop2.jpg';
+    this.DEFAULT_POSTER = '../images/default_poster.jpg';
     this.VIDEO_BASE_URL = 'https://api.themoviedb.org/3/movie/';
     this.movieID = 0;
     this.searchMode = 'popular';
@@ -70,7 +71,11 @@ class MovieApi {
       .then(resp => {
         return resp;
       })
-      .then(({ results }) => results[0])
+      .then(({ results }) => {
+        // console.log(results.length);
+        if (results.length === 0) onHandleTrailerError();
+        return results[0];
+      })
       .then(({ key }) => key);
   }
 
@@ -540,10 +545,11 @@ class MovieApi {
     detailsPageDecr.append(div, divPage, divBtn);
 
     const img = document.createElement('img');
-    img.setAttribute(
-      'src',
-      `${MyApi.IMAGE_BASE_URL}${MyApi.imgCards.currentSizes.posterSize}${item.poster_path}`,
-    );
+    const posterImage = item.poster_path
+      ? `${MyApi.IMAGE_BASE_URL}${MyApi.imgCards.currentSizes.posterSize}${item.poster_path}`
+      : MyApi.DEFAULT_POSTER;
+
+    img.setAttribute('src', posterImage);
     img.setAttribute('alt', img.title);
     img.setAttribute('width', '100%');
     img.setAttribute('data', 'poster');
