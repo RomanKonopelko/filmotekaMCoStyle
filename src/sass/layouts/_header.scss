@@ -119,6 +119,7 @@
   display: none;
   align-items: center;
   z-index: 10;
+  font-family: $header-font-family;
   padding-bottom: 5px;
   // font-weight: 500;
   // font-size: 12px;
@@ -128,7 +129,9 @@
 
   &-title {
     text-transform: uppercase;
-    font-size: 25px;
+    font-family: $header-font-family;
+    font-weight: bold;
+    font-size: 30px;
     letter-spacing: 5px;
     color: lightseagreen;
     width: 100%;
@@ -154,6 +157,14 @@
   display: inline;
   position: unset;
 
+  &-text::before {
+    content: '';
+    display: block;
+    position: relative;
+    top: 30px;
+    height: 2px;
+    color: red;
+  }
   & img {
     width: 100px;
 
