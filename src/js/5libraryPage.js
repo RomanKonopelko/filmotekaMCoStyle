@@ -13,6 +13,8 @@ function drawQueueFilmList(key) {
   MyApi.pagination.cardContainer.classList.remove('is-hidden');
 
   MyApi.resetGalleryCard();
+  btnQueue.classList.add('active');
+  btnWatched.classList.remove('active');
   btnWatched.disabled = false;
   btnQueue.disabled = true;
 
@@ -30,6 +32,8 @@ function drawWatchedFilmList(key) {
   MyApi.pagination.cardContainer.classList.remove('is-hidden');
 
   MyApi.resetGalleryCard();
+  btnQueue.classList.remove('active');
+  btnWatched.classList.add('active');
   btnWatched.disabled = true;
   btnQueue.disabled = false;
 
