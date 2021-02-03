@@ -131,9 +131,6 @@
 
     border-radius: 10px;
   }
-  // &__item-image:hover {
-  //   transform: scale(1.04);
-  // }
 
   &__list.is-hidden {
     display: none;
@@ -220,11 +217,6 @@
         @media (min-width: 768px) {
           font-size: 14px;
         }
-
-        // @media (min-width: 1024px) {
-        //   //  Захаркодил ширину текста, чтобы не растягивала контейнер
-        //   width: 450px;
-        // }
       }
 
       &__genre {
@@ -236,12 +228,7 @@
         right: 20px;
 
         @media (min-width: 768px) {
-          font-size: 14px;
-          // color: $accent-color;
-
-          @media (min-width: 768px) {
-            font-size: 20px; //Изменил с 14 для наглядности
-          }
+          font-size: 20px; //Изменил с 14 для наглядности
         }
       }
     }
