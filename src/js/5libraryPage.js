@@ -1,6 +1,7 @@
 btnQueue.addEventListener('click', drawQueueFilmList);
 btnWatched.addEventListener('click', drawWatchedFilmList);
 
+const { filmsLibrary } = refs;
 const queue = `You do not have to queue movies to watch. Add them.`;
 const watch = `You do not have watched movies. Add them.`;
 const filmsQueueKey = 'filmsQueue';
@@ -24,6 +25,7 @@ function drawQueueFilmList(key) {
 function drawWatchedFilmList(key) {
   const filmsWatchedLocalStorage = localStorage.getItem(filmsWatchedKey, key);
   const parsedFilmsWatched = JSON.parse(filmsWatchedLocalStorage);
+
   MyApi.pagination.cardContainer.classList.remove('is-hidden');
 
   MyApi.resetGalleryCard();

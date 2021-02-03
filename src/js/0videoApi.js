@@ -9,7 +9,8 @@ class MovieApi {
     this.movieID = 0;
     this.searchMode = 'popular';
 
-    this.popularFilmItem = []; // test
+    this.popularFilmItem = [];
+    // test
     this.genres = [];
 
     this.currentPage = 1;
@@ -92,6 +93,7 @@ class MovieApi {
       })
       .then(({ results }) => {
         this.popularFilmItem = results; // test
+        console.log(this.popularFilmItem);
         return results; // test
       })
       .then(collection =>
@@ -101,7 +103,7 @@ class MovieApi {
       )
       .then(item => MyApi.pagination.cardContainer.append(...item))
       .finally(() => {
-        ulForCards.classList.remove('is-hidden');
+        this.pagination.cardContainer.classList.remove('is-hidden');
         this.hideLoader();
       });
   }
@@ -128,7 +130,7 @@ class MovieApi {
       )
       .then(item => MyApi.pagination.cardContainer.append(...item))
       .finally(() => {
-        ulForCards.classList.remove('is-hidden');
+        this.pagination.cardContainer.classList.remove('is-hidden');
         this.hideLoader();
       });
   }
@@ -145,7 +147,7 @@ class MovieApi {
         return (this.genres = genres);
       })
       .finally(() => {
-        ulForCards.classList.remove('is-hidden');
+        this.pagination.cardContainer.classList.remove('is-hidden');
         this.hideLoader();
       });
   }
@@ -185,7 +187,7 @@ class MovieApi {
       .then(item => MyApi.pagination.cardContainer.append(...item))
       .catch(error => this.handlErrors(error))
       .finally(() => {
-        ulForCards.classList.remove('is-hidden');
+        this.pagination.cardWrapper.classList.remove('is-hidden');
         this.hideLoader();
       });
   }
@@ -255,8 +257,10 @@ class MovieApi {
 
     item.addEventListener('click', () => {
       // клік на картку //
-      ulForCards.classList.add('is-hidden');
+      this.pagination.cardContainer.classList.add('is-hidden');
       this.activeLoader();
+      //Скролит вверх
+      window.scrollTo(0, document.body.children[2].clientHeight);
       setTimeout(() => {
         this.activeDetailsPage(id, false);
       }, 2000);
@@ -268,9 +272,6 @@ class MovieApi {
     //Прячит пагинацию и форму поиска
     form.style.display = 'none';
     btnTop.classList.add('is-hidden');
-    console.dir(document.body.children[2].clientHeight);
-    //Скролит вверх
-    window.scrollTo(0, document.body.children[2].clientHeight);
 
     this.movieID = id;
 
@@ -626,7 +627,7 @@ class MovieApi {
         button.classList.add('active');
       button.addEventListener('click', e => {
         this.activeLoader();
-          window.scrollTo(0, document.body.children[2].clientHeight);
+        window.scrollTo(0, document.body.children[2].clientHeight);
         this.page = +e.target.textContent;
         this.currentPage = this.page;
         this.pagination.cardContainer.innerHTML = '';
@@ -703,3 +704,4 @@ class MovieApi {
 
 const API_KEY = '91085a172e1ffb2047d72641d0a91356';
 const MyApi = new MovieApi(API_KEY, paginationWrapper, ulForCards);
+console.log(MyApi.storage);

@@ -1,20 +1,17 @@
 .header {
-  // display: flex;
-  // flex-wrap: wrap;
-
+  display: flex;
   justify-content: center;
   align-items: center;
-  // background-size: cover;
-  // background-repeat: no-repeat;
-  // background-image: linear-gradient(rgba(0, 0, 0, 0.3), #0d121e),
-  //   url('../../images/parallax.jpg');
-  // @include for-size(tablet) {
-  //   background-image: linear-gradient(rgba(0, 0, 0, 0.3), #0d121e),
-  //     url('../../images/parallax.jpg');
-  // }
-  // @include for-size(desktop) {
-  //   background-image: linear-gradient(rgba(0, 0, 0, 0.3), #0d121e),
-  //     url('../../images/parallax.jpg');
+  height: 18vh;
+  position: relative;
+  overflow: hidden;
+
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), #0d121e),
+    url('../../images/parallax.jpg');
+  background-position: 25% 60%;
+  background-size: cover;
+  background-repeat: no-repeat;
+
   &::before {
     content: '';
     display: block;
@@ -24,38 +21,105 @@
     height: 5px;
     transform: translateZ(0);
     background-color: lightseagreen;
-    animation: animate-border 10s infinite;
+    animation: animate-border 20s infinite;
+  }
+  @include for-size(tablet) {
+    height: 100vh;
+    align-items: end;
+    padding-top: 130px;
+    background-image: url('../../images/parallax.jpg');
+    background-position: center;
+  }
+
+  @include for-size(desktop) {
+    background-image: unset;
   }
 }
 .scene {
-  position: relative;
-  overflow: hidden;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  padding-top: 5%;
-  min-height: 100vh;
+  position: unset;
+  display: none;
+
+  @include for-size(desktop) {
+    display: block;
+    position: absolute;
+    overflow: hidden;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    padding-top: 5%;
+    min-height: 100vh;
+  }
 }
 
 .layer__bg {
-  position: absolute;
-  z-index: -100;
-  left: -10%;
-  top: -10%;
-  width: 130%;
-  height: 110%;
-  background: linear-gradient(rgba(2, 8, 95, 0.568), rgba(95, 81, 95, 0.041)),
-    url('../../images/parallax.jpg') center no-repeat;
-  background-size: cover;
+  position: unset;
+  display: none;
+  background: unset;
+  @include for-size(desktop) {
+    display: block;
+    position: absolute;
+    z-index: -100;
+    left: -10%;
+    top: -10%;
+    width: 130%;
+    height: 110%;
+    transform: translateZ(0);
+    background: url('../../images/parallax.jpg') center no-repeat;
+    background-size: cover;
+  }
+}
+
+.decoration-first {
+  position: unset;
+  display: none;
+
+  @include for-size(desktop) {
+    display: block;
+    position: absolute;
+    top: 85px;
+    left: -10%;
+    height: 100px;
+    width: 680px;
+    background-image: linear-gradient(
+      to right bottom,
+      rgba(0, 0, 0, 0.979),
+      rgba(0, 74, 77, 0)
+    );
+  }
+}
+
+.decoration-second {
+  position: unset;
+  display: none;
+
+  @include for-size(desktop) {
+    display: block;
+    position: absolute;
+    top: 190px;
+    right: 0;
+    height: 300px;
+    width: 790px;
+    background-image: linear-gradient(
+      to left bottom,
+      rgba(0, 0, 0, 0.753),
+      transparent
+    );
+  }
 }
 .header__menu {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
   align-items: center;
+  @include for-size(tablet) {
+    justify-content: end;
+  }
 }
 .header__item {
   display: none;
   align-items: center;
+  z-index: 10;
   padding-bottom: 5px;
   // font-weight: 500;
   // font-size: 12px;
@@ -89,10 +153,22 @@
 }
 .hedear__logo {
   display: inline;
-  position: absolute;
-  top: 35%;
-  left: 50%;
-  width: 150px;
+  position: unset;
+
+  & img {
+    width: 100px;
+
+    @include for-size(tablet) {
+      width: 150px;
+    }
+  }
+
+  @include for-size(desktop) {
+    position: absolute;
+    top: 35%;
+    left: 45%;
+    width: 150px;
+  }
 }
 
 .heder__item_a {
@@ -107,23 +183,15 @@
 
 .header__item.current .header__item-title {
   //test animation active
-  position: relative;
+  position: unset;
   animation: none;
   color: #ffebee;
   text-shadow: 0 0 10px #ff1744, 0 0 20px#ff1744, 0 0 40px #ff1744,
     0 0 80px #ff1744, 0 0 160px #ff1744;
-  // &::after {
-  //   content: '';
-  //   position: absolute;
-  //   left: 0;
-  //   bottom: 0px;
-  //   height: 4px;
-  //   width: 100%;
-  //   border-radius: 2px;
-  //   background-color: $accent-color;
-  //   background-repeat: no-repeat;
-  //   background-position: center;
-  // }
+
+  @include for-size(desktop) {
+    position: relative;
+  }
 }
 .header__item:last-child {
   margin-left: 80px;
@@ -147,7 +215,7 @@
 .header__logo-text {
   display: none;
   margin-left: 10px;
-  font-size: 70px;
+  font-size: 90px;
   font-weight: bold;
   letter-spacing: 5px;
   color: $accent-color3;
@@ -164,20 +232,6 @@
     display: inline;
   }
 }
-// дублювався код //
-
-// .header__logo-text {
-//   margin-left: 10px;
-//   font-size: 25px;
-//   letter-spacing: 5px;
-//   color: lightseagreen;
-//   width: 100%;
-//   text-transform: uppercase;
-//   -webkit-box-reflect: below 1px linear-gradient(transparent, #0008);
-//   line-height: 0.7em;
-//   outline: none;
-//   animation: animate 4s linear infinite;
-// }
 
 .running__strokes {
   display: flex;

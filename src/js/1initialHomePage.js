@@ -1,6 +1,6 @@
 'use strict';
-history.scrollRestoration = 'manual';
-console.log(history.scrollRestoration);
+history.scrollRestoration = 'manual'; //kills auto scroll after page reload
+
 MyApi.checkBackdropImgSize();
 MyApi.checkPosterImgSize();
 
@@ -23,12 +23,14 @@ function scrollToTop() {
 }
 
 window.onscroll = () => {
+  parallaxCheck();
   handleScroll();
 };
 
 function handleScroll() {
   let bodyScrollTop = document.body.scrollTop;
   let elementScrollTop = document.documentElement.scrollTop;
+
   if (bodyScrollTop > 500 || elementScrollTop > 500) {
     btnTop.style.display = 'block';
   } else {
