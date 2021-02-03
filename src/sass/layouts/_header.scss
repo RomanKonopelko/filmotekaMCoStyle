@@ -122,7 +122,7 @@
     text-transform: uppercase;
     font-family: $header-font-family;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 18px;
     letter-spacing: 5px;
     color: lightseagreen;
     width: 100%;
@@ -134,6 +134,7 @@
   }
   @include for-size(tablet) {
     display: flex;
+    font-size: 30px;
   }
   @include for-size(desktop) {
     display: flex;
@@ -147,6 +148,12 @@
 .hedear__logo {
   display: inline;
   position: unset;
+  width: 70px;
+  margin-left: 15px;
+
+  @include for-size(tablet) {
+    width: 100%;
+  }
 
   &-text::before {
     content: '';
@@ -157,7 +164,7 @@
     color: red;
   }
   & img {
-    width: 100px;
+    width: 100%;
 
     @include for-size(tablet) {
       width: 150px;
@@ -195,7 +202,8 @@
   }
 }
 .header__item:last-child {
-  margin-left: 80px;
+  margin-left: auto;
+  margin-right: 15px;
 
   @include for-size(tablet) {
     margin-left: 40px;
