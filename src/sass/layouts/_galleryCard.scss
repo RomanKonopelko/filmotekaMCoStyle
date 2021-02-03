@@ -53,7 +53,7 @@
     border: none;
     background-color: transparent;
     outline: none;
-    width: 300px;
+    width: 250px;
     border-radius: 5px;
     font-style: normal;
     font-weight: 300;
@@ -65,15 +65,15 @@
     margin-left: auto;
     margin-right: auto;
 
-    @media screen and (min-width: 575px) and (max-width: 767px) {
-      width: 400px;
-    }
+    // @include for-size(max-mobile) {
+    //   width: 400px;
+    // }
 
-    @media screen and (min-width: 768px) and (max-width: 1099px) {
+    @include for-size(tablet) {
       width: 500px;
     }
 
-    @media (min-width: 1100px) {
+    @include for-size(desktop) {
       width: 600px;
       font-size: 14px;
     }
@@ -89,13 +89,17 @@
 
 .main__search-form .form__control::placeholder {
   margin-left: 10px;
-  font-size: 15px;
+  font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 5px;
   color: white;
   text-shadow: 0 0 3px lightskyblue, 0 0 5px lightskyblue, 0 0 1px lightskyblue,
     0 0 10px lightskyblue, 0 0 10px lightskyblue;
   transition: all $transition-duration $timing-function;
+
+  @include for-size(tablet) {
+  font-size: 15px;
+  }
 }
 
 .main__search-form .form__control:hover::placeholder {
@@ -131,9 +135,6 @@
 
     border-radius: 10px;
   }
-  // &__item-image:hover {
-  //   transform: scale(1.04);
-  // }
 
   &__list.is-hidden {
     display: none;
@@ -206,14 +207,13 @@
 
         font-weight: 900;
         color: white;
-        // text-align: center;   // Мешало позиционированию
-        width: 100%; //  Захаркодил ширину текста, чтобы не растягивала контейнер
+        width: 100%; 
         padding: 20px 20px;
         border-radius: 10px;
 
         background: linear-gradient(1turn, #959597, rgba(126, 35, 126, 0));
 
-        position: absolute; // ДОбавил позиционирование
+        position: absolute; 
         bottom: 0px;
         left: 0px;
 
@@ -221,14 +221,22 @@
           font-size: 14px;
         }
 
-        // @media (min-width: 1024px) {
-        //   //  Захаркодил ширину текста, чтобы не растягивала контейнер
-        //   width: 450px;
-        // }
       }
 
       &__genre {
         font-weight: 500;
+        color: white;
+        font-size: 14px;
+        position: absolute; 
+        top: 10px;
+        right: 10px;
+
+        @include for-size(tablet) {
+          font-size: 18px;
+          top: 20px;
+          right: 20px;
+        }
+
         font-size: 14px;
         color: $accent-color2;
         position: absolute; // ДОбавил позиционирование
@@ -239,11 +247,12 @@
           font-size: 14px;
           // color: $accent-color;
 
-          @media (min-width: 768px) {
-            font-size: 20px; //Изменил с 14 для наглядности
-          }
+        @include for-size(desktop) {
+          font-size: 20px;
         }
+
       }
+
     }
   }
 }
@@ -260,62 +269,6 @@
   height: 64px;
   border-radius: 50%;
   perspective: 800px;
-}
-
-.inner {
-  position: absolute;
-  box-sizing: border-box;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-}
-
-.inner.one {
-  left: 0%;
-  top: 0%;
-  animation: rotate-one 1s linear infinite;
-  border-bottom: 3px solid #efeffa;
-}
-
-.inner.two {
-  right: 0%;
-  top: 0%;
-  animation: rotate-two 1s linear infinite;
-  border-right: 3px solid #efeffa;
-}
-
-.inner.three {
-  right: 0%;
-  bottom: 0%;
-  animation: rotate-three 1s linear infinite;
-  border-top: 3px solid #efeffa;
-}
-
-@keyframes rotate-one {
-  0% {
-    transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg);
-  }
-  100% {
-    transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg);
-  }
-}
-
-@keyframes rotate-two {
-  0% {
-    transform: rotateX(50deg) rotateY(10deg) rotateZ(0deg);
-  }
-  100% {
-    transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg);
-  }
-}
-
-@keyframes rotate-three {
-  0% {
-    transform: rotateX(35deg) rotateY(55deg) rotateZ(0deg);
-  }
-  100% {
-    transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
-  }
 }
 
 .library-filter__btn {
