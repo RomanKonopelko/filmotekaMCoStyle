@@ -436,6 +436,14 @@ class MovieApi {
       btnTop.classList.remove('is-hidden');
       detailsSection.innerHTML = '';
       main.classList.remove('is-hidden');
+      if (libraryFilrt.classList != 'is-hidden') {
+        if (btnQueue.disabled) {
+          drawQueueFilmList();
+        }
+        if (btnWatched.disabled) {
+          drawWatchedFilmList();
+        }
+      }
     });
 
     // Вызов видео
@@ -626,7 +634,7 @@ class MovieApi {
         button.classList.add('active');
       button.addEventListener('click', e => {
         this.activeLoader();
-          window.scrollTo(0, document.body.children[2].clientHeight);
+        window.scrollTo(0, document.body.children[2].clientHeight);
         this.page = +e.target.textContent;
         this.currentPage = this.page;
         this.pagination.cardContainer.innerHTML = '';
