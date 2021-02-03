@@ -64,6 +64,19 @@ class MovieApi {
       part.classList.add('is-hidden');
     });
   }
+
+  fetchMovieInformationByID() {
+    return fetch(
+      `${this.BASE_URL}movie/${this.movieID}?api_key=${this.API_KEY}&language=en-US`,
+    )
+      .then(response => response.json())
+      .then(resp => {
+        console.log(resp);
+        this.popularFilmItem.push(resp);
+        return resp;
+      });
+  }
+
   fetchVideoById() {
     return fetch(
       `${this.VIDEO_BASE_URL}${this.movieID}/videos?api_key=${this.API_KEY}`,
@@ -73,7 +86,7 @@ class MovieApi {
         return resp;
       })
       .then(({ results }) => {
-        // console.log(results.length);
+        console.log(results);
         if (results.length === 0) onHandleTrailerError();
         return results[0];
       })
@@ -93,6 +106,8 @@ class MovieApi {
       })
       .then(({ results }) => {
         this.popularFilmItem = results; // test
+
+        // console.log(this.popularFilmItem);
         return results; // test
       })
       .then(collection =>
@@ -257,20 +272,41 @@ class MovieApi {
 
     this.movieID = id;
 
+    //  Adding ID to Url !!!!!!!!!!!!!!!!!!!!!!!!!
+
+    if (!window.location.search) {
+      let param = '?value=' + id;
+      // param2 = this.paramForCreatUrl;
+      window.location.href += param;
+    }
+
+    console.log(window.location.search);
     // серед масиву об'єктів знаходить об'єкт з необхідним id //
+
     const array = this.popularFilmItem.filter(item => {
       if (item.id === id) return item;
     });
+
     const item = array[0];
     const genresArray = [];
+    console.log(item);
 
     // шукаємо жанри фільма //
-    const itemGenres = item.genre_ids;
-    itemGenres.filter(item => {
-      for (let key of this.genres) {
-        if (item === key.id) return genresArray.push(key.name);
-      }
-    });
+    const itemGenres = item.genre_ids || item.genres;
+    if (item.genre_ids) {
+      itemGenres.filter(item => {
+        for (let key of this.genres) {
+          if (item === key.id) return genresArray.push(key.name);
+        }
+      });
+    } else {
+      itemGenres.filter(({ id }) => {
+        for (let key of this.genres) {
+          if (id === key.id) return genresArray.push(key.name);
+        }
+      });
+    }
+
     const genresText = genresArray.join(', ');
 
     // створюємо розмтіку сторінки //
@@ -419,6 +455,9 @@ class MovieApi {
       btnTop.classList.remove('is-hidden');
       detailsSection.innerHTML = '';
       main.classList.remove('is-hidden');
+
+      // Подтирает URL до оригинального значения.
+      window.location.href = `${window.location.origin}${window.location.pathname}`;
     });
 
     // Вызов видео
