@@ -5,7 +5,7 @@
   $desktop: 1024px;
   $max-tablet: 767.9px;
   $max-desktop: 1023.9px;
-
+  $large-desktop: 1400px;
   @if $range == max-mobile {
     @media (max-width: #{$mobile - 1}) {
       @content;
@@ -28,6 +28,10 @@
     }
   } @else if $range == desktop {
     @media (min-width: $desktop) {
+      @content;
+    }
+  } @else if $range == large-desktop {
+    @media (min-width: $large-desktop) {
       @content;
     }
   }
