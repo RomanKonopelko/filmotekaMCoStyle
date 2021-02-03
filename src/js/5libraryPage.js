@@ -18,8 +18,9 @@ function drawQueueFilmList(key) {
 
   if (parsedFilmsQueue === null || parsedFilmsQueue.length === 0) {
     createPlugTitle(queue, filmsLibrary);
+  } else {
+    createParseFilms(parsedFilmsQueue, filmsLibrary);
   }
-  createParseFilms(parsedFilmsQueue, filmsLibrary);
 }
 
 function drawWatchedFilmList(key) {
@@ -34,8 +35,9 @@ function drawWatchedFilmList(key) {
 
   if (parsedFilmsWatched === null || parsedFilmsWatched.length === 0) {
     createPlugTitle(watch, filmsLibrary);
+  } else {
+    createParseFilms(parsedFilmsWatched, filmsLibrary);
   }
-  createParseFilms(parsedFilmsWatched, filmsLibrary);
 }
 
 function createParseFilms(film, library) {

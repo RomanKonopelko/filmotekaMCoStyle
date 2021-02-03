@@ -419,6 +419,14 @@ class MovieApi {
       btnTop.classList.remove('is-hidden');
       detailsSection.innerHTML = '';
       main.classList.remove('is-hidden');
+      if (libraryFilrt.classList != 'is-hidden') {
+        if (btnQueue.disabled) {
+          drawQueueFilmList();
+        }
+        if (btnWatched.disabled) {
+          drawWatchedFilmList();
+        }
+      }
     });
 
     // Вызов видео
