@@ -15,17 +15,6 @@
       visibility: hidden;
     }
   }
-  &::before {
-    content: '';
-    display: block;
-    position: absolute;
-    top: -35px;
-    width: 100%;
-    height: 5px;
-    transform: translateZ(0);
-    background-color: lightseagreen;
-    animation: animate-border 20s infinite;
-  }
   &__search-form {
     display: inline-block;
     align-items: center;
