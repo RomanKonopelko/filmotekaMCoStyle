@@ -10,7 +10,7 @@ const parallax = function (event) {
 
   title.style.transform = `translateX(${
     //===============================================//logo&logo text
-    (event.clientX * 40) / 800
+    (event.clientX * 40) / 700
   }px) translateY(${(event.clientY * 40) / 400}px)`;
 
   decor2.style.transform = `translateX(${
@@ -21,7 +21,7 @@ const parallax = function (event) {
   items = [...title2].forEach(el => {
     //==============================================//my lybrary and home btn
     el.style.transform = `translateX(${
-      (event.clientX * 40) / 500
+      (event.clientX * 40) / 600
     }px) translateY(${(event.clientY * 30) / 500}px)`;
   });
   decor1.style.transform = `translateX(${

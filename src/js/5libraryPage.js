@@ -68,6 +68,8 @@ function openLibrary() {
     behavior: 'smooth',
   });
   MyApi.resetGalleryCard();
+  btnQueue.disabled = false;
+  btnWatched.disabled = false;
   detailsSection.innerHTML = '';
   paginationWrapper.innerHTML = '';
   form.innerHTML = '';
