@@ -1,5 +1,6 @@
 .main {
   padding-top: 20px; //add padding
+  position: relative;
   color: $title-text-color;
 
   &__container {
@@ -14,7 +15,6 @@
       visibility: hidden;
     }
   }
-
   &__search-form {
     display: inline-block;
     align-items: center;
@@ -120,9 +120,6 @@
 
     border-radius: 10px;
   }
-  // &__item-image:hover {
-  //   transform: scale(1.04);
-  // }
 
   &__list.is-hidden {
     display: none;
@@ -157,6 +154,9 @@
   }
 
   &__card-movie {
+    min-width: 286px;
+    min-height: 160px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -169,6 +169,10 @@
     box-shadow: 0px 8px 17px 2px rgba(32, 178, 170, 0.4),
       0 6px 10px 0 rgba(32, 178, 170, 10);
 
+    @include for-size(desktop) {
+      min-width: 500px;
+      height: 285px;
+    }
     // &:not(:last-child) {
     //   margin-bottom: 30px;
     // }
@@ -202,31 +206,18 @@
         @media (min-width: 768px) {
           font-size: 14px;
         }
-
-        // @media (min-width: 1024px) {
-        //   //  Захаркодил ширину текста, чтобы не растягивала контейнер
-        //   width: 450px;
-        // }
       }
 
       &__genre {
         font-weight: 500;
-        color: $accent-color;
-        font-size: 12px;
+        font-size: 14px;
+        color: $accent-color2;
+        position: absolute; // ДОбавил позиционирование
+        top: 20px;
+        right: 20px;
 
         @media (min-width: 768px) {
-          font-size: 14px;
-          // color: $accent-color;
-          color: white;
-          font-size: 12px;
-
-          position: absolute; // ДОбавил позиционирование
-          top: 20px;
-          right: 20px;
-
-          @media (min-width: 768px) {
-            font-size: 20px; //Изменил с 14 для наглядности
-          }
+          font-size: 20px; //Изменил с 14 для наглядности
         }
       }
     }

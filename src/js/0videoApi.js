@@ -9,7 +9,8 @@ class MovieApi {
     this.movieID = 0;
     this.searchMode = 'popular';
 
-    this.popularFilmItem = []; // test
+    this.popularFilmItem = [];
+    // test
     this.genres = [];
 
     this.currentPage = 1;
@@ -63,6 +64,19 @@ class MovieApi {
       part.classList.add('is-hidden');
     });
   }
+
+  fetchMovieInformationByID() {
+    return fetch(
+      `${this.BASE_URL}movie/${this.movieID}?api_key=${this.API_KEY}&language=en-US`,
+    )
+      .then(response => response.json())
+      .then(resp => {
+        console.log(resp);
+        this.popularFilmItem.push(resp);
+        return resp;
+      });
+  }
+
   fetchVideoById() {
     return fetch(
       `${this.VIDEO_BASE_URL}${this.movieID}/videos?api_key=${this.API_KEY}`,
@@ -72,7 +86,7 @@ class MovieApi {
         return resp;
       })
       .then(({ results }) => {
-        // console.log(results.length);
+        console.log(results);
         if (results.length === 0) onHandleTrailerError();
         return results[0];
       })
@@ -92,6 +106,8 @@ class MovieApi {
       })
       .then(({ results }) => {
         this.popularFilmItem = results; // test
+
+        // console.log(this.popularFilmItem);
         return results; // test
       })
       .then(collection =>
@@ -101,7 +117,7 @@ class MovieApi {
       )
       .then(item => MyApi.pagination.cardContainer.append(...item))
       .finally(() => {
-        ulForCards.classList.remove('is-hidden');
+        this.pagination.cardContainer.classList.remove('is-hidden');
         this.hideLoader();
       });
   }
@@ -128,7 +144,7 @@ class MovieApi {
       )
       .then(item => MyApi.pagination.cardContainer.append(...item))
       .finally(() => {
-        ulForCards.classList.remove('is-hidden');
+        this.pagination.cardContainer.classList.remove('is-hidden');
         this.hideLoader();
       });
   }
@@ -145,15 +161,13 @@ class MovieApi {
         return (this.genres = genres);
       })
       .finally(() => {
-        ulForCards.classList.remove('is-hidden');
+        this.pagination.cardContainer.classList.remove('is-hidden');
         this.hideLoader();
       });
   }
 
   movieSearch() {
-    // console.log(this.searchMode);
     this.searchMode = 'default';
-    // this.resetGalleryCard();
     return fetch(
       `${this.BASE_URL}${this.params.generalSearchUrl}api_key=${this.API_KEY}&language=en-US&query=${this.params.query}&page=${this.params._page}`,
     )
@@ -173,7 +187,6 @@ class MovieApi {
         return resp;
       })
       .then(({ results }) => {
-        // console.log(results);
         this.popularFilmItem = results;
         return results;
       })
@@ -185,7 +198,7 @@ class MovieApi {
       .then(item => MyApi.pagination.cardContainer.append(...item))
       .catch(error => this.handlErrors(error))
       .finally(() => {
-        ulForCards.classList.remove('is-hidden');
+        this.pagination.cardContainer.classList.remove('is-hidden');
         this.hideLoader();
       });
   }
@@ -201,20 +214,6 @@ class MovieApi {
   resetGalleryCard() {
     this.pagination.cardContainer.innerHTML = '';
   }
-
-  // createFilmCard(arr) {
-  //   const li = document.createElement('li');
-  //   const name = document.createElement('h1');
-  //   const mainPic = document.createElement('img');
-  //   mainPic.width = 300; //test card image width
-
-  //   name.textContent = arr.name || arr.title;
-  //   mainPic.src = arr.backdrop_path
-  //     ? `${this.IMAGE_BASE_URL}${MyApi.imgCards.currentSizes.backdropSize}${arr.backdrop_path}`
-  //     : this.DEFAULT_IMAGE;
-  //   li.append(name, mainPic);
-  //   return li;
-  // }
 
   createCardFunc(itemData) {
     //test start //
@@ -255,8 +254,10 @@ class MovieApi {
 
     item.addEventListener('click', () => {
       // клік на картку //
-      ulForCards.classList.add('is-hidden');
+      this.pagination.cardContainer.classList.add('is-hidden');
       this.activeLoader();
+      //Скролит вверх
+      window.scrollTo(0, document.body.children[2].clientHeight);
       setTimeout(() => {
         this.activeDetailsPage(id, false);
       }, 2000);
@@ -268,26 +269,44 @@ class MovieApi {
     //Прячит пагинацию и форму поиска
     form.style.display = 'none';
     btnTop.classList.add('is-hidden');
-    console.dir(document.body.children[2].clientHeight);
-    //Скролит вверх
-    window.scrollTo(0, document.body.children[2].clientHeight);
 
     this.movieID = id;
 
+    //  Adding ID to Url !!!!!!!!!!!!!!!!!!!!!!!!!
+
+    if (!window.location.search) {
+      let param = '?value=' + id;
+      // param2 = this.paramForCreatUrl;
+      window.location.href += param;
+    }
+
+    console.log(window.location.search);
     // серед масиву об'єктів знаходить об'єкт з необхідним id //
+
     const array = this.popularFilmItem.filter(item => {
       if (item.id === id) return item;
     });
+
     const item = array[0];
     const genresArray = [];
+    console.log(item);
 
     // шукаємо жанри фільма //
-    const itemGenres = item.genre_ids;
-    itemGenres.filter(item => {
-      for (let key of this.genres) {
-        if (item === key.id) return genresArray.push(key.name);
-      }
-    });
+    const itemGenres = item.genre_ids || item.genres;
+    if (item.genre_ids) {
+      itemGenres.filter(item => {
+        for (let key of this.genres) {
+          if (item === key.id) return genresArray.push(key.name);
+        }
+      });
+    } else {
+      itemGenres.filter(({ id }) => {
+        for (let key of this.genres) {
+          if (id === key.id) return genresArray.push(key.name);
+        }
+      });
+    }
+
     const genresText = genresArray.join(', ');
 
     // створюємо розмтіку сторінки //
@@ -444,6 +463,11 @@ class MovieApi {
           drawWatchedFilmList();
         }
       }
+
+
+      // Подтирает URL до оригинального значения.
+      window.location.href = `${window.location.origin}${window.location.pathname}`;
+
     });
 
     // Вызов видео
@@ -589,8 +613,6 @@ class MovieApi {
     lastBtn.addEventListener('click', () => {
       this.pagesScroll();
       this.params._page = this.params.lastPage;
-      console.log(data.total_pages);
-      //this.params._page += data.total_pages;
     });
 
     this.pagination.paginationContainer.prepend(firsBtn, prevBtn);
