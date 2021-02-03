@@ -455,9 +455,19 @@ class MovieApi {
       btnTop.classList.remove('is-hidden');
       detailsSection.innerHTML = '';
       main.classList.remove('is-hidden');
+      if (libraryFilrt.classList != 'is-hidden') {
+        if (btnQueue.disabled) {
+          drawQueueFilmList();
+        }
+        if (btnWatched.disabled) {
+          drawWatchedFilmList();
+        }
+      }
+
 
       // Подтирает URL до оригинального значения.
       window.location.href = `${window.location.origin}${window.location.pathname}`;
+
     });
 
     // Вызов видео
