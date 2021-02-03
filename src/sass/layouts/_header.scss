@@ -5,7 +5,17 @@
   height: 18vh;
   position: relative;
   overflow: hidden;
-
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 99%;
+    width: 100%;
+    height: 5px;
+    transform: translateZ(0);
+    background-color: lightseagreen;
+    animation: animate-border 20s infinite;
+  }
   background-image: linear-gradient(rgba(0, 0, 0, 0.3), #0d121e),
     url('../../images/parallax.jpg');
   background-position: 25% 60%;
@@ -52,7 +62,7 @@
     z-index: -100;
     left: -10%;
     top: -10%;
-    width: 130%;
+    width: 120%;
     height: 110%;
     transform: translateZ(0);
     background: url('../../images/parallax.jpg') center no-repeat;
@@ -70,7 +80,7 @@
     top: 85px;
     left: -10%;
     height: 100px;
-    width: 680px;
+    width: 630px;
     background-image: linear-gradient(
       to right bottom,
       rgba(0, 0, 0, 0.979),
@@ -89,7 +99,7 @@
     top: 190px;
     right: 0;
     height: 300px;
-    width: 790px;
+    width: 740px;
     background-image: linear-gradient(
       to left bottom,
       rgba(0, 0, 0, 0.753),
@@ -107,7 +117,6 @@
   }
 }
 .header__item {
-  display: none;
   align-items: center;
   z-index: 10;
   font-family: $header-font-family;
@@ -122,7 +131,7 @@
     text-transform: uppercase;
     font-family: $header-font-family;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 18px;
     letter-spacing: 5px;
     color: lightseagreen;
     width: 100%;
@@ -134,6 +143,7 @@
   }
   @include for-size(tablet) {
     display: flex;
+    font-size: 30px;
   }
   @include for-size(desktop) {
     display: flex;
@@ -145,8 +155,16 @@
   flex-grow: 1;
 }
 .hedear__logo {
-  display: inline;
+  display: none;
   position: unset;
+  width: 70px;
+  margin-left: 15px;
+
+  @include for-size(tablet) {
+    display: inline;
+    padding-bottom: 30px;
+    width: 100%;
+  }
 
   &-text::before {
     content: '';
@@ -156,19 +174,24 @@
     height: 2px;
     color: red;
   }
-  & img {
-    width: 100px;
+  // & img {
+  //   width: 100%;
 
-    @include for-size(tablet) {
-      width: 150px;
-    }
-  }
+  //   @include for-size(tablet) {
+  //     width: 150px;
+  //   }
+  // }
 
   @include for-size(desktop) {
+    padding-bottom: 0;
     position: absolute;
     top: 35%;
-    left: 45%;
+    left: 25%;
     width: 150px;
+  }
+
+  @include for-size(large-desktop) {
+    left: 45%;
   }
 }
 
@@ -177,11 +200,12 @@
   align-items: center;
 }
 
-.header__item.library {
-  display: flex;
-  align-items: center;
+.home {
+  margin-left: 10px;
+  @include for-size(tablet) {
+    margin-left: 0;
+  }
 }
-
 .header__item.current .header__item-title {
   //test animation active
   position: unset;
@@ -195,7 +219,8 @@
   }
 }
 .header__item:last-child {
-  margin-left: 80px;
+  margin-left: auto;
+  margin-right: 15px;
 
   @include for-size(tablet) {
     margin-left: 40px;

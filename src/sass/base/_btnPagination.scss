@@ -44,7 +44,7 @@
   margin-right: 10px;
   padding: 5px 10px;
 
-  font-size: 10px;
+  font-size: 20px;
   text-transform: uppercase;
   border: none;
   border-radius: 5px;
@@ -56,7 +56,7 @@
   animation: animate-border-btn 5s infinite, animate 5s infinite;
 
   @include for-size(tablet) {
-    width: 100px;
+    width: 70px;
     padding: 10px 20px;
     font-size: 12px;
     border-radius: 10px;
@@ -88,6 +88,16 @@
 }
 
 .pagination__btn.active {
+  animation: none;
+  border: 2px solid $accent-color3;
+  box-shadow: 0 0 10px $accent-shadow-color2, 0 0 20px $accent-shadow-color2,
+    0 0 10px, 0 0 10px $accent-shadow-color2, 0 0 10px $accent-shadow-color2;
+  color: $accent-color2;
+  text-shadow: 0 0 10px $accent-color3, 0 0 20px $accent-color3,
+    0 0 4px $accent-color3, 0 0 8px$accent-color3, 0 0 16px$accent-color3;
+}
+
+.active {
   animation: none;
   border: 2px solid $accent-color3;
   box-shadow: 0 0 10px $accent-shadow-color2, 0 0 20px $accent-shadow-color2,
