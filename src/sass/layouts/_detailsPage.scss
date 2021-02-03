@@ -141,9 +141,13 @@ td {
 
 // Кнопка для закрытия Страницы!
 .button-close {
+  padding: 0px;
   position: absolute;
   top: 0;
   right: 0;
+
+  width: 40px;
+  height: 40px;
   font-size: 15px;
 
   @include for-size(tablet) {
@@ -155,6 +159,5 @@ td {
   @include for-size(desktop) {
     top: -50px;
     right: -500px;
-    font-size: 30px;
   }
 }
