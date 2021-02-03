@@ -93,7 +93,6 @@ class MovieApi {
       })
       .then(({ results }) => {
         this.popularFilmItem = results; // test
-        console.log(this.popularFilmItem);
         return results; // test
       })
       .then(collection =>
@@ -153,9 +152,7 @@ class MovieApi {
   }
 
   movieSearch() {
-    // console.log(this.searchMode);
     this.searchMode = 'default';
-    // this.resetGalleryCard();
     return fetch(
       `${this.BASE_URL}${this.params.generalSearchUrl}api_key=${this.API_KEY}&language=en-US&query=${this.params.query}&page=${this.params._page}`,
     )
@@ -175,7 +172,6 @@ class MovieApi {
         return resp;
       })
       .then(({ results }) => {
-        // console.log(results);
         this.popularFilmItem = results;
         return results;
       })
@@ -203,20 +199,6 @@ class MovieApi {
   resetGalleryCard() {
     this.pagination.cardContainer.innerHTML = '';
   }
-
-  // createFilmCard(arr) {
-  //   const li = document.createElement('li');
-  //   const name = document.createElement('h1');
-  //   const mainPic = document.createElement('img');
-  //   mainPic.width = 300; //test card image width
-
-  //   name.textContent = arr.name || arr.title;
-  //   mainPic.src = arr.backdrop_path
-  //     ? `${this.IMAGE_BASE_URL}${MyApi.imgCards.currentSizes.backdropSize}${arr.backdrop_path}`
-  //     : this.DEFAULT_IMAGE;
-  //   li.append(name, mainPic);
-  //   return li;
-  // }
 
   createCardFunc(itemData) {
     //test start //
@@ -582,8 +564,6 @@ class MovieApi {
     lastBtn.addEventListener('click', () => {
       this.pagesScroll();
       this.params._page = this.params.lastPage;
-      console.log(data.total_pages);
-      //this.params._page += data.total_pages;
     });
 
     this.pagination.paginationContainer.prepend(firsBtn, prevBtn);
@@ -704,4 +684,3 @@ class MovieApi {
 
 const API_KEY = '91085a172e1ffb2047d72641d0a91356';
 const MyApi = new MovieApi(API_KEY, paginationWrapper, ulForCards);
-console.log(MyApi.storage);
