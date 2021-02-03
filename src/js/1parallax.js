@@ -5,7 +5,7 @@ const parallax = function (event) {
 
   layer.style.transform = `translateX(${
     //===============================================//bg-picture
-    (event.clientX * speed) / 1000
+    (event.clientX * speed) / 1300
   }px) translateY(${(event.clientY * speed) / 1000}px)`;
 
   title.style.transform = `translateX(${
@@ -15,7 +15,7 @@ const parallax = function (event) {
 
   decor2.style.transform = `translateX(${
     //===============================================//logo decoration
-    (event.clientX * 40) / 600
+    (event.clientX * 40) / 500
   }px) translateY(${(event.clientY * 30) / 600}px)`;
 
   items = [...title2].forEach(el => {
@@ -26,8 +26,8 @@ const parallax = function (event) {
   });
   decor1.style.transform = `translateX(${
     //===============================================//my lybrary and home decoration
-    (event.clientX * 40) / 800
-  }px) translateY(${(event.clientY * 40) / 800}px)`;
+    (event.clientX * 40) / 350
+  }px) translateY(${(event.clientY * 40) / 700}px)`;
 };
 
 const { layer, title, title2, decor1, decor2 } = refs;

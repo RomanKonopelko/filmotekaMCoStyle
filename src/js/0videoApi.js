@@ -383,7 +383,7 @@ class MovieApi {
     const btnClose = document.createElement('button');
     btnClose.classList.add('button__add', 'button-close');
     // const btnCloseI = document.createElement('i');
-    btnClose.textContent = 'Back';
+    btnClose.textContent = 'X';
     // btnCloseI.classList.add('material-icons', 'active');
     // btnClose.append(btnCloseI);
 
