@@ -183,7 +183,7 @@ class MovieApi {
       .then(item => MyApi.pagination.cardContainer.append(...item))
       .catch(error => this.handlErrors(error))
       .finally(() => {
-        this.pagination.cardWrapper.classList.remove('is-hidden');
+        this.pagination.cardContainer.classList.remove('is-hidden');
         this.hideLoader();
       });
   }
