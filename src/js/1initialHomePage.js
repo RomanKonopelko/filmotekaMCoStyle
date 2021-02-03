@@ -4,7 +4,6 @@ history.scrollRestoration = 'manual'; //kills auto scroll after page reload
 MyApi.checkBackdropImgSize();
 MyApi.checkPosterImgSize();
 
-MyApi.fetchPopularFilmsList();
 MyApi.fetchGenres();
 
 // MyApi.fetchVideoById();
@@ -80,6 +79,42 @@ function onBeckDropCkick(event) {
   }
 }
 
+///Logic of URL GEt and Post action
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+let idFromUrl = parseUrlQuery();
+MyApi.movieID = +idFromUrl.value;
+
+function parseUrlQuery() {
+  let data = {};
+
+  if (window.location.search) {
+    var pair = window.location.search.substr(1).split('&');
+    for (let i = 0; i < pair.length; i++) {
+      let param = pair[i].split('=');
+      data[param[0]] = param[1];
+    }
+  }
+  return data;
+}
+
+onCheckUrl();
+console.log(window.location.search);
+function onCheckUrl() {
+  if (!window.location.search) {
+    MyApi.fetchPopularFilmsList();
+  } else {
+    MyApi.fetchMovieInformationByID();
+    setTimeout(() => {
+      MyApi.activeDetailsPage(MyApi.movieID);
+    }, 1000);
+  }
+}
+
+// console.log(idFromUrl);
+// console.log(MyApi.movieID);
+console.log(window.location.pathname);
+// console.log(url.searchParams);
+// console.log(document.title);
 // Создает одну карточку фильма, "li", с
 // Load the IFrame Player API code asynchronously.
 // var tag = document.createElement('script');
