@@ -12,6 +12,8 @@
   right: 0;
   bottom: 0;
   overflow: hidden;
+  transition: opacity 4s ease-in;
+
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -30,11 +32,11 @@
   font-size: 20px;
   position: absolute;
   top: 60%;
-  opacity: 0;
   color: $accent-color2;
   font-family: $header-font-family;
   transition: opacity 4s ease-in;
   transform: translateZ(0);
+  opacity: 0;
   animation: move 4s linear infinite;
   -o-animation: move 4s linear infinite;
   -moz-animation: move 4s linear infinite;
