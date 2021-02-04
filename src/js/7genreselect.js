@@ -171,12 +171,6 @@ dramaRef.addEventListener('click', () => {
 });
 dramaRef.addEventListener('click', drawFilmListByGenre);
 
-function drawFilmListByGenre() {
-  MyApi.resetGalleryCard();
-  setTimeout(() => {
-    drawFilmListByGenre()
-  }, 2000);
-});
 
 function drawFilmListByGenre() {
   let genres, result;
@@ -272,4 +266,4 @@ function drawFilmListByGenre() {
 //     fantasyRef.classList.remove('current');
 //     dramaRef.classList.remove('current');
 // }
-}
+

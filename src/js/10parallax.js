@@ -30,7 +30,6 @@ const parallax = function (event) {
   }px) translateY(${(event.clientY * 40) / 700}px)`;
 };
 
-
 const layer = document.querySelector('.layer__bg');
 const title = document.querySelector('.parallax-logo');
 const title2 = document.querySelectorAll('.parallax-item');
@@ -38,7 +37,7 @@ const decor1 = document.querySelector('.decoration-first');
 const decor2 = document.querySelector('.decoration-second');
 
 let elementScrollTop1 = document.documentElement.scrollTop;
-function parallaxWidthCheck() {
+(function parallaxWidthCheck() {
   if (window.innerWidth >= 1024) {
     document.addEventListener('mousemove', parallax);
     return;
@@ -48,7 +47,6 @@ function parallaxWidthCheck() {
     return;
   }
 })();
-}
 
 function parallaxCheck() {
   //=====================================================//conditions to toggle the event
