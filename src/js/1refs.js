@@ -21,11 +21,6 @@ const refs = {
   btnQueue: document.querySelector('.btnQueue'),
 
   //PARALLAX DOM SECTION
-  layer: document.querySelector('.layer__bg'),
-  title: document.querySelector('.parallax-logo'),
-  title2: document.querySelectorAll('.parallax-item'),
-  decor1: document.querySelector('.decoration-first'),
-  decor2: document.querySelector('.decoration-second'),
 };
 
 const {
