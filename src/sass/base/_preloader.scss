@@ -17,7 +17,6 @@
   -ms-user-select: none;
   user-select: none;
   cursor: default;
-  transition: all 4s ease-out;
 
   @include for-size(desktop) {
     left: -10%;
@@ -34,6 +33,7 @@
   opacity: 0;
   color: $accent-color2;
   font-family: $header-font-family;
+  transition: opacity 4s ease-in;
   transform: translateZ(0);
   animation: move 4s linear infinite;
   -o-animation: move 4s linear infinite;
