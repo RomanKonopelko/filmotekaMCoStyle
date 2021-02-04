@@ -1,24 +1,5 @@
-const refs = {
-  thrillerRef: document.querySelector('[data-thriller]'),
-  comedyRef: document.querySelector('[data-comedy]'),
-  animationRef: document.querySelector('[data-animation]'),
-  actionRef: document.querySelector('[data-action]'),
-  westernRef: document.querySelector('[data-western]'),
-  fantasyRef: document.querySelector('[data-fantasy]'),
-  dramaRef: document.querySelector('[data-drama]'),
-};
-const {
-  thrillerRef,
-  comedyRef,
-  actionRef,
-  animationRef,
-  westernRef,
-  fantasyRef,
-  dramaRef,
-} = refs;
 let searchGenre = '';
 
-console.log(MyApi);
 thrillerRef.addEventListener('click', () => {
   MyApi.activeLoader();
   searchGenre = thrillerRef.innerHTML.toLowerCase();

@@ -30,8 +30,6 @@ const parallax = function (event) {
   }px) translateY(${(event.clientY * 40) / 700}px)`;
 };
 
-const { layer, title, title2, decor1, decor2 } = refs;
-
 let elementScrollTop1 = document.documentElement.scrollTop;
 (function parallaxWidthCheck() {
   if (window.innerWidth >= 1024) {

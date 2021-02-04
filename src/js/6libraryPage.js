@@ -1,7 +1,7 @@
 btnQueue.addEventListener('click', drawQueueFilmList);
 btnWatched.addEventListener('click', drawWatchedFilmList);
+btnMyLibrary.addEventListener('click', openLibrary);
 
-const { filmsLibrary } = refs;
 const queue = `You do not have to queue movies to watch. Add them.`;
 const watch = `You do not have watched movies. Add them.`;
 const filmsQueueKey = 'filmsQueue';
@@ -11,11 +11,9 @@ function drawQueueFilmList(key) {
   const filmsQueueLocalStorage = localStorage.getItem(filmsQueueKey, key);
   const parsedFilmsQueue = JSON.parse(filmsQueueLocalStorage);
   MyApi.pagination.cardContainer.classList.remove('is-hidden');
-
   MyApi.resetGalleryCard();
   btnWatched.disabled = false;
   btnQueue.disabled = true;
-
   if (parsedFilmsQueue === null || parsedFilmsQueue.length === 0) {
     createPlugTitle(queue, filmsLibrary);
   } else {
@@ -26,13 +24,10 @@ function drawQueueFilmList(key) {
 function drawWatchedFilmList(key) {
   const filmsWatchedLocalStorage = localStorage.getItem(filmsWatchedKey, key);
   const parsedFilmsWatched = JSON.parse(filmsWatchedLocalStorage);
-
   MyApi.pagination.cardContainer.classList.remove('is-hidden');
-
   MyApi.resetGalleryCard();
   btnWatched.disabled = true;
   btnQueue.disabled = false;
-
   if (parsedFilmsWatched === null || parsedFilmsWatched.length === 0) {
     createPlugTitle(watch, filmsLibrary);
   } else {
@@ -57,11 +52,6 @@ function createPlugTitle(title, library) {
   return library;
 }
 
-// кнопка My Library //
-
-btnMyLibrary.addEventListener('click', openLibrary);
-//btnHome.addEventListener('click', goHome);
-
 function openLibrary() {
   window.scrollTo({
     top: document.body.children[2].clientHeight,
@@ -76,7 +66,3 @@ function openLibrary() {
   libraryFilrt.classList.remove('is-hidden');
   main.classList.remove('is-hidden');
 }
-
-// goHome() {
-//   MyApi.fetchPopularFilmsList()
-// }
