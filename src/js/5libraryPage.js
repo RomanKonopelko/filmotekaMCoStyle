@@ -45,13 +45,20 @@ function createParseFilms(film, library) {
     return library;
   });
 }
-
+  
+let messageTitle = document.getElementsByClassName('message-title');
 function createPlugTitle(title, library) {
-  const messageTitle = document.createElement('h2');
-  messageTitle.textContent = title;
-  messageTitle.classList.add('message-title');
-  library.classList.remove('gallery__list');
-  library.append(messageTitle);
+  if (messageTitle.length === 0) {
+    messageTitle = document.createElement('h2');
+    messageTitle.textContent = title;
+    messageTitle.classList.add('message-title');
+    library.insertAdjacentElement('beforebegin', messageTitle)
+  } else {
+    messageTitle.textContent = title;
+    }
+  // messageTitle.textContent = title;
+  // library.classList.remove('gallery__list');
+  // library.append(messageTitle);
   return library;
 }
 
