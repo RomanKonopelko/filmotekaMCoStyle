@@ -20,9 +20,11 @@ const refs = {
 
   //6libraryPage
   btnMyLibrary: document.querySelector('.library'),
+
   filmsLibrary: document.querySelector('.js-gallery'),
   btnWatched: document.querySelector('.btnWatched'),
   btnQueue: document.querySelector('.btnQueue'),
+
 
   //7genreselect
   thrillerRef: document.querySelector('[data-thriller]'),
@@ -86,3 +88,4 @@ const {
   decor2,
   iconButton,
 } = refs;
+

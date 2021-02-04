@@ -3,8 +3,10 @@ class MovieApi {
     this.API_KEY = key;
     this.BASE_URL = 'https://api.themoviedb.org/3/';
     this.IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/';
-    this.DEFAULT_IMAGE = '../images/default_backdrop2.jpg';
-    this.DEFAULT_POSTER = '../images/default_poster.jpg';
+
+    this.DEFAULT_IMAGE = './images/default_backdrop2.jpg';
+    this.DEFAULT_POSTER = './images/default_poster.jpg';
+
     this.VIDEO_BASE_URL = 'https://api.themoviedb.org/3/movie/';
     this.movieID = 0;
     this.searchMode = 'popular';

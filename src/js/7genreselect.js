@@ -1,7 +1,13 @@
 let searchGenre = '';
 
 thrillerRef.addEventListener('click', () => {
+  MyApi.resetGalleryCard();
   MyApi.activeLoader();
+  MyApi.resetPage();
+  detailsSection.classList.add('is-hidden');
+  libraryFilrt.classList.add('is-hidden');
+  detailsSection.innerHTML = '';
+  paginationWrapper.innerHTML = '';
   searchGenre = thrillerRef.innerHTML.toLowerCase();
   thrillerRef.classList.add('current');
   comedyRef.classList.remove('current');
@@ -14,6 +20,19 @@ thrillerRef.addEventListener('click', () => {
 thrillerRef.addEventListener('click', drawFilmListByGenre);
 
 comedyRef.addEventListener('click', () => {
+  setTimeout(() => {
+    drawFilmListByGenre()
+  }, 2000);  
+});
+
+comedyRef.addEventListener('click', () => {
+  MyApi.resetGalleryCard();
+  MyApi.activeLoader();
+  MyApi.resetPage();
+  detailsSection.classList.add('is-hidden');
+  libraryFilrt.classList.add('is-hidden');
+  detailsSection.innerHTML = '';
+  paginationWrapper.innerHTML = '';
   searchGenre = comedyRef.innerHTML.toLowerCase();
   thrillerRef.classList.remove('current');
   comedyRef.classList.add('current');
@@ -22,10 +41,24 @@ comedyRef.addEventListener('click', () => {
   westernRef.classList.remove('current');
   fantasyRef.classList.remove('current');
   dramaRef.classList.remove('current');
+
 });
 comedyRef.addEventListener('click', drawFilmListByGenre);
 
 actionRef.addEventListener('click', () => {
+  setTimeout(() => {
+    drawFilmListByGenre()
+  }, 2000);
+});
+
+actionRef.addEventListener('click', () => {
+  MyApi.resetGalleryCard();
+  MyApi.activeLoader();
+  MyApi.resetPage();
+  detailsSection.classList.add('is-hidden');
+  libraryFilrt.classList.add('is-hidden');
+  detailsSection.innerHTML = '';
+  paginationWrapper.innerHTML = '';
   searchGenre = actionRef.innerHTML.toLowerCase();
   thrillerRef.classList.remove('current');
   comedyRef.classList.remove('current');
@@ -38,6 +71,19 @@ actionRef.addEventListener('click', () => {
 actionRef.addEventListener('click', drawFilmListByGenre);
 
 animationRef.addEventListener('click', () => {
+  setTimeout(() => {
+    drawFilmListByGenre()
+  }, 2000);
+});
+
+animationRef.addEventListener('click', () => {
+  MyApi.resetGalleryCard();
+  MyApi.activeLoader();
+  MyApi.resetPage();
+  detailsSection.classList.add('is-hidden');
+  libraryFilrt.classList.add('is-hidden');
+  detailsSection.innerHTML = '';
+  paginationWrapper.innerHTML = '';
   searchGenre = animationRef.innerHTML.toLowerCase();
   thrillerRef.classList.remove('current');
   comedyRef.classList.remove('current');
@@ -50,6 +96,20 @@ animationRef.addEventListener('click', () => {
 animationRef.addEventListener('click', drawFilmListByGenre);
 
 westernRef.addEventListener('click', () => {
+  setTimeout(() => {
+    drawFilmListByGenre()
+  }, 2000);
+});
+
+westernRef.addEventListener('click', () => {
+  MyApi.resetGalleryCard();
+  MyApi.resetGalleryCard();
+  MyApi.activeLoader();
+  MyApi.resetPage();
+  detailsSection.classList.add('is-hidden');
+  libraryFilrt.classList.add('is-hidden');
+  detailsSection.innerHTML = '';
+  paginationWrapper.innerHTML = '';
   searchGenre = westernRef.innerHTML.toLowerCase();
   thrillerRef.classList.remove('current');
   comedyRef.classList.remove('current');
@@ -62,6 +122,19 @@ westernRef.addEventListener('click', () => {
 westernRef.addEventListener('click', drawFilmListByGenre);
 
 fantasyRef.addEventListener('click', () => {
+  setTimeout(() => {
+    drawFilmListByGenre()
+  }, 2000);
+});
+
+fantasyRef.addEventListener('click', () => {
+  MyApi.resetGalleryCard();
+  MyApi.activeLoader();
+  MyApi.resetPage();
+  detailsSection.classList.add('is-hidden');
+  libraryFilrt.classList.add('is-hidden');
+  detailsSection.innerHTML = '';
+  paginationWrapper.innerHTML = '';
   searchGenre = fantasyRef.innerHTML.toLowerCase();
   thrillerRef.classList.remove('current');
   comedyRef.classList.remove('current');
@@ -74,6 +147,19 @@ fantasyRef.addEventListener('click', () => {
 fantasyRef.addEventListener('click', drawFilmListByGenre);
 
 dramaRef.addEventListener('click', () => {
+  setTimeout(() => {
+    drawFilmListByGenre()
+  }, 2000);
+});
+
+dramaRef.addEventListener('click', () => {
+  MyApi.resetGalleryCard();
+  MyApi.activeLoader();
+  MyApi.resetPage();
+  detailsSection.classList.add('is-hidden');
+  libraryFilrt.classList.add('is-hidden');
+  detailsSection.innerHTML = '';
+  paginationWrapper.innerHTML = '';
   searchGenre = dramaRef.innerHTML.toLowerCase();
   thrillerRef.classList.remove('current');
   comedyRef.classList.remove('current');
@@ -87,6 +173,12 @@ dramaRef.addEventListener('click', drawFilmListByGenre);
 
 function drawFilmListByGenre() {
   MyApi.resetGalleryCard();
+  setTimeout(() => {
+    drawFilmListByGenre()
+  }, 2000);
+});
+
+function drawFilmListByGenre() {
   let genres, result;
   MyApi.fetchGenres()
     .then(res => {
@@ -180,3 +272,4 @@ function drawFilmListByGenre() {
 //     fantasyRef.classList.remove('current');
 //     dramaRef.classList.remove('current');
 // }
+}

@@ -1,21 +1,30 @@
 .bars-common {
-  height: 4vw;
+  height: 7vw;
   max-height: 100%;
-  width: 1vw;
+  width: 2vw;
   margin: auto;
   position: absolute;
   left: 0;
   right: 0;
   top: 300px;
   bottom: 0;
+
+  @include for-size(tablet) {
+    height: 4vw;
+    width: 1vw;
+  }
 }
 
 .bar-one {
   left: 0;
-  right: 4vw;
+  right: 6vw;
   top: 0;
   bottom: 0;
   box-shadow: 0 0 0 0.1vw cyan, 0 0 1vw 0 cyan, inset 0 0 0.5vw 0 cyan;
+
+  @include for-size(tablet) {
+    right: 4vw;
+  }
 }
 
 .bar-two {
@@ -27,19 +36,23 @@
 }
 
 .bar-three {
-  left: 4vw;
+  left: 6vw;
   right: 0;
   top: 0;
   bottom: 0;
   box-shadow: 0 0 0 0.1vw cyan, 0 0 1vw 0 cyan, inset 0 0 0.5vw 0 cyan;
+
+  @include for-size(tablet) {
+    left: 4vw;
+  }
 }
 
 /* Rotating squares style */
 
 .squares-common {
-  height: 10vw;
+  height: 18vw;
   max-height: 100%;
-  width: 10vw;
+  width: 18vw;
   margin: auto;
   position: absolute;
   left: 0;
@@ -47,6 +60,10 @@
   top: 0;
   bottom: 0;
   border-radius: 0%;
+  @include for-size(tablet) {
+    height: 10vw;
+    width: 10vw;
+  }
 }
 
 .square-one {
@@ -69,6 +86,7 @@
 /* Compressing bars animation */
 
 .bar-one {
+  transform: translateZ(0);
   animation: barOne 1s 0.33s ease infinite;
   -moz-animation: barOne 1s 0.33s ease infinite;
   /* Firefox */
@@ -91,6 +109,7 @@
 }
 
 .bar-two {
+  transform: translateZ(0);
   animation: barTwo 1s 0.66s ease infinite;
   -moz-animation: barTwo 1s 0.66s ease infinite;
   /* Firefox */
@@ -113,6 +132,7 @@
 }
 
 .bar-three {
+  transform: translateZ(0);
   animation: barThree 1s 0.99s ease infinite;
   -moz-animation: barThree 1s 0.99s ease infinite;
   /* Firefox */
@@ -137,6 +157,7 @@
 /* Rotating squares animation */
 
 .square-one {
+  transform: translateZ(0);
   animation: squareOne 4s 0.99s ease infinite;
   -moz-animation: squareOne 4s 0.99s ease infinite;
   /* Firefox */
@@ -156,6 +177,7 @@
 }
 
 .square-two {
+  transform: translateZ(0);
   animation: squareTwo 4s 0.99s ease infinite;
   -moz-animation: squareTwo 4s 0.99s ease infinite;
   /* Firefox */

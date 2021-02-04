@@ -1,5 +1,6 @@
 btnQueue.addEventListener('click', drawQueueFilmList);
 btnWatched.addEventListener('click', drawWatchedFilmList);
+
 btnMyLibrary.addEventListener('click', openLibrary);
 
 const queue = `You do not have to queue movies to watch. Add them.`;
@@ -11,9 +12,13 @@ function drawQueueFilmList(key) {
   const filmsQueueLocalStorage = localStorage.getItem(filmsQueueKey, key);
   const parsedFilmsQueue = JSON.parse(filmsQueueLocalStorage);
   MyApi.pagination.cardContainer.classList.remove('is-hidden');
+
   MyApi.resetGalleryCard();
+  btnQueue.classList.add('active');
+  btnWatched.classList.remove('active');
   btnWatched.disabled = false;
   btnQueue.disabled = true;
+
   if (parsedFilmsQueue === null || parsedFilmsQueue.length === 0) {
     createPlugTitle(queue, filmsLibrary);
   } else {
@@ -24,10 +29,16 @@ function drawQueueFilmList(key) {
 function drawWatchedFilmList(key) {
   const filmsWatchedLocalStorage = localStorage.getItem(filmsWatchedKey, key);
   const parsedFilmsWatched = JSON.parse(filmsWatchedLocalStorage);
+
   MyApi.pagination.cardContainer.classList.remove('is-hidden');
+
   MyApi.resetGalleryCard();
+  btnQueue.classList.remove('active');
+  btnWatched.classList.add('active');
   btnWatched.disabled = true;
   btnQueue.disabled = false;
+
+
   if (parsedFilmsWatched === null || parsedFilmsWatched.length === 0) {
     createPlugTitle(watch, filmsLibrary);
   } else {
@@ -43,14 +54,29 @@ function createParseFilms(film, library) {
   });
 }
 
+
+  
+let messageTitle = document.getElementsByClassName('message-title');
 function createPlugTitle(title, library) {
-  const messageTitle = document.createElement('h2');
-  messageTitle.textContent = title;
-  messageTitle.classList.add('message-title');
-  library.classList.remove('gallery__list');
-  library.append(messageTitle);
+  if (messageTitle.length === 0) {
+    messageTitle = document.createElement('h2');
+    messageTitle.textContent = title;
+    messageTitle.classList.add('message-title');
+    library.insertAdjacentElement('beforebegin', messageTitle)
+  } else {
+    messageTitle.textContent = title;
+    }
+  // messageTitle.textContent = title;
+  // library.classList.remove('gallery__list');
+  // library.append(messageTitle);
   return library;
 }
+
+// кнопка My Library //
+
+btnMyLibrary.addEventListener('click', openLibrary);
+//btnHome.addEventListener('click', goHome);
+
 
 function openLibrary() {
   window.scrollTo({

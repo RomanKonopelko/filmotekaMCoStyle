@@ -15,6 +15,7 @@ function classToggle() {
     logoText.classList.remove('is-hidden');
   }
 }
+
 classToggle();
 
 window.addEventListener('resize', () => {
@@ -24,3 +25,4 @@ window.addEventListener('resize', () => {
     logoText.classList.remove('is-hidden');
   }
 });
+

@@ -210,3 +210,32 @@ $transition-duration: 250ms;
       0 0 160px $accent-shadow-color2;
   }
 }
+@keyframes animate-decoration {
+  0%,
+  18%,
+  20%,
+  50%,
+  1%,
+  60%,
+  65.1%,
+  80%,
+  90.1%,
+  92% {
+    background-color: lightseagreen;
+    box-shadow: none;
+  }
+  18.1%,
+  20.1%,
+  30%,
+  50%,
+  60.1%,
+  65%,
+  80.1%,
+  90%,
+  92.1%,
+  100% {
+    background: $accent-color2;
+    box-shadow: 0 0 1px $accent-shadow-color, 0 0 2px $accent-shadow-color,
+      0 0 2px, 0 0 3px $accent-shadow-color, 0 0 3px $accent-shadow-color;
+  }
+}

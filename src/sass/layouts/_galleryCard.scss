@@ -38,21 +38,25 @@
     }
   }
   .form__control {
+    width: 300px;
     padding: 5px 10px; // change input color
     border: none;
     background-color: transparent;
     outline: none;
-    width: 300px;
     border-radius: 5px;
+    border-bottom: 3px solid $accent-shadow-color;
     font-style: normal;
     font-weight: 300;
     font-size: 12px;
     text-align: center;
     color: $accent-color;
-    transform: translateZ(0);
-    animation: animate-border-bottom 4s infinite;
     margin-left: auto;
     margin-right: auto;
+    @include for-size(tablet) {
+      border-bottom: none;
+      transform: translateZ(0);
+      animation: animate-border-bottom 4s infinite;
+    }
 
     @media screen and (min-width: 575px) and (max-width: 767px) {
       width: 400px;
