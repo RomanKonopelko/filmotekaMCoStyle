@@ -1,1 +1,57 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="X-UA-Compatible" content="ie=edge"><title>Placeholder title</title><!-- Сюда будет всталена ссылка на файл стилей --><!-- inject:css --><link rel="stylesheet" href="css/styles.css"><!-- endinject --></head><body><!-- Сюда будет всталена ссылка на файл скриптов --><!-- //= ./html/detailsPage.html --><!-- inject:js --><script src="js/scripts.js"></script><!-- endinject --></body></html>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="X-UA-Compatible" content="ie=edge"><title>Placeholder title</title><link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"><!-- Сюда будет всталена ссылка на файл стилей --><!-- inject:css --><link rel="stylesheet" href="css/styles.css"><!-- endinject --></head><body><!-- Сюда будет всталена ссылка на файл скриптов --><!-- inject:header.html --><div id="load"><div>G</div><div>N</div><div>I</div><div>D</div><div>A</div><div>O</div><div>L</div></div><section class="header"><div class="container"><nav class="header__nav"><ul class="header__menu enumeration"><li class="header__item header__logo parallax-logo" data-icon><a class="header__item_a" href="./"><span class="header__logo-text" id="logo__text" data-logotext>FilmGeek_____________</span></a></li><li class="header__item current parallax-item" data-home><a href="./" class="header__item-title home">Home</a></li><li class="header__item library parallax-item" data-library><a class="header__item-title library">Mylibrary</a></li></ul></nav><div class="scene"><div data-speed="40" class="layer__bg"></div><div class="decoration-first"></div><div class="decoration-second"></div></div></div></section><div id="stars"></div><div id="stars2"></div><div id="stars3"></div><!-- endinject --><div class="run__container"><marquee behavior="scroll" class="marquee" scrollamount="8"><div class="running__strokes"><h2 class="header__runtext" data-thriller>thriller</h2><h2 class="header__runtext" data-comedy>comedy</h2><h2 class="header__runtext" data-animation>animation</h2><h2 class="header__runtext" data-action>action</h2><h2 class="header__runtext" data-western>western</h2><h2 class="header__runtext" data-fantasy>fantasy</h2><h2 class="header__runtext" data-drama>drama</h2></div></marquee></div><!-- inject:header.html --><!-- endinject --><section class="main is-hidden"><div class="container main__container"><form class="main__search-form is-hidden"><!-- <label for="search-form" class="search__label">What movie should I find?</label> --> <input type="text" class="form__control" name="query" id="search-form" placeholder="What movie you wish?" autocomplete="off"><p class="main__error-notification is-hidden"></p></form><div class="bars-common bar-one"></div><div class="bars-common bar-two"></div><div class="bars-common bar-three"></div><!-- Rotating squares com onent --><div class="squares-common square-one"></div><div class="squares-common square-two"></div><!-- Button up --> <button class="main__btn-scroll" title="Go to top"></button><!-- Button up end --><!-- Compressing bars component --><ul class="gallery__list enumeration js-gallery is-hidden"></ul><div class="pagination"></div><div class="library-filter is-hidden"><button type="button" class="button library-filter__btn btnWatched button__add">Watched</button> <button type="button" class="button library-filter__btn btnQueue button__add">Queue</button></div><div class="films-library"></div></div></section><!-- inject:header.html --><section class="details-page is-hidden"><!-- <div class="container details-page__film">
+        <div class="details-page__foto">
+          <a href="">
+            <img
+              src="https://www.film.ru/sites/default/files/movies/posters/18480583-1237848.jpg"
+              alt="Your ad will be here"
+              width="650"
+            />
+          </a>
+          details-page__button-close
+        </div>
+    
+        <div class="details-page__description">
+          <div>
+            <h2 class="details-page__title">Soul</h2>
+            <table class="details-page__table">
+              <tr class="details-page__rows">
+                <td>Vote / Votes</td>
+                <td><span class="rows__vote">7.3</span> / 1260</td>
+              </tr>
+              <tr class="details-page__rows">
+                <td>Popularity</td>
+                <td>100.2</td>
+              </tr>
+              <tr class="details-page__rows">
+                <td>Original Title</td>
+                <td>A FISTFUL OF LEAD</td>
+              </tr>
+              <tr class="details-page__rows">
+                <td>Genre</td>
+                <td>Western</td>
+              </tr>
+            </table>
+          </div>
+    
+          <div class="details-page__about">
+            <h3 class="details-page__title second">About</h3>
+            <p class="details-page__text">
+              What is it that makes you...YOU? Pixar Animation Studios’ all-new
+              feature film SOUL introduces Joe Gardner (voice of Jamie Foxx) – a
+              middle-school band teacher who gets the chance of a lifetime to play
+              at the best jazz club in town. But one small misstep takes him from
+              the streets of New York City to The Great Before – a fantastical place
+              where new souls get their personalities, quirks and interests before
+              they go to Earth. Determined to return to his life, Joe teams up with
+              a precocious soul, 22 (voice of Tina Fey), who has never understood
+              the appeal of the human experience....
+            </p>
+          </div>
+           <div class="details-page__button">
+            <button type="submit" class="button__add first">add to Watched</button>
+            <button type="submit" class="button__add">add to queue</button>
+          </div>
+        </div>
+      </div>  --></section><!-- endinject --><div class="library-filter is-hidden"><button type="button" class="button library-filter__btn btnWatched">Watched</button> <button type="button" class="button library-filter__btn btnQueue">Queue</button></div><div class="films-library"></div><!-- inject:footer.html --><!-- inject:header.html --><footer class="footer"><div class="container footer__container"><div class="img"><img class="footer__img" src="../images/popcorn2.png" alt="popcorn" width="40"></div><div class="footer__overlay"><p class="footer__description">Made by <a class="footer__link" href="#" aria-label="developers link" target="_blank" rel="noopener noreferrer">MagicCostyle</a></p><p>&copy; 2021</p></div></div></footer><!-- endinject --><!--  modal   --><div class="backdrop backdrop--hidden" data-backdrop><div class="backdrop__modal backdrop__modal--hidden video-block"><!-- <iframe id="ytplayer" type="text/html" width="640" height="360"
+      src="http://www.youtube.com/embed/u8ZsUivELbs?autoplay=0"
+      frameborder="0"/> --><!-- <div id="ytplayer"></div> --><iframe id="player" type="text/html" width="640" height="360" frameborder="0"></iframe><i class="backdrop__modal__btn material-icons">cancel</i></div><!-- endinject --><!-- inject:js --><script src="js/scripts.js"></script><!-- endinject --></div></body></html>
