@@ -33,7 +33,7 @@ const parallax = function (event) {
 const { layer, title, title2, decor1, decor2 } = refs;
 
 let elementScrollTop1 = document.documentElement.scrollTop;
-(function parallaxWidthCheck() {
+function parallaxWidthCheck() {
   if (window.innerWidth >= 1024) {
     document.addEventListener('mousemove', parallax);
     return;
@@ -42,7 +42,7 @@ let elementScrollTop1 = document.documentElement.scrollTop;
     document.removeEventListener('mousemove', parallax);
     return;
   }
-})();
+}
 function parallaxCheck() {
   //=====================================================//conditions to toggle the event
   let elementHeight = document.body.children[2].clientHeight;

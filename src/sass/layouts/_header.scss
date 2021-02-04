@@ -65,6 +65,7 @@
     width: 120%;
     height: 110%;
     transform: translateZ(0);
+    transition: all 0.1s linear;
     background: url('../../images/parallax.jpg') center no-repeat;
     background-size: cover;
   }
@@ -81,6 +82,7 @@
     left: -15%;
     height: 100px;
     width: 730px;
+    transition: all 0.1s linear;
     background-image: linear-gradient(
       to right bottom,
       rgba(0, 0, 0, 0.979),
@@ -100,6 +102,7 @@
     right: -10%;
     height: 300px;
     width: 940px;
+    transition: all 0.1s linear;
     background-image: linear-gradient(
       to left bottom,
       rgba(0, 0, 0, 0.753),
@@ -115,6 +118,40 @@
   @include for-size(tablet) {
     justify-content: end;
   }
+}
+
+.home::before {
+  content: '';
+  display: none;
+  @include for-size(tablet) {
+    display: block;
+    position: absolute;
+    top: 20.5px;
+    left: -350px;
+    height: 3px;
+    width: 350px;
+    line-height: 0.7em;
+    -webkit-box-reflect: below 1px linear-gradient(transparent, #0008);
+    box-shadow: 0 0 10px #ff1744, 0 0 20px#ff1744, 0 0 40px #ff1744,
+      0 0 80px #ff1744, 0 0 160px #ff1744;
+
+    background-color: #ffebee;
+  }
+}
+.library {
+  position: relative;
+}
+.library::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: -300px;
+  left: 196px;
+  height: 300px;
+  width: 2px;
+  animation: animate-decoration 4s linear infinite;
+
+  background-color: lightseagreen;
 }
 .header__item {
   align-items: center;
@@ -135,6 +172,7 @@
     font-size: 18px;
     letter-spacing: 5px;
     color: lightseagreen;
+    z-index: 10;
     width: 100%;
     -webkit-box-reflect: below 1px linear-gradient(transparent, #0008);
     line-height: 0.7em;
@@ -149,6 +187,7 @@
   }
 
   @include for-size(desktop) {
+    transition: all 0.1s linear;
     display: flex;
   }
 }
@@ -160,6 +199,7 @@
 .header__logo {
   display: none;
   position: unset;
+  z-index: 12;
   width: 70px;
   margin-left: 15px;
 

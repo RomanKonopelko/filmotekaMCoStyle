@@ -19,6 +19,13 @@
   user-select: none;
   cursor: default;
   transition: all 4s ease-out;
+
+  @include for-size(desktop) {
+    left: -10%;
+    top: -10%;
+    width: 120%;
+    height: 110%;
+  }
 }
 
 #load div {
