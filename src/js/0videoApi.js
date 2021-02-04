@@ -119,7 +119,7 @@ class MovieApi {
         return resp;
       })
       .then(({ results }) => {
-        this.filmItem = results; // test
+        this.popularFilmItem = results; // test
         return results; // test
       })
       .then(collection =>
