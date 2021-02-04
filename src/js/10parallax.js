@@ -30,6 +30,7 @@ const parallax = function (event) {
   }px) translateY(${(event.clientY * 40) / 700}px)`;
 };
 
+
 const layer = document.querySelector('.layer__bg');
 const title = document.querySelector('.parallax-logo');
 const title2 = document.querySelectorAll('.parallax-item');
@@ -46,7 +47,9 @@ function parallaxWidthCheck() {
     document.removeEventListener('mousemove', parallax);
     return;
   }
+})();
 }
+
 function parallaxCheck() {
   //=====================================================//conditions to toggle the event
   let elementHeight = document.body.children[2].clientHeight;

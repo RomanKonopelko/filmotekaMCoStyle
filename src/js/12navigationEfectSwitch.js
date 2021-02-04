@@ -1,29 +1,32 @@
 (() => {
-    const refs = {
+  const refs = {
+    homePage: document.querySelector('[data-home]'),
+    libraryPage: document.querySelector('[data-library]'),
     iconButton: document.querySelector('[data-icon]'),
-    homeButton: document.querySelector('[data-home]'),
-    libraryButton: document.querySelector('[data-library]'),
   };
+  const { homePage, libraryPage, iconButton } = refs;
 
-    refs.homeButton.addEventListener('click', homeEfect);
-    refs.iconButton.addEventListener('click', homeEfect);
-  refs.libraryButton.addEventListener('click', libraryEfect);
+  homePage.addEventListener('click', homeEfect);
+  iconButton.addEventListener('click', homeEfect);
+  libraryPage.addEventListener('click', libraryEfect);
 
-function homeEfect() {
-  if (!refs.homeButton.classList.contains('current')) {
-    refs.homeButton.classList.add('current');
-    if (refs.libraryButton.classList.contains('current')) {
-      refs.libraryButton.classList.remove('current');
+  function homeEfect() {
+    if (!homePage.classList.contains('current')) {
+      homePage.classList.add('current');
+      if (libraryPage.classList.contains('current')) {
+        libraryPage.classList.remove('current');
+      }
     }
   }
-}
 
-function libraryEfect() {
-  if (!refs.libraryButton.classList.contains('current')) {
-    refs.libraryButton.classList.add('current');
-    if (refs.homeButton.classList.contains('current')) {
-      refs.homeButton.classList.remove('current');
+  function libraryEfect() {
+    if (!libraryPage.classList.contains('current')) {
+      libraryPage.classList.add('current');
+      if (homePage.classList.contains('current')) {
+        homePage.classList.remove('current');
+      }
     }
   }
-}
 })();
+
+   

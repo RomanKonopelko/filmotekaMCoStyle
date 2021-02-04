@@ -1,7 +1,8 @@
 btnQueue.addEventListener('click', drawQueueFilmList);
 btnWatched.addEventListener('click', drawWatchedFilmList);
 
-const { filmsLibrary } = refs;
+btnMyLibrary.addEventListener('click', openLibrary);
+
 const queue = `You do not have to queue movies to watch. Add them.`;
 const watch = `You do not have watched movies. Add them.`;
 const filmsQueueKey = 'filmsQueue';
@@ -37,6 +38,7 @@ function drawWatchedFilmList(key) {
   btnWatched.disabled = true;
   btnQueue.disabled = false;
 
+
   if (parsedFilmsWatched === null || parsedFilmsWatched.length === 0) {
     createPlugTitle(watch, filmsLibrary);
   } else {
@@ -51,6 +53,8 @@ function createParseFilms(film, library) {
     return library;
   });
 }
+
+
   
 let messageTitle = document.getElementsByClassName('message-title');
 function createPlugTitle(title, library) {
@@ -73,6 +77,7 @@ function createPlugTitle(title, library) {
 btnMyLibrary.addEventListener('click', openLibrary);
 //btnHome.addEventListener('click', goHome);
 
+
 function openLibrary() {
   window.scrollTo({
     top: document.body.children[2].clientHeight,
@@ -87,7 +92,3 @@ function openLibrary() {
   libraryFilrt.classList.remove('is-hidden');
   main.classList.remove('is-hidden');
 }
-
-// goHome() {
-//   MyApi.fetchPopularFilmsList()
-// }
