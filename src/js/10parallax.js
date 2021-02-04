@@ -37,7 +37,8 @@ const decor1 = document.querySelector('.decoration-first');
 const decor2 = document.querySelector('.decoration-second');
 
 let elementScrollTop1 = document.documentElement.scrollTop;
-(function parallaxWidthCheck() {
+
+function parallaxWidthCheck() {
   if (window.innerWidth >= 1024) {
     document.addEventListener('mousemove', parallax);
     return;
@@ -46,7 +47,7 @@ let elementScrollTop1 = document.documentElement.scrollTop;
     document.removeEventListener('mousemove', parallax);
     return;
   }
-})();
+}
 
 function parallaxCheck() {
   //=====================================================//conditions to toggle the event
