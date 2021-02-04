@@ -1,18 +1,17 @@
 #load {
   position: fixed;
   background-image: linear-gradient(#0000007a 60%, #2294ff71),
-    url(../images/parallax.jpg);
+    url('../images/parallax.jpg');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
 
   z-index: 1000;
-  width: 100wv;
   left: 0;
   top: 0;
   right: 0;
   bottom: 0;
-  overflow: visible;
+  overflow: hidden;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -29,11 +28,13 @@
 }
 
 #load div {
+  font-size: 20px;
   position: absolute;
   top: 60%;
-  font-family: $header-font-family;
-  font-size: 40px;
   opacity: 0;
+  color: $accent-color2;
+  font-family: $header-font-family;
+  transform: translateZ(0);
   animation: move 4s linear infinite;
   -o-animation: move 4s linear infinite;
   -moz-animation: move 4s linear infinite;
@@ -42,12 +43,14 @@
   -o-transform: rotate(180deg);
   -moz-transform: rotate(180deg);
   -webkit-transform: rotate(180deg);
-  color: #35c4f0;
 
-  color: white;
-  text-shadow: 0 0 10px $accent-shadow-color2, 0 0 20px $accent-shadow-color2,
-    0 0 40px $accent-shadow-color2, 0 0 80px $accent-shadow-color2,
-    0 0 160px $accent-shadow-color2;
+  @include for-size(tablet) {
+    font-size: 40px;
+
+    text-shadow: 0 0 10px $accent-shadow-color2, 0 0 20px $accent-shadow-color2,
+      0 0 40px $accent-shadow-color2, 0 0 80px $accent-shadow-color2,
+      0 0 160px $accent-shadow-color2;
+  }
 }
 
 .done {

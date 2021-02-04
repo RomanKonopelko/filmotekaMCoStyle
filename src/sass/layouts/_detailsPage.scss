@@ -105,19 +105,23 @@ td {
 .button__add {
   text-decoration: none;
   display: inline-block;
-  color: white;
+
   padding: 10px 20px;
   width: 130px;
-  border: none;
+  border: 3px solid $accent-shadow-color;
+  color: lightseagreen;
   border-radius: 10px;
-
+  background-color: transparent;
   text-transform: uppercase;
 
-  background-color: transparent;
-  transform: translateZ(0);
-  animation: animate-border-btn 5s infinite, animate 5s infinite;
-  box-shadow: $popular-box-shadow;
-  transition: all $transition-duration $timing-function;
+  @include for-size(tablet) {
+    color: white;
+    border: none;
+    transform: translateZ(0);
+    animation: animate-border-btn 5s infinite, animate 5s infinite;
+    box-shadow: $popular-box-shadow;
+    transition: all $transition-duration $timing-function;
+  }
 }
 
 .button__add:not(:last-child) {
