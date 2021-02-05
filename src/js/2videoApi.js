@@ -246,7 +246,7 @@ class MovieApi {
       this.pagination.cardContainer.classList.add('is-hidden');
       this.activeLoader();
       //Скролит вверх
-      window.scrollTo(0, document.body.children[2].clientHeight);
+      window.scrollTo(0, document.body.children[1].clientHeight);
       setTimeout(() => {
         this.activeDetailsPage(id, siteSection);
       }, 2000);
