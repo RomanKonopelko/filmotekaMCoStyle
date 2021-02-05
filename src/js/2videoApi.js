@@ -12,6 +12,8 @@ class MovieApi {
     this.searchMode = 'popular';
 
     this.popularFilmItem = [];
+    this.watchedList = [];
+    this.queueList = [];
     // test
     this.genres = [];
 
@@ -202,7 +204,7 @@ class MovieApi {
     this.pagination.cardContainer.innerHTML = '';
   }
 
-  createCardFunc(itemData) {
+  createCardFunc(itemData, siteSection) {
     //test start //
     main.classList.remove('is-hidden');
     // test end //
@@ -246,21 +248,33 @@ class MovieApi {
       //Скролит вверх
       window.scrollTo(0, document.body.children[2].clientHeight);
       setTimeout(() => {
-        this.activeDetailsPage(id, false);
+        this.activeDetailsPage(id, siteSection);
       }, 2000);
     });
     return item;
   }
 
-  activeDetailsPage(id) {
+  activeDetailsPage(id, libraryIndicator) {
     //Прячит пагинацию и форму поиска
     form.style.display = 'none';
     btnTop.classList.add('is-hidden');
 
     this.movieID = id;
 
+    let collectionItems = [];
+    if (libraryIndicator === 'Queue') {
+      console.log('Queue!!!!!!!!!!!');
+      collectionItems = this.queueList;
+    } else if (libraryIndicator === 'Watched') {
+      console.log('Watched!!!!!!!!');
+      collectionItems = this.watchedList;
+    } else if (!libraryIndicator) {
+      console.log('OTHER');
+      collectionItems = this.popularFilmItem;
+    }
+
     // серед масиву об'єктів знаходить об'єкт з необхідним id //
-    const array = this.popularFilmItem.filter(item => {
+    const array = collectionItems.filter(item => {
       if (item.id === id) return item;
     });
     const item = array[0];

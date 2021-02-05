@@ -12,17 +12,19 @@ function drawQueueFilmList(key) {
   const filmsQueueLocalStorage = localStorage.getItem(filmsQueueKey, key);
   const parsedFilmsQueue = JSON.parse(filmsQueueLocalStorage);
   MyApi.pagination.cardContainer.classList.remove('is-hidden');
+  MyApi.queueList = parsedFilmsQueue;
 
   MyApi.resetGalleryCard();
   btnQueue.classList.add('active');
   btnWatched.classList.remove('active');
   btnWatched.disabled = false;
   btnQueue.disabled = true;
+  const INDICATOR_QUEUE = 'Queue';
 
   if (parsedFilmsQueue === null || parsedFilmsQueue.length === 0) {
     createPlugTitle(queue, filmsLibrary);
   } else {
-    createParseFilms(parsedFilmsQueue, filmsLibrary);
+    createParseFilms(parsedFilmsQueue, filmsLibrary, INDICATOR_QUEUE);
   }
 }
 
@@ -31,41 +33,40 @@ function drawWatchedFilmList(key) {
   const parsedFilmsWatched = JSON.parse(filmsWatchedLocalStorage);
 
   MyApi.pagination.cardContainer.classList.remove('is-hidden');
+  MyApi.watchedList = parsedFilmsWatched;
 
   MyApi.resetGalleryCard();
   btnQueue.classList.remove('active');
   btnWatched.classList.add('active');
   btnWatched.disabled = true;
   btnQueue.disabled = false;
-
+  const INDICATOR_WATCHED = 'Watched';
 
   if (parsedFilmsWatched === null || parsedFilmsWatched.length === 0) {
     createPlugTitle(watch, filmsLibrary);
   } else {
-    createParseFilms(parsedFilmsWatched, filmsLibrary);
+    createParseFilms(parsedFilmsWatched, filmsLibrary, INDICATOR_WATCHED);
   }
 }
 
-function createParseFilms(film, library) {
+function createParseFilms(film, library, siteSection) {
   film.forEach(el => {
-    const LibraryCard = MyApi.createCardFunc(el);
+    const LibraryCard = MyApi.createCardFunc(el, siteSection);
     library.append(LibraryCard);
     return library;
   });
 }
 
-
-  
 let messageTitle = document.getElementsByClassName('message-title');
 function createPlugTitle(title, library) {
   if (messageTitle.length === 0) {
     messageTitle = document.createElement('h2');
     messageTitle.textContent = title;
     messageTitle.classList.add('message-title');
-    library.insertAdjacentElement('beforebegin', messageTitle)
+    library.insertAdjacentElement('beforebegin', messageTitle);
   } else {
     messageTitle.textContent = title;
-    }
+  }
   // messageTitle.textContent = title;
   // library.classList.remove('gallery__list');
   // library.append(messageTitle);
@@ -76,7 +77,6 @@ function createPlugTitle(title, library) {
 
 btnMyLibrary.addEventListener('click', openLibrary);
 //btnHome.addEventListener('click', goHome);
-
 
 function openLibrary() {
   window.scrollTo({
