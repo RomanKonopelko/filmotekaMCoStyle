@@ -586,7 +586,6 @@ class MovieApi {
     });
 
     lastBtn.addEventListener('click', () => {
-      console.log(document.body.children[2].clientHeight);
       this.pagesScroll();
       this.params._page = this.params.lastPage;
     });
@@ -597,7 +596,6 @@ class MovieApi {
   pagesScroll() {
     this.activeLoader();
     this.resetGalleryCard();
-    console.dir(document.body);
     window.scrollTo(0, document.body.children[1].clientHeight);
     this.searchMode === 'popular'
       ? setTimeout(() => {
@@ -633,7 +631,7 @@ class MovieApi {
         button.classList.add('active');
       button.addEventListener('click', e => {
         this.activeLoader();
-        window.scrollTo(0, document.body.children[2].clientHeight);
+        window.scrollTo(0, document.body.children[1].clientHeight);
         this.page = +e.target.textContent;
         this.currentPage = this.page;
         this.pagination.cardContainer.innerHTML = '';
