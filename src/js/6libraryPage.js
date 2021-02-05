@@ -80,7 +80,7 @@ btnMyLibrary.addEventListener('click', openLibrary);
 
 function openLibrary() {
   window.scrollTo({
-    top: document.body.children[2].clientHeight,
+    top: document.body.children[1].clientHeight,
     behavior: 'smooth',
   });
   MyApi.resetGalleryCard();
