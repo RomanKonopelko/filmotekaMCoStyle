@@ -154,6 +154,27 @@ class MovieApi {
         this.hideLoader();
       });
   }
+  // test start //
+  fetchReviews() {
+    return fetch(
+      `${this.VIDEO_BASE_URL}${this.movieID}/reviews?api_key=${this.API_KEY}`,
+    )
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      })
+      .then(({ results }) => {
+        this.reviews = results
+          .map(author => {
+            return [author.author_details.name, author.content];
+          })
+          .slice(0, 5);
+        //console.log(this.reviews); // повертає ім'я автора і його рев'ю
+        return this.reviews;
+      })
+      .catch(error => this.reviews(error));
+  }
+  // test end //
 
   movieSearch() {
     this.searchMode = 'default';
@@ -352,7 +373,50 @@ class MovieApi {
     textAbout.classList.add('details-page__text');
     textAbout.textContent = item.overview;
 
-    divPage.append(titleText, textAbout);
+    // test start //
+
+    titleText.addEventListener('click', () => {
+      textAbout.classList.remove('is-hidden');
+    });
+
+    const reviewsTitle = document.createElement('h3');
+    reviewsTitle.classList.add(
+      'details-page__title',
+      'second',
+      'reviews-title',
+    );
+    reviewsTitle.textContent = 'Reviews';
+    const spanInput = document.createElement('span');
+    spanInput.classList.add('material-icons', 'span-input');
+    spanInput.textContent = 'input';
+    reviewsTitle.append(spanInput);
+
+    this.fetchReviews();
+
+    reviewsTitle.addEventListener('click', () => {
+      detailsSection.classList.add('is-hidden');
+      const reviewsAutor = document.createElement('h3');
+      const autorFace = document.createElement('span');
+
+      autorFace.classList.add('material-icons');
+      autorFace.textContent = 'face';
+
+      const reviewsText = document.createElement('p');
+      reviewsText.classList.add('details-page__text');
+
+      reviews.append(autorFace, reviewsAutor, reviewsText);
+
+      for (let obj of this.reviews) {
+        reviewsAutor.textContent = obj[0];
+        reviewsText.textContent = obj[1];
+      }
+    });
+
+    console.log(item.id, 'назва');
+
+    // test end//
+
+    divPage.append(titleText, textAbout, reviewsTitle);
 
     const buttonFirst = document.createElement('button');
     buttonFirst.classList.add('button__add', 'first');

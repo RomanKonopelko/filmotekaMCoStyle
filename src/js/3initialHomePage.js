@@ -40,7 +40,7 @@ function handleScroll() {
 
 // Modal on Details Page Logic
 
-modalBtn.addEventListener('click', closeModal);
+//modalBtn.addEventListener('click', closeModal);
 backdrop.addEventListener('click', onBeckDropCkick); // Close Modal on Backdrop click
 
 function onHandleTrailerError() {
