@@ -51,9 +51,9 @@ function parallaxWidthCheck() {
 
 function parallaxCheck() {
   //=====================================================//conditions to toggle the event
-  let elementHeight = document.body.children[2].clientHeight;
-  let documentScroll = document.documentElement.scrollTop;
 
+  let elementHeight = document.body.children[1].clientHeight;
+  let documentScroll = document.documentElement.scrollTop;
   if (documentScroll > elementHeight) {
     document.removeEventListener('mousemove', parallax);
     return;

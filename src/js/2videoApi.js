@@ -586,6 +586,7 @@ class MovieApi {
     });
 
     lastBtn.addEventListener('click', () => {
+      console.log(document.body.children[2].clientHeight);
       this.pagesScroll();
       this.params._page = this.params.lastPage;
     });
@@ -596,7 +597,8 @@ class MovieApi {
   pagesScroll() {
     this.activeLoader();
     this.resetGalleryCard();
-    window.scrollTo(0, document.body.children[2].clientHeight);
+    console.dir(document.body);
+    window.scrollTo(0, document.body.children[1].clientHeight);
     this.searchMode === 'popular'
       ? setTimeout(() => {
           this.fetchPopularFilmsList();
