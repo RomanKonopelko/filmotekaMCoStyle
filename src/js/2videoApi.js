@@ -12,6 +12,8 @@ class MovieApi {
     this.searchMode = 'popular';
 
     this.popularFilmItem = [];
+    this.watchedList = [];
+    this.queueList = [];
     this.genres = [];
     this.actors = [];
 
@@ -152,6 +154,27 @@ class MovieApi {
         this.hideLoader();
       });
   }
+  // test start //
+  fetchReviews() {
+    return fetch(
+      `${this.VIDEO_BASE_URL}${this.movieID}/reviews?api_key=${this.API_KEY}`,
+    )
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      })
+      .then(({ results }) => {
+        this.reviews = results
+          .map(author => {
+            return [author.author_details.name, author.content];
+          })
+          .slice(0, 5);
+        //console.log(this.reviews); // повертає ім'я автора і його рев'ю
+        return this.reviews;
+      })
+      .catch(error => this.reviews(error));
+  }
+  // test end //
 
   fetchActors() {
     return fetch(
@@ -221,7 +244,7 @@ class MovieApi {
     this.pagination.cardContainer.innerHTML = '';
   }
 
-  createCardFunc(itemData) {
+  createCardFunc(itemData, siteSection) {
     //test start //
     main.classList.remove('is-hidden');
     // test end //
@@ -264,24 +287,36 @@ class MovieApi {
       this.pagination.cardContainer.classList.add('is-hidden');
       this.activeLoader();
       //Скролит вверх
-      window.scrollTo(0, document.body.children[2].clientHeight);
+      window.scrollTo(0, document.body.children[1].clientHeight);
       setTimeout(() => {
-        this.activeDetailsPage(id, false);
+        this.activeDetailsPage(id, siteSection);
       }, 2000);
       this.fetchActors(this.movieID);
     });
     return item;
   }
 
-  activeDetailsPage(id) {
+  activeDetailsPage(id, libraryIndicator) {
     //Прячит пагинацию и форму поиска
     form.style.display = 'none';
     btnTop.classList.add('is-hidden');
 
     this.movieID = id;
 
+    let collectionItems = [];
+    if (libraryIndicator === 'Queue') {
+      console.log('Queue!!!!!!!!!!!');
+      collectionItems = this.queueList;
+    } else if (libraryIndicator === 'Watched') {
+      console.log('Watched!!!!!!!!');
+      collectionItems = this.watchedList;
+    } else if (!libraryIndicator) {
+      console.log('OTHER');
+      collectionItems = this.popularFilmItem;
+    }
+
     // серед масиву об'єктів знаходить об'єкт з необхідним id //
-    const array = this.popularFilmItem.filter(item => {
+    const array = collectionItems.filter(item => {
       if (item.id === id) return item;
     });
     const item = array[0];
@@ -367,7 +402,50 @@ class MovieApi {
     textAbout.classList.add('details-page__text');
     textAbout.textContent = item.overview;
 
-    divPage.append(titleText, textAbout);
+    // test start //
+
+    titleText.addEventListener('click', () => {
+      textAbout.classList.remove('is-hidden');
+    });
+
+    const reviewsTitle = document.createElement('h3');
+    reviewsTitle.classList.add(
+      'details-page__title',
+      'second',
+      'reviews-title',
+    );
+    reviewsTitle.textContent = 'Reviews';
+    const spanInput = document.createElement('span');
+    spanInput.classList.add('material-icons', 'span-input');
+    spanInput.textContent = 'input';
+    reviewsTitle.append(spanInput);
+
+    this.fetchReviews();
+
+    reviewsTitle.addEventListener('click', () => {
+      detailsSection.classList.add('is-hidden');
+      const reviewsAutor = document.createElement('h3');
+      const autorFace = document.createElement('span');
+
+      autorFace.classList.add('material-icons');
+      autorFace.textContent = 'face';
+
+      const reviewsText = document.createElement('p');
+      reviewsText.classList.add('details-page__text');
+
+      reviews.append(autorFace, reviewsAutor, reviewsText);
+
+      for (let obj of this.reviews) {
+        reviewsAutor.textContent = obj[0];
+        reviewsText.textContent = obj[1];
+      }
+    });
+
+    console.log(item.id, 'назва');
+
+    // test end//
+
+    divPage.append(titleText, textAbout, reviewsTitle);
 
     const buttonFirst = document.createElement('button');
     buttonFirst.classList.add('button__add', 'first');
@@ -614,7 +692,7 @@ class MovieApi {
   pagesScroll() {
     this.activeLoader();
     this.resetGalleryCard();
-    window.scrollTo(0, document.body.children[2].clientHeight);
+    window.scrollTo(0, document.body.children[1].clientHeight);
     this.searchMode === 'popular'
       ? setTimeout(() => {
           this.fetchPopularFilmsList();
@@ -649,7 +727,7 @@ class MovieApi {
         button.classList.add('active');
       button.addEventListener('click', e => {
         this.activeLoader();
-        window.scrollTo(0, document.body.children[2].clientHeight);
+        window.scrollTo(0, document.body.children[1].clientHeight);
         this.page = +e.target.textContent;
         this.currentPage = this.page;
         this.pagination.cardContainer.innerHTML = '';

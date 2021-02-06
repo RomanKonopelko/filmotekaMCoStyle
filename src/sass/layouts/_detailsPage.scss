@@ -6,6 +6,10 @@
   }
 }
 
+.details-page__about {
+  padding-bottom: 40px;
+}
+
 .details-page__film {
   @include for-size(tablet) {
     display: flex;
@@ -164,4 +168,12 @@ td {
     top: -13px;
     right: -500px;
   }
+}
+
+.span-input {
+  margin-left: 10px;
+}
+
+.reviews-title {
+  cursor: pointer;
 }

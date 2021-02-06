@@ -8,6 +8,7 @@ const refs = {
   libraryFilrt: document.querySelector('.library-filter'),
   paginationWrapper: document.querySelector('.pagination'),
   ulForCards: document.querySelector('.gallery__list'),
+  reviews: document.querySelector('.review'),
 
   //3initialHomePage
   btnTop: document.querySelector('.main__btn-scroll'),
@@ -24,7 +25,6 @@ const refs = {
   filmsLibrary: document.querySelector('.js-gallery'),
   btnWatched: document.querySelector('.btnWatched'),
   btnQueue: document.querySelector('.btnQueue'),
-
 
   //7genreselect
   thrillerRef: document.querySelector('[data-thriller]'),
@@ -87,5 +87,5 @@ const {
   decor1,
   decor2,
   iconButton,
+  reviews,
 } = refs;
-
