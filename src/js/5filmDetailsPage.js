@@ -1,47 +1,54 @@
-let btnAddQueue = ''; // в разметке buttonSecond
-let btnAddWatched = ''; //в разметке buttonFirst
-let selectFilm = ''; //обьект фильма который открывается
-// в activeDetailsPage() добавлял:
-// btnAddWatched = buttonFirst;
-// btnAddQueue = buttonSecond;
-// selectFilm = item;
-// monitorButtonStatusText();
-
-//     selectFilm = item - активный фильм
-//     monitorButtonStatusText(); - следит за состоянием текста в кнопке
-// и чтобы не менять разметку(делал до изменений) btnAddWatched = buttonFirst; btnAddQueue = buttonSecond;
-
-// - пишем функцию monitorButtonStatusText которая следит за состоянием(значок и текст в кнопке) читает
-// local storage по ключу filmsQueue и  filmsWatched и меняет текст и значки в кнопках:
-// Delete from queue / Add to queue; Delete from watched / Add to watched.
+let btnAddQueue = '';
+let btnAddWatched = '';
+let selectFilm = '';
 
 function monitorButtonStatusText() {
-  let arrFilmsQueue = JSON.parse(localStorage.getItem('filmsQueue'));
+  let arrFilmsQueue = JSON.parse(localStorage.getItem(filmsQueueKey));
   if (arrFilmsQueue === null) {
     btnAddQueue.textContent = 'Add to queue';
   } else {
-    let arrFilmsidx = arrFilmsQueue.map((elem, idx) => {
-      return elem.id;
-    });
-    let idxFilm = arrFilmsidx.indexOf(selectFilm.id);
-    if (idxFilm != -1) {
+    if (arrFilmsQueue.find(el => el.id === selectFilm.id)) {
       btnAddQueue.textContent = 'Delete from queue';
     } else {
       btnAddQueue.textContent = 'Add to queue';
     }
   }
-  let arrFilmsWatched = JSON.parse(localStorage.getItem('filmsWatched'));
+
+  let arrFilmsWatched = JSON.parse(localStorage.getItem(filmsWatchedKey));
   if (arrFilmsWatched === null) {
     btnAddWatched.textContent = 'Add to watched';
   } else {
-    let arrFilmsidx = arrFilmsWatched.map((elem, idx) => {
-      return elem.id;
-    });
-    let idxFilm = arrFilmsidx.indexOf(selectFilm.id);
-    if (idxFilm != -1) {
+    if (arrFilmsWatched.find(el => el.id === selectFilm.id)) {
       btnAddWatched.textContent = 'Delete from watched';
     } else {
       btnAddWatched.textContent = 'Add to watched';
     }
   }
+}
+function toggleToLocal(key) {
+  let films = JSON.parse(localStorage.getItem(key));
+
+  if (films === null) {
+    films = [];
+    addFilm();
+  } else {
+    if (films.find(el => el.id === selectFilm.id)) {
+      deleteFilm(selectFilm.id);
+    } else {
+      addFilm();
+    }
+  }
+
+  function addFilm() {
+    films.push(selectFilm);
+  }
+  function deleteFilm(idFilm) {
+    films = films.filter(el => el.id != idFilm);
+  }
+  if (films.length === 0) {
+    localStorage.removeItem(key);
+  } else {
+    localStorage.setItem(key, JSON.stringify(films));
+  }
+  monitorButtonStatusText();
 }
