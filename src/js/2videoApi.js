@@ -14,8 +14,8 @@ class MovieApi {
     this.popularFilmItem = [];
     this.watchedList = [];
     this.queueList = [];
-    // test
     this.genres = [];
+    this.actors = [];
 
     this.currentPage = 1;
 
@@ -176,6 +176,25 @@ class MovieApi {
   }
   // test end //
 
+  fetchActors() {
+    return fetch(
+      `${this.BASE_URL}movie/${this.movieID}/credits?api_key=${this.API_KEY}`,
+    )
+      .then(response => response.json())
+      .then(resp => {
+        return resp;
+      })
+      .then(({ cast }) => {
+        return cast;
+      })
+      .then(cast => {
+        cast.forEach(el => {
+          this.actors.push(el.name);
+          return this.actors;
+        });
+      });
+  }
+
   movieSearch() {
     this.searchMode = 'default';
     return fetch(
@@ -264,6 +283,7 @@ class MovieApi {
 
     item.addEventListener('click', () => {
       // клік на картку //
+      this.movieID = id;
       this.pagination.cardContainer.classList.add('is-hidden');
       this.activeLoader();
       //Скролит вверх
@@ -271,6 +291,7 @@ class MovieApi {
       setTimeout(() => {
         this.activeDetailsPage(id, siteSection);
       }, 2000);
+      this.fetchActors(this.movieID);
     });
     return item;
   }
@@ -311,15 +332,23 @@ class MovieApi {
     const genresText = genresArray.join(', ');
 
     // створюємо розмтіку сторінки //
-
     const tdGenre = document.createElement('td');
     tdGenre.textContent = 'genre';
     const tdGenreName = document.createElement('td');
     tdGenreName.textContent = genresText;
-
     const trGenre = document.createElement('tr');
     trGenre.append(tdGenre, tdGenreName);
     trGenre.classList.add('details-page__rows');
+
+    let mainActors = this.actors.slice(0, 5).join(', ');
+
+    const tdActors = document.createElement('td');
+    tdActors.textContent = 'actors';
+    const tdActorsName = document.createElement('td');
+    tdActorsName.textContent = mainActors;
+    const trActors = document.createElement('tr');
+    trActors.append(tdActors, tdActorsName);
+    trActors.classList.add('details-page__rows');
 
     const tdTitle = document.createElement('td');
     tdTitle.textContent = 'original title';
@@ -355,7 +384,7 @@ class MovieApi {
     const table = document.createElement('table');
     table.classList.add('details-page__table');
 
-    table.append(trVotes, trPopularity, trTitle, trGenre);
+    table.append(trVotes, trPopularity, trTitle, trGenre, trActors);
 
     const title = document.createElement('h2');
     title.classList.add('details-page__title');
@@ -499,6 +528,8 @@ class MovieApi {
       btnTop.classList.remove('is-hidden');
       detailsSection.innerHTML = '';
       main.classList.remove('is-hidden');
+      this.actors = []; //=========================================================================
+      // console.log(this.actors);
       if (libraryFilrt.classList != 'is-hidden') {
         if (btnQueue.disabled) {
           drawQueueFilmList();
@@ -511,6 +542,7 @@ class MovieApi {
 
     // Вызов видео
   }
+
   onTrailerClick() {
     openModal(event);
   }
