@@ -21,8 +21,8 @@ thrillerRef.addEventListener('click', drawFilmListByGenre);
 
 comedyRef.addEventListener('click', () => {
   setTimeout(() => {
-    drawFilmListByGenre()
-  }, 2000);  
+    drawFilmListByGenre();
+  }, 2000);
 });
 
 comedyRef.addEventListener('click', () => {
@@ -41,13 +41,12 @@ comedyRef.addEventListener('click', () => {
   westernRef.classList.remove('current');
   fantasyRef.classList.remove('current');
   dramaRef.classList.remove('current');
-
 });
 comedyRef.addEventListener('click', drawFilmListByGenre);
 
 actionRef.addEventListener('click', () => {
   setTimeout(() => {
-    drawFilmListByGenre()
+    drawFilmListByGenre();
   }, 2000);
 });
 
@@ -72,7 +71,7 @@ actionRef.addEventListener('click', drawFilmListByGenre);
 
 animationRef.addEventListener('click', () => {
   setTimeout(() => {
-    drawFilmListByGenre()
+    drawFilmListByGenre();
   }, 2000);
 });
 
@@ -97,7 +96,7 @@ animationRef.addEventListener('click', drawFilmListByGenre);
 
 westernRef.addEventListener('click', () => {
   setTimeout(() => {
-    drawFilmListByGenre()
+    drawFilmListByGenre();
   }, 2000);
 });
 
@@ -123,7 +122,7 @@ westernRef.addEventListener('click', drawFilmListByGenre);
 
 fantasyRef.addEventListener('click', () => {
   setTimeout(() => {
-    drawFilmListByGenre()
+    drawFilmListByGenre();
   }, 2000);
 });
 
@@ -148,7 +147,7 @@ fantasyRef.addEventListener('click', drawFilmListByGenre);
 
 dramaRef.addEventListener('click', () => {
   setTimeout(() => {
-    drawFilmListByGenre()
+    drawFilmListByGenre();
   }, 2000);
 });
 
@@ -170,7 +169,6 @@ dramaRef.addEventListener('click', () => {
   dramaRef.classList.add('current');
 });
 dramaRef.addEventListener('click', drawFilmListByGenre);
-
 
 function drawFilmListByGenre() {
   let genres, result;
@@ -266,4 +264,3 @@ function drawFilmListByGenre() {
 //     fantasyRef.classList.remove('current');
 //     dramaRef.classList.remove('current');
 // }
-
