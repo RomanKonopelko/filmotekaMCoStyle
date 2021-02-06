@@ -13,7 +13,9 @@
     animation: animate-border-btn 2s infinite;
   }
 }
-
+.pagination {
+  display: flex;
+}
 .pagination.is-hidden {
   display: none;
 }
@@ -42,11 +44,10 @@
 
 .pagination__turning-btn {
   display: inline-block;
-  width: 50px;
+  width: 30px;
   margin-right: 10px;
-  padding: 5px 10px;
 
-  font-size: 12px;
+  font-size: 14px;
   text-transform: uppercase;
   border: none;
   border-radius: 5px;
@@ -57,10 +58,9 @@
   background-color: transparent;
 
   @include for-size(tablet) {
-    width: 70px;
-    padding: 10px 20px;
-    font-size: 12px;
-    border-radius: 10px;
+    width: 40px;
+    padding: 5px 5px;
+    font-size: 18px;
     color: $accent-color2;
     border: none;
     transform: translateZ(0);

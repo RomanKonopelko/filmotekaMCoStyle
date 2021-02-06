@@ -557,32 +557,33 @@ class MovieApi {
 
     const lastBtn = document.createElement('button');
     const firsBtn = document.createElement('button');
-    lastBtn.textContent = 'Last';
-    firsBtn.textContent = 'First';
+    lastBtn.textContent = '>>';
+    firsBtn.textContent = '<<';
     lastBtn.classList.add('pagination__turning-btn');
     firsBtn.classList.add('pagination__turning-btn');
 
-    prevBtn.textContent = 'Prev';
+    prevBtn.textContent = '<';
     prevBtn.classList.add('pagination__turning-btn');
-    nextBtn.textContent = 'Next';
+    nextBtn.textContent = '>';
     nextBtn.classList.add('pagination__turning-btn');
     if (this.page === 1) {
       prevBtn.classList.add('is-hidden');
       firsBtn.classList.add('is-hidden');
       firsBtn.disabled = true;
-      //prevBtn.disabled = true; // їх же і так не видно, навіщо disabled?
     }
 
     if (this.page === data.total_pages) {
       nextBtn.classList.add('is-hidden');
       lastBtn.classList.add('is-hidden');
-      //nextBtn.disabled = true; // їх же і так не видно, навіщо disabled?
     }
-
+    if (window.innerWidth < 400) {
+      if (this.page < 3) {
+        firsBtn.classList.add('is-hidden');
+      }
+    }
     if (this.page < 4) {
       firsBtn.classList.add('is-hidden');
     }
-
     if (data.total_pages < 6) {
       firsBtn.classList.add('is-hidden');
       lastBtn.classList.add('is-hidden');
@@ -625,6 +626,9 @@ class MovieApi {
   }
 
   setRatioButtons(data) {
+    if (window.innerWidth < 400) {
+      this.pagination.window = 3;
+    }
     let maxLeft = this.params._page - Math.floor(this.pagination.window / 2);
     let maxRight = this.params._page + Math.floor(this.pagination.window / 2);
     this.params.lastPage = data.total_pages;
