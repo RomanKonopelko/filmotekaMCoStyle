@@ -189,7 +189,7 @@
         color: $accent-color2;
         text-shadow: 0.1em 0.1em 0.1em $accent-color4;
 
-
+        
         // text-align: center;   // Мешало позиционированию
         width: 100%; //  Захаркодил ширину текста, чтобы не растягивала контейнер
         padding: 20px 20px;
@@ -231,9 +231,12 @@
   cursor: pointer;
 }
 
-.library-filter__btn {
-  width: 150px;
-  height: 50px;
+.library-filter {
+  margin-bottom: 20px;
+  &__btn {
+    width: 150px;
+    height: 50px;
+  }
 }
 
 .message-title {
