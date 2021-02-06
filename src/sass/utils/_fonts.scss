@@ -10,7 +10,8 @@
 @font-face {
   font-family: 'Neon';
   font-style: normal;
-  src: url('./fonts/Neon.ttf') format('truetype');
+  src: local('AA Neon'), url('../fonts/Neon.ttf') format('truetype'),
+    local('AA Neon'), url('../fonts/aa-neon.woff') format('woff');
 }
 @font-face {
   font-family: 'Roboto';
