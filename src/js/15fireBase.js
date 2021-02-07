@@ -20,10 +20,14 @@ auth.onAuthStateChanged(user => {
     // alert('hellooo');
     btnSignOut.classList.remove('is-hidden');
     btnSignUp.classList.add('is-hidden');
+    btnSignIn.classList.add('sign-user');
+    btnSignIn.disabled = true;
   } else {
     // alert('byee');
     btnSignOut.classList.add('is-hidden');
     btnSignUp.classList.remove('is-hidden');
+    btnSignIn.classList.remove('sign-user');
+    btnSignIn.disabled = false;
   }
 });
 
