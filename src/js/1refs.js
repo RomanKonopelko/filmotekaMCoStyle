@@ -52,6 +52,10 @@ const refs = {
 
   //12navigationEfectSwitch
   iconButton: document.querySelector('[data-icon]'),
+
+  //
+  // heroContainer: document.getElementsByClassName('hero'), 
+  // galleryListItem: document.getElementsByClassName('gallery__list-item'),
 };
 
 const {
@@ -90,4 +94,6 @@ const {
   iconButton,
   reviewCard,
   sliderContainer,
+  // heroContainer,
+  // galleryListItem,
 } = refs;
