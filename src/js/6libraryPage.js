@@ -77,8 +77,11 @@ function createPlugTitle(title, library) {
 
 // кнопка My Library //
 
+btnMyLibrary.addEventListener('click', openLibrary);
+
 // btnMyLibrary.addEventListener('click', openLibrary);
 //btnHome.addEventListener('click', goHome);
+
 
 function openLibrary() {
   window.scrollTo({
@@ -91,9 +94,33 @@ function openLibrary() {
   btnWatched.disabled = false;
   detailsSection.innerHTML = '';
   paginationWrapper.innerHTML = '';
-  form.innerHTML = '';
+  // form.innerHTML = '';
+  form.classList.add('is-hidden');
+  form.style.display = 'none';
   libraryFilrt.classList.remove('is-hidden');
   main.classList.remove('is-hidden');
+}
+
+
+///// Кнопка Home и логотип
+btnHome.addEventListener('click', goHome);
+iconButton.addEventListener('click', goHome);
+function goHome() {
+  window.scrollTo({
+    top: document.body.children[1].clientHeight,
+    behavior: 'smooth',
+  });
+  MyApi.showSlider();
+  MyApi.resetGalleryCard();
+  btnQueue.disabled = true;
+  btnWatched.disabled = true;
+  detailsSection.innerHTML = '';
+  paginationWrapper.innerHTML = '';
+  libraryFilrt.classList.add('is-hidden');
+  main.classList.remove('is-hidden');
+  form.classList.remove('is-hidden');
+  form.style.display = 'block';
+  MyApi.fetchPopularFilmsList();
 }
 
 function askingToMakeAuthorization() {
@@ -109,3 +136,4 @@ function handleUserStatusForLibrary() {
     openLibrary();
   }
 }
+
