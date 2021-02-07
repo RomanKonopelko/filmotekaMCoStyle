@@ -16,10 +16,6 @@ thrillerRef.addEventListener('click', () => {
   westernRef.classList.remove('current');
   fantasyRef.classList.remove('current');
   dramaRef.classList.remove('current');
-});
-thrillerRef.addEventListener('click', drawFilmListByGenre);
-
-comedyRef.addEventListener('click', () => {
   setTimeout(() => {
     drawFilmListByGenre();
   }, 2000);
@@ -41,6 +37,7 @@ comedyRef.addEventListener('click', () => {
   westernRef.classList.remove('current');
   fantasyRef.classList.remove('current');
   dramaRef.classList.remove('current');
+
 });
 comedyRef.addEventListener('click', drawFilmListByGenre);
 
@@ -66,10 +63,6 @@ actionRef.addEventListener('click', () => {
   westernRef.classList.remove('current');
   fantasyRef.classList.remove('current');
   dramaRef.classList.remove('current');
-});
-actionRef.addEventListener('click', drawFilmListByGenre);
-
-animationRef.addEventListener('click', () => {
   setTimeout(() => {
     drawFilmListByGenre();
   }, 2000);
@@ -91,10 +84,6 @@ animationRef.addEventListener('click', () => {
   westernRef.classList.remove('current');
   fantasyRef.classList.remove('current');
   dramaRef.classList.remove('current');
-});
-animationRef.addEventListener('click', drawFilmListByGenre);
-
-westernRef.addEventListener('click', () => {
   setTimeout(() => {
     drawFilmListByGenre();
   }, 2000);
@@ -117,10 +106,6 @@ westernRef.addEventListener('click', () => {
   westernRef.classList.add('current');
   fantasyRef.classList.remove('current');
   dramaRef.classList.remove('current');
-});
-westernRef.addEventListener('click', drawFilmListByGenre);
-
-fantasyRef.addEventListener('click', () => {
   setTimeout(() => {
     drawFilmListByGenre();
   }, 2000);
@@ -142,10 +127,6 @@ fantasyRef.addEventListener('click', () => {
   westernRef.classList.remove('current');
   fantasyRef.classList.add('current');
   dramaRef.classList.remove('current');
-});
-fantasyRef.addEventListener('click', drawFilmListByGenre);
-
-dramaRef.addEventListener('click', () => {
   setTimeout(() => {
     drawFilmListByGenre();
   }, 2000);
@@ -167,8 +148,10 @@ dramaRef.addEventListener('click', () => {
   westernRef.classList.remove('current');
   fantasyRef.classList.remove('current');
   dramaRef.classList.add('current');
+  setTimeout(() => {
+    drawFilmListByGenre()
+  }, 2000);
 });
-dramaRef.addEventListener('click', drawFilmListByGenre);
 
 function drawFilmListByGenre() {
   let genres, result;
