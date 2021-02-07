@@ -85,6 +85,7 @@ function openLibrary() {
     top: document.body.children[1].clientHeight,
     behavior: 'smooth',
   });
+  MyApi.hideSlider();
   MyApi.resetGalleryCard();
   btnQueue.disabled = false;
   btnWatched.disabled = false;

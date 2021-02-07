@@ -194,7 +194,6 @@
     padding-bottom: 56.25%;
     padding-top: 30px;
     height: 0;
-    overflow: hidden;
   }
   .video-block iframe {
     position: absolute;
@@ -203,4 +202,8 @@
     width: 100%;
     height: 100%;
   }
+}
+
+.overflow {
+  overflow: hidden;
 }

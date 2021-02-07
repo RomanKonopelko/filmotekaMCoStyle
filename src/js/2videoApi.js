@@ -60,6 +60,11 @@ class MovieApi {
       part.classList.remove('is-hidden');
     });
   }
+  hideSlider() {
+    this.pagination.paginationContainer.classList.remove('is-hidden');
+    const heroContainer = document.querySelector(['.hero']);
+    heroContainer.classList.add('is-hidden');
+  }
 
   hideLoader() {
     this.pagination.paginationContainer.classList.remove('is-hidden');
@@ -77,7 +82,6 @@ class MovieApi {
         return resp;
       })
       .then(({ results }) => {
-        // console.log(results.length);
         if (results.length === 0) onHandleTrailerError();
         return results[0];
       })
@@ -96,6 +100,7 @@ class MovieApi {
       })
       .then(arr => {
         this.pagination.sliderContainer.append(...arr);
+
         const slider = tns({
           container: '.my-slider',
           items: 3,
@@ -127,7 +132,6 @@ class MovieApi {
         }),
       )
       .then(item => {
-        console.log(item);
         this.pagination.cardContainer.append(...item);
       })
       .finally(() => {
@@ -228,7 +232,6 @@ class MovieApi {
       .then(data => data.json())
       .then(data => {
         this.setRatioButtons(data);
-        console.log(data.total_pages);
         return data;
       })
       .then(resp => {
@@ -273,11 +276,13 @@ class MovieApi {
     const sliderDiv = document.createElement('div');
     sliderDiv.classList.add('slider__item');
     sliderDiv.style.backgroundImage = `url('${MyApi.IMAGE_BASE_URL}${MyApi.imgCards.currentSizes.backdropSize}${data.poster_path}')`;
-    const sliderTitle = document.createElement('h2');
-    const sliderRating = document.createElement('p');
-    sliderRating.textContent = data.vote_average;
-    sliderTitle.textContent = data.title;
-    sliderDiv.append(sliderTitle, sliderRating);
+    // const sliderTitle = document.createElement('h2');
+    // sliderTitle.classList.add('slider__item-title');
+    // const sliderRating = document.createElement('p');
+    // sliderRating.classList.add('slider__item-rating');
+    // sliderRating.textContent = data.vote_average;
+    // sliderTitle.textContent = data.title;
+    // sliderDiv.append(sliderTitle, sliderRating);
     return sliderDiv;
   }
 
@@ -322,6 +327,7 @@ class MovieApi {
       // клік на картку //
       this.movieID = id;
       this.pagination.cardContainer.classList.add('is-hidden');
+      this.hideSlider();
       this.activeLoader();
       //Скролит вверх
       window.scrollTo(0, document.body.children[1].clientHeight);
@@ -342,13 +348,10 @@ class MovieApi {
 
     let collectionItems = [];
     if (libraryIndicator === 'Queue') {
-      console.log('Queue!!!!!!!!!!!');
       collectionItems = this.queueList;
     } else if (libraryIndicator === 'Watched') {
-      console.log('Watched!!!!!!!!');
       collectionItems = this.watchedList;
     } else if (!libraryIndicator) {
-      console.log('OTHER');
       collectionItems = this.popularFilmItem;
     }
 
@@ -435,6 +438,11 @@ class MovieApi {
     const titleText = document.createElement('h3');
     titleText.classList.add('details-page__title', 'second');
     titleText.textContent = 'About';
+    const spanAbout = document.createElement('span');
+    spanAbout.classList.add('material-icons', 'span-about');
+    spanAbout.textContent = 'info';
+    titleText.append(spanAbout);
+
     const textAbout = document.createElement('p');
     textAbout.classList.add('details-page__text');
     textAbout.textContent = item.overview;
@@ -457,7 +465,7 @@ class MovieApi {
 
     reviewsTitle.addEventListener('click', () => {
       if (this.reviews.length === 0) {
-        reviewsTitle.textContent = 'Sorry, we dont have any reviews';
+        reviewsTitle.textContent = 'Sorry, we do not have any review yet!';
         return;
       }
       if (!userStatus) {
@@ -480,7 +488,7 @@ class MovieApi {
 
       this.reviews.map(el => {
         if (el[0] === '') {
-          el[0] = 'anonim';
+          el[0] = 'anonym';
         }
 
         const reviewsAutor = document.createElement('h3');
@@ -537,6 +545,7 @@ class MovieApi {
     buttonTrailer.classList.add('button__add');
     buttonTrailer.setAttribute('type', 'submite');
     buttonTrailer.textContent = 'watch the trailer';
+
     buttonTrailer.addEventListener('click', () => {
       if (!userStatus) {
         askingToMakeAuthorization();
@@ -544,6 +553,10 @@ class MovieApi {
         this.onTrailerClick();
       }
     });
+
+
+    buttonTrailer.addEventListener('click', this.onTrailerClick);
+
 
     const divBtn = document.createElement('div');
     divBtn.classList.add('details-page__button');
@@ -609,7 +622,7 @@ class MovieApi {
       reviewCard.innerHTML = '';
       main.classList.remove('is-hidden');
       this.actors = []; //=========================================================================
-      // console.log(this.actors);
+
       if (libraryFilrt.classList != 'is-hidden') {
         if (btnQueue.disabled) {
           drawQueueFilmList();

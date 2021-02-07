@@ -50,6 +50,10 @@ function onHandleTrailerError() {
 function openModal(event) {
   event.preventDefault();
 
+  body.classList.add('overflow');
+  // youTubeSizes();
+
+
   MyApi.fetchVideoById().then(key => {
     player.src = `http://www.youtube.com/embed/${key}?autoplay=1`;
   });
@@ -61,6 +65,7 @@ function openModal(event) {
 function closeModal() {
   player.src = '';
   backdrop.classList.add('backdrop--hidden');
+  body.classList.remove('overflow');
   window.removeEventListener('keydown', onKeybordPress);
 }
 
