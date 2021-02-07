@@ -557,10 +557,10 @@ var tns = function () {
         fixedWidth: false,
         autoWidth: false,
         viewportMax: false,
-        slideBy: 1,
+        slideBy: 3,
         center: false,
         controls: false,
-        controlsPosition: 'top',
+        controlsPosition: 'bottom',
         controlsText: ['prev', 'next'],
         controlsContainer: false,
         prevButton: false,
@@ -569,8 +569,8 @@ var tns = function () {
         navPosition: 'top',
         navContainer: false,
         navAsThumbnails: false,
-        arrowKeys: false,
-        speed: 300,
+        arrowKeys: true,
+        speed: 1000,
         autoplay: true,
         autoplayPosition: 'top',
         autoplayTimeout: 5000,
@@ -578,7 +578,7 @@ var tns = function () {
         autoplayText: ['start', 'stop'],
         autoplayHoverPause: false,
         autoplayButton: false,
-        autoplayButtonOutput: true,
+        autoplayButtonOutput: false,
         autoplayResetOnVisibility: true,
         animateIn: 'tns-fadeIn',
         animateOut: 'tns-fadeOut',
@@ -591,7 +591,7 @@ var tns = function () {
         lazyload: false,
         lazyloadSelector: '.tns-lazy-img',
         touch: true,
-        mouseDrag: false,
+        mouseDrag: true,
         swipeAngle: 15,
         nested: false,
         preventActionWhenRunning: false,
@@ -4068,10 +4068,3 @@ var tns = function () {
 
   return tns;
 };
-
-var slider = tns({
-  container: '.my-slider',
-  items: 3,
-  slideBy: 'page',
-  autoplay: true,
-});

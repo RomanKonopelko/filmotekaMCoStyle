@@ -96,11 +96,19 @@ class MovieApi {
       })
       .then(arr => {
         this.pagination.sliderContainer.append(...arr);
-        const slider = tns({
+
+        var slider = tns({
           container: '.my-slider',
           items: 3,
           slideBy: 'page',
           autoplay: true,
+          responsive: {
+            640: {
+              edgePadding: 20,
+              gutter: 20,
+              items: 1,
+            },
+          },
         });
         return slider();
       });
