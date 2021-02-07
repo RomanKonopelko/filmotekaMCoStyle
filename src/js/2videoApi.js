@@ -77,7 +77,6 @@ class MovieApi {
         return resp;
       })
       .then(({ results }) => {
-        // console.log(results.length);
         if (results.length === 0) onHandleTrailerError();
         return results[0];
       })
@@ -97,18 +96,11 @@ class MovieApi {
       .then(arr => {
         this.pagination.sliderContainer.append(...arr);
 
-        var slider = tns({
+        const slider = tns({
           container: '.my-slider',
           items: 3,
           slideBy: 'page',
           autoplay: true,
-          responsive: {
-            640: {
-              edgePadding: 20,
-              gutter: 20,
-              items: 1,
-            },
-          },
         });
         return slider();
       });
@@ -135,7 +127,6 @@ class MovieApi {
         }),
       )
       .then(item => {
-        console.log(item);
         this.pagination.cardContainer.append(...item);
       })
       .finally(() => {
@@ -236,7 +227,6 @@ class MovieApi {
       .then(data => data.json())
       .then(data => {
         this.setRatioButtons(data);
-        console.log(data.total_pages);
         return data;
       })
       .then(resp => {
@@ -281,11 +271,13 @@ class MovieApi {
     const sliderDiv = document.createElement('div');
     sliderDiv.classList.add('slider__item');
     sliderDiv.style.backgroundImage = `url('${MyApi.IMAGE_BASE_URL}${MyApi.imgCards.currentSizes.backdropSize}${data.poster_path}')`;
-    const sliderTitle = document.createElement('h2');
-    const sliderRating = document.createElement('p');
-    sliderRating.textContent = data.vote_average;
-    sliderTitle.textContent = data.title;
-    sliderDiv.append(sliderTitle, sliderRating);
+    // const sliderTitle = document.createElement('h2');
+    // sliderTitle.classList.add('slider__item-title');
+    // const sliderRating = document.createElement('p');
+    // sliderRating.classList.add('slider__item-rating');
+    // sliderRating.textContent = data.vote_average;
+    // sliderTitle.textContent = data.title;
+    // sliderDiv.append(sliderTitle, sliderRating);
     return sliderDiv;
   }
 
@@ -350,13 +342,10 @@ class MovieApi {
 
     let collectionItems = [];
     if (libraryIndicator === 'Queue') {
-      console.log('Queue!!!!!!!!!!!');
       collectionItems = this.queueList;
     } else if (libraryIndicator === 'Watched') {
-      console.log('Watched!!!!!!!!');
       collectionItems = this.watchedList;
     } else if (!libraryIndicator) {
-      console.log('OTHER');
       collectionItems = this.popularFilmItem;
     }
 
@@ -594,7 +583,7 @@ class MovieApi {
       reviewCard.innerHTML = '';
       main.classList.remove('is-hidden');
       this.actors = []; //=========================================================================
-      // console.log(this.actors);
+
       if (libraryFilrt.classList != 'is-hidden') {
         if (btnQueue.disabled) {
           drawQueueFilmList();

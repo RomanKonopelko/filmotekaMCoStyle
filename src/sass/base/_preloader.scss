@@ -38,13 +38,6 @@
   transform: translateZ(0);
   opacity: 0;
   animation: move 4s linear infinite;
-  -o-animation: move 4s linear infinite;
-  -moz-animation: move 4s linear infinite;
-  -webkit-animation: move 4s linear infinite;
-  transform: rotate(180deg);
-  -o-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -webkit-transform: rotate(180deg);
 
   @include for-size(tablet) {
     font-size: 40px;
@@ -103,26 +96,16 @@
   }
   35% {
     left: 41%;
-    -moz-transform: rotate(0deg);
-    -webkit-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
+
     opacity: 1;
   }
   65% {
     left: 59%;
-    -moz-transform: rotate(0deg);
-    -webkit-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
+
     opacity: 1;
   }
   100% {
     left: 100%;
-    -moz-transform: rotate(-180deg);
-    -webkit-transform: rotate(-180deg);
-    -o-transform: rotate(-180deg);
-    transform: rotate(-180deg);
     opacity: 0;
   }
 }
@@ -134,20 +117,17 @@
   }
   35% {
     left: 41%;
-    -moz-transform: rotate(0deg);
-    transform: rotate(0deg);
+
     opacity: 1;
   }
   65% {
     left: 59%;
-    -moz-transform: rotate(0deg);
-    transform: rotate(0deg);
+
     opacity: 1;
   }
   100% {
     left: 100%;
-    -moz-transform: rotate(-180deg);
-    transform: rotate(-180deg);
+
     opacity: 0;
   }
 }
@@ -159,20 +139,17 @@
   }
   35% {
     left: 41%;
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
+
     opacity: 1;
   }
   65% {
     left: 59%;
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
+
     opacity: 1;
   }
   100% {
     left: 100%;
-    -webkit-transform: rotate(-180deg);
-    transform: rotate(-180deg);
+
     opacity: 0;
   }
 }
@@ -184,20 +161,17 @@
   }
   35% {
     left: 41%;
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
+
     opacity: 1;
   }
   65% {
     left: 59%;
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
+
     opacity: 1;
   }
   100% {
     left: 100%;
-    -o-transform: rotate(-180deg);
-    transform: rotate(-180deg);
+
     opacity: 0;
   }
 }

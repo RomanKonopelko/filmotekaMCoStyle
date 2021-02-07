@@ -4,7 +4,7 @@ window.addEventListener('load', () => {
   setTimeout(() => {
     setTimeout(() => {
       parallaxWidthCheck();
-    }, 3000);
+    }, 2000);
     preloader.classList.add('done');
-  }, 3000);
+  }, 2000);
 });
