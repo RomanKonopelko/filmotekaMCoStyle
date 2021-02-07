@@ -10,6 +10,7 @@ var firebaseConfig = {
 
 const SIGN_UP_SUCCESS = 'Congratulations! You made the right choice!!!';
 const SIGN_IN_SUCCESS = 'Perfect! You are on Board!!!';
+const SIGN_IN_FAIL = 'Oops!Something went wrong!Try again!!!';
 const DEMAND_TO_REGISTER =
   'To be able to use all features of our Magic source, please pass the registration!';
 const DEFAULT_SIGN_UP = 'Become a part of our filmgeek club!';
@@ -113,14 +114,21 @@ function signUp(params) {
     signUpEmail.value,
     signUpPassword.value,
   );
+  let signUpError = '';
   signUpRequest.catch(e => {
-    alert(e);
+    console.log(e.message);
+    signUpError = e.message;
   });
-
-  welcomeTextSignUp.textContent = SIGN_UP_SUCCESS;
   setTimeout(() => {
-    authBackdrop.classList.add('auth__backdrop--hidden');
-  }, 2000);
+    if (signUpError) {
+      welcomeTextSignUp.textContent = SIGN_IN_FAIL;
+    } else {
+      welcomeTextSignUp.textContent = SIGN_UP_SUCCESS;
+      setTimeout(() => {
+        authBackdrop.classList.add('auth__backdrop--hidden');
+      }, 2000);
+    }
+  }, 1000);
 }
 
 function signIn(params) {
@@ -129,11 +137,20 @@ function signIn(params) {
     signInEmail.value,
     signInPassword.value,
   );
-  signInRequest.catch(e => alert(e));
-
-  welcomeTextSignIn.textContent = SIGN_IN_SUCCESS;
+  let signInError = '';
+  signInRequest.catch(e => {
+    signInError = e.message;
+  });
   setTimeout(() => {
-    authBackdrop.classList.add('auth__backdrop--hidden');
-  }, 2000);
+    if (signInError) {
+      welcomeTextSignIn.textContent = SIGN_IN_FAIL;
+    } else {
+      welcomeTextSignIn.textContent = SIGN_IN_SUCCESS;
+      setTimeout(() => {
+        authBackdrop.classList.add('auth__backdrop--hidden');
+      }, 2000);
+    }
+  }, 1000);
+
   // alert('Signed in' + signInEmail.value);
 }
