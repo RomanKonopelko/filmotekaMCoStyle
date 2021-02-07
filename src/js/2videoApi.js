@@ -171,8 +171,8 @@ class MovieApi {
           .slice(0, 5);
         //console.log(this.reviews); // повертає ім'я автора і його рев'ю
         return this.reviews;
-      })
-      .catch(error => this.reviews(error));
+      });
+    //.catch(error => this.reviews(error));
   }
   // test end //
 
@@ -242,6 +242,7 @@ class MovieApi {
 
   resetGalleryCard() {
     this.pagination.cardContainer.innerHTML = '';
+    reviewCard.innerHTML = '';
   }
 
   createCardFunc(itemData, siteSection) {
@@ -402,11 +403,7 @@ class MovieApi {
     textAbout.classList.add('details-page__text');
     textAbout.textContent = item.overview;
 
-    // test start //
-
-    titleText.addEventListener('click', () => {
-      textAbout.classList.remove('is-hidden');
-    });
+    // reviews //
 
     const reviewsTitle = document.createElement('h3');
     reviewsTitle.classList.add(
@@ -423,25 +420,50 @@ class MovieApi {
     this.fetchReviews();
 
     reviewsTitle.addEventListener('click', () => {
-      detailsSection.classList.add('is-hidden');
-      const reviewsAutor = document.createElement('h3');
-      const autorFace = document.createElement('span');
-
-      autorFace.classList.add('material-icons');
-      autorFace.textContent = 'face';
-
-      const reviewsText = document.createElement('p');
-      reviewsText.classList.add('details-page__text');
-
-      reviews.append(autorFace, reviewsAutor, reviewsText);
-
-      for (let obj of this.reviews) {
-        reviewsAutor.textContent = obj[0];
-        reviewsText.textContent = obj[1];
+      if (this.reviews.length === 0) {
+        reviewsTitle.textContent = 'Sorry, we dont have any reviews';
+        return;
       }
-    });
 
-    console.log(item.id, 'назва');
+      detailsSection.classList.add('is-hidden');
+
+      const btnClose = document.createElement('button');
+      btnClose.classList.add('button__add', 'button-close', 'btn-reviews');
+      btnClose.textContent = 'X';
+
+      btnClose.addEventListener('click', () => {
+        detailsSection.classList.remove('is-hidden');
+        reviewCard.innerHTML = '';
+      });
+
+      reviewCard.append(btnClose);
+
+      this.reviews.map(el => {
+        if (el[0] === '') {
+          el[0] = 'anonim';
+        }
+
+        const reviewsAutor = document.createElement('h3');
+        reviewsAutor.classList.add('reviews-autor');
+        const autorFace = document.createElement('span');
+
+        autorFace.classList.add('material-icons', 'icons-face');
+        autorFace.textContent = 'face';
+
+        const reviewsText = document.createElement('p');
+        reviewsText.classList.add('reviews-text');
+
+        reviewsAutor.textContent = el[0];
+        reviewsText.textContent =
+          el[1].split(' ').slice(0, 100).join(' ') + '...';
+
+        reviewCard.append(autorFace, reviewsAutor, reviewsText);
+
+        reviewsText.addEventListener('click', () => {
+          reviewsText.textContent = el[1];
+        });
+      });
+    });
 
     // test end//
 
@@ -525,6 +547,7 @@ class MovieApi {
       this.pagination.cardContainer.classList.remove('is-hidden');
       btnTop.classList.remove('is-hidden');
       detailsSection.innerHTML = '';
+      reviewCard.innerHTML = '';
       main.classList.remove('is-hidden');
       this.actors = []; //=========================================================================
       // console.log(this.actors);
@@ -537,9 +560,8 @@ class MovieApi {
         }
       }
     });
-
-    // Вызов видео
   }
+  //Вызов видео
 
   onTrailerClick() {
     openModal(event);
