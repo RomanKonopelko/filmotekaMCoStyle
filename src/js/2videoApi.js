@@ -1,5 +1,5 @@
 class MovieApi {
-  constructor(key, paginationWrapper, cardWrapper) {
+  constructor(key, paginationWrapper, cardWrapper, sliderWrapper) {
     this.API_KEY = key;
     this.BASE_URL = 'https://api.themoviedb.org/3/';
     this.IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/';
@@ -32,6 +32,7 @@ class MovieApi {
       window: 5, //quantity of pagination buttons
       cardContainer: cardWrapper, //gallery cards container
       paginationContainer: paginationWrapper, //pagination buttons container
+      sliderContainer: sliderWrapper,
     };
     this.imgCards = {
       defaultBackdropImg: '',
@@ -52,7 +53,6 @@ class MovieApi {
       },
     };
   }
-
   activeLoader() {
     this.pagination.paginationContainer.classList.add('is-hidden');
     const loaderArr = [...loaderPartOne, ...loaderPartTwo];
@@ -83,6 +83,28 @@ class MovieApi {
       })
       .then(({ key }) => key);
   }
+  dailyBestMovie() {
+    return fetch(
+      `https://api.themoviedb.org/3/trending/movie/day?api_key=${this.API_KEY}`,
+    )
+      .then(response => response.json())
+      .then(({ results }) => results)
+      .then(col => {
+        return col.map(el => {
+          return this.createSliderCard(el);
+        });
+      })
+      .then(arr => {
+        this.pagination.sliderContainer.append(...arr);
+        const slider = tns({
+          container: '.my-slider',
+          items: 3,
+          slideBy: 'page',
+          autoplay: true,
+        });
+        return slider();
+      });
+  }
 
   fetchPopularFilmsList() {
     this.searchMode = 'popular';
@@ -104,7 +126,10 @@ class MovieApi {
           return this.createCardFunc(el);
         }),
       )
-      .then(item => MyApi.pagination.cardContainer.append(...item))
+      .then(item => {
+        console.log(item);
+        this.pagination.cardContainer.append(...item);
+      })
       .finally(() => {
         this.pagination.cardContainer.classList.remove('is-hidden');
         this.hideLoader();
@@ -243,6 +268,17 @@ class MovieApi {
   resetGalleryCard() {
     this.pagination.cardContainer.innerHTML = '';
     reviewCard.innerHTML = '';
+  }
+  createSliderCard(data) {
+    const sliderDiv = document.createElement('div');
+    sliderDiv.classList.add('slider__item');
+    sliderDiv.style.backgroundImage = `url('${MyApi.IMAGE_BASE_URL}${MyApi.imgCards.currentSizes.backdropSize}${data.poster_path}')`;
+    const sliderTitle = document.createElement('h2');
+    const sliderRating = document.createElement('p');
+    sliderRating.textContent = data.vote_average;
+    sliderTitle.textContent = data.title;
+    sliderDiv.append(sliderTitle, sliderRating);
+    return sliderDiv;
   }
 
   createCardFunc(itemData, siteSection) {
@@ -751,4 +787,9 @@ class MovieApi {
 }
 
 const API_KEY = '91085a172e1ffb2047d72641d0a91356';
-const MyApi = new MovieApi(API_KEY, paginationWrapper, ulForCards);
+const MyApi = new MovieApi(
+  API_KEY,
+  paginationWrapper,
+  ulForCards,
+  sliderContainer,
+);

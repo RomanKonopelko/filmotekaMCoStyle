@@ -5,6 +5,7 @@ MyApi.checkBackdropImgSize();
 MyApi.checkPosterImgSize();
 
 MyApi.fetchPopularFilmsList();
+MyApi.dailyBestMovie();
 MyApi.fetchGenres();
 
 // Button UP Logic

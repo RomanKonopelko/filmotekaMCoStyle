@@ -9,6 +9,7 @@ const refs = {
   paginationWrapper: document.querySelector('.pagination'),
   ulForCards: document.querySelector('.gallery__list'),
   reviewCard: document.querySelector('.review'),
+  sliderContainer: document.querySelector('.my-slider'),
 
   //3initialHomePage
   btnTop: document.querySelector('.main__btn-scroll'),
@@ -88,4 +89,5 @@ const {
   decor2,
   iconButton,
   reviewCard,
+  sliderContainer,
 } = refs;

@@ -17,11 +17,11 @@ const auth = firebase.auth();
 auth.onAuthStateChanged(user => console.log(user));
 auth.onAuthStateChanged(user => {
   if (user) {
-    alert('hellooo');
+    // alert('hellooo');
     btnSignOut.classList.remove('is-hidden');
     btnSignUp.classList.add('is-hidden');
   } else {
-    alert('byee');
+    // alert('byee');
     btnSignOut.classList.add('is-hidden');
     btnSignUp.classList.remove('is-hidden');
   }
