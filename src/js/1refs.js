@@ -23,6 +23,7 @@ const refs = {
 
   //6libraryPage
   btnMyLibrary: document.querySelector('.library'),
+  btnHome: document.querySelector('[data-home]'),
 
   filmsLibrary: document.querySelector('.js-gallery'),
   btnWatched: document.querySelector('.btnWatched'),
@@ -110,6 +111,7 @@ const {
 
   // heroContainer,
   // galleryListItem,
+  btnHome,
   body,
 } = refs;
 

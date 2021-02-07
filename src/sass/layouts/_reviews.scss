@@ -20,6 +20,9 @@
   display: block;
   cursor: pointer;
 }
+.reviews-text:not(:last-child) {
+  margin-bottom: 25px;
+}
 
 .reviews-autor {
   display: inline;

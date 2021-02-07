@@ -30,13 +30,23 @@ auth.onAuthStateChanged(user => {
     // alert('hellooo');
     btnSignOut.classList.remove('is-hidden');
     btnSignUp.classList.add('is-hidden');
+
+    btnSignIn.classList.add('sign-user');
+    btnSignIn.disabled = true;
+
     userStatus = true;
     // console.log(user);
+
   } else {
     // alert('byee');
     btnSignOut.classList.add('is-hidden');
     btnSignUp.classList.remove('is-hidden');
+
+    btnSignIn.classList.remove('sign-user');
+    btnSignIn.disabled = false;
+
     userStatus = false;
+
   }
 });
 
@@ -98,6 +108,7 @@ signUpBtn.addEventListener('click', signUp);
 signInBtn.addEventListener('click', signIn);
 
 function signUp(params) {
+  body.classList.remove('overflow');
   console.dir(signUpEmail);
   const signUpRequest = auth.createUserWithEmailAndPassword(
     signUpEmail.value,
@@ -121,6 +132,7 @@ function signUp(params) {
 }
 
 function signIn(params) {
+  body.classList.remove('overflow');
   const signInRequest = auth.signInWithEmailAndPassword(
     signInEmail.value,
     signInPassword.value,
