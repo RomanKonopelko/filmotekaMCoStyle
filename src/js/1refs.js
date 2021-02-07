@@ -8,7 +8,7 @@ const refs = {
   libraryFilrt: document.querySelector('.library-filter'),
   paginationWrapper: document.querySelector('.pagination'),
   ulForCards: document.querySelector('.gallery__list'),
-  reviews: document.querySelector('.review'),
+  reviewCard: document.querySelector('.review'),
 
   //3initialHomePage
   btnTop: document.querySelector('.main__btn-scroll'),
@@ -87,5 +87,5 @@ const {
   decor1,
   decor2,
   iconButton,
-  reviews,
+  reviewCard,
 } = refs;

@@ -1,0 +1,48 @@
+.review {
+  padding: 30px;
+  position: relative;
+
+  @include for-size(tablet) {
+    padding: 45px;
+  }
+  @include for-size(desktop) {
+    padding: 45px 200px;
+  }
+}
+
+.reviews-title {
+  cursor: pointer;
+}
+
+.reviews-text {
+  font-size: 14px;
+  display: block;
+  cursor: pointer;
+}
+
+.reviews-autor {
+  display: inline;
+  margin-left: 10px;
+
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 17px;
+
+  color: $accent-color2;
+  text-shadow: 0.1em 0.1em 0.1em $accent-color4;
+}
+
+.span-input {
+  margin-left: 10px;
+}
+
+.icons-face {
+  color: $accent-color2;
+  text-shadow: 0.1em 0.1em 0.1em $accent-color4;
+}
+
+.btn-reviews {
+  right: 25px;
+  top: 15px;ç
+}
