@@ -55,9 +55,18 @@ const refs = {
   //12navigationEfectSwitch
   iconButton: document.querySelector('[data-icon]'),
 
+  //Authorization
+  welcomeTextSignIn: document.querySelector('.auth__title.sign-in'),
+  welcomeTextSignUp: document.querySelector('.auth__title.sign-up'),
+  // demandText: document.querySelector('.auth__title-demand'),
+  // signUpSuccess: document.querySelector('.auth__title-congratulations'),
+  // signInSuccess: document.querySelector('.auth__title-success'),
+
+
   //
   // heroContainer: document.getElementsByClassName('hero'), 
   // galleryListItem: document.getElementsByClassName('gallery__list-item'),
+
 };
 
 const {
@@ -96,8 +105,14 @@ const {
   iconButton,
   reviewCard,
   sliderContainer,
+
+  welcomeTextSignIn,
+  welcomeTextSignUp,
+
   // heroContainer,
   // galleryListItem,
   btnHome,
   body,
 } = refs;
+
+console.log(welcomeTextSignIn);

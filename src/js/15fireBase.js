@@ -7,6 +7,13 @@ var firebaseConfig = {
   appId: '1:759026227062:web:451d5ef97d20e7288acc57',
   measurementId: 'G-9HJTT3B2GK',
 };
+
+const SIGN_UP_SUCCESS = 'Congratulations! You made the right choice!!!';
+const SIGN_IN_SUCCESS = 'Perfect! You are on Board!!!';
+const DEMAND_TO_REGISTER =
+  'To be able to use all features of our Magic source, please pass the registration!';
+const DEFAULT_SIGN_UP = 'Become a part of our filmgeek club!';
+const DEFAULT_SIGN_IN = 'Welcome back! Write your data below!';
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
@@ -14,16 +21,31 @@ console.log(firebase);
 
 const auth = firebase.auth();
 // auth.signOut();
+let userStatus;
+
 auth.onAuthStateChanged(user => console.log(user));
 auth.onAuthStateChanged(user => {
   if (user) {
     // alert('hellooo');
     btnSignOut.classList.remove('is-hidden');
     btnSignUp.classList.add('is-hidden');
+
+    btnSignIn.classList.add('sign-user');
+    btnSignIn.disabled = true;
+
+    userStatus = true;
+    // console.log(user);
+
   } else {
     // alert('byee');
     btnSignOut.classList.add('is-hidden');
     btnSignUp.classList.remove('is-hidden');
+
+    btnSignIn.classList.remove('sign-user');
+    btnSignIn.disabled = false;
+
+    userStatus = false;
+
   }
 });
 
@@ -65,11 +87,13 @@ btnSignIn.addEventListener('click', () => {
   authModalSignIn.classList.remove('signIn-hidden');
   authModalSignUp.classList.add('signUp-hidden');
   authBackdrop.classList.remove('auth__backdrop--hidden');
+  welcomeTextSignIn.textContent = DEFAULT_SIGN_IN;
 });
 
 authMessage.addEventListener('click', () => {
   authModalSignIn.classList.remove('signIn-hidden');
   authModalSignUp.classList.add('signUp-hidden');
+  welcomeTextSignIn.textContent = DEFAULT_SIGN_IN;
 });
 
 btnSignUp.addEventListener('click', () => {
@@ -77,6 +101,7 @@ btnSignUp.addEventListener('click', () => {
   authModalSignUp.classList.remove('signUp-hidden');
   authModalSignIn.classList.add('signIn-hidden');
   authBackdrop.classList.remove('auth__backdrop--hidden');
+  welcomeTextSignUp.textContent = DEFAULT_SIGN_UP;
 });
 signUpBtn.addEventListener('click', signUp);
 signInBtn.addEventListener('click', signIn);
@@ -91,7 +116,10 @@ function signUp(params) {
     alert(e);
   });
 
-  alert('done');
+  welcomeTextSignUp.textContent = SIGN_UP_SUCCESS;
+  setTimeout(() => {
+    authBackdrop.classList.add('auth__backdrop--hidden');
+  }, 2000);
 }
 
 function signIn(params) {
@@ -100,5 +128,10 @@ function signIn(params) {
     signInPassword.value,
   );
   signInRequest.catch(e => alert(e));
-  alert('Signed in' + signInEmail.value);
+
+  welcomeTextSignIn.textContent = SIGN_IN_SUCCESS;
+  setTimeout(() => {
+    authBackdrop.classList.add('auth__backdrop--hidden');
+  }, 2000);
+  // alert('Signed in' + signInEmail.value);
 }

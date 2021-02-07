@@ -1,4 +1,5 @@
 'use strict';
+
 history.scrollRestoration = 'manual'; //kills auto scroll after page reload
 
 MyApi.checkBackdropImgSize();
@@ -48,8 +49,10 @@ function onHandleTrailerError() {
 
 function openModal(event) {
   event.preventDefault();
+
   body.classList.add('overflow');
   // youTubeSizes();
+
 
   MyApi.fetchVideoById().then(key => {
     player.src = `http://www.youtube.com/embed/${key}?autoplay=1`;
@@ -65,7 +68,9 @@ function closeModal() {
   body.classList.remove('overflow');
   window.removeEventListener('keydown', onKeybordPress);
 }
+
 // Close Modal by cleck on Btn Escape
+
 function onKeybordPress(event) {
   if (event.code === 'Escape') {
     closeModal();
