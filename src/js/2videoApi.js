@@ -65,6 +65,11 @@ class MovieApi {
     const heroContainer = document.querySelector(['.hero']);
     heroContainer.classList.add('is-hidden');
   }
+    showSlider() {
+    this.pagination.paginationContainer.classList.remove('is-hidden');
+    const heroContainer = document.querySelector(['.hero']);
+    heroContainer.classList.remove('is-hidden');
+  }
 
   hideLoader() {
     this.pagination.paginationContainer.classList.remove('is-hidden');
