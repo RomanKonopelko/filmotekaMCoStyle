@@ -48,6 +48,7 @@ function onHandleTrailerError() {
 
 function openModal(event) {
   event.preventDefault();
+  body.classList.add('overflow');
   // youTubeSizes();
 
   MyApi.fetchVideoById().then(key => {
@@ -61,6 +62,7 @@ function openModal(event) {
 function closeModal() {
   player.src = '';
   backdrop.classList.add('backdrop--hidden');
+  body.classList.remove('overflow');
   window.removeEventListener('keydown', onKeybordPress);
 }
 // Close Modal by cleck on Btn Escape
