@@ -14,13 +14,29 @@ console.log(firebase);
 
 const auth = firebase.auth();
 // auth.signOut();
-// auth.onAuthStateChanged(user => console.log(user));
-const modalExit = document.querySelector('.auth__exit');
+auth.onAuthStateChanged(user => console.log(user));
+auth.onAuthStateChanged(user => {
+  if (user) {
+    alert('hellooo');
+    btnSignOut.classList.remove('is-hidden');
+    btnSignUp.classList.add('is-hidden');
+  } else {
+    alert('byee');
+    btnSignOut.classList.add('is-hidden');
+    btnSignUp.classList.remove('is-hidden');
+  }
+});
+
 function modalClose(params) {
   authBackdrop.classList.add('auth__backdrop--hidden');
 }
-
-modalExit.addEventListener('click', modalClose);
+(function modalBtnAddListener(params) {
+  const modalExit = document.querySelectorAll('.auth__exit');
+  let array = [...modalExit];
+  array.forEach(e => {
+    e.addEventListener('click', modalClose);
+  });
+})();
 
 const authBackdrop = document.querySelector('.auth__backdrop');
 console.log(authBackdrop);
@@ -30,14 +46,33 @@ const signUpEmail = document.getElementById('authEmail');
 const signUpPassword = document.getElementById('authPassword');
 const signUpBtn = document.getElementById('signUp-submit');
 
+const authMessage = document.querySelector('.auth__message');
+
 const signInEmail = document.getElementById('signInEmail');
 const signInPassword = document.getElementById('signInPassword');
 const signInBtn = document.getElementById('signIn-submit');
 
 const btnSignIn = document.querySelector('.signIn-user');
 const btnSignUp = document.querySelector('.signUp-user');
+const btnSignOut = document.querySelector('.signOut-user');
+btnSignOut.addEventListener('click', () => {
+  auth.signOut();
+});
 
 btnSignIn.addEventListener('click', () => {
+  authModalSignIn.classList.remove('signIn-hidden');
+  authModalSignUp.classList.add('signUp-hidden');
+  authBackdrop.classList.remove('auth__backdrop--hidden');
+});
+
+authMessage.addEventListener('click', () => {
+  authModalSignIn.classList.remove('signIn-hidden');
+  authModalSignUp.classList.add('signUp-hidden');
+});
+
+btnSignUp.addEventListener('click', () => {
+  authModalSignUp.classList.remove('signUp-hidden');
+  authModalSignIn.classList.add('signIn-hidden');
   authBackdrop.classList.remove('auth__backdrop--hidden');
 });
 signUpBtn.addEventListener('click', signUp);

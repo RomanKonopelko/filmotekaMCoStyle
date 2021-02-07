@@ -138,6 +138,11 @@
   pointer-events: none;
 }
 
+.signUp-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
 .backdrop__modal {
   position: absolute;
   top: 50%;
