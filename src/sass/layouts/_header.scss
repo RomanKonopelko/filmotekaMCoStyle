@@ -140,16 +140,19 @@
   position: relative;
 }
 .library::before {
-  content: '';
-  display: block;
-  position: absolute;
-  top: -288px;
-  left: 197px;
-  height: 300px;
-  width: 2px;
-  animation: animate-decoration 4s linear infinite;
+  display: none;
+  @include for-size(tablet) {
+    content: '';
+    display: block;
+    position: absolute;
+    top: -288px;
+    left: 197px;
+    height: 300px;
+    width: 2px;
+    animation: animate-decoration 4s linear infinite;
 
-  background-color: lightseagreen;
+    background-color: lightseagreen;
+  }
 }
 .header__item {
   align-items: center;
@@ -183,10 +186,29 @@
 
   @include for-size(desktop) {
     transition: all 0.1s linear;
-    display: flex;
   }
 }
 
+.signIn-user {
+  font-size: 18px;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+}
+
+.signUp-user {
+  font-size: 18px;
+  position: absolute;
+  top: 10px;
+  right: 100px;
+}
+
+.signOut-user {
+  font-size: 18px;
+  position: absolute;
+  top: 10px;
+  right: 100px;
+}
 .run__container {
   display: flex;
   flex-grow: 1;

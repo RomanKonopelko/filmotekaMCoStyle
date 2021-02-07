@@ -19,6 +19,130 @@
   transform: translate(-50%, -50%) scale(0, 9);
 }
 
+.auth__backdrop {
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+
+  background-color: rgba(0, 0, 0, 0.8);
+
+  opacity: 1;
+  transition: opacity 250ms $timing-function;
+}
+
+.auth__backdrop--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.auth__modal {
+  z-index: 100;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 50px;
+  width: 500px;
+  height: 500px;
+  border: 4px solid $accent-color2;
+  background-color: rgba(20, 20, 20, 0.781);
+  transform: translate(-50%, -50%) scale(1);
+  transition: opacity 250ms $timing-function;
+
+  box-shadow: 0 0 10px $accent-shadow-color, 0 0 10px $accent-shadow-color,
+    0 0 20px $accent-shadow-color, 0 0 20px $accent-shadow-color,
+    0 0 40px $accent-shadow-color;
+
+  & .auth__title {
+    margin-bottom: 20px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 30px;
+    text-align: center;
+    letter-spacing: 0.03em;
+    color: $accent-color;
+  }
+
+  & .auth__message {
+    display: block;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    letter-spacing: 0.03em;
+    color: $accent-color;
+  }
+
+  & .auth__input {
+    display: inline-flex;
+    margin-bottom: 20px;
+    width: 100%;
+    height: 40px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 14px;
+    color: $accent-color;
+
+    letter-spacing: 0.01em;
+    padding-left: 42px;
+    border: 1px solid $accent-color;
+    background-color: transparent;
+  }
+
+  & .auth__btn {
+    display: block;
+    width: 200px;
+    height: 50px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-right: auto;
+    margin-left: auto;
+    background: transparent;
+
+    border-radius: 4px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    color: $accent-color;
+    border: 2px solid $accent-color;
+    line-height: 30px;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+  }
+  & .auth__exit {
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 50px;
+    height: 30px;
+    background: transparent;
+
+    border: none;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    color: $accent-color;
+    line-height: 30px;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+  }
+}
+
+.signIn-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.signUp-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
 .backdrop__modal {
   position: absolute;
   top: 50%;
