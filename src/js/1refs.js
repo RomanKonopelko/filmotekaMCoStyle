@@ -10,6 +10,7 @@ const refs = {
   ulForCards: document.querySelector('.gallery__list'),
   reviewCard: document.querySelector('.review'),
   sliderContainer: document.querySelector('.my-slider'),
+  body: document.querySelector('.body'),
 
   //3initialHomePage
   btnTop: document.querySelector('.main__btn-scroll'),
@@ -90,4 +91,5 @@ const {
   iconButton,
   reviewCard,
   sliderContainer,
+  body,
 } = refs;

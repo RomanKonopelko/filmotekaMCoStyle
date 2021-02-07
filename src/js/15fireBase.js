@@ -29,6 +29,7 @@ auth.onAuthStateChanged(user => {
 
 function modalClose(params) {
   authBackdrop.classList.add('auth__backdrop--hidden');
+  body.classList.remove('overflow');
 }
 (function modalBtnAddListener(params) {
   const modalExit = document.querySelectorAll('.auth__exit');
@@ -60,6 +61,7 @@ btnSignOut.addEventListener('click', () => {
 });
 
 btnSignIn.addEventListener('click', () => {
+  body.classList.add('overflow');
   authModalSignIn.classList.remove('signIn-hidden');
   authModalSignUp.classList.add('signUp-hidden');
   authBackdrop.classList.remove('auth__backdrop--hidden');
@@ -71,6 +73,7 @@ authMessage.addEventListener('click', () => {
 });
 
 btnSignUp.addEventListener('click', () => {
+  body.classList.add('overflow');
   authModalSignUp.classList.remove('signUp-hidden');
   authModalSignIn.classList.add('signIn-hidden');
   authBackdrop.classList.remove('auth__backdrop--hidden');
