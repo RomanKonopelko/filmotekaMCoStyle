@@ -438,6 +438,11 @@ class MovieApi {
     const titleText = document.createElement('h3');
     titleText.classList.add('details-page__title', 'second');
     titleText.textContent = 'About';
+    const spanAbout = document.createElement('span');
+    spanAbout.classList.add('material-icons', 'span-about');
+    spanAbout.textContent = 'info';
+    titleText.append(spanAbout);
+
     const textAbout = document.createElement('p');
     textAbout.classList.add('details-page__text');
     textAbout.textContent = item.overview;
@@ -460,7 +465,7 @@ class MovieApi {
 
     reviewsTitle.addEventListener('click', () => {
       if (this.reviews.length === 0) {
-        reviewsTitle.textContent = 'Sorry, we dont have any reviews';
+        reviewsTitle.textContent = 'Sorry, we do not have any review yet!';
         return;
       }
 
@@ -479,7 +484,7 @@ class MovieApi {
 
       this.reviews.map(el => {
         if (el[0] === '') {
-          el[0] = 'anonim';
+          el[0] = 'anonym';
         }
 
         const reviewsAutor = document.createElement('h3');
@@ -524,6 +529,7 @@ class MovieApi {
     buttonTrailer.classList.add('button__add');
     buttonTrailer.setAttribute('type', 'submite');
     buttonTrailer.textContent = 'watch the trailer';
+
     buttonTrailer.addEventListener('click', this.onTrailerClick);
 
     const divBtn = document.createElement('div');

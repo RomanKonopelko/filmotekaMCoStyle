@@ -111,7 +111,7 @@ td {
   display: inline-block;
 
   padding: 10px 20px;
-  width: 130px;
+  width: 120px;
   border: 3px solid $accent-shadow-color;
   color: lightseagreen;
   border-radius: 10px;
@@ -130,6 +130,13 @@ td {
 
 .button__add:not(:last-child) {
   margin-right: 10px;
+
+  @include for-size(tablet) {
+    margin-right: 20px;
+  }
+  @include for-size(desktop) {
+    margin-right: 20px;
+  }
 }
 
 .button__add:hover {
@@ -169,4 +176,8 @@ td {
     top: -13px;
     right: -500px;
   }
+}
+
+.span-about {
+  margin-left: 10px;
 }

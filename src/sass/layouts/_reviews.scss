@@ -1,6 +1,7 @@
 .review {
-  padding: 30px;
   position: relative;
+  padding: 30px;
+  padding-top: 40px;
 
   @include for-size(tablet) {
     padding: 45px;
@@ -42,7 +43,14 @@
   text-shadow: 0.1em 0.1em 0.1em $accent-color4;
 }
 
-.btn-reviews {
-  right: 25px;
-  top: 15px;
+.button__add.btn-reviews {
+  top: 20px;
+  right: 52px;
+
+  margin-right: 0px;
+
+  @include for-size(desktop) {
+    top: 50px;
+    right: 52px;
+  }
 }

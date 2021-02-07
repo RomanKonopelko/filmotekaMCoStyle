@@ -190,25 +190,74 @@
 }
 
 .signIn-user {
-  font-size: 18px;
   position: absolute;
-  top: 10px;
-  right: 20px;
+  top: 1.5rem;
+  right: 2rem;
+  padding: 0;
+  margin: 0;
+  font-family: 'Park of Victory Normal';
+  font-size: 14px;
+  line-height: 0.7rem;
+  transform: translateZ(0);
+  animation: animate 5s linear infinite;
+
+  @include for-size(tablet) {
+    top: 1.5rem;
+    right: 3rem;
+    font-size: 18px;
+    line-height: 0.7rem;
+  }
 }
 
 .signUp-user {
-  font-size: 18px;
   position: absolute;
-  top: 10px;
-  right: 100px;
+  top: 1.5rem;
+  right: 6rem;
+  padding: 0;
+  margin: 0;
+  font-family: 'Park of Victory Normal';
+  font-size: 14px;
+  line-height: 0.7rem;
+  transform: translateZ(0);
+  animation: animate 5s linear infinite;
+
+  @include for-size(tablet) {
+    top: 1.5rem;
+    right: 7rem;
+    font-size: 18px;
+    line-height: 0.7rem;
+  }
 }
 
 .signOut-user {
-  font-size: 18px;
   position: absolute;
-  top: 10px;
-  right: 100px;
+  top: 1.5rem;
+  right: 6rem;
+  padding: 0;
+  margin: 0;
+  font-family: 'Park of Victory Normal';
+  font-size: 14px;
+  line-height: 0.7rem;
+  transform: translateZ(0);
+  animation: animate 5s linear infinite;
+
+  @include for-size(tablet) {
+    top: 1.5rem;
+    right: 7rem;
+    font-size: 18px;
+    line-height: 0.7rem;
+  }
 }
+
+.signIn-user:hover,
+.signIn-user:focus,
+.signUp-user:hover,
+.signUp-user:focus,
+.signOut-user:hover,
+.signOut-user:focus {
+  animation: animate-logo 7s infinite;
+}
+
 .run__container {
   display: flex;
   flex-grow: 1;
