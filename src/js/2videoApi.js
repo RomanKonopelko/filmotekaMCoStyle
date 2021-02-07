@@ -554,10 +554,6 @@ class MovieApi {
       }
     });
 
-
-    buttonTrailer.addEventListener('click', this.onTrailerClick);
-
-
     const divBtn = document.createElement('div');
     divBtn.classList.add('details-page__button');
     divBtn.append(buttonFirst, buttonSecond, buttonTrailer);
