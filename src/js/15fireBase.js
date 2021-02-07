@@ -107,6 +107,7 @@ signUpBtn.addEventListener('click', signUp);
 signInBtn.addEventListener('click', signIn);
 
 function signUp(params) {
+  body.classList.remove('overflow');
   console.dir(signUpEmail);
   const signUpRequest = auth.createUserWithEmailAndPassword(
     signUpEmail.value,
@@ -123,6 +124,7 @@ function signUp(params) {
 }
 
 function signIn(params) {
+  body.classList.remove('overflow');
   const signInRequest = auth.signInWithEmailAndPassword(
     signInEmail.value,
     signInPassword.value,
