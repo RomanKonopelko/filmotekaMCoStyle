@@ -198,8 +198,11 @@
   font-family: 'Park of Victory Normal';
   font-size: 14px;
   line-height: 0.7rem;
+  border: none;
+  background-color: transparent;
   transform: translateZ(0);
   animation: animate 5s linear infinite;
+  cursor: pointer;
 
   @include for-size(tablet) {
     top: 1.5rem;
@@ -218,8 +221,11 @@
   font-family: 'Park of Victory Normal';
   font-size: 14px;
   line-height: 0.7rem;
+  border: none;
+  background-color: transparent;
   transform: translateZ(0);
   animation: animate 5s linear infinite;
+  cursor: pointer;
 
   @include for-size(tablet) {
     top: 1.5rem;
@@ -238,8 +244,11 @@
   font-family: 'Park of Victory Normal';
   font-size: 14px;
   line-height: 0.7rem;
+  border: none;
+  color: $accent-color2;
+  background-color: transparent;
   transform: translateZ(0);
-  animation: animate 5s linear infinite;
+  cursor: pointer;
 
   @include for-size(tablet) {
     top: 1.5rem;
@@ -256,6 +265,16 @@
 .signOut-user:hover,
 .signOut-user:focus {
   animation: animate-logo 7s infinite;
+}
+
+.sign-user {
+  color: $primary-text-color;
+  animation: none;
+  cursor: auto;
+
+  &:hover {
+    animation: none;
+  }
 }
 
 .run__container {
