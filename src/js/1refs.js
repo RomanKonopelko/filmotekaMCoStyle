@@ -52,6 +52,12 @@ const refs = {
 
   //12navigationEfectSwitch
   iconButton: document.querySelector('[data-icon]'),
+  //Authorization
+  welcomeTextSignIn: document.querySelector('.auth__title.sign-in'),
+  welcomeTextSignUp: document.querySelector('.auth__title.sign-up'),
+  // demandText: document.querySelector('.auth__title-demand'),
+  // signUpSuccess: document.querySelector('.auth__title-congratulations'),
+  // signInSuccess: document.querySelector('.auth__title-success'),
 };
 
 const {
@@ -90,4 +96,8 @@ const {
   iconButton,
   reviewCard,
   sliderContainer,
+  welcomeTextSignIn,
+  welcomeTextSignUp,
 } = refs;
+
+console.log(welcomeTextSignIn);

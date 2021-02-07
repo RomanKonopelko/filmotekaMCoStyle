@@ -64,6 +64,22 @@
     text-align: center;
     letter-spacing: 0.03em;
     color: $accent-color;
+    & .is-hidden {
+      visibility: hidden;
+    }
+  }
+  & .auth__title-demand {
+    margin-bottom: 20px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 30px;
+    text-align: center;
+    letter-spacing: 0.03em;
+    color: $accent-color;
+    & .is-hidden {
+      visibility: hidden;
+    }
   }
 
   & .auth__message {
