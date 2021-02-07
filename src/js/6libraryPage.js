@@ -1,7 +1,9 @@
 btnQueue.addEventListener('click', drawQueueFilmList);
 btnWatched.addEventListener('click', drawWatchedFilmList);
+console.log(btnQueue);
 
-btnMyLibrary.addEventListener('click', openLibrary);
+btnMyLibrary.addEventListener('click', handleUserStatusForLibrary);
+// console.log(btnMyLibrary);
 
 const queue = `You do not have to queue movies to watch. Add them.`;
 const watch = `You do not have watched movies. Add them.`;
@@ -75,7 +77,7 @@ function createPlugTitle(title, library) {
 
 // кнопка My Library //
 
-btnMyLibrary.addEventListener('click', openLibrary);
+// btnMyLibrary.addEventListener('click', openLibrary);
 //btnHome.addEventListener('click', goHome);
 
 function openLibrary() {
@@ -92,4 +94,18 @@ function openLibrary() {
   form.innerHTML = '';
   libraryFilrt.classList.remove('is-hidden');
   main.classList.remove('is-hidden');
+}
+
+function askingToMakeAuthorization() {
+  welcomeTextSignUp.textContent = DEMAND_TO_REGISTER;
+  authModalSignUp.classList.remove('signUp-hidden');
+  authModalSignIn.classList.add('signIn-hidden');
+  authBackdrop.classList.remove('auth__backdrop--hidden');
+}
+function handleUserStatusForLibrary() {
+  if (!userStatus) {
+    askingToMakeAuthorization();
+  } else {
+    openLibrary();
+  }
 }

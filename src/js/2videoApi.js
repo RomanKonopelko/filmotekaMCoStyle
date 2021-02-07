@@ -468,6 +468,10 @@ class MovieApi {
         reviewsTitle.textContent = 'Sorry, we do not have any review yet!';
         return;
       }
+      if (!userStatus) {
+        askingToMakeAuthorization();
+        return;
+      }
 
       detailsSection.classList.add('is-hidden');
 
@@ -517,20 +521,42 @@ class MovieApi {
     buttonFirst.classList.add('button__add', 'first');
     buttonFirst.setAttribute('type', 'submite');
     buttonFirst.textContent = 'add to watched';
-    buttonFirst.addEventListener('click', this.onWatchedClick);
+    buttonFirst.addEventListener('click', () => {
+      if (!userStatus) {
+        askingToMakeAuthorization();
+      } else {
+        this.onWatchedClick();
+      }
+    });
 
     const buttonSecond = document.createElement('button');
     buttonSecond.classList.add('button__add');
     buttonSecond.setAttribute('type', 'submite');
     buttonSecond.textContent = 'add to queue';
-    buttonSecond.addEventListener('click', this.onQueueClick);
+    buttonSecond.addEventListener('click', () => {
+      if (!userStatus) {
+        askingToMakeAuthorization();
+      } else {
+        this.onQueueClick();
+      }
+    });
 
     const buttonTrailer = document.createElement('button');
     buttonTrailer.classList.add('button__add');
     buttonTrailer.setAttribute('type', 'submite');
     buttonTrailer.textContent = 'watch the trailer';
 
+    buttonTrailer.addEventListener('click', () => {
+      if (!userStatus) {
+        askingToMakeAuthorization();
+      } else {
+        this.onTrailerClick();
+      }
+    });
+
+
     buttonTrailer.addEventListener('click', this.onTrailerClick);
+
 
     const divBtn = document.createElement('div');
     divBtn.classList.add('details-page__button');
@@ -575,7 +601,8 @@ class MovieApi {
     detailsSection.classList.remove('is-hidden');
     detailsSection.appendChild(container);
 
-    buttonTrailer.addEventListener('click', this.onTrailerClick);
+    // buttonTrailer.addEventListener('click', );
+
     main.classList.add('is-hidden');
     this.hideLoader();
 
