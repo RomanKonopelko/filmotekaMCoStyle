@@ -60,6 +60,11 @@ class MovieApi {
       part.classList.remove('is-hidden');
     });
   }
+  hideSlider() {
+    this.pagination.paginationContainer.classList.remove('is-hidden');
+    const heroContainer = document.querySelector(['.hero']);
+    heroContainer.classList.add('is-hidden');
+  }
 
   hideLoader() {
     this.pagination.paginationContainer.classList.remove('is-hidden');
@@ -322,6 +327,7 @@ class MovieApi {
       // клік на картку //
       this.movieID = id;
       this.pagination.cardContainer.classList.add('is-hidden');
+      this.hideSlider();
       this.activeLoader();
       //Скролит вверх
       window.scrollTo(0, document.body.children[1].clientHeight);
