@@ -2,7 +2,7 @@ btnQueue.addEventListener('click', drawQueueFilmList);
 btnWatched.addEventListener('click', drawWatchedFilmList);
 console.log(btnQueue);
 
-btnMyLibrary.addEventListener('click', handleUserStatusForLibrary);
+// btnMyLibrary.addEventListener('click', handleUserStatusForLibrary);
 // console.log(btnMyLibrary);
 
 const queue = `You do not have to queue movies to watch. Add them.`;
@@ -77,11 +77,10 @@ function createPlugTitle(title, library) {
 
 // кнопка My Library //
 
-btnMyLibrary.addEventListener('click', openLibrary);
+btnMyLibrary.addEventListener('click', handleUserStatusForLibrary);
 
 // btnMyLibrary.addEventListener('click', openLibrary);
 //btnHome.addEventListener('click', goHome);
-
 
 function openLibrary() {
   window.scrollTo({
@@ -100,7 +99,6 @@ function openLibrary() {
   libraryFilrt.classList.remove('is-hidden');
   main.classList.remove('is-hidden');
 }
-
 
 ///// Кнопка Home и логотип
 btnHome.addEventListener('click', goHome);
@@ -136,4 +134,3 @@ function handleUserStatusForLibrary() {
     openLibrary();
   }
 }
-
