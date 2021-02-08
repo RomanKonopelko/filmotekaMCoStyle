@@ -44,7 +44,7 @@ function handleScroll() {
 backdrop.addEventListener('click', onBeckDropCkick); // Close Modal on Backdrop click
 
 function onHandleTrailerError() {
-  player.src = `http://www.youtube.com/embed/Zq_zgig9DqQ?autoplay=1`;
+  player.src = `https://www.youtube.com/embed/Zq_zgig9DqQ?autoplay=1`;
 }
 
 function openModal(event) {
@@ -53,9 +53,8 @@ function openModal(event) {
   body.classList.add('overflow');
   // youTubeSizes();
 
-
   MyApi.fetchVideoById().then(key => {
-    player.src = `http://www.youtube.com/embed/${key}?autoplay=1`;
+    player.src = `https://www.youtube.com/embed/${key}?autoplay=1`;
   });
 
   backdrop.classList.remove('backdrop--hidden');
