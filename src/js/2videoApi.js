@@ -174,7 +174,7 @@ class MovieApi {
       .then(item => MyApi.pagination.cardContainer.append(...item))
       .finally(() => {
         this.pagination.cardContainer.classList.remove('is-hidden');
-        this.hideLoader();
+        // this.hideLoader();
       });
   }
   fetchGenres() {
@@ -191,7 +191,7 @@ class MovieApi {
       })
       .finally(() => {
         this.pagination.cardContainer.classList.remove('is-hidden');
-        this.hideLoader();
+        // this.hideLoader();
       });
   }
   // test start //
@@ -282,6 +282,15 @@ class MovieApi {
       .then(resp => {
         return resp;
       })
+      .then(resp => {
+        if (resp.results.length === 0) {
+          this.fetchPopularFilmsList();
+          throw Error('Sorry we dont know this actor!');
+        }
+        this.resetGalleryCard();
+        this.setRatioButtons(resp);
+        return resp;
+      })
       .then(({ results }) => {
         return results;
       })
@@ -292,7 +301,11 @@ class MovieApi {
             return acc;
           }, [])
           .slice(0, 1);
-        console.log(MyApi.movieSearchByActors(castList));
+        MyApi.movieSearchByActors(castList);
+      })
+      .catch(error => this.handlErrors(error))
+      .finally(() => {
+        this.hideLoader();
       });
   }
 
