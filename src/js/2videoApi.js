@@ -16,11 +16,13 @@ class MovieApi {
     this.queueList = [];
     this.genres = [];
     this.actors = [];
+    this.actorsId = [];
 
     this.currentPage = 1;
 
     this.params = {
       generalSearchUrl: 'search/movie?',
+      searchActorUrl: 'search/person?', //=================================================================
       popularSearchUrl: 'movie/popular?', //Api url of popular movie
       genreSearchUrl: 'genre/movie/list?', // Api url of genre search
       byGenreSearchUrl: 'discover/movie?',
@@ -237,12 +239,73 @@ class MovieApi {
       .then(data => data.json())
       .then(data => {
         this.setRatioButtons(data);
+
+        // console.log(data.total_pages);
+
         return data;
       })
       .then(resp => {
         if (resp.results.length === 0) {
           this.fetchPopularFilmsList();
           throw Error('Sorry we dont watch this kind of movies!');
+        }
+        this.resetGalleryCard();
+        this.setRatioButtons(resp);
+        return resp;
+      })
+      .then(({ results }) => {
+        this.popularFilmItem = results;
+        return results;
+      })
+      .then(collection =>
+        collection.map(el => {
+          return this.createCardFunc(el);
+        }),
+      )
+      .then(item => MyApi.pagination.cardContainer.append(...item))
+      .catch(error => this.handlErrors(error))
+      .finally(() => {
+        this.pagination.cardContainer.classList.remove('is-hidden');
+        this.hideLoader();
+      });
+  }
+
+  fetchActorsId(name) {
+    return fetch(
+      `https://api.themoviedb.org/3/search/person?api_key=${this.API_KEY}&language=en-US&query=${name}`,
+    )
+      .then(response => response.json())
+      .then(resp => {
+        return resp;
+      })
+      .then(({ results }) => {
+        return results;
+      })
+      .then(results => {
+        const castList = results
+          .reduce((acc, el) => {
+            acc.push(el.id);
+            return acc;
+          }, [])
+          .slice(0, 1);
+        console.log(MyApi.movieSearchByActors(castList));
+      });
+  }
+
+  movieSearchByActors(value) {
+    this.searchMode = 'popular';
+    return fetch(
+      `${this.BASE_URL}discover/movie?api_key=${this.API_KEY}&language=en-US&query=${this.params.query}&page=${this.params._page}&with_cast=${value}`,
+    )
+      .then(data => data.json())
+      .then(data => {
+        this.setRatioButtons(data);
+        return data;
+      })
+      .then(resp => {
+        if (resp.results.length === 0) {
+          this.fetchPopularFilmsList();
+          throw Error('Sorry we dont know this actor!');
         }
         this.resetGalleryCard();
         this.setRatioButtons(resp);
@@ -500,6 +563,9 @@ class MovieApi {
         reviewsAutor.classList.add('reviews-autor');
         const autorFace = document.createElement('span');
 
+
+    // console.log(item.id, 'назва');
+
         autorFace.classList.add('material-icons', 'icons-face');
         autorFace.textContent = 'face';
 
@@ -517,6 +583,7 @@ class MovieApi {
         });
       });
     });
+
 
     // test end//
 

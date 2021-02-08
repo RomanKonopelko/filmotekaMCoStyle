@@ -20,6 +20,10 @@ const refs = {
 
   //4searchAndPaginationHomePage
   form: document.querySelector('.main__search-form'),
+  input: document.getElementById('search-form'),
+  searchByMovie: document.getElementById('option-movie'),
+  searchByActor: document.getElementById('option-actor'),
+  selectedOption: document.getElementsByClassName('selected-option'),
 
   //6libraryPage
   btnMyLibrary: document.querySelector('.library'),
@@ -103,6 +107,13 @@ const {
   decor1,
   decor2,
   iconButton,
+
+  reviews,
+  searchByMovie,
+  searchByActor,
+  selectedOption,
+  input,
+
   reviewCard,
   sliderContainer,
 
@@ -113,6 +124,7 @@ const {
   // galleryListItem,
   btnHome,
   body,
+
 } = refs;
 
 console.log(welcomeTextSignIn);
