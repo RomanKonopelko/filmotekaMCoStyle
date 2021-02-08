@@ -421,11 +421,11 @@ class MovieApi {
 
   activeDetailsPage(id, libraryIndicator) {
     //Прячит пагинацию и форму поиска
-    form.style.display = 'none';
+    // form.style.display = 'none';
+    form.classList.add('is-hidden');
     btnTop.classList.add('is-hidden');
-
+    libraryFilrt.classList.add('is-hidden');
     this.movieID = id;
-
     let collectionItems = [];
     if (libraryIndicator === 'Queue') {
       collectionItems = this.queueList;
@@ -695,23 +695,43 @@ class MovieApi {
     monitorButtonStatusText();
 
     btnClose.addEventListener('click', () => {
-      form.style.display = 'block';
-      this.pagination.paginationContainer.classList.remove('is-hidden');
+      // form.style.display = 'block';
+      // this.pagination.paginationContainer.classList.remove('is-hidden');
+      // detailsSection.classList.add('is-hidden');
+      // this.pagination.cardContainer.classList.remove('is-hidden');
+      // btnTop.classList.remove('is-hidden');
+      // detailsSection.innerHTML = '';
+      // reviewCard.innerHTML = '';
+      // main.classList.remove('is-hidden');
+      // this.actors = [];
+      // //=========================================================================
+      // if (libraryFilrt.classList != 'is-hidden') {
+      //   if (btnQueue.disabled) {
+      //     drawQueueFilmList();
+      //   }
+      //   if (btnWatched.disabled) {
+      //     drawWatchedFilmList();
+      //   }
+      // }
+
       detailsSection.classList.add('is-hidden');
-      this.pagination.cardContainer.classList.remove('is-hidden');
-      btnTop.classList.remove('is-hidden');
       detailsSection.innerHTML = '';
       reviewCard.innerHTML = '';
       main.classList.remove('is-hidden');
-      this.actors = [];
-      //=========================================================================
-      if (libraryFilrt.classList != 'is-hidden') {
-        if (btnQueue.disabled) {
-          drawQueueFilmList();
-        }
-        if (btnWatched.disabled) {
-          drawWatchedFilmList();
-        }
+
+      if (!libraryIndicator || libraryIndicator === 'daily') {
+        form.classList.remove('is-hidden');
+        this.pagination.paginationContainer.classList.remove('is-hidden');
+        this.pagination.cardContainer.classList.remove('is-hidden');
+        btnTop.classList.remove('is-hidden');
+        this.showSlider();
+        this.actors = [];
+      } else if (libraryIndicator === 'Queue') {
+        libraryFilrt.classList.remove('is-hidden');
+        drawQueueFilmList();
+      } else if (libraryIndicator === 'Watched') {
+        libraryFilrt.classList.remove('is-hidden');
+        drawWatchedFilmList();
       }
     });
   }
