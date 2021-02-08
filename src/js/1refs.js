@@ -1,5 +1,4 @@
 const refs = {
-  //2videoApi
   loaderPartOne: document.querySelectorAll('.bars-common'),
   loaderPartTwo: document.querySelectorAll('.squares-common'),
   errorNotification: document.querySelector('.main__error-notification'),
@@ -12,20 +11,17 @@ const refs = {
   sliderContainer: document.querySelector('.my-slider'),
   body: document.querySelector('.body'),
 
-  //3initialHomePage
   btnTop: document.querySelector('.main__btn-scroll'),
   modalBtn: document.querySelector('.backdrop__modal__btn'),
   backdrop: document.querySelector('.backdrop'),
   player: document.querySelector('#player'),
 
-  //4searchAndPaginationHomePage
   form: document.querySelector('.main__search-form'),
   input: document.getElementById('search-form'),
   searchByMovie: document.getElementById('option-movie'),
   searchByActor: document.getElementById('option-actor'),
   selectedOption: document.getElementsByClassName('selected-option'),
 
-  //6libraryPage
   btnMyLibrary: document.querySelector('.library'),
   btnHome: document.querySelector('[data-home]'),
 
@@ -33,7 +29,6 @@ const refs = {
   btnWatched: document.querySelector('.btnWatched'),
   btnQueue: document.querySelector('.btnQueue'),
 
-  //7genreselect
   thrillerRef: document.querySelector('[data-thriller]'),
   comedyRef: document.querySelector('[data-comedy]'),
   animationRef: document.querySelector('[data-animation]'),
@@ -42,35 +37,21 @@ const refs = {
   fantasyRef: document.querySelector('[data-fantasy]'),
   dramaRef: document.querySelector('[data-drama]'),
 
-  //8headerLogoText
   logoText: document.querySelector('[data-logoText]'),
 
-  //9navigation
   homePage: document.querySelector('[data-home]'),
   libraryPage: document.querySelector('[data-library]'),
 
-  //10parallax
   layer: document.querySelector('.layer__bg'),
   title: document.querySelector('.parallax-logo'),
   title2: document.querySelectorAll('.parallax-item'),
   decor1: document.querySelector('.decoration-first'),
   decor2: document.querySelector('.decoration-second'),
 
-  //12navigationEfectSwitch
   iconButton: document.querySelector('[data-icon]'),
 
-  //Authorization
   welcomeTextSignIn: document.querySelector('.auth__title.sign-in'),
   welcomeTextSignUp: document.querySelector('.auth__title.sign-up'),
-  // demandText: document.querySelector('.auth__title-demand'),
-  // signUpSuccess: document.querySelector('.auth__title-congratulations'),
-  // signInSuccess: document.querySelector('.auth__title-success'),
-
-
-  //
-  // heroContainer: document.getElementsByClassName('hero'), 
-  // galleryListItem: document.getElementsByClassName('gallery__list-item'),
-
 };
 
 const {
@@ -107,24 +88,15 @@ const {
   decor1,
   decor2,
   iconButton,
-
   reviews,
   searchByMovie,
   searchByActor,
   selectedOption,
   input,
-
   reviewCard,
   sliderContainer,
-
   welcomeTextSignIn,
   welcomeTextSignUp,
-
-  // heroContainer,
-  // galleryListItem,
   btnHome,
   body,
-
 } = refs;
-
-console.log(welcomeTextSignIn);

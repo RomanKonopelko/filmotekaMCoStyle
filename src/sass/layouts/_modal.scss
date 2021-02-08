@@ -179,7 +179,6 @@
     margin-right: auto;
     margin-left: auto;
     transition: all $transition-duration $timing-function;
-    // background: transparent;
     background: linear-gradient(
       0.25turn,
       rgba(200, 242, 243, 0.568),
@@ -214,7 +213,6 @@
     width: 30px;
     height: 30px;
     border-radius: 10px;
-    // background: transparent;
     background: transparent;
 
     border: none;
@@ -279,21 +277,6 @@
 
   box-shadow: $popular-box-shadow;
 }
-
-// .backdrop__modal__btn {
-//   position: absolute;
-//   top: 10%;
-//   left: 90%;
-// }
-
-// .material-icons {
-//   color: $accent-color;
-//   font-size: 36px;
-// }
-
-// .material-icons:hover {
-//   cursor: pointer;
-// }
 
 .video-block {
   text-align: center;

@@ -15,33 +15,29 @@ const DEMAND_TO_REGISTER =
   'To be able to use all features of our Magic source, please pass the registration!';
 const DEFAULT_SIGN_UP = 'Become a part of our filmgeek club!';
 const DEFAULT_SIGN_IN = 'Welcome back! Write your data below!';
-// Initialize Firebase
+
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
-// console.log(firebase);
 
 const auth = firebase.auth();
-// auth.signOut();
+
 let userStatus;
 
 auth.onAuthStateChanged(user => console.log(user));
 auth.onAuthStateChanged(user => {
   if (user) {
-    // alert('hellooo');
     btnSignOut.classList.remove('is-hidden');
     btnSignUp.classList.add('is-hidden');
 
-    btnSignIn.classList.add('sign-user');
+    btnSignIn.classList.add('is-hidden');
     btnSignIn.disabled = true;
 
     userStatus = true;
-    // console.log(user);
   } else {
-    // alert('byee');
     btnSignOut.classList.add('is-hidden');
     btnSignUp.classList.remove('is-hidden');
 
-    btnSignIn.classList.remove('sign-user');
+    btnSignIn.classList.remove('is-hidden');
     btnSignIn.disabled = false;
 
     userStatus = false;
@@ -61,7 +57,7 @@ function modalClose(params) {
 })();
 
 const authBackdrop = document.querySelector('.auth__backdrop');
-// console.log(authBackdrop);
+
 const authModalSignIn = document.querySelector('.signIn__modal');
 const authModalSignUp = document.querySelector('.signUp__modal');
 const signUpEmail = document.getElementById('authEmail');
@@ -107,14 +103,13 @@ signInBtn.addEventListener('click', signIn);
 
 function signUp(params) {
   body.classList.remove('overflow');
-  // console.dir(signUpEmail);
+
   const signUpRequest = auth.createUserWithEmailAndPassword(
     signUpEmail.value,
     signUpPassword.value,
   );
   let signUpError = '';
   signUpRequest.catch(e => {
-    // console.log(e.message);
     signUpError = e.message;
   });
   setTimeout(() => {
