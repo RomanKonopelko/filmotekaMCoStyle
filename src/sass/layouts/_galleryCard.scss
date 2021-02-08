@@ -37,6 +37,7 @@
       visibility: hidden;
     }
   }
+
   .form__control {
     width: 300px;
     padding: 5px 10px; // change input color
@@ -82,7 +83,7 @@
 
 .main__search-form .form__control::placeholder {
   margin-left: 10px;
-  font-size: 15px;
+  font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 5px;
   color: white;
@@ -101,6 +102,47 @@
 .main__search-form .form__control:focus::placeholder {
   color: transparent;
   text-shadow: none;
+}
+
+.search-form__choice,
+.search-form__line {
+  display: inline-block;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  color: white;
+  text-shadow: 0 0 3px lightskyblue, 0 0 5px lightskyblue, 0 0 1px lightskyblue,
+    0 0 10px lightskyblue, 0 0 10px lightskyblue;
+}
+
+.search-form__option {
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  color: white;
+  text-shadow: 0 0 3px lightskyblue, 0 0 5px lightskyblue, 0 0 1px lightskyblue,
+    0 0 10px lightskyblue, 0 0 10px lightskyblue;
+  transition: all $transition-duration $timing-function;
+}
+
+.search-form__option:hover {
+  cursor: pointer;
+  color: $accent-color2;
+  text-shadow: 0 0 3px $accent-shadow-color2, 0 0 5px $accent-shadow-color2,
+    0 0 1px $accent-shadow-color2, 0 0 10px $accent-shadow-color2,
+    0 0 10px $accent-shadow-color2;
+}
+
+.search-form__option:focus {
+  color: transparent;
+  text-shadow: none;
+}
+
+.selected-option {
+  color: $accent-color2;
+  text-shadow: 0 0 3px $accent-shadow-color2, 0 0 5px $accent-shadow-color2,
+    0 0 1px $accent-shadow-color2, 0 0 10px $accent-shadow-color2,
+    0 0 10px $accent-shadow-color2;
 }
 
 .gallery {
