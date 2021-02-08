@@ -211,8 +211,8 @@
         text-shadow: 0.1em 0.1em 0.1em $accent-color4;
         color: $gold-color;
         position: absolute;
-        top: 20px;
-        right: 20px;
+        top: 15px;
+        right: 15px;
 
         padding: 3px 5px;
         border-radius: 10px;
@@ -225,6 +225,8 @@
 
         @media (min-width: 768px) {
           font-size: 20px;
+          top: 20px;
+          right: 20px;
         }
       }
     }
