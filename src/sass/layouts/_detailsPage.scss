@@ -111,7 +111,7 @@ td {
   display: inline-block;
 
   padding: 10px 20px;
-  width: 130px;
+  width: 120px;
   border: 3px solid $accent-shadow-color;
   color: lightseagreen;
   border-radius: 10px;
@@ -130,6 +130,13 @@ td {
 
 .button__add:not(:last-child) {
   margin-right: 10px;
+
+  @include for-size(tablet) {
+    margin-right: 20px;
+  }
+  @include for-size(desktop) {
+    margin-right: 20px;
+  }
 }
 
 .button__add:hover {
@@ -148,6 +155,7 @@ td {
 }
 
 // Кнопка для закрытия Страницы!
+
 .button-close {
   padding: 0px;
   position: absolute;
@@ -156,7 +164,16 @@ td {
 
   width: 40px;
   height: 40px;
-  font-size: 15px;
+  font-size: 18px;
+  text-shadow: 0.1em 0.1em 0.1em $accent-color4;
+
+  background: linear-gradient(
+    0.25turn,
+    rgba(250, 250, 250, 0.4),
+    rgba(126, 35, 126, 0)
+  );
+  border: none;
+  border-radius: 15px;
 
   @include for-size(tablet) {
     top: -15px;
@@ -170,10 +187,6 @@ td {
   }
 }
 
-.span-input {
+.span-about {
   margin-left: 10px;
-}
-
-.reviews-title {
-  cursor: pointer;
 }

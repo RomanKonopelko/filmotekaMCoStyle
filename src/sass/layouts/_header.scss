@@ -140,16 +140,19 @@
   position: relative;
 }
 .library::before {
-  content: '';
-  display: block;
-  position: absolute;
-  top: -288px;
-  left: 197px;
-  height: 300px;
-  width: 2px;
-  animation: animate-decoration 4s linear infinite;
+  display: none;
+  @include for-size(tablet) {
+    content: '';
+    display: block;
+    position: absolute;
+    top: -288px;
+    left: 197px;
+    height: 300px;
+    width: 2px;
+    animation: animate-decoration 4s linear infinite;
 
-  background-color: lightseagreen;
+    background-color: lightseagreen;
+  }
 }
 .header__item {
   align-items: center;
@@ -183,7 +186,94 @@
 
   @include for-size(desktop) {
     transition: all 0.1s linear;
-    display: flex;
+  }
+}
+
+.signIn-user {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  padding: 0;
+  margin: 0;
+  font-family: 'Park of Victory Normal';
+  font-size: 14px;
+  line-height: 0.7rem;
+  border: none;
+  background-color: transparent;
+  transform: translateZ(0);
+  animation: animate 5s linear infinite;
+  cursor: pointer;
+
+  @include for-size(tablet) {
+    top: 1.5rem;
+    right: 3rem;
+    font-size: 18px;
+    line-height: 0.7rem;
+  }
+}
+
+.signUp-user {
+  position: absolute;
+  top: 1.5rem;
+  right: 6rem;
+  padding: 0;
+  margin: 0;
+  font-family: 'Park of Victory Normal';
+  font-size: 14px;
+  line-height: 0.7rem;
+  border: none;
+  background-color: transparent;
+  transform: translateZ(0);
+  animation: animate 5s linear infinite;
+  cursor: pointer;
+
+  @include for-size(tablet) {
+    top: 1.5rem;
+    right: 7rem;
+    font-size: 18px;
+    line-height: 0.7rem;
+  }
+}
+
+.signOut-user {
+  position: absolute;
+  top: 1.5rem;
+  right: 6rem;
+  padding: 0;
+  margin: 0;
+  font-family: 'Park of Victory Normal';
+  font-size: 14px;
+  line-height: 0.7rem;
+  border: none;
+  color: $accent-color2;
+  background-color: transparent;
+  transform: translateZ(0);
+  cursor: pointer;
+
+  @include for-size(tablet) {
+    top: 1.5rem;
+    right: 7rem;
+    font-size: 18px;
+    line-height: 0.7rem;
+  }
+}
+
+.signIn-user:hover,
+.signIn-user:focus,
+.signUp-user:hover,
+.signUp-user:focus,
+.signOut-user:hover,
+.signOut-user:focus {
+  animation: animate-logo 7s infinite;
+}
+
+.sign-user {
+  color: $primary-text-color;
+  animation: none;
+  cursor: auto;
+
+  &:hover {
+    animation: none;
   }
 }
 

@@ -1,7 +1,9 @@
 btnQueue.addEventListener('click', drawQueueFilmList);
 btnWatched.addEventListener('click', drawWatchedFilmList);
+console.log(btnQueue);
 
-btnMyLibrary.addEventListener('click', openLibrary);
+// btnMyLibrary.addEventListener('click', handleUserStatusForLibrary);
+// console.log(btnMyLibrary);
 
 const queue = `You do not have to queue movies to watch. Add them.`;
 const watch = `You do not have watched movies. Add them.`;
@@ -75,7 +77,9 @@ function createPlugTitle(title, library) {
 
 // кнопка My Library //
 
-btnMyLibrary.addEventListener('click', openLibrary);
+btnMyLibrary.addEventListener('click', handleUserStatusForLibrary);
+
+// btnMyLibrary.addEventListener('click', openLibrary);
 //btnHome.addEventListener('click', goHome);
 
 function openLibrary() {
@@ -83,12 +87,50 @@ function openLibrary() {
     top: document.body.children[1].clientHeight,
     behavior: 'smooth',
   });
+  MyApi.hideSlider();
   MyApi.resetGalleryCard();
   btnQueue.disabled = false;
   btnWatched.disabled = false;
   detailsSection.innerHTML = '';
   paginationWrapper.innerHTML = '';
-  form.innerHTML = '';
+  // form.innerHTML = '';
+  form.classList.add('is-hidden');
+  form.style.display = 'none';
   libraryFilrt.classList.remove('is-hidden');
   main.classList.remove('is-hidden');
+}
+
+///// Кнопка Home и логотип
+btnHome.addEventListener('click', goHome);
+iconButton.addEventListener('click', goHome);
+function goHome() {
+  window.scrollTo({
+    top: document.body.children[1].clientHeight,
+    behavior: 'smooth',
+  });
+  MyApi.showSlider();
+  MyApi.resetGalleryCard();
+  btnQueue.disabled = true;
+  btnWatched.disabled = true;
+  detailsSection.innerHTML = '';
+  paginationWrapper.innerHTML = '';
+  libraryFilrt.classList.add('is-hidden');
+  main.classList.remove('is-hidden');
+  form.classList.remove('is-hidden');
+  form.style.display = 'block';
+  MyApi.fetchPopularFilmsList();
+}
+
+function askingToMakeAuthorization() {
+  welcomeTextSignUp.textContent = DEMAND_TO_REGISTER;
+  authModalSignUp.classList.remove('signUp-hidden');
+  authModalSignIn.classList.add('signIn-hidden');
+  authBackdrop.classList.remove('auth__backdrop--hidden');
+}
+function handleUserStatusForLibrary() {
+  if (!userStatus) {
+    askingToMakeAuthorization();
+  } else {
+    openLibrary();
+  }
 }

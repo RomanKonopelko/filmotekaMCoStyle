@@ -8,7 +8,9 @@ const refs = {
   libraryFilrt: document.querySelector('.library-filter'),
   paginationWrapper: document.querySelector('.pagination'),
   ulForCards: document.querySelector('.gallery__list'),
-  reviews: document.querySelector('.review'),
+  reviewCard: document.querySelector('.review'),
+  sliderContainer: document.querySelector('.my-slider'),
+  body: document.querySelector('.body'),
 
   //3initialHomePage
   btnTop: document.querySelector('.main__btn-scroll'),
@@ -25,6 +27,7 @@ const refs = {
 
   //6libraryPage
   btnMyLibrary: document.querySelector('.library'),
+  btnHome: document.querySelector('[data-home]'),
 
   filmsLibrary: document.querySelector('.js-gallery'),
   btnWatched: document.querySelector('.btnWatched'),
@@ -55,6 +58,19 @@ const refs = {
 
   //12navigationEfectSwitch
   iconButton: document.querySelector('[data-icon]'),
+
+  //Authorization
+  welcomeTextSignIn: document.querySelector('.auth__title.sign-in'),
+  welcomeTextSignUp: document.querySelector('.auth__title.sign-up'),
+  // demandText: document.querySelector('.auth__title-demand'),
+  // signUpSuccess: document.querySelector('.auth__title-congratulations'),
+  // signInSuccess: document.querySelector('.auth__title-success'),
+
+
+  //
+  // heroContainer: document.getElementsByClassName('hero'), 
+  // galleryListItem: document.getElementsByClassName('gallery__list-item'),
+
 };
 
 const {
@@ -91,9 +107,24 @@ const {
   decor1,
   decor2,
   iconButton,
+
   reviews,
   searchByMovie,
   searchByActor,
   selectedOption,
   input,
+
+  reviewCard,
+  sliderContainer,
+
+  welcomeTextSignIn,
+  welcomeTextSignUp,
+
+  // heroContainer,
+  // galleryListItem,
+  btnHome,
+  body,
+
 } = refs;
+
+console.log(welcomeTextSignIn);

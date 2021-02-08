@@ -1,5 +1,5 @@
 class MovieApi {
-  constructor(key, paginationWrapper, cardWrapper) {
+  constructor(key, paginationWrapper, cardWrapper, sliderWrapper) {
     this.API_KEY = key;
     this.BASE_URL = 'https://api.themoviedb.org/3/';
     this.IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/';
@@ -34,6 +34,7 @@ class MovieApi {
       window: 5, //quantity of pagination buttons
       cardContainer: cardWrapper, //gallery cards container
       paginationContainer: paginationWrapper, //pagination buttons container
+      sliderContainer: sliderWrapper,
     };
     this.imgCards = {
       defaultBackdropImg: '',
@@ -54,13 +55,22 @@ class MovieApi {
       },
     };
   }
-
   activeLoader() {
     this.pagination.paginationContainer.classList.add('is-hidden');
     const loaderArr = [...loaderPartOne, ...loaderPartTwo];
     loaderArr.map(part => {
       part.classList.remove('is-hidden');
     });
+  }
+  hideSlider() {
+    this.pagination.paginationContainer.classList.remove('is-hidden');
+    const heroContainer = document.querySelector(['.hero']);
+    heroContainer.classList.add('is-hidden');
+  }
+    showSlider() {
+    this.pagination.paginationContainer.classList.remove('is-hidden');
+    const heroContainer = document.querySelector(['.hero']);
+    heroContainer.classList.remove('is-hidden');
   }
 
   hideLoader() {
@@ -79,11 +89,33 @@ class MovieApi {
         return resp;
       })
       .then(({ results }) => {
-        // console.log(results.length);
         if (results.length === 0) onHandleTrailerError();
         return results[0];
       })
       .then(({ key }) => key);
+  }
+  dailyBestMovie() {
+    return fetch(
+      `https://api.themoviedb.org/3/trending/movie/day?api_key=${this.API_KEY}`,
+    )
+      .then(response => response.json())
+      .then(({ results }) => results)
+      .then(col => {
+        return col.map(el => {
+          return this.createSliderCard(el);
+        });
+      })
+      .then(arr => {
+        this.pagination.sliderContainer.append(...arr);
+
+        const slider = tns({
+          container: '.my-slider',
+          items: 3,
+          slideBy: 'page',
+          autoplay: true,
+        });
+        return slider();
+      });
   }
 
   fetchPopularFilmsList() {
@@ -106,7 +138,9 @@ class MovieApi {
           return this.createCardFunc(el);
         }),
       )
-      .then(item => MyApi.pagination.cardContainer.append(...item))
+      .then(item => {
+        this.pagination.cardContainer.append(...item);
+      })
       .finally(() => {
         this.pagination.cardContainer.classList.remove('is-hidden');
         this.hideLoader();
@@ -173,8 +207,8 @@ class MovieApi {
           .slice(0, 5);
         //console.log(this.reviews); // повертає ім'я автора і його рев'ю
         return this.reviews;
-      })
-      .catch(error => this.reviews(error));
+      });
+    //.catch(error => this.reviews(error));
   }
   // test end //
 
@@ -205,7 +239,9 @@ class MovieApi {
       .then(data => data.json())
       .then(data => {
         this.setRatioButtons(data);
+
         // console.log(data.total_pages);
+
         return data;
       })
       .then(resp => {
@@ -302,6 +338,20 @@ class MovieApi {
 
   resetGalleryCard() {
     this.pagination.cardContainer.innerHTML = '';
+    reviewCard.innerHTML = '';
+  }
+  createSliderCard(data) {
+    const sliderDiv = document.createElement('div');
+    sliderDiv.classList.add('slider__item');
+    sliderDiv.style.backgroundImage = `url('${MyApi.IMAGE_BASE_URL}${MyApi.imgCards.currentSizes.backdropSize}${data.poster_path}')`;
+    // const sliderTitle = document.createElement('h2');
+    // sliderTitle.classList.add('slider__item-title');
+    // const sliderRating = document.createElement('p');
+    // sliderRating.classList.add('slider__item-rating');
+    // sliderRating.textContent = data.vote_average;
+    // sliderTitle.textContent = data.title;
+    // sliderDiv.append(sliderTitle, sliderRating);
+    return sliderDiv;
   }
 
   createCardFunc(itemData, siteSection) {
@@ -345,6 +395,7 @@ class MovieApi {
       // клік на картку //
       this.movieID = id;
       this.pagination.cardContainer.classList.add('is-hidden');
+      this.hideSlider();
       this.activeLoader();
       //Скролит вверх
       window.scrollTo(0, document.body.children[1].clientHeight);
@@ -365,13 +416,10 @@ class MovieApi {
 
     let collectionItems = [];
     if (libraryIndicator === 'Queue') {
-      console.log('Queue!!!!!!!!!!!');
       collectionItems = this.queueList;
     } else if (libraryIndicator === 'Watched') {
-      console.log('Watched!!!!!!!!');
       collectionItems = this.watchedList;
     } else if (!libraryIndicator) {
-      console.log('OTHER');
       collectionItems = this.popularFilmItem;
     }
 
@@ -458,15 +506,16 @@ class MovieApi {
     const titleText = document.createElement('h3');
     titleText.classList.add('details-page__title', 'second');
     titleText.textContent = 'About';
+    const spanAbout = document.createElement('span');
+    spanAbout.classList.add('material-icons', 'span-about');
+    spanAbout.textContent = 'info';
+    titleText.append(spanAbout);
+
     const textAbout = document.createElement('p');
     textAbout.classList.add('details-page__text');
     textAbout.textContent = item.overview;
 
-    // test start //
-
-    titleText.addEventListener('click', () => {
-      textAbout.classList.remove('is-hidden');
-    });
+    // reviews //
 
     const reviewsTitle = document.createElement('h3');
     reviewsTitle.classList.add(
@@ -483,25 +532,58 @@ class MovieApi {
     this.fetchReviews();
 
     reviewsTitle.addEventListener('click', () => {
-      detailsSection.classList.add('is-hidden');
-      const reviewsAutor = document.createElement('h3');
-      const autorFace = document.createElement('span');
-
-      autorFace.classList.add('material-icons');
-      autorFace.textContent = 'face';
-
-      const reviewsText = document.createElement('p');
-      reviewsText.classList.add('details-page__text');
-
-      reviews.append(autorFace, reviewsAutor, reviewsText);
-
-      for (let obj of this.reviews) {
-        reviewsAutor.textContent = obj[0];
-        reviewsText.textContent = obj[1];
+      if (this.reviews.length === 0) {
+        reviewsTitle.textContent = 'Sorry, we do not have any review yet!';
+        return;
       }
-    });
+      if (!userStatus) {
+        askingToMakeAuthorization();
+        return;
+      }
+
+      detailsSection.classList.add('is-hidden');
+
+      const btnClose = document.createElement('button');
+      btnClose.classList.add('button__add', 'button-close', 'btn-reviews');
+      btnClose.textContent = 'X';
+
+      btnClose.addEventListener('click', () => {
+        detailsSection.classList.remove('is-hidden');
+        reviewCard.innerHTML = '';
+      });
+
+      reviewCard.append(btnClose);
+
+      this.reviews.map(el => {
+        if (el[0] === '') {
+          el[0] = 'anonym';
+        }
+
+        const reviewsAutor = document.createElement('h3');
+        reviewsAutor.classList.add('reviews-autor');
+        const autorFace = document.createElement('span');
+
 
     // console.log(item.id, 'назва');
+
+        autorFace.classList.add('material-icons', 'icons-face');
+        autorFace.textContent = 'face';
+
+        const reviewsText = document.createElement('p');
+        reviewsText.classList.add('reviews-text');
+
+        reviewsAutor.textContent = el[0];
+        reviewsText.textContent =
+          el[1].split(' ').slice(0, 100).join(' ') + '...';
+
+        reviewCard.append(autorFace, reviewsAutor, reviewsText);
+
+        reviewsText.addEventListener('click', () => {
+          reviewsText.textContent = el[1];
+        });
+      });
+    });
+
 
     // test end//
 
@@ -511,19 +593,38 @@ class MovieApi {
     buttonFirst.classList.add('button__add', 'first');
     buttonFirst.setAttribute('type', 'submite');
     buttonFirst.textContent = 'add to watched';
-    buttonFirst.addEventListener('click', this.onWatchedClick);
+    buttonFirst.addEventListener('click', () => {
+      if (!userStatus) {
+        askingToMakeAuthorization();
+      } else {
+        this.onWatchedClick();
+      }
+    });
 
     const buttonSecond = document.createElement('button');
     buttonSecond.classList.add('button__add');
     buttonSecond.setAttribute('type', 'submite');
     buttonSecond.textContent = 'add to queue';
-    buttonSecond.addEventListener('click', this.onQueueClick);
+    buttonSecond.addEventListener('click', () => {
+      if (!userStatus) {
+        askingToMakeAuthorization();
+      } else {
+        this.onQueueClick();
+      }
+    });
 
     const buttonTrailer = document.createElement('button');
     buttonTrailer.classList.add('button__add');
     buttonTrailer.setAttribute('type', 'submite');
     buttonTrailer.textContent = 'watch the trailer';
-    buttonTrailer.addEventListener('click', this.onTrailerClick);
+
+    buttonTrailer.addEventListener('click', () => {
+      if (!userStatus) {
+        askingToMakeAuthorization();
+      } else {
+        this.onTrailerClick();
+      }
+    });
 
     const divBtn = document.createElement('div');
     divBtn.classList.add('details-page__button');
@@ -568,7 +669,8 @@ class MovieApi {
     detailsSection.classList.remove('is-hidden');
     detailsSection.appendChild(container);
 
-    buttonTrailer.addEventListener('click', this.onTrailerClick);
+    // buttonTrailer.addEventListener('click', );
+
     main.classList.add('is-hidden');
     this.hideLoader();
 
@@ -585,9 +687,10 @@ class MovieApi {
       this.pagination.cardContainer.classList.remove('is-hidden');
       btnTop.classList.remove('is-hidden');
       detailsSection.innerHTML = '';
+      reviewCard.innerHTML = '';
       main.classList.remove('is-hidden');
       this.actors = []; //=========================================================================
-      // console.log(this.actors);
+
       if (libraryFilrt.classList != 'is-hidden') {
         if (btnQueue.disabled) {
           drawQueueFilmList();
@@ -597,9 +700,8 @@ class MovieApi {
         }
       }
     });
-
-    // Вызов видео
   }
+  //Вызов видео
 
   onTrailerClick() {
     openModal(event);
@@ -789,4 +891,9 @@ class MovieApi {
 }
 
 const API_KEY = '91085a172e1ffb2047d72641d0a91356';
-const MyApi = new MovieApi(API_KEY, paginationWrapper, ulForCards);
+const MyApi = new MovieApi(
+  API_KEY,
+  paginationWrapper,
+  ulForCards,
+  sliderContainer,
+);
