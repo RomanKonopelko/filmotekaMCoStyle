@@ -9,6 +9,7 @@ thrillerRef.addEventListener('click', () => {
   libraryFilrt.classList.add('is-hidden');
   detailsSection.innerHTML = '';
   paginationWrapper.innerHTML = '';
+  messageTitle.innerHTML = '';
   searchGenre = thrillerRef.innerHTML.toLowerCase();
   thrillerRef.classList.add('current');
   comedyRef.classList.remove('current');
@@ -31,6 +32,7 @@ comedyRef.addEventListener('click', () => {
   libraryFilrt.classList.add('is-hidden');
   detailsSection.innerHTML = '';
   paginationWrapper.innerHTML = '';
+  messageTitle.innerHTML = '';
   searchGenre = comedyRef.innerHTML.toLowerCase();
   thrillerRef.classList.remove('current');
   comedyRef.classList.add('current');
@@ -57,6 +59,7 @@ actionRef.addEventListener('click', () => {
   libraryFilrt.classList.add('is-hidden');
   detailsSection.innerHTML = '';
   paginationWrapper.innerHTML = '';
+  messageTitle.innerHTML = '';
   searchGenre = actionRef.innerHTML.toLowerCase();
   thrillerRef.classList.remove('current');
   comedyRef.classList.remove('current');
@@ -79,6 +82,7 @@ animationRef.addEventListener('click', () => {
   libraryFilrt.classList.add('is-hidden');
   detailsSection.innerHTML = '';
   paginationWrapper.innerHTML = '';
+  messageTitle.innerHTML = '';
   searchGenre = animationRef.innerHTML.toLowerCase();
   thrillerRef.classList.remove('current');
   comedyRef.classList.remove('current');
@@ -101,6 +105,7 @@ westernRef.addEventListener('click', () => {
   libraryFilrt.classList.add('is-hidden');
   detailsSection.innerHTML = '';
   paginationWrapper.innerHTML = '';
+  messageTitle.innerHTML = '';
   searchGenre = westernRef.innerHTML.toLowerCase();
   thrillerRef.classList.remove('current');
   comedyRef.classList.remove('current');
@@ -123,6 +128,7 @@ fantasyRef.addEventListener('click', () => {
   libraryFilrt.classList.add('is-hidden');
   detailsSection.innerHTML = '';
   paginationWrapper.innerHTML = '';
+  messageTitle.innerHTML = '';
   searchGenre = fantasyRef.innerHTML.toLowerCase();
   thrillerRef.classList.remove('current');
   comedyRef.classList.remove('current');
@@ -145,6 +151,7 @@ dramaRef.addEventListener('click', () => {
   libraryFilrt.classList.add('is-hidden');
   detailsSection.innerHTML = '';
   paginationWrapper.innerHTML = '';
+  messageTitle.innerHTML = '';
   searchGenre = dramaRef.innerHTML.toLowerCase();
   thrillerRef.classList.remove('current');
   comedyRef.classList.remove('current');

@@ -405,11 +405,12 @@ class MovieApi {
     item.addEventListener('click', () => {
       // клік на картку //
       this.movieID = id;
+      messageTitle.innerHTML = '';
       this.pagination.cardContainer.classList.add('is-hidden');
       this.hideSlider();
       this.activeLoader();
       //Скролит вверх
-      window.scrollTo(0, document.body.children[1].clientHeight);
+      window.scrollTo(0, document.body.children[9].offsetTop);
       setTimeout(() => {
         this.activeDetailsPage(id, siteSection);
       }, 2000);
@@ -564,6 +565,7 @@ class MovieApi {
       btnClose.addEventListener('click', () => {
         detailsSection.classList.remove('is-hidden');
         reviewCard.innerHTML = '';
+        messageTitle.innerHTML = '';
       });
 
       reviewCard.append(btnClose);
@@ -701,8 +703,8 @@ class MovieApi {
       detailsSection.innerHTML = '';
       reviewCard.innerHTML = '';
       main.classList.remove('is-hidden');
-      this.actors = []; //=========================================================================
-
+      this.actors = [];
+      //=========================================================================
       if (libraryFilrt.classList != 'is-hidden') {
         if (btnQueue.disabled) {
           drawQueueFilmList();

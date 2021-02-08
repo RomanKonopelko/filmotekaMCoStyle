@@ -26,6 +26,7 @@ function drawQueueFilmList(key) {
   if (parsedFilmsQueue === null || parsedFilmsQueue.length === 0) {
     createPlugTitle(queue, filmsLibrary);
   } else {
+    messageTitle.innerHTML = '';
     createParseFilms(parsedFilmsQueue, filmsLibrary, INDICATOR_QUEUE);
   }
 }
@@ -47,6 +48,7 @@ function drawWatchedFilmList(key) {
   if (parsedFilmsWatched === null || parsedFilmsWatched.length === 0) {
     createPlugTitle(watch, filmsLibrary);
   } else {
+    messageTitle.innerHTML = '';
     createParseFilms(parsedFilmsWatched, filmsLibrary, INDICATOR_WATCHED);
   }
 }
@@ -84,13 +86,15 @@ btnMyLibrary.addEventListener('click', handleUserStatusForLibrary);
 
 function openLibrary() {
   window.scrollTo({
-    top: document.body.children[1].clientHeight,
+    top: document.body.children[7].offsetTop,
     behavior: 'smooth',
   });
   MyApi.hideSlider();
   MyApi.resetGalleryCard();
   btnQueue.disabled = false;
   btnWatched.disabled = false;
+  btnWatched.classList.remove('active');
+  btnQueue.classList.remove('active');
   detailsSection.innerHTML = '';
   paginationWrapper.innerHTML = '';
   // form.innerHTML = '';
@@ -103,15 +107,17 @@ function openLibrary() {
 ///// Кнопка Home и логотип
 btnHome.addEventListener('click', goHome);
 iconButton.addEventListener('click', goHome);
+
 function goHome() {
   window.scrollTo({
-    top: document.body.children[1].clientHeight,
+    top: document.body.children[9].offsetTop,
     behavior: 'smooth',
   });
   MyApi.showSlider();
   MyApi.resetGalleryCard();
   btnQueue.disabled = true;
   btnWatched.disabled = true;
+  messageTitle.innerHTML = '';
   detailsSection.innerHTML = '';
   paginationWrapper.innerHTML = '';
   libraryFilrt.classList.add('is-hidden');
