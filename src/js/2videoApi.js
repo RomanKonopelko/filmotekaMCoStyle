@@ -361,14 +361,15 @@ class MovieApi {
         this.activeDetailsPage(id, siteSection);
       }, 2000);
       this.fetchActors(this.movieID);
+      //test  start //
+      main.classList.add('is-hidden');
+      // test end//
     });
     return sliderDiv;
   }
 
   createCardFunc(itemData, siteSection) {
-    //test start //
     main.classList.remove('is-hidden');
-    // test end //
 
     const { backdrop_path, title, id, vote_average, release_date } = itemData;
     const imgCardSize = backdrop_path
@@ -420,9 +421,11 @@ class MovieApi {
   }
 
   activeDetailsPage(id, libraryIndicator) {
-    //Прячит пагинацию и форму поиска
     form.style.display = 'none';
     btnTop.classList.add('is-hidden');
+    main.classList.add('is-hidden');
+    detailsSection.classList.remove('is-hidden');
+    // buttonTrailer.addEventListener('click', );
 
     this.movieID = id;
 
@@ -497,7 +500,6 @@ class MovieApi {
 
     const tdVoteName = document.createElement('td');
     tdVoteName.textContent = `/ ${item.vote_count}`;
-
     spanVote.appendChild(tdVoteName);
 
     const trVotes = document.createElement('tr');
@@ -521,6 +523,7 @@ class MovieApi {
     const titleText = document.createElement('h3');
     titleText.classList.add('details-page__title', 'second');
     titleText.textContent = 'About';
+
     const spanAbout = document.createElement('span');
     spanAbout.classList.add('material-icons', 'span-about');
     spanAbout.textContent = 'info';
@@ -531,7 +534,6 @@ class MovieApi {
     textAbout.textContent = item.overview;
 
     // reviews //
-
     const reviewsTitle = document.createElement('h3');
     reviewsTitle.classList.add(
       'details-page__title',
@@ -578,29 +580,20 @@ class MovieApi {
         const reviewsAutor = document.createElement('h3');
         reviewsAutor.classList.add('reviews-autor');
         const autorFace = document.createElement('span');
-
-        // console.log(item.id, 'назва');
-
         autorFace.classList.add('material-icons', 'icons-face');
         autorFace.textContent = 'face';
-
         const reviewsText = document.createElement('p');
         reviewsText.classList.add('reviews-text');
-
         reviewsAutor.textContent = el[0];
         reviewsText.textContent =
           el[1].split(' ').slice(0, 100).join(' ') + '...';
 
         reviewCard.append(autorFace, reviewsAutor, reviewsText);
-
         reviewsText.addEventListener('click', () => {
           reviewsText.textContent = el[1];
         });
       });
     });
-
-    // test end//
-
     divPage.append(titleText, textAbout, reviewsTitle);
 
     const buttonFirst = document.createElement('button');
@@ -660,32 +653,21 @@ class MovieApi {
 
     const aImg = document.createElement('a');
     aImg.setAttribute('href', '#');
-
     aImg.appendChild(img);
 
-    //TEST Btn that close DetailsPage
     const btnClose = document.createElement('button');
     btnClose.classList.add('button__add', 'button-close');
-    // const btnCloseI = document.createElement('i');
     btnClose.textContent = 'X';
-    // btnCloseI.classList.add('material-icons', 'active');
-    // btnClose.append(btnCloseI);
 
     const divImage = document.createElement('div');
     divImage.classList.add('details-page__foto');
-
     divImage.append(aImg, btnClose);
 
     const container = document.createElement('div');
     container.classList.add('container', 'details-page__film');
     container.append(divImage, detailsPageDecr);
-
-    detailsSection.classList.remove('is-hidden');
     detailsSection.appendChild(container);
 
-    // buttonTrailer.addEventListener('click', );
-
-    main.classList.add('is-hidden');
     this.hideLoader();
 
     btnAddWatched = buttonFirst;
@@ -698,12 +680,18 @@ class MovieApi {
       form.style.display = 'block';
       this.pagination.paginationContainer.classList.remove('is-hidden');
       detailsSection.classList.add('is-hidden');
+
       this.pagination.cardContainer.classList.remove('is-hidden');
       btnTop.classList.remove('is-hidden');
       detailsSection.innerHTML = '';
       reviewCard.innerHTML = '';
-      main.classList.remove('is-hidden');
       this.actors = [];
+      if ((main.classList = 'is-hidden')) {
+        main.classList.add('main');
+        main.classList.remove('is-hidden');
+        this.createCardFunc();
+      }
+
       //=========================================================================
       if (libraryFilrt.classList != 'is-hidden') {
         if (btnQueue.disabled) {
