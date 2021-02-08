@@ -356,7 +356,7 @@ class MovieApi {
       this.hideSlider();
       this.activeLoader();
       //Скролит вверх
-      window.scrollTo(0, document.body.children[1].clientHeight);
+      window.scrollTo(0, document.body.children[7].offsetTop);
       setTimeout(() => {
         this.activeDetailsPage(id, siteSection);
       }, 2000);
@@ -410,7 +410,7 @@ class MovieApi {
       this.hideSlider();
       this.activeLoader();
       //Скролит вверх
-      window.scrollTo(0, document.body.children[9].offsetTop);
+      window.scrollTo(0, document.body.children[7].offsetTop);
       setTimeout(() => {
         this.activeDetailsPage(id, siteSection);
       }, 2000);
@@ -791,7 +791,7 @@ class MovieApi {
   pagesScroll() {
     this.activeLoader();
     this.resetGalleryCard();
-    window.scrollTo(0, document.body.children[1].clientHeight);
+    window.scrollTo(0, document.body.children[7].clientHeight);
     this.searchMode === 'popular'
       ? setTimeout(() => {
           this.fetchPopularFilmsList();
@@ -829,7 +829,7 @@ class MovieApi {
         button.classList.add('active');
       button.addEventListener('click', e => {
         this.activeLoader();
-        window.scrollTo(0, document.body.children[1].clientHeight);
+        window.scrollTo(0, document.body.children[7].clientHeight);
         this.page = +e.target.textContent;
         this.currentPage = this.page;
         this.pagination.cardContainer.innerHTML = '';

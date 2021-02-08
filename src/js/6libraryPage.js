@@ -110,7 +110,7 @@ iconButton.addEventListener('click', goHome);
 
 function goHome() {
   window.scrollTo({
-    top: document.body.children[9].offsetTop,
+    top: document.body.children[7].offsetTop,
     behavior: 'smooth',
   });
   MyApi.showSlider();
