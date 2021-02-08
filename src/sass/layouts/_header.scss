@@ -138,15 +138,16 @@
 }
 .library {
   position: relative;
+  margin-left: 15px;
 }
-.library::before {
+.header__item.library::before {
   display: none;
   @include for-size(tablet) {
     content: '';
     display: block;
     position: absolute;
-    top: -288px;
-    left: 197px;
+    top: -283px;
+    left: 211px;
     height: 300px;
     width: 2px;
     animation: animate-decoration 4s linear infinite;

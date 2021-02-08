@@ -17,6 +17,7 @@ class MovieApi {
     this.genres = [];
     this.actors = [];
     this.actorsId = [];
+    this.dailyBestArr = [];
 
     this.currentPage = 1;
 
@@ -67,7 +68,7 @@ class MovieApi {
     const heroContainer = document.querySelector(['.hero']);
     heroContainer.classList.add('is-hidden');
   }
-    showSlider() {
+  showSlider() {
     this.pagination.paginationContainer.classList.remove('is-hidden');
     const heroContainer = document.querySelector(['.hero']);
     heroContainer.classList.remove('is-hidden');
@@ -99,10 +100,13 @@ class MovieApi {
       `https://api.themoviedb.org/3/trending/movie/day?api_key=${this.API_KEY}`,
     )
       .then(response => response.json())
-      .then(({ results }) => results)
+      .then(({ results }) => {
+        this.dailyBestArr = results;
+        return results;
+      })
       .then(col => {
         return col.map(el => {
-          return this.createSliderCard(el);
+          return this.createSliderCard(el, 'daily');
         });
       })
       .then(arr => {
@@ -340,17 +344,24 @@ class MovieApi {
     this.pagination.cardContainer.innerHTML = '';
     reviewCard.innerHTML = '';
   }
-  createSliderCard(data) {
+  createSliderCard(data, siteSection) {
+    const id = data.id;
     const sliderDiv = document.createElement('div');
     sliderDiv.classList.add('slider__item');
     sliderDiv.style.backgroundImage = `url('${MyApi.IMAGE_BASE_URL}${MyApi.imgCards.currentSizes.backdropSize}${data.poster_path}')`;
-    // const sliderTitle = document.createElement('h2');
-    // sliderTitle.classList.add('slider__item-title');
-    // const sliderRating = document.createElement('p');
-    // sliderRating.classList.add('slider__item-rating');
-    // sliderRating.textContent = data.vote_average;
-    // sliderTitle.textContent = data.title;
-    // sliderDiv.append(sliderTitle, sliderRating);
+    sliderDiv.addEventListener('click', () => {
+      // клік на картку //
+      this.movieID = id;
+      this.pagination.cardContainer.classList.add('is-hidden');
+      this.hideSlider();
+      this.activeLoader();
+      //Скролит вверх
+      window.scrollTo(0, document.body.children[1].clientHeight);
+      setTimeout(() => {
+        this.activeDetailsPage(id, siteSection);
+      }, 2000);
+      this.fetchActors(this.movieID);
+    });
     return sliderDiv;
   }
 
@@ -421,6 +432,9 @@ class MovieApi {
       collectionItems = this.watchedList;
     } else if (!libraryIndicator) {
       collectionItems = this.popularFilmItem;
+    } else if (libraryIndicator === 'daily') {
+      collectionItems = this.dailyBestArr;
+      console.log(collectionItems);
     }
 
     // серед масиву об'єктів знаходить об'єкт з необхідним id //
@@ -563,8 +577,7 @@ class MovieApi {
         reviewsAutor.classList.add('reviews-autor');
         const autorFace = document.createElement('span');
 
-
-    // console.log(item.id, 'назва');
+        // console.log(item.id, 'назва');
 
         autorFace.classList.add('material-icons', 'icons-face');
         autorFace.textContent = 'face';
@@ -583,7 +596,6 @@ class MovieApi {
         });
       });
     });
-
 
     // test end//
 

@@ -6,6 +6,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 8px;
+  cursor: pointer;
 
   @include for-size(tablet) {
     height: 610px;

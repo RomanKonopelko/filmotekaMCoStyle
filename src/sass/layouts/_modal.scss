@@ -79,7 +79,7 @@
       font-size: 18px;
     }
 
-    @include for-size(desktop) {      
+    @include for-size(desktop) {
       font-size: 20px;
     }
 
@@ -126,7 +126,6 @@
     @include for-size(desktop) {
       font-size: 16px;
     }
-
   }
 
   & .auth__input {
@@ -139,7 +138,7 @@
     font-size: 14px;
     line-height: 14px;
     color: $accent-color;
-
+    transition: all 500ms $timing-function;
     letter-spacing: 0.01em;
     padding-left: 42px;
     border: 1px solid $accent-color;
@@ -147,6 +146,27 @@
 
     @include for-size(tablet) {
       height: 40px;
+    }
+  }
+
+  .auth__input:focus {
+    outline: none;
+    border: 3px solid $accent-color;
+    box-shadow: 0 0 10px $accent-shadow-color, 0 0 2px $accent-shadow-color,
+      0 0 3px $accent-shadow-color, 0 0 3px $accent-shadow-color,
+      0 0 6px $accent-shadow-color;
+    transition: transform $transition-duration $timing-function;
+
+    &::placeholder {
+      transition: all 1000ms $timing-function;
+      color: $accent-color2;
+      text-shadow: 0 0 2px $accent-shadow-color, 0 0 2px $accent-shadow-color,
+        0 0 3px $accent-shadow-color, 0 0 3px $accent-shadow-color,
+        0 0 6px $accent-shadow-color;
+
+      @include for-size(tablet) {
+        transform: translateX(70%);
+      }
     }
   }
 
@@ -158,13 +178,13 @@
     margin-bottom: 30px;
     margin-right: auto;
     margin-left: auto;
+    transition: all $transition-duration $timing-function;
     // background: transparent;
     background: linear-gradient(
       0.25turn,
-      rgba(250, 250, 250, 0.4),
+      rgba(200, 242, 243, 0.568),
       rgba(126, 35, 126, 0)
     );
-
 
     border-radius: 5px;
     font-style: normal;
@@ -185,7 +205,6 @@
       font-size: 16px;
       width: 200px;
     }
-
   }
   & .auth__exit {
     display: block;
@@ -196,12 +215,7 @@
     height: 30px;
     border-radius: 10px;
     // background: transparent;
-    background: linear-gradient(
-      0.25turn,
-      rgba(250, 250, 250, 0.4),
-      rgba(126, 35, 126, 0)
-    );
-
+    background: transparent;
 
     border: none;
     font-style: normal;
@@ -227,6 +241,24 @@
       border-radius: 15px;
     }
   }
+}
+
+.auth__exit:hover,
+.auth__exit:focus {
+  color: $accent-color2;
+  text-shadow: 0 0 10px $accent-shadow-color2, 0 0 5px $accent-shadow-color2,
+    0 0 6px $accent-shadow-color2, 0 0 6px $accent-shadow-color2,
+    0 0 10px $accent-shadow-color2;
+}
+
+.auth__btn:hover,
+.auth__btn:focus {
+  color: $accent-color2;
+  border: $accent-color2;
+  background-color: $accent-color;
+  box-shadow: 0 0 10px $accent-shadow-color, 0 0 2px $accent-shadow-color,
+    0 0 3px $accent-shadow-color, 0 0 3px $accent-shadow-color,
+    0 0 6px $accent-shadow-color;
 }
 
 .signIn-hidden {
