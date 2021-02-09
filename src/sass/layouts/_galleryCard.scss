@@ -1,5 +1,5 @@
 .main {
-  padding-top: 20px;
+  padding-top: 20px; //add padding
   position: relative;
   color: $title-text-color;
 
@@ -40,7 +40,7 @@
 
   .form__control {
     width: 300px;
-    padding: 5px 10px;
+    padding: 5px 10px; // change input color
     border: none;
     background-color: transparent;
     outline: none;
@@ -253,13 +253,14 @@
         color: $accent-color2;
         text-shadow: 0.1em 0.1em 0.1em $accent-color4;
 
-        width: 100%;
+        // text-align: center;   // Мешало позиционированию
+        width: 100%; //  Захаркодил ширину текста, чтобы не растягивала контейнер
         padding: 20px 20px;
         border-radius: 10px;
 
         background: linear-gradient(1turn, #959597, rgba(126, 35, 126, 0));
 
-        position: absolute;
+        position: absolute; // ДОбавил позиционирование
         bottom: 0px;
         left: 0px;
 

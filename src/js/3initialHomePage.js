@@ -1,6 +1,6 @@
 'use strict';
 
-history.scrollRestoration = 'manual';
+history.scrollRestoration = 'manual'; //kills auto scroll after page reload
 
 MyApi.checkBackdropImgSize();
 MyApi.checkPosterImgSize();
@@ -8,6 +8,8 @@ MyApi.checkPosterImgSize();
 MyApi.fetchPopularFilmsList();
 MyApi.dailyBestMovie();
 MyApi.fetchGenres();
+
+// Button UP Logic
 
 btnTop.addEventListener('click', () => {
   scrollToTop();
@@ -36,7 +38,10 @@ function handleScroll() {
   }
 }
 
-backdrop.addEventListener('click', onBeckDropCkick);
+// Modal on Details Page Logic
+
+//modalBtn.addEventListener('click', closeModal);
+backdrop.addEventListener('click', onBeckDropCkick); // Close Modal on Backdrop click
 
 function onHandleTrailerError() {
   player.src = `https://www.youtube.com/embed/Zq_zgig9DqQ?autoplay=1`;
@@ -46,6 +51,7 @@ function openModal(event) {
   event.preventDefault();
 
   body.classList.add('overflow');
+  // youTubeSizes();
 
   MyApi.fetchVideoById().then(key => {
     player.src = `https://www.youtube.com/embed/${key}?autoplay=1`;
@@ -62,12 +68,14 @@ function closeModal() {
   window.removeEventListener('keydown', onKeybordPress);
 }
 
+// Close Modal by cleck on Btn Escape
+
 function onKeybordPress(event) {
   if (event.code === 'Escape') {
     closeModal();
   }
 }
-
+// Close Modal by cleck on Backdrop
 function onBeckDropCkick(event) {
   if (event.target.nodeName === 'DIV') {
     closeModal();

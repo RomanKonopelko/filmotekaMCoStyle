@@ -20,6 +20,16 @@ $shadows-big: multiple-box-shadow(200);
     box-shadow: $shadows-small;
     animation: animStar 100s linear infinite;
   }
+  // &:after {
+  //   content: ' ';
+  //   position: absolute;
+  //   top: 100px;
+  //   width: 2px;
+  //   height: 2px;
+  //   border-radius: 50%;
+  //   background: transparent;
+  //   box-shadow: $shadows-small;
+  // }
 }
 
 #stars2 {
@@ -32,6 +42,16 @@ $shadows-big: multiple-box-shadow(200);
     box-shadow: $shadows-medium;
     animation: animStar 60s linear infinite;
   }
+  // &:after {
+  //   content: ' ';
+  //   position: absolute;
+  //   top: 100px;
+  //   width: 2px;
+  //   height: 2px;
+  //   border-radius: 50%;
+  //   background: transparent;
+  //   box-shadow: $shadows-medium;
+  // }
 }
 #stars3 {
   @include for-size(tablet) {

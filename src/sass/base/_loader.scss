@@ -47,6 +47,8 @@
   }
 }
 
+/* Rotating squares style */
+
 .squares-common {
   height: 18vw;
   max-height: 100%;
@@ -80,12 +82,18 @@
   box-shadow: 0 0 0 0.1vw cyan, 0 0 1vw 0 cyan, inset 0 0 0.5vw 0 cyan;
 }
 
+/* Animation */
+/* Compressing bars animation */
+
 .bar-one {
   transform: translateZ(0);
   animation: barOne 1s 0.33s ease infinite;
   -moz-animation: barOne 1s 0.33s ease infinite;
+  /* Firefox */
   -webkit-animation: barOne 1s 0.33s ease infinite;
+  /* Safari and Chrome */
   -o-animation: barOne 1s 0.33s ease infinite;
+  /* Opera */
 }
 
 @keyframes barOne {
@@ -104,8 +112,11 @@
   transform: translateZ(0);
   animation: barTwo 1s 0.66s ease infinite;
   -moz-animation: barTwo 1s 0.66s ease infinite;
+  /* Firefox */
   -webkit-animation: barTwo 1s 0.66s ease infinite;
+  /* Safari and Chrome */
   -o-animation: barTwo 1s 0.66s ease infinite;
+  /* Opera */
 }
 
 @keyframes barTwo {
@@ -124,8 +135,11 @@
   transform: translateZ(0);
   animation: barThree 1s 0.99s ease infinite;
   -moz-animation: barThree 1s 0.99s ease infinite;
+  /* Firefox */
   -webkit-animation: barThree 1s 0.99s ease infinite;
+  /* Safari and Chrome */
   -o-animation: barThree 1s 0.99s ease infinite;
+  /* Opera */
 }
 
 @keyframes barThree {
@@ -140,12 +154,17 @@
   }
 }
 
+/* Rotating squares animation */
+
 .square-one {
   transform: translateZ(0);
   animation: squareOne 4s 0.99s ease infinite;
   -moz-animation: squareOne 4s 0.99s ease infinite;
+  /* Firefox */
   -webkit-animation: squareOne 4s 0.99s ease infinite;
+  /* Safari and Chrome */
   -o-animation: squareOne 4s 0.99s ease infinite;
+  /* Opera */
 }
 
 @keyframes squareOne {
@@ -161,8 +180,11 @@
   transform: translateZ(0);
   animation: squareTwo 4s 0.99s ease infinite;
   -moz-animation: squareTwo 4s 0.99s ease infinite;
+  /* Firefox */
   -webkit-animation: squareTwo 4s 0.99s ease infinite;
+  /* Safari and Chrome */
   -o-animation: squareTwo 4s 0.99s ease infinite;
+  /* Opera */
 }
 
 @keyframes squareTwo {

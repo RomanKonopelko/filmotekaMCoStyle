@@ -23,18 +23,18 @@ class MovieApi {
 
     this.params = {
       generalSearchUrl: 'search/movie?',
-      searchActorUrl: 'search/person?',
-      popularSearchUrl: 'movie/popular?',
-      genreSearchUrl: 'genre/movie/list?',
+      searchActorUrl: 'search/person?', //=================================================================
+      popularSearchUrl: 'movie/popular?', //Api url of popular movie
+      genreSearchUrl: 'genre/movie/list?', // Api url of genre search
       byGenreSearchUrl: 'discover/movie?',
       query: '',
       _page: 1,
       lastPage: '',
     };
     this.pagination = {
-      window: 5,
-      cardContainer: cardWrapper,
-      paginationContainer: paginationWrapper,
+      window: 5, //quantity of pagination buttons
+      cardContainer: cardWrapper, //gallery cards container
+      paginationContainer: paginationWrapper, //pagination buttons container
       sliderContainer: sliderWrapper,
     };
     this.imgCards = {
@@ -134,8 +134,8 @@ class MovieApi {
         return resp;
       })
       .then(({ results }) => {
-        this.popularFilmItem = results;
-        return results;
+        this.popularFilmItem = results; // test
+        return results; // test
       })
       .then(collection =>
         collection.map(el => {
@@ -163,8 +163,8 @@ class MovieApi {
         return resp;
       })
       .then(({ results }) => {
-        this.popularFilmItem = results;
-        return results;
+        this.popularFilmItem = results; // test
+        return results; // test
       })
       .then(collection =>
         collection.map(el => {
@@ -194,7 +194,7 @@ class MovieApi {
         // this.hideLoader();
       });
   }
-
+  // test start //
   fetchReviews() {
     return fetch(
       `${this.VIDEO_BASE_URL}${this.movieID}/reviews?api_key=${this.API_KEY}`,
@@ -209,10 +209,12 @@ class MovieApi {
             return [author.author_details.name, author.content];
           })
           .slice(0, 5);
-
+        //console.log(this.reviews); // повертає ім'я автора і його рев'ю
         return this.reviews;
       });
+    //.catch(error => this.reviews(error));
   }
+  // test end //
 
   fetchActors() {
     return fetch(
@@ -241,6 +243,8 @@ class MovieApi {
       .then(data => data.json())
       .then(data => {
         this.setRatioButtons(data);
+
+        // console.log(data.total_pages);
 
         return data;
       })
@@ -359,11 +363,12 @@ class MovieApi {
     sliderDiv.classList.add('slider__item');
     sliderDiv.style.backgroundImage = `url('${MyApi.IMAGE_BASE_URL}${MyApi.imgCards.currentSizes.backdropSize}${data.poster_path}')`;
     sliderDiv.addEventListener('click', () => {
+      // клік на картку //
       this.movieID = id;
       this.pagination.cardContainer.classList.add('is-hidden');
       this.hideSlider();
       this.activeLoader();
-
+      //Скролит вверх
       window.scrollTo(0, document.body.children[7].offsetTop);
       setTimeout(() => {
         this.activeDetailsPage(id, siteSection);
@@ -412,12 +417,13 @@ class MovieApi {
     item.append(cardContainer);
 
     item.addEventListener('click', () => {
+      // клік на картку //
       this.movieID = id;
       messageTitle.innerHTML = '';
       this.pagination.cardContainer.classList.add('is-hidden');
       this.hideSlider();
       this.activeLoader();
-
+      //Скролит вверх
       window.scrollTo(0, document.body.children[7].offsetTop);
       setTimeout(() => {
         this.activeDetailsPage(id, siteSection);
@@ -449,12 +455,14 @@ class MovieApi {
       console.log(collectionItems);
     }
 
+    // серед масиву об'єктів знаходить об'єкт з необхідним id //
     const array = collectionItems.filter(item => {
       if (item.id === id) return item;
     });
     const item = array[0];
     const genresArray = [];
 
+    // шукаємо жанри фільма //
     const itemGenres = item.genre_ids;
     itemGenres.filter(item => {
       for (let key of this.genres) {
@@ -463,6 +471,7 @@ class MovieApi {
     });
     const genresText = genresArray.join(', ');
 
+    // створюємо розмтіку сторінки //
     const tdGenre = document.createElement('td');
     tdGenre.textContent = 'genre';
     const tdGenreName = document.createElement('td');
@@ -538,7 +547,7 @@ class MovieApi {
     textAbout.classList.add('details-page__text');
     textAbout.textContent = item.overview;
 
-
+    // reviews //
     const reviewsTitle = document.createElement('h3');
     reviewsTitle.classList.add(
       'details-page__title',
@@ -585,7 +594,6 @@ class MovieApi {
         const reviewsAutor = document.createElement('h3');
         reviewsAutor.classList.add('reviews-autor');
         const autorFace = document.createElement('span');
-
         autorFace.classList.add('material-icons', 'icons-face');
         autorFace.textContent = 'face';
         const reviewsText = document.createElement('p');
@@ -600,7 +608,6 @@ class MovieApi {
         });
       });
     });
-
     divPage.append(titleText, textAbout, reviewsTitle);
 
     const buttonFirst = document.createElement('button');
@@ -664,7 +671,6 @@ class MovieApi {
 
     const btnClose = document.createElement('button');
     btnClose.classList.add('button__add', 'button-close');
-
     btnClose.textContent = 'X';
 
     const divImage = document.createElement('div');
@@ -675,9 +681,6 @@ class MovieApi {
     container.classList.add('container', 'details-page__film');
     container.append(divImage, detailsPageDecr);
     detailsSection.appendChild(container);
-
-
-    main.classList.add('is-hidden');
 
     this.hideLoader();
 
@@ -715,7 +718,6 @@ class MovieApi {
       detailsSection.innerHTML = '';
       reviewCard.innerHTML = '';
       this.actors = [];
-
       if ((main.classList = 'is-hidden')) {
         main.classList.add('main');
         main.classList.remove('is-hidden');
@@ -723,7 +725,6 @@ class MovieApi {
       }
 
       //=========================================================================
-
       if (libraryFilrt.classList != 'is-hidden') {
         if (btnQueue.disabled) {
           drawQueueFilmList();
@@ -753,6 +754,7 @@ class MovieApi {
       }
     });
   }
+  //Вызов видео
 
   onTrailerClick() {
     openModal(event);
@@ -860,7 +862,7 @@ class MovieApi {
     for (let i = maxLeft; i <= maxRight; i++) {
       const button = document.createElement('button');
       button.textContent = i;
-      button.classList.add('pagination__btn');
+      button.classList.add('pagination__btn'); // добавляет класс для стилей
 
       if (+button.textContent === this.params._page)
         button.classList.add('active');
@@ -918,6 +920,11 @@ class MovieApi {
       this.imgCards.defaultBackdropImg = this.DEFAULT_IMAGE;
       return;
     }
+    // if (window.innerWidth < 768) {
+    //   this.imgCards.currentSizes.backdropSize = this.imgCards.backdropSizes.mobile;
+    //   this.imgCards.defaultBackdropImg = '../images/image-not-found.jpg';
+    //   return;
+    // }
   }
 
   checkPosterImgSize() {
