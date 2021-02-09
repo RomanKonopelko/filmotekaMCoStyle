@@ -174,6 +174,9 @@ function drawFilmListByGenre() {
         }
       }),
     )
-    .then(() => MyApi.fetchFilmsListByGenre(result))
+    .then(() => {
+      MyApi.hideLoader();
+      MyApi.fetchFilmsListByGenre(result);
+    })
     .catch(console.log.bind(console));
 }
