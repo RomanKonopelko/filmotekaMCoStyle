@@ -105,5 +105,3 @@ const {
   btnHome,
   body,
 } = refs;
-
-console.log(welcomeTextSignIn);

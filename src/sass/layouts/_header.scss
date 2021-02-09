@@ -149,7 +149,7 @@
     top: -283px;
     left: 211px;
     height: 300px;
-    width: 2px;
+    width: 3px;
     animation: animate-decoration 4s linear infinite;
 
     background-color: lightseagreen;
@@ -319,6 +319,18 @@
   color: #ffebee;
   text-shadow: 0 0 10px #ff1744, 0 0 20px#ff1744, 0 0 40px #ff1744,
     0 0 80px #ff1744, 0 0 160px #ff1744;
+  &::before {
+    background-color: $accent-color3;
+    animation: none;
+    box-shadow: 0 0 10px $accent-shadow-color2, 0 0 2px $accent-shadow-color2,
+      0 0 3px $accent-shadow-color2, 0 0 3px $accent-shadow-color2,
+      0 0 6px $accent-shadow-color2;
+  }
+  @include for-size(desktop) {
+    position: relative;
+  }
+}
+.header__item.library.current.library {
   &::before {
     background-color: $accent-color3;
     animation: none;

@@ -1,6 +1,5 @@
 btnQueue.addEventListener('click', drawQueueFilmList);
 btnWatched.addEventListener('click', drawWatchedFilmList);
-console.log(btnQueue);
 
 const queue = `You do not have to queue movies to watch. Add them.`;
 const watch = `You do not have watched movies. Add them.`;

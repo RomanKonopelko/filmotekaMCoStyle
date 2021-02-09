@@ -10,7 +10,6 @@ searchByMovie.addEventListener('click', () => {
   searchByActor.classList.remove('selected-option');
 });
 
-console.log(clearInputBtn);
 clearInputBtn.addEventListener('click', () => {
   input.value = '';
 });

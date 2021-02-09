@@ -22,7 +22,6 @@ const auth = firebase.auth();
 
 let userStatus;
 
-auth.onAuthStateChanged(user => console.log(user));
 auth.onAuthStateChanged(user => {
   if (user) {
     btnSignOut.classList.remove('is-hidden');

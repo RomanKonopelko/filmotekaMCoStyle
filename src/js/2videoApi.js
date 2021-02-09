@@ -354,18 +354,16 @@ class MovieApi {
     sliderDiv.classList.add('slider__item');
     sliderDiv.style.backgroundImage = `url('${MyApi.IMAGE_BASE_URL}${MyApi.imgCards.currentSizes.backdropSize}${data.poster_path}')`;
     sliderDiv.addEventListener('click', () => {
-      // клік на картку //
       this.movieID = id;
       this.pagination.cardContainer.classList.add('is-hidden');
       this.hideSlider();
       this.activeLoader();
-      //Скролит вверх
       window.scrollTo(0, document.body.children[7].offsetTop);
       setTimeout(() => {
+        main.classList.add('is-hidden');
         this.activeDetailsPage(id, siteSection);
       }, 2000);
       this.fetchActors(this.movieID);
-      main.classList.add('is-hidden');
     });
     return sliderDiv;
   }
@@ -437,7 +435,6 @@ class MovieApi {
       collectionItems = this.popularFilmItem;
     } else if (libraryIndicator === 'daily') {
       collectionItems = this.dailyBestArr;
-      console.log(collectionItems);
     }
 
     const array = collectionItems.filter(item => {
