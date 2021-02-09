@@ -10,6 +10,11 @@ searchByMovie.addEventListener('click', () => {
   searchByActor.classList.remove('selected-option');
 });
 
+console.log(clearInputBtn);
+clearInputBtn.addEventListener('click', () => {
+  input.value = '';
+});
+
 form.addEventListener('submit', e => {
   e.preventDefault();
   MyApi.resetGalleryCard();
@@ -26,5 +31,4 @@ form.addEventListener('submit', e => {
       MyApi.movieSearch();
     }
   }, 4000);
-  form.reset();
 });
