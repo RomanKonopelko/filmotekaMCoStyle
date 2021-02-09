@@ -177,5 +177,3 @@ function drawFilmListByGenre() {
     .then(() => MyApi.fetchFilmsListByGenre(result))
     .catch(console.log.bind(console));
 }
-
-

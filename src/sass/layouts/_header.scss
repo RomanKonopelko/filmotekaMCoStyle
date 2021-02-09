@@ -208,7 +208,7 @@
   @include for-size(tablet) {
     top: 1.5rem;
     right: 3rem;
-    font-size: 20px;
+    font-size: 18px;
     line-height: 0.7rem;
   }
 }
@@ -231,7 +231,7 @@
   @include for-size(tablet) {
     top: 1.5rem;
     right: 7rem;
-    font-size: 20px;
+    font-size: 18px;
     line-height: 0.7rem;
   }
 }
@@ -239,7 +239,7 @@
 .signOut-user {
   position: absolute;
   top: 1.5rem;
-  right: 2rem;
+  right: 6rem;
   padding: 0;
   margin: 0;
   font-family: 'Park of Victory Normal';
@@ -253,8 +253,8 @@
 
   @include for-size(tablet) {
     top: 1.5rem;
-    right: 3rem;
-    font-size: 20px;
+    right: 7rem;
+    font-size: 18px;
     line-height: 0.7rem;
   }
 }
@@ -314,6 +314,7 @@
 }
 
 .header__item.current .header__item-title {
+  //test animation active
   position: unset;
   animation: none;
   color: #ffebee;
@@ -350,11 +351,14 @@
     margin-left: 40px;
   }
 }
-
+// .header__item:first-child {
+//   // margin-right: auto;
+// }
 .header__item-title.library {
   display: inline;
 }
 
+//test animation to main text
 .header__logo-text {
   display: none;
   margin-left: 10px;
@@ -381,6 +385,7 @@
   justify-content: space-around;
 }
 
+//runtext
 .header__runtext {
   display: none;
   margin-left: 100px;
