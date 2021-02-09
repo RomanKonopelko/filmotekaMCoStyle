@@ -541,15 +541,15 @@ class MovieApi {
     this.fetchReviews();
 
     reviewsTitle.addEventListener('click', () => {
+      if (this.reviews.length === 0) {
+        reviewsTitle.textContent = 'Sorry, we do not have any review yet!';
+        return;
+      }
       window.scrollTo({
         top: document.body.children[6].offsetTop,
         behavior: 'smooth',
       });
 
-      if (this.reviews.length === 0) {
-        reviewsTitle.textContent = 'Sorry, we do not have any review yet!';
-        return;
-      }
       if (!userStatus) {
         askingToMakeAuthorization();
         return;
