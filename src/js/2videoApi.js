@@ -765,7 +765,7 @@ class MovieApi {
   pagesScroll() {
     this.activeLoader();
     this.resetGalleryCard();
-    window.scrollTo(0, document.body.children[7].clientHeight);
+    window.scrollTo(0, document.body.children[7].offsetTop);
     this.searchMode === 'popular'
       ? setTimeout(() => {
           this.fetchPopularFilmsList();
