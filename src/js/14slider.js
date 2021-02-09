@@ -557,7 +557,7 @@ var tns = function () {
         fixedWidth: false,
         autoWidth: false,
         viewportMax: false,
-        slideBy: 3,
+        slideBy: 2,
         center: false,
         controls: false,
         controlsPosition: 'bottom',
