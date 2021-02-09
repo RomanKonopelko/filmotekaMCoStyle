@@ -21,6 +21,7 @@ const refs = {
   searchByMovie: document.getElementById('option-movie'),
   searchByActor: document.getElementById('option-actor'),
   selectedOption: document.getElementsByClassName('selected-option'),
+  clearInputBtn: document.querySelector('.search-form__clear'),
 
   btnMyLibrary: document.querySelector('.library'),
   btnHome: document.querySelector('[data-home]'),
@@ -100,3 +101,9 @@ const {
   btnHome,
   body,
 } = refs;
+
+
+
+
+
+

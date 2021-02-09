@@ -174,7 +174,7 @@ class MovieApi {
       .then(item => MyApi.pagination.cardContainer.append(...item))
       .finally(() => {
         this.pagination.cardContainer.classList.remove('is-hidden');
-        this.hideLoader();
+        // this.hideLoader();
       });
   }
   fetchGenres() {
@@ -191,7 +191,7 @@ class MovieApi {
       })
       .finally(() => {
         this.pagination.cardContainer.classList.remove('is-hidden');
-        this.hideLoader();
+        // this.hideLoader();
       });
   }
 
@@ -278,6 +278,15 @@ class MovieApi {
       .then(resp => {
         return resp;
       })
+      .then(resp => {
+        if (resp.results.length === 0) {
+          this.fetchPopularFilmsList();
+          throw Error('Sorry we dont know this actor!');
+        }
+        this.resetGalleryCard();
+        this.setRatioButtons(resp);
+        return resp;
+      })
       .then(({ results }) => {
         return results;
       })
@@ -288,7 +297,11 @@ class MovieApi {
             return acc;
           }, [])
           .slice(0, 1);
-        console.log(MyApi.movieSearchByActors(castList));
+        MyApi.movieSearchByActors(castList);
+      })
+      .catch(error => this.handlErrors(error))
+      .finally(() => {
+        this.hideLoader();
       });
   }
 
@@ -356,6 +369,9 @@ class MovieApi {
         this.activeDetailsPage(id, siteSection);
       }, 2000);
       this.fetchActors(this.movieID);
+      //test  start //
+      main.classList.add('is-hidden');
+      // test end//
     });
     return sliderDiv;
   }
@@ -412,11 +428,15 @@ class MovieApi {
   }
 
   activeDetailsPage(id, libraryIndicator) {
+
     form.style.display = 'none';
     btnTop.classList.add('is-hidden');
+    main.classList.add('is-hidden');
+    detailsSection.classList.remove('is-hidden');
+    // buttonTrailer.addEventListener('click', );
+
 
     this.movieID = id;
-
     let collectionItems = [];
     if (libraryIndicator === 'Queue') {
       collectionItems = this.queueList;
@@ -485,7 +505,6 @@ class MovieApi {
 
     const tdVoteName = document.createElement('td');
     tdVoteName.textContent = `/ ${item.vote_count}`;
-
     spanVote.appendChild(tdVoteName);
 
     const trVotes = document.createElement('tr');
@@ -509,6 +528,7 @@ class MovieApi {
     const titleText = document.createElement('h3');
     titleText.classList.add('details-page__title', 'second');
     titleText.textContent = 'About';
+
     const spanAbout = document.createElement('span');
     spanAbout.classList.add('material-icons', 'span-about');
     spanAbout.textContent = 'info';
@@ -517,6 +537,7 @@ class MovieApi {
     const textAbout = document.createElement('p');
     textAbout.classList.add('details-page__text');
     textAbout.textContent = item.overview;
+
 
     const reviewsTitle = document.createElement('h3');
     reviewsTitle.classList.add(
@@ -567,16 +588,13 @@ class MovieApi {
 
         autorFace.classList.add('material-icons', 'icons-face');
         autorFace.textContent = 'face';
-
         const reviewsText = document.createElement('p');
         reviewsText.classList.add('reviews-text');
-
         reviewsAutor.textContent = el[0];
         reviewsText.textContent =
           el[1].split(' ').slice(0, 100).join(' ') + '...';
 
         reviewCard.append(autorFace, reviewsAutor, reviewsText);
-
         reviewsText.addEventListener('click', () => {
           reviewsText.textContent = el[1];
         });
@@ -642,7 +660,6 @@ class MovieApi {
 
     const aImg = document.createElement('a');
     aImg.setAttribute('href', '#');
-
     aImg.appendChild(img);
 
     const btnClose = document.createElement('button');
@@ -652,17 +669,16 @@ class MovieApi {
 
     const divImage = document.createElement('div');
     divImage.classList.add('details-page__foto');
-
     divImage.append(aImg, btnClose);
 
     const container = document.createElement('div');
     container.classList.add('container', 'details-page__film');
     container.append(divImage, detailsPageDecr);
-
-    detailsSection.classList.remove('is-hidden');
     detailsSection.appendChild(container);
 
+
     main.classList.add('is-hidden');
+
     this.hideLoader();
 
     btnAddWatched = buttonFirst;
@@ -672,15 +688,41 @@ class MovieApi {
     monitorButtonStatusText();
 
     btnClose.addEventListener('click', () => {
-      form.style.display = 'block';
-      this.pagination.paginationContainer.classList.remove('is-hidden');
+      // form.style.display = 'block';
+      // this.pagination.paginationContainer.classList.remove('is-hidden');
+      // detailsSection.classList.add('is-hidden');
+      // this.pagination.cardContainer.classList.remove('is-hidden');
+      // btnTop.classList.remove('is-hidden');
+      // detailsSection.innerHTML = '';
+      // reviewCard.innerHTML = '';
+      // main.classList.remove('is-hidden');
+      // this.actors = [];
+      // //=========================================================================
+      // if (libraryFilrt.classList != 'is-hidden') {
+      //   if (btnQueue.disabled) {
+      //     drawQueueFilmList();
+      //   }
+      //   if (btnWatched.disabled) {
+      //     drawWatchedFilmList();
+      //   }
+      // }
+
       detailsSection.classList.add('is-hidden');
+
+
       this.pagination.cardContainer.classList.remove('is-hidden');
       btnTop.classList.remove('is-hidden');
       detailsSection.innerHTML = '';
       reviewCard.innerHTML = '';
-      main.classList.remove('is-hidden');
       this.actors = [];
+
+      if ((main.classList = 'is-hidden')) {
+        main.classList.add('main');
+        main.classList.remove('is-hidden');
+        this.createCardFunc();
+      }
+
+      //=========================================================================
 
       if (libraryFilrt.classList != 'is-hidden') {
         if (btnQueue.disabled) {
@@ -689,6 +731,25 @@ class MovieApi {
         if (btnWatched.disabled) {
           drawWatchedFilmList();
         }
+
+      detailsSection.innerHTML = '';
+      reviewCard.innerHTML = '';
+      main.classList.remove('is-hidden');
+
+      if (!libraryIndicator || libraryIndicator === 'daily') {
+        form.classList.remove('is-hidden');
+        this.pagination.paginationContainer.classList.remove('is-hidden');
+        this.pagination.cardContainer.classList.remove('is-hidden');
+        btnTop.classList.remove('is-hidden');
+        this.showSlider();
+        this.actors = [];
+      } else if (libraryIndicator === 'Queue') {
+        libraryFilrt.classList.remove('is-hidden');
+        drawQueueFilmList();
+      } else if (libraryIndicator === 'Watched') {
+        libraryFilrt.classList.remove('is-hidden');
+        drawWatchedFilmList();
+
       }
     });
   }

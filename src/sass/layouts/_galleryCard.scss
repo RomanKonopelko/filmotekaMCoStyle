@@ -149,6 +149,24 @@
     0 0 10px $accent-shadow-color2;
 }
 
+.search-form__clear {
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  color: white;
+  text-shadow: 0 0 3px lightskyblue, 0 0 5px lightskyblue, 0 0 1px lightskyblue,
+    0 0 10px lightskyblue, 0 0 10px lightskyblue;
+  transition: all $transition-duration $timing-function;
+}
+
+.search-form__clear:hover {
+  cursor: pointer;
+  color: $accent-color2;
+  text-shadow: 0 0 3px $accent-shadow-color2, 0 0 5px $accent-shadow-color2,
+    0 0 1px $accent-shadow-color2, 0 0 10px $accent-shadow-color2,
+    0 0 10px $accent-shadow-color2;
+}
+
 .gallery {
   padding: 0;
 

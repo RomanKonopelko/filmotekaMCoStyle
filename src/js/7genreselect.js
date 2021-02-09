@@ -41,10 +41,6 @@ comedyRef.addEventListener('click', () => {
   westernRef.classList.remove('current');
   fantasyRef.classList.remove('current');
   dramaRef.classList.remove('current');
-});
-comedyRef.addEventListener('click', drawFilmListByGenre);
-
-actionRef.addEventListener('click', () => {
   setTimeout(() => {
     drawFilmListByGenre();
   }, 2000);
@@ -165,8 +161,6 @@ dramaRef.addEventListener('click', () => {
   }, 2000);
 });
 
-dramaRef.addEventListener('click', drawFilmListByGenre);
-
 function drawFilmListByGenre() {
   let genres, result;
   MyApi.fetchGenres()
@@ -183,3 +177,5 @@ function drawFilmListByGenre() {
     .then(() => MyApi.fetchFilmsListByGenre(result))
     .catch(console.log.bind(console));
 }
+
+
