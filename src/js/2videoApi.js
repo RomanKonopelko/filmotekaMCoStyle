@@ -338,7 +338,7 @@ class MovieApi {
 
   handlErrors(text) {
     errorNotification.classList.remove('is-hidden');
-    errorNotification.textContent = text.message;
+    errorNotification.textContent = text.message || text;
     setTimeout(() => {
       errorNotification.classList.add('is-hidden');
     }, 3000);
