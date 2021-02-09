@@ -111,3 +111,13 @@
   text-shadow: 0 0 10px $accent-color3, 0 0 20px $accent-color3,
     0 0 4px $accent-color3, 0 0 8px$accent-color3, 0 0 16px$accent-color3;
 }
+
+.pagination__btn.library-filter__btn.active {
+  animation: none;
+  border: 2px solid $accent-color3;
+  box-shadow: 0 0 10px $accent-shadow-color2, 0 0 20px $accent-shadow-color2,
+    0 0 10px, 0 0 10px $accent-shadow-color2, 0 0 10px $accent-shadow-color2;
+  color: $accent-color2;
+  text-shadow: 0 0 10px $accent-color3, 0 0 20px $accent-color3,
+    0 0 4px $accent-color3, 0 0 8px$accent-color3, 0 0 16px$accent-color3;
+}
