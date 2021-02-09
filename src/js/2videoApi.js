@@ -351,6 +351,10 @@ class MovieApi {
   createSliderCard(data, siteSection) {
     const id = data.id;
     const sliderDiv = document.createElement('div');
+    const sliderTitle = document.createElement('h2');
+    sliderTitle.textContent = data.title;
+    sliderTitle.classList.add('slider__item-title');
+    sliderDiv.append(sliderTitle);
     sliderDiv.classList.add('slider__item');
     sliderDiv.style.backgroundImage = `url('${MyApi.IMAGE_BASE_URL}${MyApi.imgCards.currentSizes.backdropSize}${data.poster_path}')`;
     sliderDiv.addEventListener('click', () => {
