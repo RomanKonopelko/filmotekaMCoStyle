@@ -27,21 +27,16 @@
   src: url('../fonts/park-of-victory-normal/park-of-victory-normal.eot'); /* IE9 Compat Modes */
   src: url('../fonts/park-of-victory-normal/park-of-victory-normal.eot?#iefix')
       format('embedded-opentype'),
-    /* IE6-IE8 */
-      url('../fonts/park-of-victory-normal/park-of-victory-normal.otf')
+    url('../fonts/park-of-victory-normal/park-of-victory-normal.otf')
       format('opentype'),
-    /* Open Type Font */
-      url('../fonts/park-of-victory-normal/park-of-victory-normal.svg')
+    url('../fonts/park-of-victory-normal/park-of-victory-normal.svg')
       format('svg'),
-    /* Legacy iOS */
-      url('../fonts/park-of-victory-normal/park-of-victory-normal.ttf')
+    url('../fonts/park-of-victory-normal/park-of-victory-normal.ttf')
       format('truetype'),
-    /* Safari, Android, iOS */
-      url('../fonts/park-of-victory-normal/park-of-victory-normal.woff')
+    url('../fonts/park-of-victory-normal/park-of-victory-normal.woff')
       format('woff'),
-    /* Modern Browsers */
-      url('../fonts/park-of-victory-normal/park-of-victory-normal.woff2')
-      format('woff2'); /* Modern Browsers */
+    url('../fonts/park-of-victory-normal/park-of-victory-normal.woff2')
+      format('woff2');
   font-weight: 500;
   font-style: normal;
 }

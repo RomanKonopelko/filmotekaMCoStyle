@@ -2,9 +2,6 @@ btnQueue.addEventListener('click', drawQueueFilmList);
 btnWatched.addEventListener('click', drawWatchedFilmList);
 console.log(btnQueue);
 
-// btnMyLibrary.addEventListener('click', handleUserStatusForLibrary);
-// console.log(btnMyLibrary);
-
 const queue = `You do not have to queue movies to watch. Add them.`;
 const watch = `You do not have watched movies. Add them.`;
 const filmsQueueKey = 'filmsQueue';
@@ -71,18 +68,10 @@ function createPlugTitle(title, library) {
   } else {
     messageTitle.textContent = title;
   }
-  // messageTitle.textContent = title;
-  // library.classList.remove('gallery__list');
-  // library.append(messageTitle);
   return library;
 }
 
-// кнопка My Library //
-
 btnMyLibrary.addEventListener('click', handleUserStatusForLibrary);
-
-// btnMyLibrary.addEventListener('click', openLibrary);
-//btnHome.addEventListener('click', goHome);
 
 function openLibrary() {
   window.scrollTo({
@@ -97,14 +86,12 @@ function openLibrary() {
   btnQueue.classList.remove('active');
   detailsSection.innerHTML = '';
   paginationWrapper.innerHTML = '';
-  // form.innerHTML = '';
   form.classList.add('is-hidden');
   form.style.display = 'none';
   libraryFilrt.classList.remove('is-hidden');
   main.classList.remove('is-hidden');
 }
 
-///// Кнопка Home и логотип
 btnHome.addEventListener('click', goHome);
 iconButton.addEventListener('click', goHome);
 

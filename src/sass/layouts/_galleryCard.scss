@@ -253,14 +253,13 @@
         color: $accent-color2;
         text-shadow: 0.1em 0.1em 0.1em $accent-color4;
 
-        // text-align: center;   // Мешало позиционированию
-        width: 100%; //  Захаркодил ширину текста, чтобы не растягивала контейнер
+        width: 100%;
         padding: 20px 20px;
         border-radius: 10px;
 
         background: linear-gradient(1turn, #959597, rgba(126, 35, 126, 0));
 
-        position: absolute; // ДОбавил позиционирование
+        position: absolute;
         bottom: 0px;
         left: 0px;
 

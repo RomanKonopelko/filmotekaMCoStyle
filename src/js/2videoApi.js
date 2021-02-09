@@ -23,18 +23,18 @@ class MovieApi {
 
     this.params = {
       generalSearchUrl: 'search/movie?',
-      searchActorUrl: 'search/person?', //=================================================================
-      popularSearchUrl: 'movie/popular?', //Api url of popular movie
-      genreSearchUrl: 'genre/movie/list?', // Api url of genre search
+      searchActorUrl: 'search/person?',
+      popularSearchUrl: 'movie/popular?',
+      genreSearchUrl: 'genre/movie/list?',
       byGenreSearchUrl: 'discover/movie?',
       query: '',
       _page: 1,
       lastPage: '',
     };
     this.pagination = {
-      window: 5, //quantity of pagination buttons
-      cardContainer: cardWrapper, //gallery cards container
-      paginationContainer: paginationWrapper, //pagination buttons container
+      window: 5,
+      cardContainer: cardWrapper,
+      paginationContainer: paginationWrapper,
       sliderContainer: sliderWrapper,
     };
     this.imgCards = {
@@ -134,8 +134,8 @@ class MovieApi {
         return resp;
       })
       .then(({ results }) => {
-        this.popularFilmItem = results; // test
-        return results; // test
+        this.popularFilmItem = results;
+        return results;
       })
       .then(collection =>
         collection.map(el => {
@@ -163,8 +163,8 @@ class MovieApi {
         return resp;
       })
       .then(({ results }) => {
-        this.popularFilmItem = results; // test
-        return results; // test
+        this.popularFilmItem = results;
+        return results;
       })
       .then(collection =>
         collection.map(el => {
@@ -174,7 +174,6 @@ class MovieApi {
       .then(item => MyApi.pagination.cardContainer.append(...item))
       .finally(() => {
         this.pagination.cardContainer.classList.remove('is-hidden');
-        // this.hideLoader();
       });
   }
   fetchGenres() {
@@ -191,10 +190,8 @@ class MovieApi {
       })
       .finally(() => {
         this.pagination.cardContainer.classList.remove('is-hidden');
-        // this.hideLoader();
       });
   }
-  // test start //
   fetchReviews() {
     return fetch(
       `${this.VIDEO_BASE_URL}${this.movieID}/reviews?api_key=${this.API_KEY}`,
@@ -209,12 +206,9 @@ class MovieApi {
             return [author.author_details.name, author.content];
           })
           .slice(0, 5);
-        //console.log(this.reviews); // повертає ім'я автора і його рев'ю
         return this.reviews;
       });
-    //.catch(error => this.reviews(error));
   }
-  // test end //
 
   fetchActors() {
     return fetch(
@@ -243,9 +237,6 @@ class MovieApi {
       .then(data => data.json())
       .then(data => {
         this.setRatioButtons(data);
-
-        // console.log(data.total_pages);
-
         return data;
       })
       .then(resp => {
@@ -374,9 +365,7 @@ class MovieApi {
         this.activeDetailsPage(id, siteSection);
       }, 2000);
       this.fetchActors(this.movieID);
-      //test  start //
       main.classList.add('is-hidden');
-      // test end//
     });
     return sliderDiv;
   }
@@ -417,7 +406,6 @@ class MovieApi {
     item.append(cardContainer);
 
     item.addEventListener('click', () => {
-      // клік на картку //
       this.movieID = id;
       messageTitle.innerHTML = '';
       this.pagination.cardContainer.classList.add('is-hidden');
@@ -438,7 +426,6 @@ class MovieApi {
     btnTop.classList.add('is-hidden');
     main.classList.add('is-hidden');
     detailsSection.classList.remove('is-hidden');
-    // buttonTrailer.addEventListener('click', );
 
     this.movieID = id;
     let collectionItems = [];
@@ -453,14 +440,12 @@ class MovieApi {
       console.log(collectionItems);
     }
 
-    // серед масиву об'єктів знаходить об'єкт з необхідним id //
     const array = collectionItems.filter(item => {
       if (item.id === id) return item;
     });
     const item = array[0];
     const genresArray = [];
 
-    // шукаємо жанри фільма //
     const itemGenres = item.genre_ids;
     itemGenres.filter(item => {
       for (let key of this.genres) {
@@ -469,7 +454,6 @@ class MovieApi {
     });
     const genresText = genresArray.join(', ');
 
-    // створюємо розмтіку сторінки //
     const tdGenre = document.createElement('td');
     tdGenre.textContent = 'genre';
     const tdGenreName = document.createElement('td');
@@ -545,7 +529,6 @@ class MovieApi {
     textAbout.classList.add('details-page__text');
     textAbout.textContent = item.overview;
 
-    // reviews //
     const reviewsTitle = document.createElement('h3');
     reviewsTitle.classList.add(
       'details-page__title',
@@ -689,25 +672,6 @@ class MovieApi {
     monitorButtonStatusText();
 
     btnClose.addEventListener('click', () => {
-      // form.style.display = 'block';
-      // this.pagination.paginationContainer.classList.remove('is-hidden');
-      // detailsSection.classList.add('is-hidden');
-      // this.pagination.cardContainer.classList.remove('is-hidden');
-      // btnTop.classList.remove('is-hidden');
-      // detailsSection.innerHTML = '';
-      // reviewCard.innerHTML = '';
-      // main.classList.remove('is-hidden');
-      // this.actors = [];
-      // //=========================================================================
-      // if (libraryFilrt.classList != 'is-hidden') {
-      //   if (btnQueue.disabled) {
-      //     drawQueueFilmList();
-      //   }
-      //   if (btnWatched.disabled) {
-      //     drawWatchedFilmList();
-      //   }
-      // }
-
       detailsSection.classList.add('is-hidden');
 
       this.pagination.cardContainer.classList.remove('is-hidden');
@@ -721,7 +685,6 @@ class MovieApi {
         this.createCardFunc();
       }
 
-      //=========================================================================
       if (libraryFilrt.classList != 'is-hidden') {
         if (btnQueue.disabled) {
           drawQueueFilmList();
@@ -751,7 +714,6 @@ class MovieApi {
       }
     });
   }
-  //Вызов видео
 
   onTrailerClick() {
     openModal(event);
@@ -917,11 +879,6 @@ class MovieApi {
       this.imgCards.defaultBackdropImg = this.DEFAULT_IMAGE;
       return;
     }
-    // if (window.innerWidth < 768) {
-    //   this.imgCards.currentSizes.backdropSize = this.imgCards.backdropSizes.mobile;
-    //   this.imgCards.defaultBackdropImg = '../images/image-not-found.jpg';
-    //   return;
-    // }
   }
 
   checkPosterImgSize() {
