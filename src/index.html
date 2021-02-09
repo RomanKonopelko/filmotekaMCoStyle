@@ -5,14 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Placeholder title</title>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css">
     <!-- Сюда будет всталена ссылка на файл стилей -->
     <!-- inject:css -->
     <!-- endinject -->
-  </head>
 
-  <body>
+      <!-- The core Firebase JS SDK is always required and must be listed first -->
+      <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
+      
+      <!-- TODO: Add SDKs for Firebase products that you want to use
+                     https://firebase.google.com/docs/web/setup#available-libraries -->
+      <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-analytics.js"></script>
+      
+      <!-- Add Firebase products that you want to use -->
+      <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-firestore.js"></script>
+  </head>
+  <body class="body">
     <!-- Сюда будет всталена ссылка на файл скриптов -->
+    <!-- inject:preloader.html -->
+    //= ./html/preloader.html
+    <!-- endinject -->
+    <!-- inject:header.html -->
+    //= ./html/header.html
+    <!-- endinject -->
+    <!-- inject:stars.html -->
+    //= ./html/stars.html
+    <!-- endinject -->
+    <!-- inject:hero.html -->
+    //= ./html/hero.html
+    <!-- endinject -->
+    <!-- inject:main.html -->
+    //= ./html/main.html
+    <!-- endinject -->
+    <!-- inject:galleryCard.html -->
+    //= ./html/galleryCard.html
+    <!-- endinject -->
+    //= ./html/detailsPage.html
+    <!-- inject:myFilmLibraryPage -->
+    //= ./html/myFilmLibraryPage.html
+    <!-- endinject -->
+    <!-- inject:review.html -->
+    //= ./html/review.html
+    <!-- endinject -->
+    <!-- inject:footer.html -->
+    //= ./html/footer.html
+    <!-- inject:authFireBase.html -->
+    //= ./html/authFireBase.html
+    <!-- endinject -->
+    <!-- inject:modal.html -->
+    //= ./html/modal.html
+    <!-- endinject -->
     <!-- inject:js -->
+  
+    <script src="./js/8headerLogoText.js"></script>
+    <script src="./js/9parallax.js"></script>
+    <script src="./js/10navigationEfectSwitch.js"></script>
+    <!-- inject:js -->
+    <script src="./js/4searchAndPaginationHomePage.js"></script>
+    <script src="./js/7genreselect.js"></script>
+    <script src="./js/13fireBase.js"></script>
+    
+
     <!-- endinject -->
   </body>
-</html>
+  </html>
