@@ -74,7 +74,7 @@ btnMyLibrary.addEventListener('click', handleUserStatusForLibrary);
 
 function openLibrary() {
   window.scrollTo({
-    top: document.body.children[7].offsetTop,
+    top: document.body.children[6].offsetTop,
     behavior: 'smooth',
   });
   MyApi.hideSlider();
