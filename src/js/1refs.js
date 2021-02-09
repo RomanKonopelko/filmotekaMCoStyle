@@ -24,6 +24,7 @@ const refs = {
   searchByMovie: document.getElementById('option-movie'),
   searchByActor: document.getElementById('option-actor'),
   selectedOption: document.getElementsByClassName('selected-option'),
+  clearInputBtn: document.querySelector('.search-form__clear'),
 
   //6libraryPage
   btnMyLibrary: document.querySelector('.library'),
@@ -66,11 +67,9 @@ const refs = {
   // signUpSuccess: document.querySelector('.auth__title-congratulations'),
   // signInSuccess: document.querySelector('.auth__title-success'),
 
-
   //
-  // heroContainer: document.getElementsByClassName('hero'), 
+  // heroContainer: document.getElementsByClassName('hero'),
   // galleryListItem: document.getElementsByClassName('gallery__list-item'),
-
 };
 
 const {
@@ -113,6 +112,7 @@ const {
   searchByActor,
   selectedOption,
   input,
+  clearInputBtn,
 
   reviewCard,
   sliderContainer,
@@ -124,7 +124,7 @@ const {
   // galleryListItem,
   btnHome,
   body,
-
 } = refs;
 
 console.log(welcomeTextSignIn);
+// console.log(input);
