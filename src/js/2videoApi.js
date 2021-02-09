@@ -545,10 +545,16 @@ class MovieApi {
         reviewsTitle.textContent = 'Sorry, we do not have any review yet!';
         return;
       }
+
       if (!userStatus) {
         askingToMakeAuthorization();
         return;
       }
+
+      window.scrollTo({
+        top: document.body.children[6].offsetTop,
+        behavior: 'smooth',
+      });
 
       detailsSection.classList.add('is-hidden');
 
