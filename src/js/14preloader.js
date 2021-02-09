@@ -6,5 +6,5 @@ window.addEventListener('load', () => {
       parallaxWidthCheck();
     }, 3000);
     preloader.classList.add('done');
-  }, 3000);
+  }, 1000);
 });

@@ -18,7 +18,7 @@ const DEFAULT_SIGN_IN = 'Welcome back! Write your data below!';
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
-console.log(firebase);
+// console.log(firebase);
 
 const auth = firebase.auth();
 // auth.signOut();
@@ -36,7 +36,6 @@ auth.onAuthStateChanged(user => {
 
     userStatus = true;
     // console.log(user);
-
   } else {
     // alert('byee');
     btnSignOut.classList.add('is-hidden');
@@ -46,7 +45,6 @@ auth.onAuthStateChanged(user => {
     btnSignIn.disabled = false;
 
     userStatus = false;
-
   }
 });
 
@@ -63,7 +61,7 @@ function modalClose(params) {
 })();
 
 const authBackdrop = document.querySelector('.auth__backdrop');
-console.log(authBackdrop);
+// console.log(authBackdrop);
 const authModalSignIn = document.querySelector('.signIn__modal');
 const authModalSignUp = document.querySelector('.signUp__modal');
 const signUpEmail = document.getElementById('authEmail');
@@ -109,14 +107,14 @@ signInBtn.addEventListener('click', signIn);
 
 function signUp(params) {
   body.classList.remove('overflow');
-  console.dir(signUpEmail);
+  // console.dir(signUpEmail);
   const signUpRequest = auth.createUserWithEmailAndPassword(
     signUpEmail.value,
     signUpPassword.value,
   );
   let signUpError = '';
   signUpRequest.catch(e => {
-    console.log(e.message);
+    // console.log(e.message);
     signUpError = e.message;
   });
   setTimeout(() => {
@@ -151,6 +149,4 @@ function signIn(params) {
       }, 2000);
     }
   }, 1000);
-
-  // alert('Signed in' + signInEmail.value);
 }

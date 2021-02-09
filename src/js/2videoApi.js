@@ -356,7 +356,7 @@ class MovieApi {
       this.hideSlider();
       this.activeLoader();
       //Скролит вверх
-      window.scrollTo(0, document.body.children[1].clientHeight);
+      window.scrollTo(0, document.body.children[7].offsetTop);
       setTimeout(() => {
         this.activeDetailsPage(id, siteSection);
       }, 2000);
@@ -411,7 +411,7 @@ class MovieApi {
       this.hideSlider();
       this.activeLoader();
       //Скролит вверх
-      window.scrollTo(0, document.body.children[9].offsetTop);
+      window.scrollTo(0, document.body.children[7].offsetTop);
       setTimeout(() => {
         this.activeDetailsPage(id, siteSection);
       }, 2000);
@@ -421,14 +421,15 @@ class MovieApi {
   }
 
   activeDetailsPage(id, libraryIndicator) {
+
     form.style.display = 'none';
     btnTop.classList.add('is-hidden');
     main.classList.add('is-hidden');
     detailsSection.classList.remove('is-hidden');
     // buttonTrailer.addEventListener('click', );
 
-    this.movieID = id;
 
+    this.movieID = id;
     let collectionItems = [];
     if (libraryIndicator === 'Queue') {
       collectionItems = this.queueList;
@@ -677,9 +678,27 @@ class MovieApi {
     monitorButtonStatusText();
 
     btnClose.addEventListener('click', () => {
-      form.style.display = 'block';
-      this.pagination.paginationContainer.classList.remove('is-hidden');
+      // form.style.display = 'block';
+      // this.pagination.paginationContainer.classList.remove('is-hidden');
+      // detailsSection.classList.add('is-hidden');
+      // this.pagination.cardContainer.classList.remove('is-hidden');
+      // btnTop.classList.remove('is-hidden');
+      // detailsSection.innerHTML = '';
+      // reviewCard.innerHTML = '';
+      // main.classList.remove('is-hidden');
+      // this.actors = [];
+      // //=========================================================================
+      // if (libraryFilrt.classList != 'is-hidden') {
+      //   if (btnQueue.disabled) {
+      //     drawQueueFilmList();
+      //   }
+      //   if (btnWatched.disabled) {
+      //     drawWatchedFilmList();
+      //   }
+      // }
+
       detailsSection.classList.add('is-hidden');
+
 
       this.pagination.cardContainer.classList.remove('is-hidden');
       btnTop.classList.remove('is-hidden');
@@ -700,6 +719,25 @@ class MovieApi {
         if (btnWatched.disabled) {
           drawWatchedFilmList();
         }
+
+      detailsSection.innerHTML = '';
+      reviewCard.innerHTML = '';
+      main.classList.remove('is-hidden');
+
+      if (!libraryIndicator || libraryIndicator === 'daily') {
+        form.classList.remove('is-hidden');
+        this.pagination.paginationContainer.classList.remove('is-hidden');
+        this.pagination.cardContainer.classList.remove('is-hidden');
+        btnTop.classList.remove('is-hidden');
+        this.showSlider();
+        this.actors = [];
+      } else if (libraryIndicator === 'Queue') {
+        libraryFilrt.classList.remove('is-hidden');
+        drawQueueFilmList();
+      } else if (libraryIndicator === 'Watched') {
+        libraryFilrt.classList.remove('is-hidden');
+        drawWatchedFilmList();
+
       }
     });
   }
@@ -779,7 +817,7 @@ class MovieApi {
   pagesScroll() {
     this.activeLoader();
     this.resetGalleryCard();
-    window.scrollTo(0, document.body.children[1].clientHeight);
+    window.scrollTo(0, document.body.children[7].clientHeight);
     this.searchMode === 'popular'
       ? setTimeout(() => {
           this.fetchPopularFilmsList();
@@ -817,7 +855,7 @@ class MovieApi {
         button.classList.add('active');
       button.addEventListener('click', e => {
         this.activeLoader();
-        window.scrollTo(0, document.body.children[1].clientHeight);
+        window.scrollTo(0, document.body.children[7].clientHeight);
         this.page = +e.target.textContent;
         this.currentPage = this.page;
         this.pagination.cardContainer.innerHTML = '';
