@@ -24,8 +24,8 @@
 
   @include for-size(tablet) {
     height: 100vh;
-    align-items: end;
     padding-top: 130px;
+    align-items: unset;
     background-image: url('../images/parallax.jpg');
     background-position: center;
   }
@@ -116,7 +116,7 @@
   justify-content: space-around;
   align-items: center;
   @include for-size(tablet) {
-    justify-content: end;
+    justify-content: unset;
   }
 }
 

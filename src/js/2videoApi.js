@@ -856,12 +856,14 @@ class MovieApi {
 
   checkBackdropImgSize() {
     if (window.innerWidth >= 1024) {
-      this.imgCards.currentSizes.backdropSize = this.imgCards.backdropSizes.desktop;
+      this.imgCards.currentSizes.backdropSize =
+        this.imgCards.backdropSizes.desktop;
       this.imgCards.defaultBackdropImg = this.DEFAULT_IMAGE;
       return;
     }
     if (window.innerWidth < 1024) {
-      this.imgCards.currentSizes.backdropSize = this.imgCards.backdropSizes.tablet;
+      this.imgCards.currentSizes.backdropSize =
+        this.imgCards.backdropSizes.tablet;
       this.imgCards.defaultBackdropImg = this.DEFAULT_IMAGE;
       return;
     }
